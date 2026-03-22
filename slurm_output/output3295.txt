@@ -1,0 +1,59 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+`torch_dtype` is deprecated! Use `dtype` instead!
+
+=== Starting MAD-Graph Evaluation (Transformers) ===
+Model       : Qwen/Qwen2.5-14B-Instruct
+Dataset     : ../dataset/2012-2020_ICT_DSE.csv
+Temperature : 0.7
+Device      : cuda
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files:  12%|█▎        | 1/8 [06:56<48:36, 416.59s/it]Fetching 8 files:  25%|██▌       | 2/8 [06:56<17:09, 171.62s/it]Fetching 8 files:  75%|███████▌  | 6/8 [06:56<01:18, 39.39s/it] Fetching 8 files: 100%|██████████| 8/8 [06:56<00:00, 52.12s/it]
+Loading weights:   0%|          | 0/579 [00:00<?, ?it/s]Loading weights:   0%|          | 1/579 [01:52<18:04:42, 112.60s/it]Loading weights:   0%|          | 2/579 [01:53<7:29:19, 46.72s/it]  Loading weights:  11%|█▏        | 66/579 [02:00<08:15,  1.04it/s] Loading weights:  13%|█▎        | 76/579 [02:03<07:09,  1.17it/s]Loading weights:  13%|█▎        | 77/579 [02:06<07:26,  1.12it/s]Loading weights:  13%|█▎        | 78/579 [02:06<07:15,  1.15it/s]Loading weights:  15%|█▍        | 84/579 [02:07<05:53,  1.40it/s]Loading weights:  15%|█▌        | 88/579 [02:15<07:45,  1.06it/s]Loading weights:  15%|█▌        | 89/579 [02:16<07:27,  1.10it/s]Loading weights:  16%|█▌        | 90/579 [02:16<07:03,  1.15it/s]Loading weights:  17%|█▋        | 98/579 [02:16<03:42,  2.17it/s]Loading weights:  17%|█▋        | 101/579 [02:25<07:54,  1.01it/s]Loading weights:  19%|█▉        | 112/579 [02:34<06:49,  1.14it/s]Loading weights:  20%|█▉        | 114/579 [02:35<06:24,  1.21it/s]Loading weights:  21%|██▏       | 124/579 [02:44<06:40,  1.14it/s]Loading weights:  22%|██▏       | 125/579 [02:44<06:19,  1.20it/s]Loading weights:  22%|██▏       | 126/579 [02:45<06:04,  1.24it/s]Loading weights:  23%|██▎       | 136/579 [02:54<06:22,  1.16it/s]Loading weights:  24%|██▎       | 137/579 [02:54<05:59,  1.23it/s]Loading weights:  26%|██▌       | 148/579 [03:03<05:56,  1.21it/s]Loading weights:  26%|██▌       | 149/579 [03:04<05:45,  1.24it/s]Loading weights:  28%|██▊       | 160/579 [03:12<05:33,  1.26it/s]Loading weights:  28%|██▊       | 161/579 [03:13<05:20,  1.30it/s]Loading weights:  28%|██▊       | 162/579 [03:13<05:14,  1.33it/s]Loading weights:  30%|██▉       | 172/579 [03:22<05:30,  1.23it/s]Loading weights:  30%|██▉       | 173/579 [03:22<05:12,  1.30it/s]Loading weights:  32%|███▏      | 184/579 [03:31<05:20,  1.23it/s]Loading weights:  32%|███▏      | 185/579 [03:32<05:10,  1.27it/s]Loading weights:  34%|███▍      | 196/579 [03:41<05:01,  1.27it/s]Loading weights:  34%|███▍      | 197/579 [03:41<04:52,  1.31it/s]Loading weights:  34%|███▍      | 198/579 [03:42<04:44,  1.34it/s]Loading weights:  36%|███▌      | 208/579 [03:50<05:02,  1.23it/s]Loading weights:  38%|███▊      | 220/579 [04:00<04:45,  1.26it/s]Loading weights:  40%|████      | 232/579 [04:08<04:25,  1.30it/s]Loading weights:  40%|████      | 233/579 [04:09<04:19,  1.34it/s]Loading weights:  40%|████      | 234/579 [04:09<04:09,  1.38it/s]Loading weights:  42%|████▏     | 244/579 [04:18<04:28,  1.25it/s]Loading weights:  42%|████▏     | 245/579 [04:18<04:15,  1.31it/s]Loading weights:  42%|████▏     | 246/579 [04:18<03:59,  1.39it/s]Loading weights:  44%|████▍     | 256/579 [04:27<04:26,  1.21it/s]Loading weights:  45%|████▍     | 258/579 [04:28<03:54,  1.37it/s]Loading weights:  46%|████▋     | 268/579 [04:37<04:10,  1.24it/s]Loading weights:  46%|████▋     | 269/579 [04:37<04:07,  1.25it/s]Loading weights:  48%|████▊     | 280/579 [04:44<03:27,  1.44it/s]Loading weights:  49%|████▊     | 282/579 [04:44<03:08,  1.58it/s]Loading weights:  50%|█████     | 292/579 [04:49<02:36,  1.83it/s]Loading weights:  51%|█████     | 293/579 [04:49<02:28,  1.92it/s]Loading weights:  53%|█████▎    | 304/579 [04:53<02:09,  2.12it/s]Loading weights:  53%|█████▎    | 305/579 [04:53<02:05,  2.19it/s]Loading weights:  55%|█████▍    | 316/579 [04:58<01:51,  2.35it/s]Loading weights:  55%|█████▍    | 317/579 [04:58<01:47,  2.43it/s]Loading weights:  55%|█████▍    | 318/579 [04:58<01:44,  2.49it/s]Loading weights:  57%|█████▋    | 328/579 [05:03<01:45,  2.39it/s]Loading weights:  57%|█████▋    | 329/579 [05:03<01:39,  2.52it/s]Loading weights:  59%|█████▊    | 340/579 [05:07<01:36,  2.47it/s]Loading weights:  59%|█████▉    | 341/579 [05:08<01:34,  2.51it/s]Loading weights:  61%|██████    | 352/579 [05:12<01:30,  2.50it/s]Loading weights:  61%|██████    | 354/579 [05:12<01:23,  2.68it/s]Loading weights:  63%|██████▎   | 364/579 [05:17<01:26,  2.48it/s]Loading weights:  63%|██████▎   | 365/579 [05:17<01:23,  2.58it/s]Loading weights:  65%|██████▍   | 376/579 [05:21<01:21,  2.49it/s]Loading weights:  65%|██████▌   | 378/579 [05:22<01:14,  2.69it/s]Loading weights:  67%|██████▋   | 388/579 [05:26<01:18,  2.43it/s]Loading weights:  67%|██████▋   | 390/579 [05:26<01:10,  2.69it/s]Loading weights:  69%|██████▉   | 400/579 [05:31<01:13,  2.42it/s]Loading weights:  69%|██████▉   | 402/579 [05:31<01:06,  2.67it/s]Loading weights:  71%|███████   | 412/579 [05:36<01:07,  2.47it/s]Loading weights:  71%|███████▏  | 413/579 [05:36<01:05,  2.55it/s]Loading weights:  73%|███████▎  | 424/579 [05:40<01:02,  2.47it/s]Loading weights:  74%|███████▎  | 426/579 [05:41<00:56,  2.70it/s]Loading weights:  75%|███████▌  | 436/579 [05:45<00:58,  2.43it/s]Loading weights:  75%|███████▌  | 437/579 [05:45<00:56,  2.53it/s]Loading weights:  77%|███████▋  | 448/579 [05:50<00:53,  2.46it/s]Loading weights:  78%|███████▊  | 449/579 [05:50<00:50,  2.56it/s]Loading weights:  79%|███████▉  | 460/579 [05:55<00:47,  2.51it/s]Loading weights:  80%|███████▉  | 461/579 [05:55<00:45,  2.61it/s]Loading weights:  80%|███████▉  | 462/579 [05:55<00:43,  2.71it/s]Loading weights:  82%|████████▏ | 472/579 [05:59<00:44,  2.43it/s]Loading weights:  84%|████████▎ | 484/579 [06:04<00:37,  2.53it/s]Loading weights:  84%|████████▍ | 485/579 [06:04<00:36,  2.59it/s]Loading weights:  86%|████████▌ | 496/579 [06:09<00:33,  2.48it/s]Loading weights:  88%|████████▊ | 508/579 [06:14<00:28,  2.52it/s]Loading weights:  88%|████████▊ | 510/579 [06:14<00:25,  2.71it/s]Loading weights:  90%|████████▉ | 520/579 [06:18<00:23,  2.52it/s]Loading weights:  90%|████████▉ | 521/579 [06:18<00:22,  2.59it/s]Loading weights:  92%|█████████▏| 532/579 [06:23<00:18,  2.50it/s]Loading weights:  92%|█████████▏| 534/579 [06:23<00:16,  2.71it/s]Loading weights:  94%|█████████▍| 544/579 [06:28<00:14,  2.48it/s]Loading weights:  94%|█████████▍| 546/579 [06:28<00:12,  2.72it/s]Loading weights:  96%|█████████▌| 556/579 [06:32<00:09,  2.47it/s]Loading weights:  96%|█████████▌| 557/579 [06:32<00:08,  2.58it/s]Loading weights:  98%|█████████▊| 568/579 [06:37<00:04,  2.50it/s]Loading weights: 100%|██████████| 579/579 [06:37<00:00,  1.46it/s]
+Traceback (most recent call last):
+  File "/research/d7/fyp25/bhtang2/mad_graph/CS_FYP_sem2/transformers/mad_graph_analysis_transformers.py", line 329, in <module>
+    main()
+    ~~~~^^
+  File "/research/d7/fyp25/bhtang2/mad_graph/CS_FYP_sem2/transformers/mad_graph_analysis_transformers.py", line 318, in main
+    run_evaluation(
+    ~~~~~~~~~~~~~~^
+        model_name_or_path=args.model,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        device=args.device,
+        ^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/research/d7/fyp25/bhtang2/mad_graph/CS_FYP_sem2/transformers/mad_graph_analysis_transformers.py", line 252, in run_evaluation
+    llm = TransformersLLM(model_name_or_path, device=device, temperature=temperature)
+  File "/research/d7/fyp25/bhtang2/mad_graph/CS_FYP_sem2/transformers/mad_graph_analysis_transformers.py", line 124, in __init__
+    self.model.to(self.device)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/research/d7/fyp25/bhtang2/conda_envs/mad/lib/python3.14/site-packages/transformers/modeling_utils.py", line 3587, in to
+    return super().to(*args, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/research/d7/fyp25/bhtang2/conda_envs/mad/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1381, in to
+    return self._apply(convert)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/research/d7/fyp25/bhtang2/conda_envs/mad/lib/python3.14/site-packages/torch/nn/modules/module.py", line 933, in _apply
+    module._apply(fn)
+    ~~~~~~~~~~~~~^^^^
+  File "/research/d7/fyp25/bhtang2/conda_envs/mad/lib/python3.14/site-packages/torch/nn/modules/module.py", line 933, in _apply
+    module._apply(fn)
+    ~~~~~~~~~~~~~^^^^
+  File "/research/d7/fyp25/bhtang2/conda_envs/mad/lib/python3.14/site-packages/torch/nn/modules/module.py", line 933, in _apply
+    module._apply(fn)
+    ~~~~~~~~~~~~~^^^^
+  [Previous line repeated 2 more times]
+  File "/research/d7/fyp25/bhtang2/conda_envs/mad/lib/python3.14/site-packages/torch/nn/modules/module.py", line 964, in _apply
+    param_applied = fn(param)
+  File "/research/d7/fyp25/bhtang2/conda_envs/mad/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1367, in convert
+    return t.to(
+           ~~~~^
+        device,
+        ^^^^^^^
+        dtype if t.is_floating_point() or t.is_complex() else None,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        non_blocking,
+        ^^^^^^^^^^^^^
+    )
+    ^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 50.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 21.69 MiB is free. Including non-PyTorch memory, this process has 23.49 GiB memory in use. Of the allocated memory 23.11 GiB is allocated by PyTorch, and 620.00 KiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

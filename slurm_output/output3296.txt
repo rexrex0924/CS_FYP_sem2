@@ -1,0 +1,59 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+`torch_dtype` is deprecated! Use `dtype` instead!
+
+=== Starting MAD-Graph Evaluation (Transformers) ===
+Model       : microsoft/Phi-4-reasoning
+Dataset     : ../dataset/2012-2020_ICT_DSE.csv
+Temperature : 0.7
+Device      : cuda
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Fetching 6 files:  17%|█▋        | 1/6 [05:03<25:18, 303.77s/it]Fetching 6 files: 100%|██████████| 6/6 [05:03<00:00, 50.63s/it] 
+Loading weights:   0%|          | 0/243 [00:00<?, ?it/s]Loading weights:   0%|          | 1/243 [00:35<2:21:23, 35.06s/it]Loading weights:   7%|▋         | 17/243 [00:37<06:06,  1.62s/it] Loading weights:   9%|▉         | 22/243 [00:38<04:27,  1.21s/it]Loading weights:   9%|▉         | 23/243 [00:47<06:43,  1.84s/it]Loading weights:  12%|█▏        | 29/243 [00:51<04:49,  1.35s/it]Loading weights:  14%|█▍        | 35/243 [00:56<04:03,  1.17s/it]Loading weights:  17%|█▋        | 41/243 [01:04<03:59,  1.19s/it]Loading weights:  19%|█▉        | 47/243 [01:09<03:32,  1.08s/it]Loading weights:  22%|██▏       | 53/243 [01:15<03:20,  1.06s/it]Loading weights:  24%|██▍       | 59/243 [01:20<03:02,  1.01it/s]Loading weights:  26%|██▋       | 64/243 [01:20<02:11,  1.36it/s]Loading weights:  27%|██▋       | 65/243 [01:27<03:22,  1.14s/it]Loading weights:  29%|██▉       | 71/243 [01:33<03:07,  1.09s/it]Loading weights:  32%|███▏      | 77/243 [01:39<02:57,  1.07s/it]Loading weights:  34%|███▍      | 83/243 [01:44<02:39,  1.00it/s]Loading weights:  37%|███▋      | 89/243 [01:50<02:37,  1.02s/it]Loading weights:  39%|███▉      | 95/243 [01:57<02:34,  1.04s/it]Loading weights:  42%|████▏     | 101/243 [02:02<02:21,  1.00it/s]Loading weights:  44%|████▍     | 107/243 [02:07<02:07,  1.06it/s]Loading weights:  47%|████▋     | 113/243 [02:14<02:08,  1.01it/s]Loading weights:  49%|████▉     | 119/243 [02:19<01:57,  1.05it/s]Loading weights:  51%|█████▏    | 125/243 [02:26<02:00,  1.02s/it]Loading weights:  54%|█████▍    | 131/243 [02:32<01:50,  1.02it/s]Loading weights:  56%|█████▋    | 137/243 [02:37<01:43,  1.02it/s]Loading weights:  59%|█████▉    | 143/243 [02:43<01:38,  1.01it/s]Loading weights:  61%|██████▏   | 149/243 [02:50<01:35,  1.02s/it]Loading weights:  64%|██████▍   | 155/243 [02:55<01:24,  1.04it/s]Loading weights:  66%|██████▋   | 161/243 [03:00<01:15,  1.09it/s]Loading weights:  68%|██████▊   | 166/243 [03:01<00:56,  1.36it/s]Loading weights:  69%|██████▊   | 167/243 [03:08<01:27,  1.15s/it]Loading weights:  71%|███████   | 173/243 [03:12<01:11,  1.02s/it]Loading weights:  74%|███████▎  | 179/243 [03:18<01:04,  1.01s/it]Loading weights:  76%|███████▌  | 185/243 [03:25<01:01,  1.06s/it]Loading weights:  79%|███████▊  | 191/243 [03:31<00:54,  1.05s/it]Loading weights:  81%|████████  | 197/243 [03:36<00:43,  1.05it/s]Loading weights:  84%|████████▎ | 203/243 [03:42<00:38,  1.05it/s]Loading weights:  86%|████████▌ | 209/243 [03:49<00:34,  1.02s/it]Loading weights:  88%|████████▊ | 215/243 [03:54<00:27,  1.01it/s]Loading weights:  91%|█████████ | 221/243 [03:59<00:20,  1.06it/s]Loading weights:  93%|█████████▎| 227/243 [04:06<00:16,  1.01s/it]Loading weights:  96%|█████████▌| 233/243 [04:11<00:09,  1.04it/s]Loading weights:  98%|█████████▊| 239/243 [04:13<00:02,  1.34it/s]Loading weights: 100%|██████████| 243/243 [04:13<00:00,  1.04s/it]
+Traceback (most recent call last):
+  File "/research/d7/fyp25/bhtang2/mad_graph/CS_FYP_sem2/transformers/mad_graph_analysis_transformers.py", line 329, in <module>
+    main()
+    ~~~~^^
+  File "/research/d7/fyp25/bhtang2/mad_graph/CS_FYP_sem2/transformers/mad_graph_analysis_transformers.py", line 318, in main
+    run_evaluation(
+    ~~~~~~~~~~~~~~^
+        model_name_or_path=args.model,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        device=args.device,
+        ^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/research/d7/fyp25/bhtang2/mad_graph/CS_FYP_sem2/transformers/mad_graph_analysis_transformers.py", line 252, in run_evaluation
+    llm = TransformersLLM(model_name_or_path, device=device, temperature=temperature)
+  File "/research/d7/fyp25/bhtang2/mad_graph/CS_FYP_sem2/transformers/mad_graph_analysis_transformers.py", line 124, in __init__
+    self.model.to(self.device)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/research/d7/fyp25/bhtang2/conda_envs/mad/lib/python3.14/site-packages/transformers/modeling_utils.py", line 3587, in to
+    return super().to(*args, **kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/research/d7/fyp25/bhtang2/conda_envs/mad/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1381, in to
+    return self._apply(convert)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/research/d7/fyp25/bhtang2/conda_envs/mad/lib/python3.14/site-packages/torch/nn/modules/module.py", line 933, in _apply
+    module._apply(fn)
+    ~~~~~~~~~~~~~^^^^
+  File "/research/d7/fyp25/bhtang2/conda_envs/mad/lib/python3.14/site-packages/torch/nn/modules/module.py", line 933, in _apply
+    module._apply(fn)
+    ~~~~~~~~~~~~~^^^^
+  File "/research/d7/fyp25/bhtang2/conda_envs/mad/lib/python3.14/site-packages/torch/nn/modules/module.py", line 933, in _apply
+    module._apply(fn)
+    ~~~~~~~~~~~~~^^^^
+  [Previous line repeated 2 more times]
+  File "/research/d7/fyp25/bhtang2/conda_envs/mad/lib/python3.14/site-packages/torch/nn/modules/module.py", line 964, in _apply
+    param_applied = fn(param)
+  File "/research/d7/fyp25/bhtang2/conda_envs/mad/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1367, in convert
+    return t.to(
+           ~~~~^
+        device,
+        ^^^^^^^
+        dtype if t.is_floating_point() or t.is_complex() else None,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        non_blocking,
+        ^^^^^^^^^^^^^
+    )
+    ^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 176.00 MiB. GPU 0 has a total capacity of 23.52 GiB of which 59.69 MiB is free. Including non-PyTorch memory, this process has 23.45 GiB memory in use. Of the allocated memory 23.07 GiB is allocated by PyTorch, and 1.34 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

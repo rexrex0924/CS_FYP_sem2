@@ -5,11 +5,11 @@
 #SBATCH --partition=gpu_24h
 #SBATCH --qos=gpu
 #SBATCH --cpus-per-task=2
-#SBATCH --output=/research/d7/fyp25/bhtang2/mad_graph/CS_FYP_sem2/output%j.txt ##Do not use "~" point to your home!
+#SBATCH --output=/research/d7/fyp25/bhtang2/mad_graph/CS_FYP_sem2/slurm_output/output%j.txt ##Do not use "~" point to your home!
 #SBATCH --gres=gpu:1
 
-MODEL="TinyLlama/TinyLlama-1.1B-Chat-v1.0"
-CSV_PATH="dataset/2012-2020_ICT_DSE.csv"
+MODEL="microsoft/Phi-4-reasoning"
+CSV_PATH="../dataset/2012-2020_ICT_DSE.csv"
 TEMPERATURE="0.7"
 SEED="42"
 QNUM="100"

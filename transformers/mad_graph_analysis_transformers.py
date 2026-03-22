@@ -253,7 +253,7 @@ def run_evaluation(model_name_or_path: str, csv_path: str, seed: int,
 
     mcqs = load_mcq_csv(csv_path, max_questions=max_questions)
 
-    csv_dir = Path("mad_graph/results")
+    csv_dir = Path("../mad_graph/results")
     csv_dir.mkdir(parents=True, exist_ok=True)
 
     dataset_name = Path(csv_path).stem
