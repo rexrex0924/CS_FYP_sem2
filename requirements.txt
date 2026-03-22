@@ -1,0 +1,38 @@
+# ============================================================
+# Core data / numerics
+# ============================================================
+numpy>=2.2.0
+pandas>=2.2.0
+scipy>=1.15.0
+
+# ============================================================
+# Visualisation
+# ============================================================
+matplotlib>=3.10.0
+seaborn>=0.13.2
+
+# ============================================================
+# Progress bars
+# ============================================================
+tqdm>=4.67.0
+
+# ============================================================
+# HTTP (Ollama API calls in mad_graph_eval.py)
+# ============================================================
+requests>=2.32.0
+
+# ============================================================
+# HuggingFace stack (transformers/mad_graph_analysis_transformers.py)
+# Install PyTorch separately first — see note below.
+# ============================================================
+transformers>=4.49.0
+accelerate>=1.4.0        # required for device_map="auto"
+
+# ============================================================
+# PyTorch — CPU-only default.
+# For CUDA (GPU), replace this with the appropriate wheel from:
+#   https://pytorch.org/get-started/locally/
+# e.g. for CUDA 12.1:
+#   pip install torch --index-url https://download.pytorch.org/whl/cu121
+# ============================================================
+torch>=2.6.0
