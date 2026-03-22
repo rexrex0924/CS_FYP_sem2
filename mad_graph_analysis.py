@@ -28,11 +28,10 @@ def compute_selection_frequency(df: pd.DataFrame) -> pd.Series:
     return df["predicted_answer"].value_counts(normalize=True).sort_index()
 
 
-def analyze_agent_agreement(df: pd.DataFrame):
+def analyze_agent_agreement(df: pd.DataFrame, label: str = ""):
     if not all(c in df.columns for c in ["agent_1_ans", "agent_2_ans", "agent_3_ans"]):
         return
 
-    print("\nAgent Agreement Analysis:")
     total = len(df)
 
     unanimous = (
@@ -42,17 +41,45 @@ def analyze_agent_agreement(df: pd.DataFrame):
     ).sum()
     disagreement = total - unanimous
 
-    print(f"  All 3 agreed (no debate needed) : {unanimous} ({unanimous/total:.1%})")
-    print(f"  Debate triggered                : {disagreement} ({disagreement/total:.1%})")
-
     unanimous_mask = (
         (df["agent_1_ans"] == df["agent_2_ans"]) &
         (df["agent_2_ans"] == df["agent_3_ans"])
     )
     acc_unanimous = df[unanimous_mask]["is_correct"].mean() if unanimous > 0 else 0
     acc_debate = df[~unanimous_mask]["is_correct"].mean() if disagreement > 0 else 0
-    print(f"  Accuracy (unanimous)            : {acc_unanimous:.3f}")
-    print(f"  Accuracy (after debate)         : {acc_debate:.3f}")
+
+    # Build the output text
+    lines = [
+        "Agent Agreement Analysis:",
+        f"  All 3 agreed (no debate needed) : {unanimous} ({unanimous/total:.1%})",
+        f"  Debate triggered                : {disagreement} ({disagreement/total:.1%})",
+        f"  Accuracy (unanimous)            : {acc_unanimous:.3f}",
+        f"  Accuracy (after debate)         : {acc_debate:.3f}"
+    ]
+
+    # Include individual accuracies if the correct_answer column exists
+    if "correct_answer" in df.columns:
+        lines.append("\n  Individual Agent Accuracies:")
+        lines.append(f"  Agent 1 Accuracy                : {(df['agent_1_ans'] == df['correct_answer']).mean():.3f}")
+        lines.append(f"  Agent 2 Accuracy                : {(df['agent_2_ans'] == df['correct_answer']).mean():.3f}")
+        lines.append(f"  Agent 3 Accuracy                : {(df['agent_3_ans'] == df['correct_answer']).mean():.3f}")
+
+    output_text = "\n".join(lines)
+    
+    # Print to console
+    print(f"\n{output_text}")
+
+    # Save to text file
+    summary_dir = Path("mad_graph/summary")
+    summary_dir.mkdir(parents=True, exist_ok=True)
+    
+    filename = f"{label}_agreement.txt" if label else "agreement_summary.txt"
+    out_path = summary_dir / filename
+    
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write(output_text + "\n")
+        
+    print(f"\nAgent agreement summary saved to: {out_path}")
 
 
 def print_summary(df: pd.DataFrame, label: str = ""):
@@ -156,7 +183,7 @@ def main():
     label = Path(args.mad_results).stem
 
     print_summary(mad_df, label=f"MAD-Graph: {label}")
-    analyze_agent_agreement(mad_df)
+    analyze_agent_agreement(mad_df, label=label)
 
     if args.baseline_results:
         baseline_df = load_results(args.baseline_results)
