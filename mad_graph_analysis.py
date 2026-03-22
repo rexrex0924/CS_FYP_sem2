@@ -1,10 +1,12 @@
 """
 MAD-Graph Results Analysis
 
-Analyzes the CSV output from mad_graph_eval.py and produces:
-- Overall accuracy
-- Agent agreement rate (how often Phase 1 resolved without debate)
-- Optional comparison plots vs. a baseline CSV
+Compares three stages for each run:
+  - Phase 1  : majority vote of the three agents BEFORE any debate
+  - Post-debate (Final) : resolved answer AFTER debate / graph resolution
+  - Baseline (optional) : a separate vanilla CSV for further comparison
+
+Produces console summary + comparison plots.
 """
 
 import argparse
@@ -18,152 +20,269 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
 def load_results(csv_path: str) -> pd.DataFrame:
     df = pd.read_csv(csv_path)
     df["is_correct"] = df["is_correct"].astype(int)
     return df
 
 
-def compute_selection_frequency(df: pd.DataFrame) -> pd.Series:
-    return df["predicted_answer"].value_counts(normalize=True).sort_index()
+def majority_vote(row) -> str:
+    """Return the Phase-1 majority-vote answer from the three agent columns."""
+    votes = [
+        str(row.get("agent_1_ans", "")).strip().upper(),
+        str(row.get("agent_2_ans", "")).strip().upper(),
+        str(row.get("agent_3_ans", "")).strip().upper(),
+    ]
+    valid = [v for v in votes if v in ("A", "B", "C", "D")]
+    if not valid:
+        return ""
+    return Counter(valid).most_common(1)[0][0]
 
 
-def analyze_agent_agreement(df: pd.DataFrame, label: str = ""):
-    if not all(c in df.columns for c in ["agent_1_ans", "agent_2_ans", "agent_3_ans"]):
+def add_phase1_column(df: pd.DataFrame) -> pd.DataFrame:
+    """Add a 'phase1_answer' column (majority vote before debate)."""
+    df = df.copy()
+    if all(c in df.columns for c in ("agent_1_ans", "agent_2_ans", "agent_3_ans")):
+        df["phase1_answer"] = df.apply(majority_vote, axis=1)
+        df["phase1_is_correct"] = (df["phase1_answer"] == df["correct_answer"]).astype(int)
+    return df
+
+
+def selection_freq(series: pd.Series) -> pd.Series:
+    return series.value_counts(normalize=True).reindex(["A", "B", "C", "D"], fill_value=0)
+
+
+def get_reference_dist(dataset_csv: str | None) -> pd.Series:
+    """
+    Return the reference distribution to use as the 'unbiased' baseline.
+    If a dataset CSV is provided, use the empirical answer key distribution.
+    Otherwise fall back to uniform (0.25 each).
+    """
+    POSITIONS = ["A", "B", "C", "D"]
+    if dataset_csv and Path(dataset_csv).exists():
+        df = pd.read_csv(dataset_csv)
+        ans_col = next((c for c in df.columns
+                        if c.lower() in ("answer", "correct_answer", "label")), None)
+        if ans_col:
+            dist = (df[ans_col].astype(str).str.strip().str.upper()
+                    .value_counts(normalize=True)
+                    .reindex(POSITIONS, fill_value=0))
+            return dist
+    return pd.Series([0.25] * 4, index=POSITIONS)
+
+
+def bias_score(pred_freq: pd.Series, ref_dist: pd.Series | None = None) -> float:
+    """
+    Mean absolute deviation of predicted selection frequencies from the
+    reference distribution (empirical answer key dist, or uniform 0.25).
+    Lower = less biased.
+    """
+    if ref_dist is None:
+        ref_dist = pd.Series([0.25] * 4, index=["A", "B", "C", "D"])
+    return float((pred_freq - ref_dist).abs().mean())
+
+
+# ---------------------------------------------------------------------------
+# Console reporting
+# ---------------------------------------------------------------------------
+
+def print_stage(df: pd.DataFrame, answer_col: str, correct_col: str, label: str,
+                ref_dist: pd.Series | None = None):
+    valid = df[df[answer_col].isin(["A", "B", "C", "D"])]
+    total = len(valid)
+    acc = valid[correct_col].mean() if total > 0 else 0.0
+    freq = selection_freq(valid[answer_col])
+
+    print(f"\n{'-'*52}")
+    print(f"  {label}")
+    print(f"{'-'*52}")
+    print(f"  Valid responses : {total}")
+    print(f"  Accuracy        : {acc:.3f}  ({valid[correct_col].sum()}/{total})")
+    print(f"  Selection freq  : A={freq['A']:.3f}  B={freq['B']:.3f}  "
+          f"C={freq['C']:.3f}  D={freq['D']:.3f}")
+    print(f"  Bias score (MAD): {bias_score(freq, ref_dist):.4f}")
+    return acc, freq
+
+
+def print_summary(df: pd.DataFrame, label: str = "", ref_dist: pd.Series | None = None,
+                  output_dir: Path | None = None):
+    df = add_phase1_column(df)
+
+    print(f"\n{'='*52}")
+    if label:
+        print(f"  {label}")
+    print(f"{'='*52}")
+    print(f"  Total rows : {len(df)}")
+
+    phase1_acc, phase1_freq = None, None
+    if "phase1_answer" in df.columns:
+        phase1_acc, phase1_freq = print_stage(
+            df, "phase1_answer", "phase1_is_correct",
+            "Phase 1  (before debate - majority vote)", ref_dist)
+
+    final_acc, final_freq = print_stage(
+        df, "predicted_answer", "is_correct",
+        "Final  (after debate / graph resolution)", ref_dist)
+
+    if phase1_acc is not None:
+        delta_acc = final_acc - phase1_acc
+        delta_bias = bias_score(final_freq, ref_dist) - bias_score(phase1_freq, ref_dist)
+        print(f"\n  Delta Accuracy  (Final - Phase1) : {delta_acc:+.3f}")
+        print(f"  Delta Bias (MAD)(Final - Phase1) : {delta_bias:+.4f}  "
+              f"({'reduced [OK]' if delta_bias < 0 else 'increased [!!]'})")
+
+    # Debate trigger analysis
+    print_agent_agreement(df, label=label, output_dir=output_dir)
+
+    return df
+
+
+def print_agent_agreement(df: pd.DataFrame, label: str = "",
+                          output_dir: Path | None = None):
+    if not all(c in df.columns for c in ("agent_1_ans", "agent_2_ans", "agent_3_ans")):
         return
-
     total = len(df)
-
     unanimous = (
         (df["agent_1_ans"] == df["agent_2_ans"]) &
         (df["agent_2_ans"] == df["agent_3_ans"]) &
         df["agent_1_ans"].isin(["A", "B", "C", "D"])
     ).sum()
-    disagreement = total - unanimous
+    debated = total - unanimous
 
-    unanimous_mask = (
+    mask = (
         (df["agent_1_ans"] == df["agent_2_ans"]) &
         (df["agent_2_ans"] == df["agent_3_ans"])
     )
-    acc_unanimous = df[unanimous_mask]["is_correct"].mean() if unanimous > 0 else 0
-    acc_debate = df[~unanimous_mask]["is_correct"].mean() if disagreement > 0 else 0
+    acc_u = df[mask]["is_correct"].mean() if unanimous > 0 else 0
+    acc_d = df[~mask]["is_correct"].mean() if debated > 0 else 0
 
-    # Build the output text
     lines = [
-        "Agent Agreement Analysis:",
-        f"  All 3 agreed (no debate needed) : {unanimous} ({unanimous/total:.1%})",
-        f"  Debate triggered                : {disagreement} ({disagreement/total:.1%})",
-        f"  Accuracy (unanimous)            : {acc_unanimous:.3f}",
-        f"  Accuracy (after debate)         : {acc_debate:.3f}"
+        "  Agent agreement (Phase 1):",
+        f"    Unanimous (no debate needed) : {unanimous:4d}  ({unanimous/total:.1%})",
+        f"    Debate triggered             : {debated:4d}  ({debated/total:.1%})",
+        f"    Accuracy when unanimous      : {acc_u:.3f}",
+        f"    Accuracy after debate        : {acc_d:.3f}",
     ]
 
-    # Include individual accuracies if the correct_answer column exists
     if "correct_answer" in df.columns:
-        lines.append("\n  Individual Agent Accuracies:")
-        lines.append(f"  Agent 1 Accuracy                : {(df['agent_1_ans'] == df['correct_answer']).mean():.3f}")
-        lines.append(f"  Agent 2 Accuracy                : {(df['agent_2_ans'] == df['correct_answer']).mean():.3f}")
-        lines.append(f"  Agent 3 Accuracy                : {(df['agent_3_ans'] == df['correct_answer']).mean():.3f}")
+        lines.append("\n  Individual Agent Accuracies (Phase 1):")
+        for i in range(1, 4):
+            col = f"agent_{i}_ans"
+            acc = (df[col] == df["correct_answer"]).mean()
+            lines.append(f"    Agent {i} Accuracy : {acc:.3f}")
 
     output_text = "\n".join(lines)
-    
-    # Print to console
     print(f"\n{output_text}")
 
-    # Save to text file
-    summary_dir = Path("mad_graph/summary")
-    summary_dir.mkdir(parents=True, exist_ok=True)
-    
-    filename = f"{label}_agreement.txt" if label else "agreement_summary.txt"
-    out_path = summary_dir / filename
-    
-    with open(out_path, "w", encoding="utf-8") as f:
-        f.write(output_text + "\n")
-        
-    print(f"\nAgent agreement summary saved to: {out_path}")
+    if output_dir is not None:
+        output_dir.mkdir(parents=True, exist_ok=True)
+        filename = f"{label}_agreement.txt" if label else "agreement_summary.txt"
+        out_path = output_dir / filename
+        with open(out_path, "w", encoding="utf-8") as f:
+            f.write(output_text + "\n")
+        print(f"\n  Agreement summary saved -> {out_path}")
 
 
-def print_summary(df: pd.DataFrame, label: str = ""):
-    print(f"\n{'='*50}")
-    if label:
-        print(f"  {label}")
-    print(f"{'='*50}")
+# ---------------------------------------------------------------------------
+# Plotting
+# ---------------------------------------------------------------------------
 
-    total = len(df)
-    overall_acc = df["is_correct"].mean()
-    print(f"Total questions : {total}")
-    print(f"Overall accuracy: {overall_acc:.3f} ({df['is_correct'].sum()}/{total})")
-
-    sel_freq = compute_selection_frequency(df)
-    print("\nSelection frequency by position:")
-    for pos in ["A", "B", "C", "D"]:
-        print(f"  {pos}: {sel_freq.get(pos, 0):.3f}")
-
-    return overall_acc
+COLORS = {
+    "baseline": "#5E81AC",
+    "phase1":   "#EBCB8B",
+    "final":    "#A3BE8C",
+}
 
 
-def plot_comparison(baseline_df: pd.DataFrame, mad_df: pd.DataFrame,
-                    output_dir: Path, label: str):
+def plot_comparison(df: pd.DataFrame, baseline_df: pd.DataFrame | None,
+                    output_dir: Path, label: str, ref_dist: pd.Series | None = None):
     positions = ["A", "B", "C", "D"]
 
-    # Selection frequency (proxy for positional bias)
-    baseline_freq = baseline_df["predicted_answer"].value_counts(normalize=True).reindex(positions, fill_value=0)
-    mad_freq = mad_df["predicted_answer"].value_counts(normalize=True).reindex(positions, fill_value=0)
+    phase1_freq  = selection_freq(df["phase1_answer"]) if "phase1_answer" in df.columns else None
+    final_freq   = selection_freq(df["predicted_answer"])
+    base_freq    = selection_freq(baseline_df["predicted_answer"]) if baseline_df is not None else None
 
+    phase1_acc  = df["phase1_is_correct"].mean() if "phase1_is_correct" in df.columns else None
+    final_acc   = df["is_correct"].mean()
+    base_acc    = baseline_df["is_correct"].mean() if baseline_df is not None else None
+
+    # Decide how many series to plot
+    series = []
+    if base_freq is not None:
+        series.append(("Baseline",      base_freq,   base_acc,   COLORS["baseline"]))
+    if phase1_freq is not None:
+        series.append(("Phase 1\n(before debate)", phase1_freq, phase1_acc, COLORS["phase1"]))
+    series.append(("Final\n(after debate)",  final_freq,  final_acc,  COLORS["final"]))
+
+    n = len(series)
     x = np.arange(len(positions))
-    width = 0.35
+    total_width = 0.7
+    w = total_width / n
 
-    fig, axes = plt.subplots(1, 2, figsize=(13, 5))
-    fig.suptitle(f"MAD-Graph vs Baseline — {label}", fontsize=13)
+    fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+    fig.suptitle(f"MAD-Graph Analysis — {label}", fontsize=13, fontweight="bold")
 
-    # Selection frequency chart
+    # --- Left: selection frequency ---
     ax = axes[0]
-    bars1 = ax.bar(x - width/2, baseline_freq.values, width, label="Baseline", color="#5E81AC", alpha=0.85)
-    bars2 = ax.bar(x + width/2, mad_freq.values, width, label="MAD-Graph", color="#A3BE8C", alpha=0.85)
-    ax.axhline(0.25, color="gray", linestyle="--", linewidth=0.8, label="Uniform (0.25)")
+    for i, (lbl, freq, _, color) in enumerate(series):
+        offset = (i - (n - 1) / 2) * w
+        bars = ax.bar(x + offset, freq.values, w, label=lbl, color=color, alpha=0.85)
+        for bar in bars:
+            h = bar.get_height()
+            ax.text(bar.get_x() + bar.get_width() / 2, h + 0.005,
+                    f"{h:.2f}", ha="center", va="bottom", fontsize=7)
+    # Draw a reference bar per position instead of a single flat line,
+    # so non-uniform datasets show the correct per-position target.
+    if ref_dist is None:
+        ref_dist = pd.Series([0.25] * 4, index=["A", "B", "C", "D"])
+    is_uniform = (ref_dist - 0.25).abs().max() < 0.01
+    ref_label = "Uniform (0.25)" if is_uniform else "Answer key dist (unbiased ref)"
+    ax.bar(x, ref_dist.values, total_width + 0.05, color="none",
+           edgecolor="gray", linewidth=1.5, linestyle="--", label=ref_label, zorder=0)
     ax.set_xlabel("Selected Answer Position")
     ax.set_ylabel("Selection Frequency")
-    ax.set_title("Answer Selection Frequency\n(uniform = unbiased)")
+    title_note = "(reference = uniform 0.25)" if is_uniform else "(reference = answer key distribution)"
+    ax.set_title(f"Answer Selection Frequency\n{title_note}")
     ax.set_xticks(x)
     ax.set_xticklabels(positions)
-    ax.set_ylim(0, 0.6)
-    ax.legend()
-    ax.grid(axis='y', alpha=0.3)
-    for bar in bars1:
-        h = bar.get_height()
-        ax.text(bar.get_x() + bar.get_width()/2., h + 0.005, f"{h:.2f}", ha='center', va='bottom', fontsize=8)
-    for bar in bars2:
-        h = bar.get_height()
-        ax.text(bar.get_x() + bar.get_width()/2., h + 0.005, f"{h:.2f}", ha='center', va='bottom', fontsize=8)
+    ax.set_ylim(0, 0.65)
+    ax.legend(fontsize=8)
+    ax.grid(axis="y", alpha=0.3)
 
-    # Bias score (std of selection freq) and accuracy
-    baseline_bias = float(baseline_freq.std())
-    mad_bias = float(mad_freq.std())
-    baseline_acc = baseline_df["is_correct"].mean()
-    mad_acc = mad_df["is_correct"].mean()
-
+    # --- Right: accuracy + bias score ---
     ax2 = axes[1]
     metrics = ["Overall Accuracy", "Selection Bias\n(std of freq)"]
-    baseline_vals = [baseline_acc, baseline_bias]
-    mad_vals = [mad_acc, mad_bias]
-
     x2 = np.arange(len(metrics))
-    ax2.bar(x2 - width/2, baseline_vals, width, label="Baseline", color="#5E81AC", alpha=0.85)
-    ax2.bar(x2 + width/2, mad_vals, width, label="MAD-Graph", color="#A3BE8C", alpha=0.85)
+    for i, (lbl, freq, acc, color) in enumerate(series):
+        if acc is None:
+            continue
+        offset = (i - (n - 1) / 2) * w
+        vals = [acc, bias_score(freq, ref_dist)]
+        bars2 = ax2.bar(x2 + offset, vals, w, label=lbl, color=color, alpha=0.85)
+        for bar, v in zip(bars2, vals):
+            ax2.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.005,
+                     f"{v:.3f}", ha="center", va="bottom", fontsize=8)
     ax2.set_xticks(x2)
     ax2.set_xticklabels(metrics)
-    ax2.set_title("Summary Metrics Comparison")
-    ax2.legend()
-    ax2.grid(axis='y', alpha=0.3)
-    for i, (bv, mv) in enumerate(zip(baseline_vals, mad_vals)):
-        ax2.text(i - width/2, bv + 0.005, f"{bv:.3f}", ha='center', va='bottom', fontsize=9)
-        ax2.text(i + width/2, mv + 0.005, f"{mv:.3f}", ha='center', va='bottom', fontsize=9)
+    bias_note = "vs uniform" if is_uniform else "vs answer key dist"
+    ax2.set_title(f"Summary Metrics Comparison\n(bias = MAD {bias_note})")
+    ax2.legend(fontsize=8)
+    ax2.grid(axis="y", alpha=0.3)
 
     plt.tight_layout()
     out_path = output_dir / f"{label}_comparison.png"
-    plt.savefig(out_path, dpi=150, bbox_inches='tight')
+    plt.savefig(out_path, dpi=150, bbox_inches="tight")
     plt.close()
-    print(f"\nPlot saved to: {out_path}")
+    print(f"\n  Plot saved -> {out_path}")
 
+
+# ---------------------------------------------------------------------------
+# Entry point
+# ---------------------------------------------------------------------------
 
 def main():
     parser = argparse.ArgumentParser(description="Analyze MAD-Graph evaluation results.")
@@ -171,25 +290,44 @@ def main():
                         help="Path to MAD-Graph results CSV")
     parser.add_argument("--baseline-results", type=str, default=None,
                         help="Path to baseline results CSV for comparison")
-    parser.add_argument("--output-dir", type=str, default="mad_graph/analysis",
+    parser.add_argument("--dataset", type=str, default=None,
+                        help="Path to the original dataset CSV (used to compute the empirical "
+                             "answer key distribution as the unbiased reference). "
+                             "If omitted, falls back to uniform 0.25.")
+    parser.add_argument("--output-dir", type=str, default="results/mad_graph/analysis",
                         help="Directory to save plots")
-
     args = parser.parse_args()
 
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    ref_dist = get_reference_dist(args.dataset)
+    is_uniform = (ref_dist - 0.25).abs().max() < 0.01
+    if args.dataset:
+        print(f"\n  Reference distribution loaded from: {args.dataset}")
+        if is_uniform:
+            print("  Dataset is near-uniform — 0.25 line is appropriate.")
+        else:
+            print("  Dataset is NON-UNIFORM — using empirical answer key distribution as reference.")
+            for pos, v in ref_dist.items():
+                print(f"    {pos}: {v:.4f} ({v*100:.1f}%)")
+    else:
+        print("\n  No --dataset provided. Using uniform 0.25 as reference.")
+
     mad_df = load_results(args.mad_results)
-    label = Path(args.mad_results).stem
+    mad_df = add_phase1_column(mad_df)
+    label  = Path(args.mad_results).stem
 
-    print_summary(mad_df, label=f"MAD-Graph: {label}")
-    analyze_agent_agreement(mad_df, label=label)
+    print_summary(mad_df, label=label, ref_dist=ref_dist, output_dir=output_dir)
 
+    baseline_df = None
     if args.baseline_results:
         baseline_df = load_results(args.baseline_results)
-        print_summary(baseline_df, label=f"Baseline: {Path(args.baseline_results).stem}")
-        short_label = label.replace("_mad_graph", "")
-        plot_comparison(baseline_df, mad_df, output_dir, short_label)
+        baseline_label = Path(args.baseline_results).stem
+        print_summary(baseline_df, label=baseline_label, ref_dist=ref_dist,
+                      output_dir=output_dir)
+
+    plot_comparison(mad_df, baseline_df, output_dir, label, ref_dist=ref_dist)
 
 
 if __name__ == "__main__":
