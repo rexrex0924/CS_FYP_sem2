@@ -8,7 +8,7 @@
 #SBATCH --output=/research/d7/fyp25/bhtang2/mad_graph/CS_FYP_sem2/slurm_output/output%j.txt ##Do not use "~" point to your home!
 #SBATCH --gres=gpu:1
 
-MODEL="microsoft/Phi-4-reasoning"
+MODEL="deepseek-ai/DeepSeek-V2.5-7B-Instruct"
 CSV_PATH="../dataset/2012-2020_ICT_DSE.csv"
 TEMPERATURE="0.7"
 SEED="42"
