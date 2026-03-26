@@ -1,0 +1,5 @@
+question_id,permutation_idx,prob_A,prob_B,prob_C,prob_D,predicted_answer,correct_position,model
+q4,0,1.0,0.0,0.0,0.0,A,A,gemma3:4b
+q4,1,0.0,0.0,0.0,1.0,D,D,gemma3:4b
+q4,2,0.0,0.0,1.0,0.0,C,C,gemma3:4b
+q4,3,0.0,1.0,0.0,0.0,B,B,gemma3:4b

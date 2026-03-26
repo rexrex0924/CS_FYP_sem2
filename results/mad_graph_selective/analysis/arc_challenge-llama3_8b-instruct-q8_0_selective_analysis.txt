@@ -1,0 +1,44 @@
+
+==========================================================
+  MAD-Graph Selective PriDe Analysis
+  arc_challenge-llama3_8b-instruct-q8_0
+==========================================================
+  Reference dist   : empirical answer key dist
+  Total questions  : 1168
+  Confident (3/3)  : 1155  (98.9%)
+  Uncertain (<3/3) :   13  (1.1%)
+
+----------------------------------------------------------
+  CONFIDENT SET  (agents unanimously agreed — model 'knows')
+----------------------------------------------------------
+  N              : 1155
+  Accuracy       : 0.822  (949/1155)
+  Selection freq : A=0.230  B=0.286  C=0.261  D=0.223
+  Bias (MAD)     : 0.0123  vs empirical answer key dist
+
+----------------------------------------------------------
+  UNCERTAIN SET  (agents disagreed — positional bias suspected)
+----------------------------------------------------------
+  N              : 7
+  Pre-PriDe acc  : 0.000  (0/7)
+  Selection freq : A=0.143  B=0.143  C=0.429  D=0.286
+  Bias (MAD)     : 0.1029  vs empirical answer key dist
+
+  Avg vote probs across all permutations (PriDe input signal):
+    prob_A=0.237  prob_B=0.154  prob_C=0.160  prob_D=0.064
+
+----------------------------------------------------------
+  OVERALL (confident + uncertain combined)
+----------------------------------------------------------
+  Accuracy       : 0.812  (949/1168)
+  Accuracy gap   : confident=0.822  uncertain=0.000  gap=+0.822
+  -> Hypothesis SUPPORTED: confident set is notably more accurate.
+  -> Bias gap SUPPORTS hypothesis: uncertain bias (0.1029) > confident bias (0.0123)
+
+----------------------------------------------------------
+  NEXT STEPS
+----------------------------------------------------------
+  To debias the uncertain set with PriDe, run:
+    python pride/pride_detail_eval.py results\mad_graph_selective\arc_challenge-llama3_8b-instruct-q8_0_uncertain_pride.csv
+
+  Plot saved -> results\mad_graph_selective\analysis\arc_challenge-llama3_8b-instruct-q8_0_selective_comparison.png

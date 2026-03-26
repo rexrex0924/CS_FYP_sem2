@@ -1,0 +1,10 @@
+  Agent agreement (Phase 1):
+    Unanimous (no debate needed) :   23  (44.2%)
+    Debate triggered             :   29  (55.8%)
+    Accuracy when unanimous      : 0.739
+    Accuracy after debate        : 0.483
+
+  Individual Agent Accuracies (Phase 1):
+    Agent 1 Accuracy : 0.654
+    Agent 2 Accuracy : 0.615
+    Agent 3 Accuracy : 0.538

@@ -1,0 +1,44 @@
+
+==========================================================
+  MAD-Graph Selective PriDe Analysis
+  2012-2020_ICT_DSE-llama3_8b-instruct-q8_0
+==========================================================
+  Reference dist   : uniform 0.25
+  Total questions  : 271
+  Confident (3/3)  :  256  (94.5%)
+  Uncertain (<3/3) :   15  (5.5%)
+
+----------------------------------------------------------
+  CONFIDENT SET  (agents unanimously agreed — model 'knows')
+----------------------------------------------------------
+  N              : 256
+  Accuracy       : 0.758  (194/256)
+  Selection freq : A=0.266  B=0.324  C=0.176  D=0.234
+  Bias (MAD)     : 0.0392  vs uniform 0.25
+
+----------------------------------------------------------
+  UNCERTAIN SET  (agents disagreed — positional bias suspected)
+----------------------------------------------------------
+  N              : 11
+  Pre-PriDe acc  : 0.364  (4/11)
+  Selection freq : A=0.091  B=0.182  C=0.455  D=0.273
+  Bias (MAD)     : 0.1193  vs uniform 0.25
+
+  Avg vote probs across all permutations (PriDe input signal):
+    prob_A=0.206  prob_B=0.267  prob_C=0.206  prob_D=0.106
+
+----------------------------------------------------------
+  OVERALL (confident + uncertain combined)
+----------------------------------------------------------
+  Accuracy       : 0.734  (199/271)
+  Accuracy gap   : confident=0.758  uncertain=0.364  gap=+0.394
+  -> Hypothesis SUPPORTED: confident set is notably more accurate.
+  -> Bias gap SUPPORTS hypothesis: uncertain bias (0.1193) > confident bias (0.0392)
+
+----------------------------------------------------------
+  NEXT STEPS
+----------------------------------------------------------
+  To debias the uncertain set with PriDe, run:
+    python pride/pride_detail_eval.py results\mad_graph_selective\2012-2020_ICT_DSE-llama3_8b-instruct-q8_0_uncertain_pride.csv
+
+  Plot saved -> results\mad_graph_selective\analysis\2012-2020_ICT_DSE-llama3_8b-instruct-q8_0_selective_comparison.png

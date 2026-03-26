@@ -44,11 +44,13 @@ B. {B}
 C. {C}
 D. {D}
 
-You previously chose {my_ans}. Another agent chose {other_ans} with this reasoning:
-"{other_reasoning}"
+You previously chose {my_ans}.
 
-Critique their reasoning. Do you concede to {other_ans}, or hold your ground on {my_ans}?
-End your response by clearly stating your final choice as exactly one letter ({my_ans} or {other_ans}) inside <answer> tags, like this: <answer>{my_ans}</answer>"""
+Other agents' current answers and reasoning:
+{other_responses}
+Carefully review the reasoning above. You may keep your answer or change it to any option (A, B, C, or D) if you find another argument more convincing.
+
+End your response by clearly stating your final answer as exactly one letter (A, B, C, or D) inside <answer> tags, like this: <answer>B</answer>"""
 
 # The three agent personas (Phase 1)
 AGENT_PROMPTS = {
@@ -107,13 +109,17 @@ def load_mcq_csv(path: str, max_questions: Optional[int] = None) -> List[MCQ]:
 
 def call_ollama(model: str, prompt: str, host: str = "http://localhost:11434",
                 temperature: float = 0.7, seed: int = 42,
-                retries: int = 3, timeout: int = 180) -> str:
+                retries: int = 3, timeout: int = 180,
+                num_predict: int | None = None) -> str:
     url = f"{host.rstrip('/')}/api/generate"
+    options: dict = {"temperature": temperature, "seed": seed}
+    if num_predict is not None:
+        options["num_predict"] = num_predict
     payload = {
         "model": model,
         "prompt": prompt,
         "stream": False,
-        "options": {"temperature": temperature, "seed": seed},
+        "options": options,
     }
     for attempt in range(retries):
         try:
@@ -143,9 +149,20 @@ def extract_answer_and_reasoning(response_text: str) -> Tuple[str, str]:
     return "", response_text.strip()
 
 
-def run_mad_graph(mcq: MCQ, model: str, host: str, temperature: float, seed: int) -> Tuple[str, Dict]:
+def run_mad_graph(mcq: MCQ, model: str, host: str, temperature: float, seed: int,
+                  debate_rounds: int = 2) -> Tuple[str, Dict, Dict]:
     """
     Runs the full MAD-Graph pipeline for a single question.
+
+    Phase 1 — Divergent Generation:
+        Each agent independently answers with a distinct reasoning persona.
+    Phase 2 — Multi-Round Debate:
+        Each agent sees ALL other agents' current answers and reasoning, then
+        updates its own answer. Repeated for `debate_rounds` rounds.
+        (Du et al. 2023: "debate over multiple rounds to arrive at a common answer")
+    Phase 3 — Graph Resolution:
+        Majority vote over final answers (in-degree centrality approximation).
+
     Returns (final_answer, initial_responses).
     """
     # --- Phase 1: Divergent Generation ---
@@ -170,49 +187,88 @@ def run_mad_graph(mcq: MCQ, model: str, host: str, temperature: float, seed: int
                   if r["ans"] in ["A", "B", "C", "D"]}
 
     if not valid_votes:
-        return "", initial_responses
+        return "", initial_responses, {}
 
     # All agents agree — no debate needed
     if len(set(valid_votes.values())) == 1:
-        return list(valid_votes.values())[0], initial_responses
+        return list(valid_votes.values())[0], initial_responses, valid_votes
 
-    # --- Phase 2: Debate (Cross-Critique) ---
-    final_votes = dict(valid_votes)
+    # --- Phase 2: Multi-Round Debate ---
+    # current_responses tracks the live answers+reasoning across rounds
+    current_responses = {aid: dict(r) for aid, r in initial_responses.items()}
 
-    for agent_id, my_ans in valid_votes.items():
-        disagreeing = [(aid, a) for aid, a in valid_votes.items() if a != my_ans]
-        if not disagreeing:
-            continue
+    for round_idx in range(debate_rounds):
+        # Snapshot answers at the start of this round so all agents debate
+        # against the same set of responses (simultaneous update)
+        round_snapshot = {aid: dict(r) for aid, r in current_responses.items()}
+        next_responses  = {aid: dict(r) for aid, r in current_responses.items()}
 
-        other_agent_id, other_ans = disagreeing[0]
-        other_reasoning = initial_responses[other_agent_id]["reasoning"]
+        for agent_id, r in round_snapshot.items():
+            my_ans = r["ans"]
+            if my_ans not in ["A", "B", "C", "D"]:
+                continue
 
-        debate_prompt = DEBATE_PROMPT_TEMPLATE.format(
-            question=mcq.question,
-            A=mcq.options["A"],
-            B=mcq.options["B"],
-            C=mcq.options["C"],
-            D=mcq.options["D"],
-            my_ans=my_ans,
-            other_ans=other_ans,
-            other_reasoning=other_reasoning[:800]
-        )
+            # Build a summary of ALL other agents' current answers + reasoning
+            other_lines = []
+            for other_id, other_r in round_snapshot.items():
+                if other_id == agent_id:
+                    continue
+                if other_r["ans"] not in ["A", "B", "C", "D"]:
+                    continue
+                snippet = other_r["reasoning"][:600].strip()
+                other_lines.append(
+                    f"Agent {other_id} chose {other_r['ans']}:\n{snippet}"
+                )
 
-        try:
-            response = call_ollama(model, debate_prompt, host, temperature, seed=seed + 10 + agent_id)
-            new_ans, _ = extract_answer_and_reasoning(response)
-            if new_ans in [my_ans, other_ans]:
-                final_votes[agent_id] = new_ans
-        except Exception:
-            pass
+            if not other_lines:
+                continue  # no valid opponents — nothing to debate
 
-    # --- Phase 3: Graph Resolution (In-Degree Centrality) ---
-    final_answer = Counter(final_votes.values()).most_common(1)[0][0]
-    return final_answer, initial_responses
+            other_responses_text = "\n\n".join(other_lines)
+
+            debate_prompt = DEBATE_PROMPT_TEMPLATE.format(
+                question=mcq.question,
+                A=mcq.options["A"],
+                B=mcq.options["B"],
+                C=mcq.options["C"],
+                D=mcq.options["D"],
+                my_ans=my_ans,
+                other_responses=other_responses_text
+            )
+
+            try:
+                response = call_ollama(
+                    model, debate_prompt, host, temperature,
+                    seed=seed + 100 * (round_idx + 1) + agent_id
+                )
+                new_ans, new_reasoning = extract_answer_and_reasoning(response)
+                if new_ans in ["A", "B", "C", "D"]:
+                    next_responses[agent_id]["ans"] = new_ans
+                    next_responses[agent_id]["reasoning"] = new_reasoning
+            except Exception:
+                pass  # keep previous answer on failure
+
+        current_responses = next_responses
+
+        # Early exit if all valid agents now agree
+        final_valid = {aid: r["ans"] for aid, r in current_responses.items()
+                       if r["ans"] in ["A", "B", "C", "D"]}
+        if len(set(final_valid.values())) == 1:
+            break
+
+    # --- Phase 3: Graph Resolution (In-Degree Centrality / Majority Vote) ---
+    final_valid = {aid: r["ans"] for aid, r in current_responses.items()
+                   if r["ans"] in ["A", "B", "C", "D"]}
+    if not final_valid:
+        return "", initial_responses, {}
+
+    final_answer = Counter(final_valid.values()).most_common(1)[0][0]
+    return final_answer, initial_responses, final_valid
 
 
-def process_question(mcq: MCQ, model: str, host: str, temperature: float, seed: int) -> Dict:
-    predicted_answer, initial_responses = run_mad_graph(mcq, model, host, temperature, seed)
+def process_question(mcq: MCQ, model: str, host: str, temperature: float, seed: int,
+                     debate_rounds: int = 2) -> Dict:
+    predicted_answer, initial_responses, _ = run_mad_graph(
+        mcq, model, host, temperature, seed, debate_rounds=debate_rounds)
     return {
         "question_id": mcq.uid,
         "model": model,
@@ -226,29 +282,128 @@ def process_question(mcq: MCQ, model: str, host: str, temperature: float, seed: 
     }
 
 
+# ---------------------------------------------------------------------------
+# PriDe-compatible evaluation helpers
+# ---------------------------------------------------------------------------
+
+_POSITIONS = ["A", "B", "C", "D"]
+
+
+def permute_options(options: Dict[str, str], shift: int) -> Dict[str, str]:
+    """
+    Cyclically shift answer options by `shift` positions.
+    Position i in the output shows the original option at index (i + shift) % 4.
+      shift=0: [A,B,C,D] -> [A,B,C,D]
+      shift=1: [A,B,C,D] -> [B,C,D,A]   (original B now labelled A, etc.)
+      shift=2: [A,B,C,D] -> [C,D,A,B]
+      shift=3: [A,B,C,D] -> [D,A,B,C]
+    """
+    return {_POSITIONS[i]: options[_POSITIONS[(i + shift) % 4]] for i in range(4)}
+
+
+def correct_pos_in_permutation(correct_answer: str, shift: int) -> str:
+    """
+    Given the original correct answer letter and the cyclic shift, return
+    the label that letter appears under in the permuted layout.
+    orig_idx=0 (A), shift=1  ->  new label = (0-1)%4 = 3 = D
+    """
+    orig_idx = _POSITIONS.index(correct_answer)
+    return _POSITIONS[(orig_idx - shift) % 4]
+
+
+def votes_to_probs(final_valid: Dict) -> Dict[str, float]:
+    """
+    Convert agent final-vote dict {agent_id: answer_letter} to a probability
+    distribution over positions A/B/C/D (fraction of agents who voted each).
+    With 3 agents, possible values are 0.0, 0.333, 0.667, 1.0.
+    """
+    n = len(final_valid) if final_valid else 1
+    counts = Counter(final_valid.values())
+    return {f"prob_{p}": counts.get(p, 0) / n for p in _POSITIONS}
+
+
+def process_question_for_pride(mcq: MCQ, model: str, host: str, temperature: float,
+                                seed: int, debate_rounds: int = 2) -> List[Dict]:
+    """
+    Run MAD-Graph on all 4 cyclic permutations of the question's options and
+    return a list of 4 rows in PriDe-compatible CSV format:
+      question_id, permutation_idx, prob_A, prob_B, prob_C, prob_D,
+      predicted_answer, correct_position, model
+    The soft probabilities (prob_*) are derived from the final agent vote
+    distribution after debate, giving PriDe the signal it needs to estimate
+    and subtract the model's positional prior.
+    """
+    rows = []
+    for shift in range(4):
+        perm_options = permute_options(mcq.options, shift)
+        correct_pos = correct_pos_in_permutation(mcq.answer, shift)
+
+        # Build a temporary MCQ with permuted options so run_mad_graph uses them
+        perm_mcq = MCQ(
+            uid=mcq.uid,
+            question=mcq.question,
+            options=perm_options,
+            answer=correct_pos,  # correct answer in permuted space
+        )
+        _, _, final_valid = run_mad_graph(
+            perm_mcq, model, host, temperature,
+            seed=seed + shift * 1000, debate_rounds=debate_rounds
+        )
+
+        probs = votes_to_probs(final_valid)
+        predicted = Counter(final_valid.values()).most_common(1)[0][0] if final_valid else ""
+
+        rows.append({
+            "question_id":      mcq.uid,
+            "permutation_idx":  shift,
+            "prob_A":           probs["prob_A"],
+            "prob_B":           probs["prob_B"],
+            "prob_C":           probs["prob_C"],
+            "prob_D":           probs["prob_D"],
+            "predicted_answer": predicted,
+            "correct_position": correct_pos,
+            "model":            model,
+        })
+    return rows
+
+
 def run_evaluation(model: str, host: str, csv_path: str, seed: int,
-                   max_questions: Optional[int], temperature: float, num_workers: int):
-    print("\n=== Starting MAD-Graph Evaluation ===")
-    print(f"Model       : {model}")
-    print(f"Dataset     : {csv_path}")
-    print(f"Temperature : {temperature}")
-    print(f"Workers     : {num_workers}")
+                   max_questions: Optional[int], temperature: float, num_workers: int,
+                   debate_rounds: int = 2, for_pride: bool = False):
+    mode_label = "MAD-Graph (PriDe-compatible)" if for_pride else "MAD-Graph"
+    print(f"\n=== Starting {mode_label} Evaluation ===")
+    print(f"Model         : {model}")
+    print(f"Dataset       : {csv_path}")
+    print(f"Temperature   : {temperature}")
+    print(f"Workers       : {num_workers}")
+    print(f"Debate rounds : {debate_rounds}")
+    if for_pride:
+        print("Mode          : --for-pride  (4 permutations per question, vote probabilities)")
 
     mcqs = load_mcq_csv(csv_path, max_questions=max_questions)
 
-    csv_dir = Path("mad_graph/results")
-    csv_dir.mkdir(parents=True, exist_ok=True)
-
     dataset_name = Path(csv_path).stem
     model_name = model.replace(':', '_').replace('/', '_')
-    csv_output_file = csv_dir / f"{dataset_name}-{model_name}_mad_graph.csv"
 
-    fieldnames = [
-        "question_id", "model", "predicted_answer", "correct_answer", "is_correct",
-        "agent_1_ans", "agent_2_ans", "agent_3_ans", "question"
-    ]
+    if for_pride:
+        csv_dir = Path("results/mad_graph_pride")
+        csv_output_file = csv_dir / f"{dataset_name}-{model_name}_mad_graph_pride.csv"
+        fieldnames = [
+            "question_id", "permutation_idx",
+            "prob_A", "prob_B", "prob_C", "prob_D",
+            "predicted_answer", "correct_position", "model",
+        ]
+    else:
+        csv_dir = Path("mad_graph/results")
+        csv_output_file = csv_dir / f"{dataset_name}-{model_name}_mad_graph.csv"
+        fieldnames = [
+            "question_id", "model", "predicted_answer", "correct_answer", "is_correct",
+            "agent_1_ans", "agent_2_ans", "agent_3_ans", "question",
+        ]
 
-    # Checkpointing
+    csv_dir.mkdir(parents=True, exist_ok=True)
+
+    # Checkpointing — track by question_id (all permutations re-run together)
     processed_ids: set = set()
     if csv_output_file.exists():
         try:
@@ -267,26 +422,50 @@ def run_evaluation(model: str, host: str, csv_path: str, seed: int,
         if not processed_ids and f.tell() == 0:
             writer.writeheader()
 
-        with concurrent.futures.ThreadPoolExecutor(max_workers=num_workers) as executor:
-            future_to_id = {
-                executor.submit(process_question, mcq, model, host, temperature, seed): mcq.uid
-                for mcq in pending
-            }
-
-            with tqdm(total=len(mcqs), initial=len(processed_ids),
-                      desc=f"MAD-Graph [{model}]") as pbar:
-                for future in concurrent.futures.as_completed(future_to_id):
-                    try:
-                        result = future.result()
-                        writer.writerow(result)
-                        f.flush()
-                    except Exception as e:
-                        qid = future_to_id[future]
-                        print(f"\nError on question {qid}: {e}")
-                    pbar.update(1)
+        if for_pride:
+            # Each task returns a list of 4 rows (one per permutation)
+            with concurrent.futures.ThreadPoolExecutor(max_workers=num_workers) as executor:
+                future_to_id = {
+                    executor.submit(process_question_for_pride, mcq, model, host,
+                                    temperature, seed, debate_rounds): mcq.uid
+                    for mcq in pending
+                }
+                with tqdm(total=len(mcqs), initial=len(processed_ids),
+                          desc=f"MAD-Graph PriDe [{model}]") as pbar:
+                    for future in concurrent.futures.as_completed(future_to_id):
+                        try:
+                            rows = future.result()
+                            for row in rows:
+                                writer.writerow(row)
+                            f.flush()
+                        except Exception as e:
+                            qid = future_to_id[future]
+                            print(f"\nError on question {qid}: {e}")
+                        pbar.update(1)
+        else:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=num_workers) as executor:
+                future_to_id = {
+                    executor.submit(process_question, mcq, model, host, temperature, seed,
+                                    debate_rounds): mcq.uid
+                    for mcq in pending
+                }
+                with tqdm(total=len(mcqs), initial=len(processed_ids),
+                          desc=f"MAD-Graph [{model}]") as pbar:
+                    for future in concurrent.futures.as_completed(future_to_id):
+                        try:
+                            result = future.result()
+                            writer.writerow(result)
+                            f.flush()
+                        except Exception as e:
+                            qid = future_to_id[future]
+                            print(f"\nError on question {qid}: {e}")
+                        pbar.update(1)
 
     print(f"\nDone. Results saved to: {csv_output_file}")
-    print("Run mad_graph_analysis.py to analyse the results.")
+    if for_pride:
+        print("Feed this CSV directly into pride/pride_detail_eval.py or pride/pride_batch_summary.py.")
+    else:
+        print("Run mad_graph_analysis.py to analyse the results.")
 
 
 def main():
@@ -300,6 +479,13 @@ def main():
     parser.add_argument("--seed", type=int, default=42, help="Base random seed")
     parser.add_argument("--max-questions", type=int, default=None, help="Cap number of questions evaluated")
     parser.add_argument("--num-workers", type=int, default=4, help="Parallel workers")
+    parser.add_argument("--debate-rounds", type=int, default=2,
+                        help="Number of debate rounds (default: 2, per Du et al. 2023)")
+    parser.add_argument("--for-pride", action="store_true",
+                        help="Run all 4 cyclic permutations per question and output "
+                             "vote-based soft probabilities in PriDe-compatible CSV format. "
+                             "Output goes to results/mad_graph_pride/. "
+                             "Note: 4x more LLM calls than standard mode.")
 
     args = parser.parse_args()
 
@@ -314,6 +500,8 @@ def main():
         max_questions=args.max_questions,
         temperature=args.temperature,
         num_workers=args.num_workers,
+        debate_rounds=args.debate_rounds,
+        for_pride=args.for_pride,
     )
 
 
