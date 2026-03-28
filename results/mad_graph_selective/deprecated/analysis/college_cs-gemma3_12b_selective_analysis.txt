@@ -1,0 +1,56 @@
+
+============================================================
+  MAD-Graph Selective PriDe Analysis
+  college_cs-gemma3_12b
+============================================================
+  Reference dist   : empirical answer key dist
+    A: 0.2600  (26.0%)
+    B: 0.1500  (15.0%)
+    C: 0.2600  (26.0%)
+    D: 0.3300  (33.0%)
+  Total questions  : 100
+  Confident (3/3)  :   72  (72.0%)
+  Uncertain (<3/3) :   28  (28.0%)
+
+------------------------------------------------------------
+  CONFIDENT SET  (agents unanimously agreed)
+------------------------------------------------------------
+  N              : 72
+  Accuracy       : 0.667  (48/72)
+  Selection freq : A=0.208  B=0.167  C=0.236  D=0.389
+  Bias (MAD)     : 0.0378  vs empirical answer key dist
+  Avg vote probs (all perms, confident):
+    prob_A=0.170  prob_B=0.248  prob_C=0.216  prob_D=0.366
+
+------------------------------------------------------------
+  UNCERTAIN SET  (agents disagreed — positional bias suspected)
+------------------------------------------------------------
+  N              : 28
+  Accuracy       : 0.357  (10/28)
+  Selection freq : A=0.036  B=0.250  C=0.250  D=0.464
+  Bias (MAD)     : 0.1171  vs empirical answer key dist
+  Avg vote probs (all perms, uncertain):
+    prob_A=0.116  prob_B=0.238  prob_C=0.205  prob_D=0.440
+
+------------------------------------------------------------
+  OVERALL (confident + uncertain combined)
+------------------------------------------------------------
+  Accuracy       : 0.580  (58/100)
+  Accuracy gap   : confident=0.667  uncertain=0.357  gap=+0.310
+  -> Hypothesis SUPPORTED: confident set is notably more accurate.
+  -> Bias gap SUPPORTS hypothesis: uncertain (0.1171) > confident (0.0378)
+
+------------------------------------------------------------
+  PERMUTATION CONSISTENCY  (do all 4 shifts pick the same answer?)
+------------------------------------------------------------
+  Confident  : 5/72 questions had identical answer across all 4 perms  (6.9%)
+  Uncertain  : 1/28 questions had identical answer across all 4 perms  (3.6%)
+
+------------------------------------------------------------
+  NEXT STEPS
+------------------------------------------------------------
+  To run PriDe on the uncertain subset:
+    python -c "import pandas as pd; df=pd.read_csv('results\mad_graph_selective\college_cs-gemma3_12b_pride.csv'); df[df.confident==0].drop(columns='confident').to_csv('uncertain_only.csv', index=False)"
+    python pride/pride_detail_eval.py uncertain_only.csv
+
+  Plot saved -> results\mad_graph_selective\analysis\college_cs-gemma3_12b_selective_comparison.png

@@ -1,0 +1,99 @@
+
+==============================================================
+  PriDe Selective Analysis
+  college_cs-ministral-3_8b
+  Calibration ratio: 15%
+==============================================================
+
+  Total questions  : 100
+  Confident (1)    : 52  (52.0%)
+  Uncertain (0)    : 48  (48.0%)
+
+  Running PriDe on all 3 groups (calibration=15%) ...
+
+--------------------------------------------------------------
+  ALL QUESTIONS  (n=100 total, 85 test)
+--------------------------------------------------------------
+  Best alpha        : 0.70
+  Prior (A/B/C/D)   : 0.048 / 0.248 / 0.617 / 0.087
+  Metric                     Before    After    Delta
+  --------------------------------------------------
+  Accuracy                   0.5647   0.5794  +0.0147
+  Position Bias Score          8.53     2.96  -5.5710
+  RStd (%)                    12.56     5.15  -7.4079
+  Chi2 p-value               0.0000   0.1908
+
+  Selection freq (%)  Before -> After
+    A:   15.0%  ->   21.8%  ####
+    B:   24.1%  ->   22.9%  ####
+    C:   38.5%  ->   29.4%  #####
+    D:   22.4%  ->   25.9%  #####
+
+--------------------------------------------------------------
+  CONFIDENT SET  (n=52 total, 45 test)
+--------------------------------------------------------------
+  Best alpha        : 0.60
+  Prior (A/B/C/D)   : 0.144 / 0.209 / 0.504 / 0.144
+  Metric                     Before    After    Delta
+  --------------------------------------------------
+  Accuracy                   0.6222   0.6500  +0.0278
+  Position Bias Score          6.31     2.45  -3.8566
+  RStd (%)                     6.09     2.89  -3.1991
+  Chi2 p-value               0.0095   0.6295
+
+  Selection freq (%)  Before -> After
+    A:   18.9%  ->   22.2%  ####
+    B:   23.3%  ->   25.0%  #####
+    C:   35.6%  ->   28.9%  #####
+    D:   22.2%  ->   23.9%  ####
+
+--------------------------------------------------------------
+  UNCERTAIN SET  (n=48 total, 41 test)
+--------------------------------------------------------------
+  Best alpha        : 0.20
+  Prior (A/B/C/D)   : 0.079 / 0.144 / 0.775 / 0.001
+  Metric                     Before    After    Delta
+  --------------------------------------------------
+  Accuracy                   0.4695   0.4878  +0.0183
+  Position Bias Score         11.36     9.05  -2.3041
+  RStd (%)                    18.44    15.71  -2.7322
+  Chi2 p-value               0.0000   0.0001
+
+  Selection freq (%)  Before -> After
+    A:   11.0%  ->   10.4%  ##
+    B:   23.2%  ->   25.0%  #####
+    C:   42.7%  ->   34.1%  ######
+    D:   23.2%  ->   30.5%  ######
+
+==============================================================
+  SUMMARY TABLE
+==============================================================
+  Group         Alpha  Acc Before  Acc After  Acc Gain  Bias Before  Bias After  RStd Before  RStd After
+  ----------------------------------------------------------------------------------------------------
+  All            0.70      0.5647     0.5794   +0.0147         8.53        2.96        12.56        5.15
+  Confident      0.60      0.6222     0.6500   +0.0278         6.31        2.45         6.09        2.89
+  Uncertain      0.20      0.4695     0.4878   +0.0183        11.36        9.05        18.44       15.71
+
+==============================================================
+  HYPOTHESIS VERDICT
+==============================================================
+
+  Accuracy gain from PriDe:
+    Confident  : +0.0278
+    Uncertain  : +0.0183
+
+  Pre-PriDe positional bias (bias score):
+    Confident  : 6.31
+    Uncertain  : 11.36
+
+  Optimal alpha (higher = more debiasing needed):
+    Confident  : 0.60
+    Uncertain  : 0.20
+
+  (~) PriDe accuracy gain is similar for both groups.
+  (+) Uncertain questions have higher pre-PriDe bias as expected.
+  (~) Both groups required similar debiasing strength.
+
+  => Overall: WEAK / mixed support for the hypothesis.
+
+  Plot saved -> pride\results\selective\college_cs-ministral-3_8b_selective_pride_comparison.png

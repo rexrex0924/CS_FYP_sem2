@@ -1079,7 +1079,7 @@ def main():
     
     # Set paths
     csv_dir = Path("results/csv_results")
-    output_base = Path("results/pride_summary")
+    output_base = Path("pride/results/summary")
     
     # Create output directories
     by_dataset_dir = output_base / "by_dataset"

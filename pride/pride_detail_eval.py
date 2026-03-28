@@ -196,7 +196,7 @@ def compute_bias_metrics(df: pd.DataFrame, prediction_col: str = 'predicted_answ
 
 def create_visualization_folder(dataset_name: str, model_name: str) -> Path:
     """Create organized folder structure for visualizations."""
-    base_dir = Path("results") / "pride_visualizations" / f"{dataset_name}-{model_name}"
+    base_dir = Path("pride/results/visualizations") / f"{dataset_name}-{model_name}"
     subdirs = {
         'comparison': base_dir / "01_before_after_comparison",
         'distributions': base_dir / "02_choice_distributions",
@@ -829,7 +829,7 @@ def main_comprehensive_with_viz(csv_path: str, calibration_ratio: float = 0.10):
     
     # Save numerical results
     print("\n💾 Saving numerical results...")
-    csv_output_dir = Path("results") / "pride_optimized_csv_results"
+    csv_output_dir = Path("pride/results/csv")
     csv_output_dir.mkdir(parents=True, exist_ok=True)
     output_csv_path = csv_output_dir / f"{dataset_name}_pride_debiased.csv"
     test_df_debiased_final.to_csv(output_csv_path, index=False)
