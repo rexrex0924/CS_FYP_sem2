@@ -56,7 +56,7 @@ OUTPUT_DIR = Path("results/baseline")
 FIELDNAMES = [
     "question_id", "permutation_idx",
     "prob_A", "prob_B", "prob_C", "prob_D",
-    "predicted_answer", "correct_position", "correct_answer", "model",
+    "predicted_answer", "correct_position", "correct_answer", "model", "temperature",
 ]
 
 
@@ -106,6 +106,7 @@ def process_question_baseline(
             "correct_position": correct_pos,
             "correct_answer":   mcq.answer,
             "model":            model,
+            "temperature":      0.0,
         })
 
     return rows

@@ -15,7 +15,7 @@ from typing import Dict, List, Optional, Tuple
 
 import pandas as pd
 from tqdm import tqdm
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig, QuantoConfig
 
 
 PROMPT_TEMPLATE = """Question: {question}
@@ -110,17 +110,66 @@ def extract_answer_and_reasoning(response_text: str) -> Tuple[str, str]:
     return "", response_text.strip()
 
 
+QUANT_CHOICES = ("fp16", "int8", "nf4", "fp4", "fp8")
+
+
+def _build_quant_config(quantization: str):
+    """
+    Return a quantization config object (or None for plain fp16).
+
+    Backend mapping:
+      fp16 – no quantization; loads in torch.float16 on CUDA (default)
+      int8 – bitsandbytes LLM.int8()  (~1.5x VRAM saving vs fp16)
+               requires: pip install bitsandbytes
+      nf4  – bitsandbytes 4-bit NormalFloat, double-quantized
+               best quality at 4-bit; recommended for inference
+               requires: pip install bitsandbytes
+      fp4  – bitsandbytes 4-bit FloatingPoint
+               slightly faster kernel than nf4, marginally lower quality
+               requires: pip install bitsandbytes
+      fp8  – Quanto 8-bit floating-point (E4M3)
+               better quality than int8 at the same memory footprint;
+               hardware-accelerated on Hopper (H100) GPUs, software fallback elsewhere
+               requires: pip install optimum-quanto
+    """
+    if quantization == "fp16":
+        return None
+    if quantization == "int8":
+        return BitsAndBytesConfig(load_in_8bit=True)
+    if quantization in ("nf4", "fp4"):
+        return BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_quant_type=quantization,
+            bnb_4bit_use_double_quant=(quantization == "nf4"),
+            bnb_4bit_compute_dtype=torch.float16,
+        )
+    if quantization == "fp8":
+        # QuantoConfig is backed by optimum-quanto; works on any GPU via software
+        # emulation, natively accelerated on Hopper (H100) hardware.
+        return QuantoConfig(weights="float8")
+    raise ValueError(f"Unknown quantization: {quantization!r}. Choose from {QUANT_CHOICES}")
+
+
 class TransformersLLM:
     """Wrapper for a Hugging Face causal language model."""
-    def __init__(self, model_name_or_path: str, device: str = "auto", temperature: float = 0.7):
+    def __init__(self, model_name_or_path: str, device: str = "auto",
+                 temperature: float = 0.7, quantization: str = "fp16"):
         self.device = device if device != "auto" else ("cuda" if torch.cuda.is_available() else "cpu")
         self.tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
-        self.model = AutoModelForCausalLM.from_pretrained(
-            model_name_or_path,
-            torch_dtype=torch.float16 if self.device == "cuda" else torch.float32,
-            device_map="auto" if device == "auto" else None
-        )
-        if self.device != "auto":
+
+        quant_config = _build_quant_config(quantization)
+        load_kwargs: dict = {"device_map": "auto" if device == "auto" else None}
+
+        if quant_config is not None:
+            load_kwargs["quantization_config"] = quant_config
+            # BitsAndBytes requires device_map="auto"; Quanto works with or without it
+            load_kwargs["device_map"] = "auto"
+        else:
+            load_kwargs["torch_dtype"] = torch.float16 if self.device == "cuda" else torch.float32
+
+        self.model = AutoModelForCausalLM.from_pretrained(model_name_or_path, **load_kwargs)
+
+        if quant_config is None and device != "auto":
             self.model.to(self.device)
         self.model.eval()
         self.temperature = temperature
@@ -241,15 +290,18 @@ def process_question(mcq: MCQ, llm: TransformersLLM, seed: int) -> Dict:
 
 
 def run_evaluation(model_name_or_path: str, csv_path: str, seed: int,
-                   max_questions: Optional[int], temperature: float, device: str):
+                   max_questions: Optional[int], temperature: float, device: str,
+                   quantization: str = "fp16"):
     print("\n=== Starting MAD-Graph Evaluation (Transformers) ===")
-    print(f"Model       : {model_name_or_path}")
-    print(f"Dataset     : {csv_path}")
-    print(f"Temperature : {temperature}")
-    print(f"Device      : {device}")
+    print(f"Model        : {model_name_or_path}")
+    print(f"Dataset      : {csv_path}")
+    print(f"Temperature  : {temperature}")
+    print(f"Device       : {device}")
+    print(f"Quantization : {quantization}")
 
     # Load model once
-    llm = TransformersLLM(model_name_or_path, device=device, temperature=temperature)
+    llm = TransformersLLM(model_name_or_path, device=device,
+                          temperature=temperature, quantization=quantization)
 
     mcqs = load_mcq_csv(csv_path, max_questions=max_questions)
 
@@ -309,6 +361,15 @@ def main():
     parser.add_argument("--max-questions", type=int, default=None, help="Cap number of questions evaluated")
     parser.add_argument("--device", type=str, default="auto", choices=["auto", "cpu", "cuda"],
                         help="Device to run the model on")
+    parser.add_argument(
+        "--quantization", type=str, default="fp16", choices=QUANT_CHOICES,
+        help=(
+            "Weight quantization: fp16 (default, no quantization), "
+            "int8 (bitsandbytes 8-bit), nf4 (4-bit NormalFloat, recommended), "
+            "fp4 (4-bit FloatingPoint), fp8 (Quanto 8-bit float, better than int8). "
+            "int8/nf4/fp4 require bitsandbytes; fp8 requires optimum-quanto."
+        ),
+    )
 
     args = parser.parse_args()
 
@@ -322,6 +383,7 @@ def main():
         max_questions=args.max_questions,
         temperature=args.temperature,
         device=args.device,
+        quantization=args.quantization,
     )
 
 

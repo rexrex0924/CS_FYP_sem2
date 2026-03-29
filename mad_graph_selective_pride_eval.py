@@ -63,12 +63,14 @@ D. {D}
 
 Answer with a single letter only (A, B, C, or D):"""
 
-OUTPUT_DIR = Path("results/mad_graph_selective")
+OUTPUT_DIR = Path("results/mad_graph_selective/output")
 
 FIELDNAMES = [
     "question_id", "permutation_idx",
     "prob_A", "prob_B", "prob_C", "prob_D",
-    "predicted_answer", "correct_position", "correct_answer", "model", "confident",
+    "predicted_answer", "correct_position", "correct_answer", "model",
+    "confident", "temperature",
+    "agent_1_ans", "agent_2_ans", "agent_3_ans",
 ]
 
 
@@ -142,6 +144,13 @@ def process_question_selective(
     vote_values = list(valid_orig.values())
     is_confident = (len(set(vote_values)) == 1 and len(vote_values) >= 2)
 
+    # Store Phase 1 individual agent answers (on original question ordering).
+    # These are the raw evidence behind the confident flag and are written into
+    # every permutation row so downstream analysis doesn't need to cross-join.
+    agent_1_ans = orig_votes.get(1, "")
+    agent_2_ans = orig_votes.get(2, "")
+    agent_3_ans = orig_votes.get(3, "")
+
     # --- Step 2: deterministic permutation passes (all 4 cyclic shifts) ---
     rows: List[Dict] = []
     for shift in range(4):
@@ -172,6 +181,10 @@ def process_question_selective(
             "correct_answer":   mcq.answer,
             "model":            model,
             "confident":        int(is_confident),
+            "temperature":      temperature,
+            "agent_1_ans":      agent_1_ans,
+            "agent_2_ans":      agent_2_ans,
+            "agent_3_ans":      agent_3_ans,
         })
 
     return is_confident, rows

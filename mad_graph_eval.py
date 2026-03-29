@@ -394,7 +394,7 @@ def run_evaluation(model: str, host: str, csv_path: str, seed: int,
             "predicted_answer", "correct_position", "model",
         ]
     else:
-        csv_dir = Path("mad_graph/results")
+        csv_dir = Path("results/mad_graph")
         csv_output_file = csv_dir / f"{dataset_name}-{model_name}_mad_graph.csv"
         fieldnames = [
             "question_id", "model", "predicted_answer", "correct_answer", "is_correct",

@@ -6,89 +6,89 @@
 ==============================================================
 
   Total questions  : 271
-  Confident (1)    : 53  (19.6%)
-  Uncertain (0)    : 218  (80.4%)
+  Confident (1)    : 57  (21.0%)
+  Uncertain (0)    : 214  (79.0%)
 
   Running PriDe on all 3 groups (calibration=15%) ...
 
 --------------------------------------------------------------
   ALL QUESTIONS  (n=271 total, 231 test)
 --------------------------------------------------------------
-  Best alpha        : 1.00
-  Prior (A/B/C/D)   : 0.012 / 0.000 / 0.963 / 0.025
+  Best alpha        : 0.10
+  Prior (A/B/C/D)   : 0.001 / 0.000 / 0.975 / 0.024
   Metric                     Before    After    Delta
   --------------------------------------------------
-  Accuracy                   0.5660   0.5898  +0.0238
-  Position Bias Score          9.63     8.03  -1.5968
-  RStd (%)                    11.65     9.81  -1.8381
+  Accuracy                   0.5758   0.5931  +0.0173
+  Position Bias Score          9.21     8.08  -1.1229
+  RStd (%)                    11.36    10.00  -1.3553
   Chi2 p-value               0.0000   0.0000
 
   Selection freq (%)  Before -> After
-    A:   25.1%  ->   38.9%  #######
-    B:   14.2%  ->   20.7%  ####
-    C:   40.3%  ->   21.2%  ####
-    D:   20.5%  ->   19.3%  ###
+    A:   25.5%  ->   38.2%  #######
+    B:   14.7%  ->   20.2%  ####
+    C:   39.5%  ->   24.6%  ####
+    D:   20.2%  ->   17.0%  ###
 
 --------------------------------------------------------------
-  CONFIDENT SET  (n=53 total, 46 test)
+  CONFIDENT SET  (n=57 total, 49 test)
 --------------------------------------------------------------
-  Best alpha        : 0.70
-  Prior (A/B/C/D)   : 0.071 / 0.071 / 0.643 / 0.214
+  Best alpha        : 0.50
+  Prior (A/B/C/D)   : 0.144 / 0.063 / 0.674 / 0.119
   Metric                     Before    After    Delta
   --------------------------------------------------
-  Accuracy                   0.6467   0.7337  +0.0870
-  Position Bias Score         12.08     4.23  -7.8521
-  RStd (%)                    13.43     6.94  -6.4953
-  Chi2 p-value               0.0000   0.1537
+  Accuracy                   0.7143   0.7755  +0.0612
+  Position Bias Score         10.25     3.42  -6.8261
+  RStd (%)                    13.15     4.33  -8.8178
+  Chi2 p-value               0.0000   0.2990
 
   Selection freq (%)  Before -> After
-    A:   20.7%  ->   29.9%  #####
-    B:   15.2%  ->   22.3%  ####
-    C:   45.7%  ->   28.3%  #####
-    D:   18.5%  ->   19.6%  ###
+    A:   22.4%  ->   26.5%  #####
+    B:   16.3%  ->   20.4%  ####
+    C:   42.3%  ->   29.6%  #####
+    D:   18.9%  ->   23.5%  ####
 
 --------------------------------------------------------------
-  UNCERTAIN SET  (n=218 total, 186 test)
+  UNCERTAIN SET  (n=214 total, 182 test)
 --------------------------------------------------------------
-  Best alpha        : 0.30
-  Prior (A/B/C/D)   : 0.040 / 0.000 / 0.934 / 0.025
+  Best alpha        : 0.10
+  Prior (A/B/C/D)   : 0.053 / 0.000 / 0.929 / 0.017
   Metric                     Before    After    Delta
   --------------------------------------------------
-  Accuracy                   0.5148   0.5336  +0.0188
-  Position Bias Score          8.50     5.61  -2.8970
-  RStd (%)                    11.73     6.15  -5.5859
-  Chi2 p-value               0.0000   0.0000
+  Accuracy                   0.5247   0.5508  +0.0261
+  Position Bias Score          8.55     3.64  -4.9142
+  RStd (%)                    12.05     6.28  -5.7660
+  Chi2 p-value               0.0000   0.0015
 
   Selection freq (%)  Before -> After
-    A:   25.4%  ->   33.9%  ######
-    B:   14.8%  ->   21.0%  ####
-    C:   38.2%  ->   19.5%  ###
-    D:   21.6%  ->   25.7%  #####
+    A:   25.0%  ->   24.5%  ####
+    B:   14.4%  ->   21.0%  ####
+    C:   38.2%  ->   30.9%  ######
+    D:   22.4%  ->   23.6%  ####
 
 ==============================================================
   SUMMARY TABLE
 ==============================================================
   Group         Alpha  Acc Before  Acc After  Acc Gain  Bias Before  Bias After  RStd Before  RStd After
   ----------------------------------------------------------------------------------------------------
-  All            1.00      0.5660     0.5898   +0.0238         9.63        8.03        11.65        9.81
-  Confident      0.70      0.6467     0.7337   +0.0870        12.08        4.23        13.43        6.94
-  Uncertain      0.30      0.5148     0.5336   +0.0188         8.50        5.61        11.73        6.15
+  All            0.10      0.5758     0.5931   +0.0173         9.21        8.08        11.36       10.00
+  Confident      0.50      0.7143     0.7755   +0.0612        10.25        3.42        13.15        4.33
+  Uncertain      0.10      0.5247     0.5508   +0.0261         8.55        3.64        12.05        6.28
 
 ==============================================================
   HYPOTHESIS VERDICT
 ==============================================================
 
   Accuracy gain from PriDe:
-    Confident  : +0.0870
-    Uncertain  : +0.0188
+    Confident  : +0.0612
+    Uncertain  : +0.0261
 
   Pre-PriDe positional bias (bias score):
-    Confident  : 12.08
-    Uncertain  : 8.50
+    Confident  : 10.25
+    Uncertain  : 8.55
 
   Optimal alpha (higher = more debiasing needed):
-    Confident  : 0.70
-    Uncertain  : 0.30
+    Confident  : 0.50
+    Uncertain  : 0.10
 
   (-) PriDe unexpectedly helped confident questions more.
   (~) Bias difference between groups is small.

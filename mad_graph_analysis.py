@@ -10,6 +10,8 @@ Produces console summary + comparison plots.
 """
 
 import argparse
+import io
+import sys
 from pathlib import Path
 from collections import Counter
 
@@ -18,6 +20,23 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+
+
+class _Tee:
+    """Mirror every write to stdout AND an in-memory buffer."""
+    def __init__(self, real_stdout):
+        self._real = real_stdout   # captured before sys.stdout is replaced
+        self._buf = io.StringIO()
+
+    def write(self, text: str):
+        self._real.write(text)     # always write to the original stdout
+        self._buf.write(text)
+
+    def flush(self):
+        self._real.flush()
+
+    def getvalue(self) -> str:
+        return self._buf.getvalue()
 
 
 # ---------------------------------------------------------------------------
@@ -318,16 +337,30 @@ def main():
     mad_df = add_phase1_column(mad_df)
     label  = Path(args.mad_results).stem
 
-    print_summary(mad_df, label=label, ref_dist=ref_dist, output_dir=output_dir)
+    # Capture everything printed so we can also save it to a txt report
+    _real_stdout = sys.stdout
+    tee = _Tee(_real_stdout)   # capture real stdout before replacing
+    sys.stdout = tee
 
-    baseline_df = None
-    if args.baseline_results:
-        baseline_df = load_results(args.baseline_results)
-        baseline_label = Path(args.baseline_results).stem
-        print_summary(baseline_df, label=baseline_label, ref_dist=ref_dist,
-                      output_dir=output_dir)
+    try:
+        print_summary(mad_df, label=label, ref_dist=ref_dist, output_dir=output_dir)
 
-    plot_comparison(mad_df, baseline_df, output_dir, label, ref_dist=ref_dist)
+        baseline_df = None
+        if args.baseline_results:
+            baseline_df = load_results(args.baseline_results)
+            baseline_label = Path(args.baseline_results).stem
+            print_summary(baseline_df, label=baseline_label, ref_dist=ref_dist,
+                          output_dir=output_dir)
+
+        plot_comparison(mad_df, baseline_df, output_dir, label, ref_dist=ref_dist)
+    finally:
+        sys.stdout = _real_stdout
+
+    # Save the full console output to a txt file alongside the plots
+    report_path = output_dir / f"{label}_report.txt"
+    with open(report_path, "w", encoding="utf-8") as f:
+        f.write(tee.getvalue())
+    print(f"\n  Full report saved -> {report_path}")
 
 
 if __name__ == "__main__":
