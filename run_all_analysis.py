@@ -252,7 +252,7 @@ def _compute_agent_metrics(df_perm0: pd.DataFrame) -> dict:
 def _parse_label(filepath: Path):
     """Return (dataset, model) or (None, None)."""
     name = filepath.stem.replace("_pride", "").replace("_baseline", "")
-    for prefix in ["ministral", "mistral", "gemma", "llama", "phi", "qwen"]:
+    for prefix in ["ministral", "mistral", "gemma", "llama", "phi", "Qwen"]:
         if prefix in name:
             parts = name.split(prefix, 1)
             return parts[0].strip("-"), prefix + parts[1]
