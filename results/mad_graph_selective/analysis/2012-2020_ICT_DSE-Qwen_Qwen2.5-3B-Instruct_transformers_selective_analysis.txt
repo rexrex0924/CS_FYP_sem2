@@ -1,0 +1,52 @@
+
+============================================================
+  MAD-Graph Selective PriDe Analysis
+  2012-2020_ICT_DSE-Qwen_Qwen2.5-3B-Instruct_transformers
+============================================================
+  Reference dist   : uniform 0.25
+  Total questions  : 271
+  Confident (3/3)  :  139  (51.3%)
+  Uncertain (<3/3) :  132  (48.7%)
+
+------------------------------------------------------------
+  CONFIDENT SET  (agents unanimously agreed)
+------------------------------------------------------------
+  N              : 139
+  Accuracy       : 0.712  (99/139)
+  Selection freq : A=0.043  B=0.187  C=0.309  D=0.460
+  Bias (MAD)     : 0.1406  vs uniform 0.25
+  Avg vote probs (all perms, confident):
+    prob_A=0.173  prob_B=0.207  prob_C=0.285  prob_D=0.335
+
+------------------------------------------------------------
+  UNCERTAIN SET  (agents disagreed — positional bias suspected)
+------------------------------------------------------------
+  N              : 132
+  Accuracy       : 0.500  (66/132)
+  Selection freq : A=0.197  B=0.182  C=0.235  D=0.386
+  Bias (MAD)     : 0.0724  vs uniform 0.25
+  Avg vote probs (all perms, uncertain):
+    prob_A=0.156  prob_B=0.162  prob_C=0.338  prob_D=0.345
+
+------------------------------------------------------------
+  OVERALL (confident + uncertain combined)
+------------------------------------------------------------
+  Accuracy       : 0.609  (165/271)
+  Accuracy gap   : confident=0.712  uncertain=0.500  gap=+0.212
+  -> Hypothesis SUPPORTED: confident set is notably more accurate.
+  -> Bias gap INCONCLUSIVE: uncertain (0.0724) vs confident (0.1406)
+
+------------------------------------------------------------
+  PERMUTATION CONSISTENCY  (do all 4 shifts pick the same answer?)
+------------------------------------------------------------
+  Confident  : 3/139 questions had identical answer across all 4 perms  (2.2%)
+  Uncertain  : 10/132 questions had identical answer across all 4 perms  (7.6%)
+
+------------------------------------------------------------
+  NEXT STEPS
+------------------------------------------------------------
+  To run PriDe on the uncertain subset:
+    python -c "import pandas as pd; df=pd.read_csv('results/mad_graph_selective/2012-2020_ICT_DSE-Qwen_Qwen2.5-3B-Instruct_transformers_pride.csv'); df[df.confident==0].drop(columns='confident').to_csv('uncertain_only.csv', index=False)"
+    python pride/pride_detail_eval.py uncertain_only.csv
+
+  Plot saved -> results/mad_graph_selective/analysis/2012-2020_ICT_DSE-Qwen_Qwen2.5-3B-Instruct_transformers_selective_comparison.png

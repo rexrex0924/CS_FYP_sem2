@@ -5,10 +5,10 @@
 #SBATCH --partition=gpu_24h
 #SBATCH --qos=gpu
 #SBATCH --cpus-per-task=2
-#SBATCH --output=/research/d7/fyp25/bhtang2/mad_graph/CS_FYP_sem2/slurm_output/selective/Qwen2.5_1.5B%j.txt ##Do not use "~" point to your home!
+#SBATCH --output=/research/d7/fyp25/bhtang2/mad_graph/CS_FYP_sem2/slurm_output/selective/Qwen2.5_7B%j.txt ##Do not use "~" point to your home!
 #SBATCH --gres=gpu:1
 
-MODEL="Qwen/Qwen2.5-1.5B-Instruct"
+MODEL="Qwen/Qwen2.5-7B-Instruct"
 CSV_PATH="../dataset/2012-2020_ICT_DSE.csv"
 TEMPERATURE="0.7"
 SEED="42"
