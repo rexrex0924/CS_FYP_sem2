@@ -1,0 +1,99 @@
+
+==============================================================
+  PriDe Selective Analysis
+  2012-2020_ICT_DSE-mistral-nemo_latest
+  Calibration ratio: 15%
+==============================================================
+
+  Total questions  : 271
+  Confident (1)    : 98  (36.2%)
+  Uncertain (0)    : 173  (63.8%)
+
+  Running PriDe on all 3 groups (calibration=15%) ...
+
+--------------------------------------------------------------
+  ALL QUESTIONS  (n=271 total, 231 test)
+--------------------------------------------------------------
+  Best alpha        : 0.40
+  Prior (A/B/C/D)   : 0.061 / 0.165 / 0.703 / 0.070
+  Metric                     Before    After    Delta
+  --------------------------------------------------
+  Accuracy                   0.6353   0.6634  +0.0281
+  Position Bias Score          7.15     7.88  +0.7212
+  RStd (%)                     9.49     8.70  -0.7880
+  Chi2 p-value               0.0000   0.0000
+
+  Selection freq (%)  Before -> After
+    A:   24.4%  ->   38.5%  #######
+    B:   21.3%  ->   20.8%  ####
+    C:   36.7%  ->   21.8%  ####
+    D:   17.6%  ->   18.9%  ###
+
+--------------------------------------------------------------
+  CONFIDENT SET  (n=98 total, 84 test)
+--------------------------------------------------------------
+  Best alpha        : 0.10
+  Prior (A/B/C/D)   : 0.111 / 0.149 / 0.597 / 0.143
+  Metric                     Before    After    Delta
+  --------------------------------------------------
+  Accuracy                   0.7887   0.7917  +0.0030
+  Position Bias Score          3.77     3.54  -0.2302
+  RStd (%)                     7.26     6.76  -0.4991
+  Chi2 p-value               0.0540   0.0807
+
+  Selection freq (%)  Before -> After
+    A:   25.3%  ->   26.8%  #####
+    B:   26.2%  ->   25.0%  #####
+    C:   29.5%  ->   28.9%  #####
+    D:   19.0%  ->   19.3%  ###
+
+--------------------------------------------------------------
+  UNCERTAIN SET  (n=173 total, 148 test)
+--------------------------------------------------------------
+  Best alpha        : 0.30
+  Prior (A/B/C/D)   : 0.001 / 0.022 / 0.977 / 0.001
+  Metric                     Before    After    Delta
+  --------------------------------------------------
+  Accuracy                   0.5507   0.5963  +0.0456
+  Position Bias Score          8.38     9.32  +0.9415
+  RStd (%)                    10.49    12.95  +2.4526
+  Chi2 p-value               0.0000   0.0000
+
+  Selection freq (%)  Before -> After
+    A:   25.0%  ->   39.5%  #######
+    B:   20.1%  ->   22.1%  ####
+    C:   38.5%  ->   13.7%  ##
+    D:   16.4%  ->   24.7%  ####
+
+==============================================================
+  SUMMARY TABLE
+==============================================================
+  Group         Alpha  Acc Before  Acc After  Acc Gain  Bias Before  Bias After  RStd Before  RStd After
+  ----------------------------------------------------------------------------------------------------
+  All            0.40      0.6353     0.6634   +0.0281         7.15        7.88         9.49        8.70
+  Confident      0.10      0.7887     0.7917   +0.0030         3.77        3.54         7.26        6.76
+  Uncertain      0.30      0.5507     0.5963   +0.0456         8.38        9.32        10.49       12.95
+
+==============================================================
+  HYPOTHESIS VERDICT
+==============================================================
+
+  Accuracy gain from PriDe:
+    Confident  : +0.0030
+    Uncertain  : +0.0456
+
+  Pre-PriDe positional bias (bias score):
+    Confident  : 3.77
+    Uncertain  : 8.38
+
+  Optimal alpha (higher = more debiasing needed):
+    Confident  : 0.10
+    Uncertain  : 0.30
+
+  (+) PriDe helps uncertain questions MORE than confident ones.
+  (+) Uncertain questions have higher pre-PriDe bias as expected.
+  (+) Uncertain group needed stronger debiasing (higher alpha).
+
+  => Overall: STRONG support for the hypothesis.
+
+  Plot saved -> pride\results\selective\2012-2020_ICT_DSE-mistral-nemo_latest_selective_pride_comparison.png

@@ -1,0 +1,99 @@
+
+==============================================================
+  PriDe Selective Analysis
+  sociology-gemma3_1b
+  Calibration ratio: 15%
+==============================================================
+
+  Total questions  : 201
+  Confident (1)    : 111  (55.2%)
+  Uncertain (0)    : 90  (44.8%)
+
+  Running PriDe on all 3 groups (calibration=15%) ...
+
+--------------------------------------------------------------
+  ALL QUESTIONS  (n=201 total, 171 test)
+--------------------------------------------------------------
+  Best alpha        : 0.30
+  Prior (A/B/C/D)   : 0.017 / 0.017 / 0.936 / 0.031
+  Metric                     Before    After    Delta
+  --------------------------------------------------
+  Accuracy                   0.3874   0.4956  +0.1082
+  Position Bias Score         29.64    13.26 -16.3784
+  RStd (%)                    31.90    12.37 -19.5244
+  Chi2 p-value               0.0000   0.0000
+
+  Selection freq (%)  Before -> After
+    A:    7.5%  ->   21.8%  ####
+    B:    4.8%  ->   15.4%  ###
+    C:   76.2%  ->   47.5%  #########
+    D:   11.5%  ->   15.4%  ###
+
+--------------------------------------------------------------
+  CONFIDENT SET  (n=111 total, 95 test)
+--------------------------------------------------------------
+  Best alpha        : 0.30
+  Prior (A/B/C/D)   : 0.031 / 0.031 / 0.880 / 0.057
+  Metric                     Before    After    Delta
+  --------------------------------------------------
+  Accuracy                   0.3737   0.4474  +0.0737
+  Position Bias Score         32.07    20.97 -11.0981
+  RStd (%)                    32.60    21.44 -11.1646
+  Chi2 p-value               0.0000   0.0000
+
+  Selection freq (%)  Before -> After
+    A:    6.8%  ->   17.1%  ###
+    B:    5.3%  ->   11.3%  ##
+    C:   80.5%  ->   61.1%  ############
+    D:    7.4%  ->   10.5%  ##
+
+--------------------------------------------------------------
+  UNCERTAIN SET  (n=90 total, 77 test)
+--------------------------------------------------------------
+  Best alpha        : 0.30
+  Prior (A/B/C/D)   : 0.067 / 0.000 / 0.933 / 0.000
+  Metric                     Before    After    Delta
+  --------------------------------------------------
+  Accuracy                   0.3799   0.5260  +0.1461
+  Position Bias Score         27.89     4.39 -23.5029
+  RStd (%)                    31.30     6.53 -24.7695
+  Chi2 p-value               0.0000   0.0235
+
+  Selection freq (%)  Before -> After
+    A:    7.1%  ->   21.4%  ####
+    B:    4.2%  ->   22.4%  ####
+    C:   72.7%  ->   32.5%  ######
+    D:   15.9%  ->   23.7%  ####
+
+==============================================================
+  SUMMARY TABLE
+==============================================================
+  Group         Alpha  Acc Before  Acc After  Acc Gain  Bias Before  Bias After  RStd Before  RStd After
+  ----------------------------------------------------------------------------------------------------
+  All            0.30      0.3874     0.4956   +0.1082        29.64       13.26        31.90       12.37
+  Confident      0.30      0.3737     0.4474   +0.0737        32.07       20.97        32.60       21.44
+  Uncertain      0.30      0.3799     0.5260   +0.1461        27.89        4.39        31.30        6.53
+
+==============================================================
+  HYPOTHESIS VERDICT
+==============================================================
+
+  Accuracy gain from PriDe:
+    Confident  : +0.0737
+    Uncertain  : +0.1461
+
+  Pre-PriDe positional bias (bias score):
+    Confident  : 32.07
+    Uncertain  : 27.89
+
+  Optimal alpha (higher = more debiasing needed):
+    Confident  : 0.30
+    Uncertain  : 0.30
+
+  (+) PriDe helps uncertain questions MORE than confident ones.
+  (~) Bias difference between groups is small.
+  (~) Both groups required similar debiasing strength.
+
+  => Overall: WEAK / mixed support for the hypothesis.
+
+  Plot saved -> pride\results\selective\sociology-gemma3_1b_selective_pride_comparison.png

@@ -1,0 +1,99 @@
+
+==============================================================
+  PriDe Selective Analysis
+  2012-2020_ICT_DSE-Qwen_Qwen2.5-7B-Instruct_transformers
+  Calibration ratio: 15%
+==============================================================
+
+  Total questions  : 100
+  Confident (1)    : 48  (48.0%)
+  Uncertain (0)    : 52  (52.0%)
+
+  Running PriDe on all 3 groups (calibration=15%) ...
+
+--------------------------------------------------------------
+  ALL QUESTIONS  (n=100 total, 85 test)
+--------------------------------------------------------------
+  Best alpha        : 0.20
+  Prior (A/B/C/D)   : 0.000 / 0.799 / 0.000 / 0.200
+  Metric                     Before    After    Delta
+  --------------------------------------------------
+  Accuracy                   0.7206   0.7471  +0.0265
+  Position Bias Score          3.36     3.77  +0.4124
+  RStd (%)                     3.66     4.74  +1.0808
+  Chi2 p-value               0.1049   0.0517
+
+  Selection freq (%)  Before -> After
+    A:   24.4%  ->   29.7%  #####
+    B:   30.6%  ->   22.9%  ####
+    C:   21.8%  ->   27.4%  #####
+    D:   23.2%  ->   20.0%  ####
+
+--------------------------------------------------------------
+  CONFIDENT SET  (n=48 total, 41 test)
+--------------------------------------------------------------
+  Best alpha        : 0.60
+  Prior (A/B/C/D)   : 0.073 / 0.641 / 0.001 / 0.284
+  Metric                     Before    After    Delta
+  --------------------------------------------------
+  Accuracy                   0.8415   0.8720  +0.0305
+  Position Bias Score          2.66     1.43  -1.2279
+  RStd (%)                     3.66     2.66  -1.0007
+  Chi2 p-value               0.6033   0.9108
+
+  Selection freq (%)  Before -> After
+    A:   24.4%  ->   26.2%  #####
+    B:   29.3%  ->   25.6%  #####
+    C:   22.0%  ->   25.6%  #####
+    D:   24.4%  ->   22.6%  ####
+
+--------------------------------------------------------------
+  UNCERTAIN SET  (n=52 total, 45 test)
+--------------------------------------------------------------
+  Best alpha        : 0.00
+  Prior (A/B/C/D)   : 0.000 / 1.000 / 0.000 / 0.000
+  Metric                     Before    After    Delta
+  --------------------------------------------------
+  Accuracy                   0.6389   0.6500  +0.0111
+  Position Bias Score          3.19     3.97  +0.7760
+  RStd (%)                     2.89     4.27  +1.3806
+  Chi2 p-value               0.4020   0.2093
+
+  Selection freq (%)  Before -> After
+    A:   24.4%  ->   30.0%  ######
+    B:   30.0%  ->   27.8%  #####
+    C:   21.1%  ->   21.1%  ####
+    D:   24.4%  ->   21.1%  ####
+
+==============================================================
+  SUMMARY TABLE
+==============================================================
+  Group         Alpha  Acc Before  Acc After  Acc Gain  Bias Before  Bias After  RStd Before  RStd After
+  ----------------------------------------------------------------------------------------------------
+  All            0.20      0.7206     0.7471   +0.0265         3.36        3.77         3.66        4.74
+  Confident      0.60      0.8415     0.8720   +0.0305         2.66        1.43         3.66        2.66
+  Uncertain      0.00      0.6389     0.6500   +0.0111         3.19        3.97         2.89        4.27
+
+==============================================================
+  HYPOTHESIS VERDICT
+==============================================================
+
+  Accuracy gain from PriDe:
+    Confident  : +0.0305
+    Uncertain  : +0.0111
+
+  Pre-PriDe positional bias (bias score):
+    Confident  : 2.66
+    Uncertain  : 3.19
+
+  Optimal alpha (higher = more debiasing needed):
+    Confident  : 0.60
+    Uncertain  : 0.00
+
+  (-) PriDe unexpectedly helped confident questions more.
+  (~) Bias difference between groups is small.
+  (~) Both groups required similar debiasing strength.
+
+  => Overall: Hypothesis NOT supported by this data.
+
+  Plot saved -> pride/results/selective/2012-2020_ICT_DSE-Qwen_Qwen2.5-7B-Instruct_transformers_selective_pride_comparison.png
