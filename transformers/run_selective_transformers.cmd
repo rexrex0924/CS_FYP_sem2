@@ -5,10 +5,10 @@
 #SBATCH --partition=gpu_24h
 #SBATCH --qos=gpu
 #SBATCH --cpus-per-task=2
-#SBATCH --output=/research/d7/fyp25/bhtang2/mad_graph/CS_FYP_sem2/slurm_output/selective/Qwen2.5_7B%j.txt ##Do not use "~" point to your home!
+#SBATCH --output=/research/d7/fyp25/bhtang2/mad_graph/CS_FYP_sem2/slurm_output/selective/Phi-3.5-mini-instruct-dse.txt ##Do not use "~" point to your home!
 #SBATCH --gres=gpu:1
 
-MODEL="Qwen/Qwen2.5-7B-Instruct"
+MODEL="microsoft/Phi-3.5-mini-instruct"
 CSV_PATH="../dataset/2012-2020_ICT_DSE.csv"
 TEMPERATURE="0.7"
 SEED="42"
@@ -19,6 +19,7 @@ export HF_HOME=/research/d7/fyp25/bhtang2/mad_graph/cache/huggingface
 export TRANSFORMERS_CACHE=/research/d7/fyp25/bhtang2/mad_graph/cache/huggingface
 export HUGGINGFACE_HUB_CACHE=/research/d7/fyp25/bhtang2/mad_graph/cache/huggingface
 export TORCH_HOME=/research/d7/fyp25/bhtang2/mad_graph/cache/torch
+export LD_LIBRARY_PATH=/research/d7/fyp25/bhtang2/conda_envs/mad/lib:$LD_LIBRARY_PATH
 
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate mad

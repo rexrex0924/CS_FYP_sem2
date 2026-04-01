@@ -406,7 +406,7 @@ def _load(path):
 
 def _parse_label(path: Path):
     name = path.stem.replace("_baseline", "").replace("_pride", "")
-    for prefix in ["ministral", "mistral", "gemma", "llama", "phi", "qwen"]:
+    for prefix in ["ministral", "mistral", "gemma", "llama", "microsoft-Phi", "Qwen"]:
         if prefix in name:
             parts = name.split(prefix, 1)
             return parts[0].strip("-"), prefix + parts[1]
