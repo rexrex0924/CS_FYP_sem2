@@ -1,0 +1,635 @@
+==============================================================================================================
+COMPARATIVE ANALYSIS REPORT
+Baseline vs Agent  |  Baseline vs Agent+PriDe  |  Agent vs Agent+PriDe
+==============================================================================================================
+
+==============================================================================================================
+DATASET: 2012-2020_ICT_DSE
+==============================================================================================================
+
+  Comp 1: Baseline (raw) vs Agent (raw)  — Does multi-agent debate improve raw accuracy?
+--------------------------------------------------------------------------------------------------------------
+  Model                                  |  NatAcc_A  NatAcc_B  DeltaAcc |  Bias_A  Bias_B   DBias |  RStd_A  RStd_B   DRStd |  Cons_A  Cons_B   DCons |  McNemar        p  Sig
+--------------------------------------------------------------------------------------------------------------
+  gemma3_1b                              |    36.53%    30.63%    -5.90pp |  14.511  28.765 +14.255 |   16.28   31.22  +14.94 |   10.0%    4.8%   -5.2pp |   3.6290   0.0568   no
+  gemma3_4b                              |    54.61%    50.18%    -4.43pp |   7.715  11.451  +3.736 |   14.17   19.26   +5.09 |   38.0%   21.0%  -17.0pp |   4.0333   0.0446  YES
+  gemma3_12b                             |    79.34%    75.65%    -3.69pp |   0.882   4.101  +3.219 |    1.93    6.19   +4.26 |   75.3%   64.9%  -10.3pp |   3.3750   0.0662   no
+  llama3.2_latest                        |    52.59%    32.84%   -19.75pp |  17.228  35.237 +18.009 |   19.26   36.12  +16.85 |   29.5%    6.3%  -23.2pp |  42.5606   0.0000  YES
+  llama3_8b-instruct-q6_K                |    72.69%    32.47%   -40.22pp |   1.988  19.190 +17.202 |    3.86   28.41  +24.55 |   64.6%    0.0%  -64.6pp |  76.2353   0.0000  YES
+  llama3_8b-instruct-q8_0                |    73.43%    32.47%   -40.96pp |   1.830  16.756 +14.926 |    3.01   27.06  +24.05 |   63.1%    0.0%  -63.1pp |  80.1325   0.0000  YES
+  mistral_latest                         |    62.36%    59.78%    -2.58pp |   7.645   9.547  +1.902 |    8.73   12.21   +3.48 |   40.6%   33.9%   -6.6pp |   0.7059   0.4008   no
+  mistral-nemo_latest                    |    66.04%    61.62%    -4.42pp |   3.453   7.216  +3.763 |    3.59   10.27   +6.68 |   46.3%   36.9%   -9.4pp |   1.6393   0.2004   no
+  mistral-small3.2_24b                   |    84.13%    82.29%    -1.85pp |   2.211   3.894  +1.683 |    3.52    7.14   +3.61 |   79.0%   73.1%   -5.9pp |   0.7619   0.3827   no
+
+  Comp 2: Baseline (raw) vs Agent+PriDe  — Does agent structure + PriDe beat single-call baseline?
+--------------------------------------------------------------------------------------------------------------
+  Model                                  |  NatAcc_A  NatAcc_B  DeltaAcc |  Bias_A  Bias_B   DBias |  RStd_A  RStd_B   DRStd |  Cons_A  Cons_B   DCons |  McNemar        p  Sig
+--------------------------------------------------------------------------------------------------------------
+  gemma3_1b                              |    36.53%    30.30%    -6.23pp |  14.511  13.063  -1.448 |   16.28   15.08   -1.20 |   10.0%    9.1%   -0.9pp |   2.6304   0.1048   no
+  gemma3_4b                              |    54.61%    52.81%    -1.80pp |   7.715  10.640  +2.925 |   14.17   18.64   +4.47 |   38.0%   24.7%  -13.3pp |   2.2273   0.1356   no
+  gemma3_12b                             |    79.34%    75.76%    -3.58pp |   0.882   2.804  +1.922 |    1.93    4.80   +2.88 |   75.3%   68.0%   -7.3pp |   1.3889   0.2386   no
+  llama3.2_latest                        |    52.59%    58.44%    +5.85pp |  17.228   5.574 -11.654 |   19.26    9.22  -10.05 |   29.5%   39.0%   +9.4pp |   3.0638   0.0801   no
+  llama3_8b-instruct-q6_K                |    72.69%    54.11%   -18.58pp |   1.988  10.431  +8.443 |    3.86   19.32  +15.46 |   64.6%   16.5%  -48.1pp |  28.1250   0.0000  YES
+  llama3_8b-instruct-q8_0                |    73.43%    56.71%   -16.72pp |   1.830   9.632  +7.802 |    3.01   16.28  +13.27 |   63.1%   21.6%  -41.5pp |  22.8167   0.0000  YES
+  mistral_latest                         |    62.36%    61.04%    -1.32pp |   7.645   7.601  -0.044 |    8.73    9.28   +0.55 |   40.6%   39.8%   -0.8pp |   0.2647   0.6069   no
+  mistral-nemo_latest                    |    66.04%    65.80%    -0.24pp |   3.453   3.089  -0.364 |    3.59    3.98   +0.39 |   46.3%   44.6%   -1.7pp |   0.2143   0.6434   no
+  mistral-small3.2_24b                   |    84.13%    86.58%    +2.45pp |   2.211   2.834  +0.622 |    3.52    5.97   +2.45 |   79.0%   77.1%   -1.9pp |   0.7500   0.3865   no
+
+  Comp 3: Agent (raw)    vs Agent+PriDe  — Does PriDe debiasing add value on top of agents?
+--------------------------------------------------------------------------------------------------------------
+  Model                                  |  NatAcc_A  NatAcc_B  DeltaAcc |  Bias_A  Bias_B   DBias |  RStd_A  RStd_B   DRStd |  Cons_A  Cons_B   DCons |  McNemar        p  Sig
+--------------------------------------------------------------------------------------------------------------
+  gemma3_1b                              |    30.63%    30.30%    -0.32pp |  28.765  13.063 -15.702 |   31.22   15.08  -16.13 |    4.8%    9.1%   +4.3pp |   0.0278   0.8676   no
+  gemma3_4b                              |    50.18%    52.81%    +2.63pp |  11.451  10.640  -0.812 |   19.26   18.64   -0.62 |   21.0%   24.7%   +3.6pp |   0.0000   1.0000   no
+  gemma3_12b                             |    75.65%    75.76%    +0.11pp |   4.101   2.804  -1.297 |    6.19    4.80   -1.38 |   64.9%   68.0%   +3.0pp |   0.5000   0.4795   no
+  llama3.2_latest                        |    32.84%    58.44%   +25.60pp |  35.237   5.574 -29.663 |   36.12    9.22  -26.90 |    6.3%   39.0%  +32.7pp |  34.3059   0.0000  YES
+  llama3_8b-instruct-q6_K                |    32.47%    54.11%   +21.64pp |  19.190  10.431  -8.759 |   28.41   19.32   -9.09 |    0.0%   16.5%  +16.5pp |  35.8644   0.0000  YES
+  llama3_8b-instruct-q8_0                |    32.47%    56.71%   +24.24pp |  16.756   9.632  -7.124 |   27.06   16.28  -10.78 |    0.0%   21.6%  +21.6pp |  31.3548   0.0000  YES
+  mistral_latest                         |    59.78%    61.04%    +1.26pp |   9.547   7.601  -1.946 |   12.21    9.28   -2.93 |   33.9%   39.8%   +5.9pp |   0.0000   1.0000   no
+  mistral-nemo_latest                    |    61.62%    65.80%    +4.18pp |   7.216   3.089  -4.127 |   10.27    3.98   -6.29 |   36.9%   44.6%   +7.7pp |   2.8929   0.0890   no
+  mistral-small3.2_24b                   |    82.29%    86.58%    +4.29pp |   3.894   2.834  -1.060 |    7.14    5.97   -1.17 |   73.1%   77.1%   +4.0pp |   4.0000   0.0455  YES
+
+  DETAILED STATISTICS PER MODEL
+--------------------------------------------------------------------------------------------------------------
+
+  [gemma3_1b]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=34.50%  bias=14.511  rstd=16.28%  cons=10.0%  chi2=365.203(p=0.0000)  chi2_acc=127.154(p=0.0000)
+      Agent (raw)           : acc=32.38%  bias=28.765  rstd=31.22%  cons=4.8%  chi2=1435.129(p=0.0000)  chi2_acc=482.481(p=0.0000)
+      Agent + PriDe         : acc=35.06%  bias=13.063  rstd=15.08%  cons=9.1%  chi2=252.286(p=0.0000)  chi2_acc=92.324(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=3.6290  p=0.0568  ns
+        Contingency: both=60  A_only=39  B_only=23  neither=149
+      Dist shift: chi2=507.9139  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=2.6304  p=0.1048  ns
+        Contingency: both=53  A_only=29  B_only=17  neither=132
+      Dist shift: chi2=109.2617  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.0278  p=0.8676  ns
+        Contingency: both=52  A_only=18  B_only=18  neither=143
+      Dist shift: chi2=339.0490  p=0.0000  ***  (sig=True)
+
+  [gemma3_4b]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=56.27%  bias=7.715  rstd=14.17%  cons=38.0%  chi2=103.232(p=0.0000)  chi2_acc=88.493(p=0.0000)
+      Agent (raw)           : acc=51.94%  bias=11.451  rstd=19.26%  cons=21.0%  chi2=227.432(p=0.0000)  chi2_acc=161.168(p=0.0000)
+      Agent + PriDe         : acc=54.33%  bias=10.640  rstd=18.64%  cons=24.7%  chi2=167.359(p=0.0000)  chi2_acc=129.438(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=4.0333  p=0.0446  *
+        Contingency: both=127  A_only=21  B_only=9  neither=114
+      Dist shift: chi2=84.4792  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=2.2273  p=0.1356  ns
+        Contingency: both=115  A_only=15  B_only=7  neither=94
+      Dist shift: chi2=47.8020  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=120  A_only=1  B_only=2  neither=108
+      Dist shift: chi2=3.1022  p=0.3761  ns  (sig=False)
+
+  [gemma3_12b]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=79.52%  bias=0.882  rstd=1.93%  cons=75.3%  chi2=1.351(p=0.7172)  chi2_acc=2.470(p=0.4808)
+      Agent (raw)           : acc=76.20%  bias=4.101  rstd=6.19%  cons=64.9%  chi2=29.173(p=0.0000)  chi2_acc=22.890(p=0.0000)
+      Agent + PriDe         : acc=76.95%  bias=2.804  rstd=4.80%  cons=68.0%  chi2=11.628(p=0.0088)  chi2_acc=12.026(p=0.0073)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=3.3750  p=0.0662  ns
+        Contingency: both=198  A_only=17  B_only=7  neither=49
+      Dist shift: chi2=28.5953  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=1.3889  p=0.2386  ns
+        Contingency: both=169  A_only=12  B_only=6  neither=44
+      Dist shift: chi2=13.3587  p=0.0039  **  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.5000  p=0.4795  ns
+        Contingency: both=174  A_only=1  B_only=1  neither=55
+      Dist shift: chi2=2.9730  p=0.3958  ns  (sig=False)
+
+  [llama3.2_latest]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=51.29%  bias=17.228  rstd=19.26%  cons=29.5%  chi2=513.845(p=0.0000)  chi2_acc=160.198(p=0.0000)
+      Agent (raw)           : acc=33.67%  bias=35.237  rstd=36.12%  cons=6.3%  chi2=2153.542(p=0.0000)  chi2_acc=633.110(p=0.0000)
+      Agent + PriDe         : acc=56.49%  bias=5.574  rstd=9.22%  cons=39.0%  chi2=45.939(p=0.0000)  chi2_acc=31.933(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=42.5606  p=0.0000  ***
+        Contingency: both=82  A_only=60  B_only=6  neither=122
+      Dist shift: chi2=1016.2402  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=3.0638  p=0.0801  ns
+        Contingency: both=104  A_only=17  B_only=30  neither=79
+      Dist shift: chi2=217.6688  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=34.3059  p=0.0000  ***
+        Contingency: both=65  A_only=15  B_only=70  neither=81
+      Dist shift: chi2=1340.2119  p=0.0000  ***  (sig=True)
+
+  [llama3_8b-instruct-q6_K]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=70.11%  bias=1.988  rstd=3.86%  cons=64.6%  chi2=6.856(p=0.0766)  chi2_acc=7.713(p=0.0523)
+      Agent (raw)           : acc=33.39%  bias=19.190  rstd=28.41%  cons=0.0%  chi2=638.716(p=0.0000)  chi2_acc=393.396(p=0.0000)
+      Agent + PriDe         : acc=53.14%  bias=10.431  rstd=19.32%  cons=16.5%  chi2=160.857(p=0.0000)  chi2_acc=138.463(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=76.2353  p=0.0000  ***
+        Contingency: both=66  A_only=131  B_only=22  neither=52
+      Dist shift: chi2=nan  p=nan  n/a  (sig=False)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=28.1250  p=0.0000  ***
+        Contingency: both=112  A_only=59  B_only=13  neither=47
+      Dist shift: chi2=409.6560  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=35.8644  p=0.0000  ***
+        Contingency: both=72  A_only=6  B_only=53  neither=100
+      Dist shift: chi2=447.8476  p=0.0000  ***  (sig=True)
+
+  [llama3_8b-instruct-q8_0]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=70.85%  bias=1.830  rstd=3.01%  cons=63.1%  chi2=5.808(p=0.1213)  chi2_acc=4.753(p=0.1908)
+      Agent (raw)           : acc=34.23%  bias=16.756  rstd=27.06%  cons=0.0%  chi2=486.959(p=0.0000)  chi2_acc=352.665(p=0.0000)
+      Agent + PriDe         : acc=56.71%  bias=9.632  rstd=16.28%  cons=21.6%  chi2=137.152(p=0.0000)  chi2_acc=99.736(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=80.1325  p=0.0000  ***
+        Contingency: both=68  A_only=131  B_only=20  neither=52
+      Dist shift: chi2=nan  p=nan  n/a  (sig=False)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=22.8167  p=0.0000  ***
+        Contingency: both=120  A_only=49  B_only=11  neither=51
+      Dist shift: chi2=265.5689  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=31.3548  p=0.0000  ***
+        Contingency: both=57  A_only=19  B_only=74  neither=81
+      Dist shift: chi2=862.8935  p=0.0000  ***  (sig=True)
+
+  [mistral_latest]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=57.99%  bias=7.645  rstd=8.73%  cons=40.6%  chi2=101.284(p=0.0000)  chi2_acc=33.905(p=0.0000)
+      Agent (raw)           : acc=55.72%  bias=9.547  rstd=12.21%  cons=33.9%  chi2=158.089(p=0.0000)  chi2_acc=65.477(p=0.0000)
+      Agent + PriDe         : acc=58.77%  bias=7.601  rstd=9.28%  cons=39.8%  chi2=85.420(p=0.0000)  chi2_acc=32.850(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=0.7059  p=0.4008  ns
+        Contingency: both=140  A_only=29  B_only=22  neither=80
+      Dist shift: chi2=163.3581  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.2647  p=0.6069  ns
+        Contingency: both=126  A_only=19  B_only=15  neither=71
+      Dist shift: chi2=5.9444  p=0.1143  ns  (sig=False)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=122  A_only=20  B_only=19  neither=70
+      Dist shift: chi2=241.4610  p=0.0000  ***  (sig=True)
+
+  [mistral-nemo_latest]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=66.08%  bias=3.453  rstd=3.59%  cons=46.3%  chi2=20.469(p=0.0001)  chi2_acc=6.166(p=0.1038)
+      Agent (raw)           : acc=62.64%  bias=7.216  rstd=10.27%  cons=36.9%  chi2=90.310(p=0.0000)  chi2_acc=48.860(p=0.0000)
+      Agent + PriDe         : acc=67.10%  bias=3.089  rstd=3.98%  cons=44.6%  chi2=14.104(p=0.0028)  chi2_acc=6.628(p=0.0847)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=1.6393  p=0.2004  ns
+        Contingency: both=141  A_only=36  B_only=25  neither=66
+      Dist shift: chi2=26.0425  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.2143  p=0.6434  ns
+        Contingency: both=131  A_only=23  B_only=19  neither=55
+      Dist shift: chi2=1.7521  p=0.6254  ns  (sig=False)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=2.8929  p=0.0890  ns
+        Contingency: both=133  A_only=9  B_only=19  neither=70
+      Dist shift: chi2=36.3322  p=0.0000  ***  (sig=True)
+
+  [mistral-small3.2_24b]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=83.95%  bias=2.211  rstd=3.52%  cons=79.0%  chi2=8.480(p=0.0371)  chi2_acc=9.995(p=0.0186)
+      Agent (raw)           : acc=83.30%  bias=3.894  rstd=7.14%  cons=73.1%  chi2=26.295(p=0.0000)  chi2_acc=39.707(p=0.0000)
+      Agent + PriDe         : acc=85.50%  bias=2.834  rstd=5.97%  cons=77.1%  chi2=11.870(p=0.0078)  chi2_acc=26.570(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=0.7619  p=0.3827  ns
+        Contingency: both=215  A_only=13  B_only=8  neither=35
+      Dist shift: chi2=6.3330  p=0.0965  ns  (sig=False)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.7500  p=0.3865  ns
+        Contingency: both=192  A_only=4  B_only=8  neither=27
+      Dist shift: chi2=1.3493  p=0.7175  ns  (sig=False)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=4.0000  p=0.0455  *
+        Contingency: both=192  A_only=1  B_only=8  neither=30
+      Dist shift: chi2=4.6802  p=0.1968  ns  (sig=False)
+==============================================================================================================
+DATASET: college_cs
+==============================================================================================================
+
+  Comp 1: Baseline (raw) vs Agent (raw)  — Does multi-agent debate improve raw accuracy?
+--------------------------------------------------------------------------------------------------------------
+  Model                                  |  NatAcc_A  NatAcc_B  DeltaAcc |  Bias_A  Bias_B   DBias |  RStd_A  RStd_B   DRStd |  Cons_A  Cons_B   DCons |  McNemar        p  Sig
+--------------------------------------------------------------------------------------------------------------
+  gemma3_1b                              |    35.71%    27.00%    -8.71pp |  14.992  36.407 +21.415 |   16.41   35.69  +19.28 |    2.0%    0.0%   -2.0pp |   2.5600   0.1096   no
+  gemma3_4b                              |    49.00%    47.00%    -2.00pp |  10.273  15.571  +5.299 |   12.50   19.49   +6.99 |   20.0%   10.0%  -10.0pp |   0.0455   0.8312   no
+  gemma3_12b                             |    58.00%    56.00%    -2.00pp |   4.870   9.814  +4.944 |    6.80   12.46   +5.66 |   45.0%   35.0%  -10.0pp |   0.0833   0.7728   no
+  llama3.2_latest                        |    29.90%    28.00%    -1.90pp |  26.068  38.709 +12.641 |   26.01   39.68  +13.67 |   10.2%    1.0%   -9.2pp |   0.0714   0.7893   no
+  llama3_8b-instruct-q6_K                |    40.00%    21.00%   -19.00pp |   7.420  21.222 +13.802 |    7.04   21.99  +14.95 |   36.0%    0.0%  -36.0pp |   9.8182   0.0017  YES
+  llama3_8b-instruct-q8_0                |    42.00%    26.00%   -16.00pp |   7.951  19.603 +11.652 |    7.89   21.98  +14.09 |   36.0%    0.0%  -36.0pp |   5.9211   0.0150  YES
+  mistral_latest                         |    49.49%    42.00%    -7.49pp |  14.090  13.882  -0.208 |   16.35   15.02   -1.33 |   22.0%   20.0%   -2.0pp |   1.5652   0.2109   no
+  mistral-nemo_latest                    |    45.26%    40.00%    -5.26pp |   3.414   9.294  +5.879 |    4.84   11.26   +6.42 |   32.3%   16.0%  -16.3pp |   0.4091   0.5224   no
+  mistral-small3.2_24b                   |    65.00%    61.00%    -4.00pp |   5.034  10.618  +5.584 |    6.87   15.18   +8.31 |   57.0%   34.0%  -23.0pp |   0.4500   0.5023   no
+
+  Comp 2: Baseline (raw) vs Agent+PriDe  — Does agent structure + PriDe beat single-call baseline?
+--------------------------------------------------------------------------------------------------------------
+  Model                                  |  NatAcc_A  NatAcc_B  DeltaAcc |  Bias_A  Bias_B   DBias |  RStd_A  RStd_B   DRStd |  Cons_A  Cons_B   DCons |  McNemar        p  Sig
+--------------------------------------------------------------------------------------------------------------
+  gemma3_1b                              |    35.71%    28.24%    -7.48pp |  14.992  18.628  +3.636 |   16.41   16.74   +0.33 |    2.0%    1.2%   -0.9pp |   2.1176   0.1456   no
+  gemma3_4b                              |    49.00%    45.88%    -3.12pp |  10.273  13.739  +3.466 |   12.50   16.68   +4.18 |   20.0%   14.1%   -5.9pp |   0.1905   0.6625   no
+  gemma3_12b                             |    58.00%    54.12%    -3.88pp |   4.870   7.444  +2.573 |    6.80   10.29   +3.49 |   45.0%   36.5%   -8.5pp |   0.5714   0.4497   no
+  llama3.2_latest                        |    29.90%    35.29%    +5.40pp |  26.068  17.101  -8.968 |   26.01   17.58   -8.43 |   10.2%   12.9%   +2.7pp |   0.6429   0.4227   no
+  llama3_8b-instruct-q6_K                |    40.00%    32.94%    -7.06pp |   7.420  10.710  +3.290 |    7.04   12.24   +5.20 |   36.0%   14.1%  -21.9pp |   0.6957   0.4042   no
+  llama3_8b-instruct-q8_0                |    42.00%    30.59%   -11.41pp |   7.951  14.446  +6.495 |    7.89   17.93  +10.04 |   36.0%    4.7%  -31.3pp |   2.5600   0.1096   no
+  mistral_latest                         |    49.49%    42.35%    -7.14pp |  14.090   6.095  -7.995 |   16.35    6.36   -9.99 |   22.0%   17.6%   -4.4pp |   1.2308   0.2673   no
+  mistral-nemo_latest                    |    45.26%    41.18%    -4.09pp |   3.414   5.908  +2.494 |    4.84    6.36   +1.52 |   32.3%   22.4%  -10.0pp |   0.2353   0.6276   no
+  mistral-small3.2_24b                   |    65.00%    61.18%    -3.82pp |   5.034   6.291  +1.257 |    6.87    9.81   +2.94 |   57.0%   44.7%  -12.3pp |   0.0833   0.7728   no
+
+  Comp 3: Agent (raw)    vs Agent+PriDe  — Does PriDe debiasing add value on top of agents?
+--------------------------------------------------------------------------------------------------------------
+  Model                                  |  NatAcc_A  NatAcc_B  DeltaAcc |  Bias_A  Bias_B   DBias |  RStd_A  RStd_B   DRStd |  Cons_A  Cons_B   DCons |  McNemar        p  Sig
+--------------------------------------------------------------------------------------------------------------
+  gemma3_1b                              |    27.00%    28.24%    +1.24pp |  36.407  18.628 -17.779 |   35.69   16.74  -18.95 |    0.0%    1.2%   +1.2pp |   0.0625   0.8026   no
+  gemma3_4b                              |    47.00%    45.88%    -1.12pp |  15.571  13.739  -1.833 |   19.49   16.68   -2.81 |   10.0%   14.1%   +4.1pp |   0.0000   1.0000   no
+  gemma3_12b                             |    56.00%    54.12%    -1.88pp |   9.814   7.444  -2.370 |   12.46   10.29   -2.17 |   35.0%   36.5%   +1.5pp |   0.1667   0.6831   no
+  llama3.2_latest                        |    28.00%    35.29%    +7.29pp |  38.709  17.101 -21.609 |   39.68   17.58  -22.10 |    1.0%   12.9%  +11.9pp |   1.2308   0.2673   no
+  llama3_8b-instruct-q6_K                |    21.00%    32.94%   +11.94pp |  21.222  10.710 -10.512 |   21.99   12.24   -9.75 |    0.0%   14.1%  +14.1pp |   8.4706   0.0036  YES
+  llama3_8b-instruct-q8_0                |    26.00%    30.59%    +4.59pp |  19.603  14.446  -5.157 |   21.98   17.93   -4.05 |    0.0%    4.7%   +4.7pp |   1.7857   0.1814   no
+  mistral_latest                         |    42.00%    42.35%    +0.35pp |  13.882   6.095  -7.787 |   15.02    6.36   -8.66 |   20.0%   17.6%   -2.4pp |   0.0000   1.0000   no
+  mistral-nemo_latest                    |    40.00%    41.18%    +1.18pp |   9.294   5.908  -3.386 |   11.26    6.36   -4.90 |   16.0%   22.4%   +6.4pp |   0.1667   0.6831   no
+  mistral-small3.2_24b                   |    61.00%    61.18%    +0.18pp |  10.618   6.291  -4.327 |   15.18    9.81   -5.37 |   34.0%   44.7%  +10.7pp |   0.1667   0.6831   no
+
+  DETAILED STATISTICS PER MODEL
+--------------------------------------------------------------------------------------------------------------
+
+  [gemma3_1b]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=29.74%  bias=14.992  rstd=16.41%  cons=2.0%  chi2=140.256(p=0.0000)  chi2_acc=50.210(p=0.0000)
+      Agent (raw)           : acc=25.25%  bias=36.407  rstd=35.69%  cons=0.0%  chi2=848.300(p=0.0000)  chi2_acc=269.929(p=0.0000)
+      Agent + PriDe         : acc=24.71%  bias=18.628  rstd=16.74%  cons=1.2%  chi2=188.776(p=0.0000)  chi2_acc=51.228(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=2.5600  p=0.1096  ns
+        Contingency: both=18  A_only=17  B_only=8  neither=55
+      Dist shift: chi2=792.0482  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=2.1176  p=0.1456  ns
+        Contingency: both=19  A_only=12  B_only=5  neither=47
+      Dist shift: chi2=22.8390  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.0625  p=0.8026  ns
+        Contingency: both=15  A_only=7  B_only=9  neither=54
+      Dist shift: chi2=179.6368  p=0.0000  ***  (sig=True)
+
+  [gemma3_4b]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=42.75%  bias=10.273  rstd=12.50%  cons=20.0%  chi2=67.540(p=0.0000)  chi2_acc=25.527(p=0.0000)
+      Agent (raw)           : acc=37.25%  bias=15.571  rstd=19.49%  cons=10.0%  chi2=155.180(p=0.0000)  chi2_acc=64.975(p=0.0000)
+      Agent + PriDe         : acc=38.82%  bias=13.739  rstd=16.68%  cons=14.1%  chi2=102.682(p=0.0000)  chi2_acc=39.825(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=0.0455  p=0.8312  ns
+        Contingency: both=37  A_only=12  B_only=10  neither=41
+      Dist shift: chi2=64.4030  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.1905  p=0.6625  ns
+        Contingency: both=30  A_only=12  B_only=9  neither=34
+      Dist shift: chi2=13.7796  p=0.0032  **  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=38  A_only=2  B_only=1  neither=44
+      Dist shift: chi2=16.2567  p=0.0010  **  (sig=True)
+
+  [gemma3_12b]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=57.50%  bias=4.870  rstd=6.80%  cons=45.0%  chi2=15.180(p=0.0017)  chi2_acc=7.570(p=0.0558)
+      Agent (raw)           : acc=49.50%  bias=9.814  rstd=12.46%  cons=35.0%  chi2=61.640(p=0.0000)  chi2_acc=24.842(p=0.0000)
+      Agent + PriDe         : acc=49.41%  bias=7.444  rstd=10.29%  cons=36.5%  chi2=30.141(p=0.0000)  chi2_acc=14.402(p=0.0024)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=0.0833  p=0.7728  ns
+        Contingency: both=51  A_only=7  B_only=5  neither=37
+      Dist shift: chi2=34.8452  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.5714  p=0.4497  ns
+        Contingency: both=44  A_only=5  B_only=2  neither=34
+      Dist shift: chi2=19.0766  p=0.0003  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.1667  p=0.6831  ns
+        Contingency: both=44  A_only=4  B_only=2  neither=35
+      Dist shift: chi2=4.1988  p=0.2408  ns  (sig=False)
+
+  [llama3.2_latest]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=30.59%  bias=26.068  rstd=26.01%  cons=10.2%  chi2=422.959(p=0.0000)  chi2_acc=123.682(p=0.0000)
+      Agent (raw)           : acc=27.50%  bias=38.709  rstd=39.68%  cons=1.0%  chi2=958.980(p=0.0000)  chi2_acc=315.937(p=0.0000)
+      Agent + PriDe         : acc=35.88%  bias=17.101  rstd=17.58%  cons=12.9%  chi2=159.082(p=0.0000)  chi2_acc=45.664(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=0.0714  p=0.7893  ns
+        Contingency: both=21  A_only=8  B_only=6  neither=62
+      Dist shift: chi2=303.1270  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.6429  p=0.4227  ns
+        Contingency: both=20  A_only=5  B_only=9  neither=48
+      Dist shift: chi2=42.5188  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=1.2308  p=0.2673  ns
+        Contingency: both=21  A_only=4  B_only=9  neither=51
+      Dist shift: chi2=229.2944  p=0.0000  ***  (sig=True)
+
+  [llama3_8b-instruct-q6_K]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=44.00%  bias=7.420  rstd=7.04%  cons=36.0%  chi2=35.240(p=0.0000)  chi2_acc=8.036(p=0.0453)
+      Agent (raw)           : acc=26.00%  bias=21.222  rstd=21.99%  cons=0.0%  chi2=288.240(p=0.0000)  chi2_acc=100.520(p=0.0000)
+      Agent + PriDe         : acc=35.88%  bias=10.710  rstd=12.24%  cons=14.1%  chi2=62.400(p=0.0000)  chi2_acc=22.142(p=0.0001)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=9.8182  p=0.0017  **
+        Contingency: both=14  A_only=26  B_only=7  neither=53
+      Dist shift: chi2=nan  p=nan  n/a  (sig=False)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.6957  p=0.4042  ns
+        Contingency: both=19  A_only=14  B_only=9  neither=43
+      Dist shift: chi2=141.9377  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=8.4706  p=0.0036  **
+        Contingency: both=13  A_only=2  B_only=15  neither=55
+      Dist shift: chi2=173.8658  p=0.0000  ***  (sig=True)
+
+  [llama3_8b-instruct-q8_0]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=42.50%  bias=7.951  rstd=7.89%  cons=36.0%  chi2=40.460(p=0.0000)  chi2_acc=10.189(p=0.0170)
+      Agent (raw)           : acc=28.25%  bias=19.603  rstd=21.98%  cons=0.0%  chi2=245.940(p=0.0000)  chi2_acc=95.353(p=0.0000)
+      Agent + PriDe         : acc=33.53%  bias=14.446  rstd=17.93%  cons=4.7%  chi2=113.529(p=0.0000)  chi2_acc=49.039(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=5.9211  p=0.0150  *
+        Contingency: both=15  A_only=27  B_only=11  neither=47
+      Dist shift: chi2=nan  p=nan  n/a  (sig=False)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=2.5600  p=0.1096  ns
+        Contingency: both=18  A_only=17  B_only=8  neither=42
+      Dist shift: chi2=732.6644  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=1.7857  p=0.1814  ns
+        Contingency: both=16  A_only=4  B_only=10  neither=55
+      Dist shift: chi2=296.2165  p=0.0000  ***  (sig=True)
+
+  [mistral_latest]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=42.86%  bias=14.090  rstd=16.35%  cons=22.0%  chi2=126.744(p=0.0000)  chi2_acc=43.362(p=0.0000)
+      Agent (raw)           : acc=39.75%  bias=13.882  rstd=15.02%  cons=20.0%  chi2=123.340(p=0.0000)  chi2_acc=37.694(p=0.0000)
+      Agent + PriDe         : acc=39.41%  bias=6.095  rstd=6.36%  cons=17.6%  chi2=20.212(p=0.0002)  chi2_acc=5.764(p=0.1237)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=1.5652  p=0.2109  ns
+        Contingency: both=34  A_only=15  B_only=8  neither=42
+      Dist shift: chi2=178.1090  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=1.2308  p=0.2673  ns
+        Contingency: both=31  A_only=9  B_only=4  neither=40
+      Dist shift: chi2=44.3262  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=30  A_only=5  B_only=6  neither=44
+      Dist shift: chi2=93.7798  p=0.0000  ***  (sig=True)
+
+  [mistral-nemo_latest]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=46.39%  bias=3.414  rstd=4.84%  cons=32.3%  chi2=7.237(p=0.0647)  chi2_acc=3.624(p=0.3050)
+      Agent (raw)           : acc=41.75%  bias=9.294  rstd=11.26%  cons=16.0%  chi2=55.280(p=0.0000)  chi2_acc=20.837(p=0.0001)
+      Agent + PriDe         : acc=45.00%  bias=5.908  rstd=6.36%  cons=22.4%  chi2=18.988(p=0.0003)  chi2_acc=5.550(p=0.1357)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=0.4091  p=0.5224  ns
+        Contingency: both=30  A_only=13  B_only=9  neither=43
+      Dist shift: chi2=66.5643  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.2353  p=0.6276  ns
+        Contingency: both=27  A_only=10  B_only=7  neither=37
+      Dist shift: chi2=26.5656  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.1667  p=0.6831  ns
+        Contingency: both=32  A_only=3  B_only=3  neither=47
+      Dist shift: chi2=41.9398  p=0.0000  ***  (sig=True)
+
+  [mistral-small3.2_24b]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=64.75%  bias=5.034  rstd=6.87%  cons=57.0%  chi2=16.220(p=0.0010)  chi2_acc=8.270(p=0.0408)
+      Agent (raw)           : acc=59.00%  bias=10.618  rstd=15.18%  cons=34.0%  chi2=72.160(p=0.0000)  chi2_acc=38.115(p=0.0000)
+      Agent + PriDe         : acc=61.18%  bias=6.291  rstd=9.81%  cons=44.7%  chi2=21.529(p=0.0001)  chi2_acc=13.770(p=0.0032)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=0.4500  p=0.5023  ns
+        Contingency: both=53  A_only=12  B_only=8  neither=27
+      Dist shift: chi2=27.1564  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.0833  p=0.7728  ns
+        Contingency: both=46  A_only=6  B_only=6  neither=27
+      Dist shift: chi2=9.6703  p=0.0216  *  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.1667  p=0.6831  ns
+        Contingency: both=48  A_only=2  B_only=4  neither=31
+      Dist shift: chi2=21.0288  p=0.0001  ***  (sig=True)
+==============================================================================================================
+DATASET: sociology
+==============================================================================================================
+
+  Comp 1: Baseline (raw) vs Agent (raw)  — Does multi-agent debate improve raw accuracy?
+--------------------------------------------------------------------------------------------------------------
+  Model                                  |  NatAcc_A  NatAcc_B  DeltaAcc |  Bias_A  Bias_B   DBias |  RStd_A  RStd_B   DRStd |  Cons_A  Cons_B   DCons |  McNemar        p  Sig
+--------------------------------------------------------------------------------------------------------------
+  gemma3_1b                              |    49.25%    39.80%    -9.45pp |  15.977  30.097 +14.120 |   20.69   31.65  +10.96 |   17.4%    6.5%  -10.9pp |   8.7568   0.0031  YES
+  gemma3_4b                              |    72.14%    67.66%    -4.48pp |   3.791   6.537  +2.746 |    8.83   11.69   +2.86 |   58.2%   49.8%   -8.5pp |   2.0645   0.1508   no
+  gemma3_12b                             |    87.06%    88.06%    +1.00pp |   0.839   2.371  +1.532 |    1.47    3.47   +2.01 |   82.6%   75.1%   -7.5pp |   0.1000   0.7518   no
+  llama3.2_latest                        |    69.50%    57.71%   -11.79pp |   2.878  12.179  +9.300 |    4.86   15.88  +11.02 |   61.7%   36.8%  -24.9pp |  13.9211   0.0002  YES
+  llama3_8b-instruct-q6_K                |    80.60%    25.87%   -54.73pp |   2.405  34.680 +32.275 |    3.84   38.16  +34.33 |   73.1%    1.0%  -72.1pp |  95.8145   0.0000  YES
+  llama3_8b-instruct-q8_0                |    80.60%    27.36%   -53.23pp |   2.204  29.924 +27.720 |    3.66   36.07  +32.40 |   72.6%    1.0%  -71.6pp |  91.3496   0.0000  YES
+  mistral_latest                         |    76.12%    72.64%    -3.48pp |   6.518   6.662  +0.144 |    7.53    9.09   +1.56 |   61.7%   54.2%   -7.5pp |   1.7143   0.1904   no
+  mistral-nemo_latest                    |    78.11%    65.67%   -12.44pp |   3.564   7.789  +4.225 |    4.11    8.94   +4.84 |   60.2%   46.3%  -13.9pp |  18.5806   0.0000  YES
+  mistral-small3.2_24b                   |    88.06%    78.61%    -9.45pp |   0.796   7.651  +6.854 |    2.68   13.60  +10.92 |   83.1%   57.2%  -25.9pp |  14.0870   0.0002  YES
+
+  Comp 2: Baseline (raw) vs Agent+PriDe  — Does agent structure + PriDe beat single-call baseline?
+--------------------------------------------------------------------------------------------------------------
+  Model                                  |  NatAcc_A  NatAcc_B  DeltaAcc |  Bias_A  Bias_B   DBias |  RStd_A  RStd_B   DRStd |  Cons_A  Cons_B   DCons |  McNemar        p  Sig
+--------------------------------------------------------------------------------------------------------------
+  gemma3_1b                              |    49.25%    48.54%    -0.72pp |  15.977  12.537  -3.440 |   20.69   11.14   -9.55 |   17.4%   20.5%   +3.1pp |   0.9730   0.3239   no
+  gemma3_4b                              |    72.14%    69.59%    -2.55pp |   3.791   6.463  +2.672 |    8.83   12.39   +3.55 |   58.2%   48.0%  -10.3pp |   0.8929   0.3447   no
+  gemma3_12b                             |    87.06%    86.55%    -0.51pp |   0.839   1.942  +1.103 |    1.47    2.91   +1.44 |   82.6%   75.4%   -7.1pp |   0.1250   0.7237   no
+  llama3.2_latest                        |    69.50%    65.50%    -4.00pp |   2.878   1.903  -0.975 |    4.86    3.64   -1.22 |   61.7%   53.8%   -7.9pp |   2.0833   0.1489   no
+  llama3_8b-instruct-q6_K                |    80.60%    60.23%   -20.36pp |   2.405  13.401 +10.996 |    3.84   26.61  +22.77 |   73.1%   13.5%  -59.7pp |  26.8837   0.0000  YES
+  llama3_8b-instruct-q8_0                |    80.60%    58.48%   -22.12pp |   2.204  11.702  +9.498 |    3.66   24.43  +20.77 |   72.6%   17.5%  -55.1pp |  28.5208   0.0000  YES
+  mistral_latest                         |    76.12%    71.35%    -4.77pp |   6.518   4.129  -2.390 |    7.53    5.81   -1.72 |   61.7%   57.9%   -3.8pp |   3.0476   0.0809   no
+  mistral-nemo_latest                    |    78.11%    73.68%    -4.43pp |   3.564   3.009  -0.555 |    4.11    2.21   -1.90 |   60.2%   53.2%   -7.0pp |   4.5000   0.0339  YES
+  mistral-small3.2_24b                   |    88.06%    87.13%    -0.93pp |   0.796   2.034  +1.237 |    2.68    4.02   +1.34 |   83.1%   77.8%   -5.3pp |   0.4444   0.5050   no
+
+  Comp 3: Agent (raw)    vs Agent+PriDe  — Does PriDe debiasing add value on top of agents?
+--------------------------------------------------------------------------------------------------------------
+  Model                                  |  NatAcc_A  NatAcc_B  DeltaAcc |  Bias_A  Bias_B   DBias |  RStd_A  RStd_B   DRStd |  Cons_A  Cons_B   DCons |  McNemar        p  Sig
+--------------------------------------------------------------------------------------------------------------
+  gemma3_1b                              |    39.80%    48.54%    +8.74pp |  30.097  12.537 -17.560 |   31.65   11.14  -20.50 |    6.5%   20.5%  +14.0pp |   3.0250   0.0820   no
+  gemma3_4b                              |    67.66%    69.59%    +1.93pp |   6.537   6.463  -0.075 |   11.69   12.39   +0.69 |   49.8%   48.0%   -1.8pp |   0.5000   0.4795   no
+  gemma3_12b                             |    88.06%    86.55%    -1.51pp |   2.371   1.942  -0.429 |    3.47    2.91   -0.56 |   75.1%   75.4%   +0.3pp |   0.5000   0.4795   no
+  llama3.2_latest                        |    57.71%    65.50%    +7.79pp |  12.179   1.903 -10.275 |   15.88    3.64  -12.24 |   36.8%   53.8%  +17.0pp |   9.3750   0.0022  YES
+  llama3_8b-instruct-q6_K                |    25.87%    60.23%   +34.36pp |  34.680  13.401 -21.279 |   38.16   26.61  -11.56 |    1.0%   13.5%  +12.5pp |  48.2462   0.0000  YES
+  llama3_8b-instruct-q8_0                |    27.36%    58.48%   +31.12pp |  29.924  11.702 -18.222 |   36.07   24.43  -11.64 |    1.0%   17.5%  +16.5pp |  39.4091   0.0000  YES
+  mistral_latest                         |    72.64%    71.35%    -1.29pp |   6.662   4.129  -2.533 |    9.09    5.81   -3.28 |   54.2%   57.9%   +3.7pp |   0.0000   1.0000   no
+  mistral-nemo_latest                    |    65.67%    73.68%    +8.01pp |   7.789   3.009  -4.781 |    8.94    2.21   -6.74 |   46.3%   53.2%   +6.9pp |   6.6667   0.0098  YES
+  mistral-small3.2_24b                   |    78.61%    87.13%    +8.53pp |   7.651   2.034  -5.617 |   13.60    4.02   -9.58 |   57.2%   77.8%  +20.6pp |   8.4706   0.0036  YES
+
+  DETAILED STATISTICS PER MODEL
+--------------------------------------------------------------------------------------------------------------
+
+  [gemma3_1b]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=47.76%  bias=15.977  rstd=20.69%  cons=17.4%  chi2=328.368(p=0.0000)  chi2_acc=137.988(p=0.0000)
+      Agent (raw)           : acc=38.18%  bias=30.097  rstd=31.65%  cons=6.5%  chi2=1165.244(p=0.0000)  chi2_acc=341.178(p=0.0000)
+      Agent + PriDe         : acc=48.68%  bias=12.537  rstd=11.14%  cons=20.5%  chi2=172.012(p=0.0000)  chi2_acc=34.006(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=8.7568  p=0.0031  **
+        Contingency: both=71  A_only=28  B_only=9  neither=93
+      Dist shift: chi2=306.3263  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.9730  p=0.3239  ns
+        Contingency: both=68  A_only=22  B_only=15  neither=66
+      Dist shift: chi2=78.7009  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=3.0250  p=0.0820  ns
+        Contingency: both=57  A_only=14  B_only=26  neither=74
+      Dist shift: chi2=316.9909  p=0.0000  ***  (sig=True)
+
+  [gemma3_4b]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=71.39%  bias=3.791  rstd=8.83%  cons=58.2%  chi2=18.488(p=0.0003)  chi2_acc=30.718(p=0.0000)
+      Agent (raw)           : acc=66.17%  bias=6.537  rstd=11.69%  cons=49.8%  chi2=54.975(p=0.0000)  chi2_acc=49.117(p=0.0000)
+      Agent + PriDe         : acc=66.52%  bias=6.463  rstd=12.39%  cons=48.0%  chi2=45.708(p=0.0000)  chi2_acc=47.127(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=2.0645  p=0.1508  ns
+        Contingency: both=125  A_only=20  B_only=11  neither=45
+      Dist shift: chi2=20.5699  p=0.0001  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.8929  p=0.3447  ns
+        Contingency: both=108  A_only=17  B_only=11  neither=35
+      Dist shift: chi2=18.9711  p=0.0003  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.5000  p=0.4795  ns
+        Contingency: both=117  A_only=0  B_only=2  neither=52
+      Dist shift: chi2=0.3411  p=0.9521  ns  (sig=False)
+
+  [gemma3_12b]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=85.20%  bias=0.839  rstd=1.47%  cons=82.6%  chi2=0.905(p=0.8241)  chi2_acc=1.371(p=0.7123)
+      Agent (raw)           : acc=83.46%  bias=2.371  rstd=3.47%  cons=75.1%  chi2=7.234(p=0.0648)  chi2_acc=7.018(p=0.0713)
+      Agent + PriDe         : acc=83.92%  bias=1.942  rstd=2.91%  cons=75.4%  chi2=4.129(p=0.2479)  chi2_acc=4.290(p=0.2318)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=0.1000  p=0.7518  ns
+        Contingency: both=171  A_only=4  B_only=6  neither=20
+      Dist shift: chi2=8.3202  p=0.0398  *  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.1250  p=0.7237  ns
+        Contingency: both=145  A_only=5  B_only=3  neither=18
+      Dist shift: chi2=7.0717  p=0.0696  ns  (sig=False)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.5000  p=0.4795  ns
+        Contingency: both=148  A_only=2  B_only=0  neither=21
+      Dist shift: chi2=0.6411  p=0.8870  ns  (sig=False)
+
+  [llama3.2_latest]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=69.74%  bias=2.878  rstd=4.86%  cons=61.7%  chi2=10.644(p=0.0138)  chi2_acc=8.993(p=0.0294)
+      Agent (raw)           : acc=59.20%  bias=12.179  rstd=15.88%  cons=36.8%  chi2=190.796(p=0.0000)  chi2_acc=83.918(p=0.0000)
+      Agent + PriDe         : acc=65.79%  bias=1.903  rstd=3.64%  cons=53.8%  chi2=3.965(p=0.2653)  chi2_acc=4.027(p=0.2585)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=13.9211  p=0.0002  ***
+        Contingency: both=108  A_only=31  B_only=7  neither=54
+      Dist shift: chi2=167.7515  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=2.0833  p=0.1489  ns
+        Contingency: both=109  A_only=9  B_only=3  neither=50
+      Dist shift: chi2=12.2950  p=0.0064  **  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=9.3750  p=0.0022  **
+        Contingency: both=92  A_only=4  B_only=20  neither=55
+      Dist shift: chi2=158.6048  p=0.0000  ***  (sig=True)
+
+  [llama3_8b-instruct-q6_K]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=80.60%  bias=2.405  rstd=3.84%  cons=73.1%  chi2=7.443(p=0.0590)  chi2_acc=7.572(p=0.0557)
+      Agent (raw)           : acc=28.48%  bias=34.680  rstd=38.16%  cons=1.0%  chi2=1547.164(p=0.0000)  chi2_acc=574.856(p=0.0000)
+      Agent + PriDe         : acc=62.28%  bias=13.401  rstd=26.61%  cons=13.5%  chi2=196.550(p=0.0000)  chi2_acc=206.143(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=95.8145  p=0.0000  ***
+        Contingency: both=45  A_only=117  B_only=7  neither=32
+      Dist shift: chi2=18197.0419  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=26.8837  p=0.0000  ***
+        Contingency: both=99  A_only=39  B_only=4  neither=29
+      Dist shift: chi2=736.9644  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=48.2462  p=0.0000  ***
+        Contingency: both=42  A_only=4  B_only=61  neither=64
+      Dist shift: chi2=691.4337  p=0.0000  ***  (sig=True)
+
+  [llama3_8b-instruct-q8_0]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=81.22%  bias=2.204  rstd=3.66%  cons=72.6%  chi2=6.249(p=0.1001)  chi2_acc=7.069(p=0.0697)
+      Agent (raw)           : acc=30.10%  bias=29.924  rstd=36.07%  cons=1.0%  chi2=1151.891(p=0.0000)  chi2_acc=497.070(p=0.0000)
+      Agent + PriDe         : acc=62.72%  bias=11.702  rstd=24.43%  cons=17.5%  chi2=149.860(p=0.0000)  chi2_acc=174.591(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=91.3496  p=0.0000  ***
+        Contingency: both=47  A_only=115  B_only=8  neither=31
+      Dist shift: chi2=17566.2225  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=28.5208  p=0.0000  ***
+        Contingency: both=95  A_only=43  B_only=5  neither=28
+      Dist shift: chi2=478.9726  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=39.4091  p=0.0000  ***
+        Contingency: both=41  A_only=7  B_only=59  neither=64
+      Dist shift: chi2=730.5707  p=0.0000  ***  (sig=True)
+
+  [mistral_latest]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=72.89%  bias=6.518  rstd=7.53%  cons=61.7%  chi2=54.657(p=0.0000)  chi2_acc=23.085(p=0.0000)
+      Agent (raw)           : acc=68.03%  bias=6.662  rstd=9.09%  cons=54.2%  chi2=57.095(p=0.0000)  chi2_acc=30.535(p=0.0000)
+      Agent + PriDe         : acc=69.74%  bias=4.129  rstd=5.81%  cons=57.9%  chi2=18.655(p=0.0003)  chi2_acc=10.938(p=0.0121)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=1.7143  p=0.1904  ns
+        Contingency: both=139  A_only=14  B_only=7  neither=41
+      Dist shift: chi2=14.8236  p=0.0020  **  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=3.0476  p=0.0809  ns
+        Contingency: both=116  A_only=15  B_only=6  neither=34
+      Dist shift: chi2=8.9911  p=0.0294  *  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=116  A_only=7  B_only=6  neither=42
+      Dist shift: chi2=19.1986  p=0.0002  ***  (sig=True)
+
+  [mistral-nemo_latest]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=75.00%  bias=3.564  rstd=4.11%  cons=60.2%  chi2=16.338(p=0.0010)  chi2_acc=7.237(p=0.0647)
+      Agent (raw)           : acc=66.54%  bias=7.789  rstd=8.94%  cons=46.3%  chi2=78.050(p=0.0000)  chi2_acc=28.888(p=0.0000)
+      Agent + PriDe         : acc=68.71%  bias=3.009  rstd=2.21%  cons=53.2%  chi2=9.906(p=0.0194)  chi2_acc=1.551(p=0.6707)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=18.5806  p=0.0000  ***
+        Contingency: both=129  A_only=28  B_only=3  neither=41
+      Dist shift: chi2=21.7114  p=0.0001  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=4.5000  p=0.0339  *
+        Contingency: both=122  A_only=14  B_only=4  neither=31
+      Dist shift: chi2=4.8553  p=0.1827  ns  (sig=False)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=6.6667  p=0.0098  **
+        Contingency: both=113  A_only=2  B_only=13  neither=43
+      Dist shift: chi2=35.6330  p=0.0000  ***  (sig=True)
+
+  [mistral-small3.2_24b]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=86.57%  bias=0.796  rstd=2.68%  cons=83.1%  chi2=0.816(p=0.8457)  chi2_acc=4.963(p=0.1745)
+      Agent (raw)           : acc=76.00%  bias=7.651  rstd=13.60%  cons=57.2%  chi2=75.294(p=0.0000)  chi2_acc=81.509(p=0.0000)
+      Agent + PriDe         : acc=84.36%  bias=2.034  rstd=4.02%  cons=77.8%  chi2=4.526(p=0.2100)  chi2_acc=8.365(p=0.0390)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=14.0870  p=0.0002  ***
+        Contingency: both=156  A_only=21  B_only=2  neither=22
+      Dist shift: chi2=74.4563  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.4444  p=0.5050  ns
+        Contingency: both=146  A_only=6  B_only=3  neither=16
+      Dist shift: chi2=1.9492  p=0.5830  ns  (sig=False)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=8.4706  p=0.0036  **
+        Contingency: both=134  A_only=2  B_only=15  neither=20
+      Dist shift: chi2=59.4097  p=0.0000  ***  (sig=True)
