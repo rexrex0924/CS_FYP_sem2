@@ -25,20 +25,6 @@ build/
 *.ipynb
 
 # =============================================================================
-# Evaluation result CSVs
-# (large generated files — reproducible by re-running eval scripts)
-# =============================================================================
-results/baseline/*.csv
-results/mad_graph/*.csv
-results/mad_graph_pride/*.csv
-results/mad_graph_selective/output/*.csv
-results/mad_graph_selective/*.csv
-
-# Keep deprecated folders out of git too
-results/mad_graph_selective/deprecated/
-results/mad_graph/analysis/
-
-# =============================================================================
 # Slurm / HPC logs
 # =============================================================================
 slurm_output/

@@ -106,7 +106,7 @@ def process_question_baseline(
             "correct_position": correct_pos,
             "correct_answer":   mcq.answer,
             "model":            model,
-            "temperature":      0.0,
+            "temperature":      0.5,
         })
 
     return rows
@@ -127,7 +127,7 @@ def run_baseline_evaluation(
     print("\n=== Baseline Cyclic Permutation Evaluation ===")
     print(f"Model         : {model}")
     print(f"Dataset       : {csv_path}")
-    print(f"Mode          : Single call per permutation | num_predict=3 | temp=0")
+    print(f"Mode          : Single call per permutation | num_predict=3 | temp=0.5")
     print(f"Workers       : {num_workers}")
 
     mcqs = load_mcq_csv(csv_path, max_questions=max_questions)
