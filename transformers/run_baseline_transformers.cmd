@@ -5,15 +5,16 @@
 #SBATCH --partition=gpu_24h
 #SBATCH --qos=gpu
 #SBATCH --cpus-per-task=2
-#SBATCH --output=/research/d7/fyp25/bhtang2/mad_graph/CS_FYP_sem2/slurm_output/baseline_transformers_%j.txt 
+#SBATCH --output=/research/d7/fyp25/bhtang2/mad_graph/CS_FYP_sem2/slurm_output/baseline/soc-Qwen2.5-7B_%j.txt 
 #SBATCH --gres=gpu:1
 
-MODEL="microsoft/Phi-3.5-mini-instruct"
-CSV_PATH="../dataset/2012-2020_ICT_DSE.csv"
+MODEL="Qwen/Qwen2.5-7B-Instruct"
+CSV_PATH="../dataset/sociology.csv"
 SEED="42"
 DEVICE="cuda"
 QUANTIZATION="fp16"
 
+export CUDA_VISIBLE_DEVICES=0,1
 export SLURM_CONF=/opt1/slurm/gpu-slurm.conf
 export HF_HOME=/research/d7/fyp25/bhtang2/mad_graph/cache/huggingface
 export TRANSFORMERS_CACHE=/research/d7/fyp25/bhtang2/mad_graph/cache/huggingface
@@ -25,5 +26,4 @@ source ~/miniconda3/etc/profile.d/conda.sh
 conda activate mad
 
 # Run from the parent directory so output goes to results/baseline gracefully
-cd ..
-python transformers/baseline_cyclic_eval_transformers.py --model ${MODEL} --input ${CSV_PATH} --seed ${SEED} --device ${DEVICE} --quantization ${QUANTIZATION}
+python baseline_cyclic_eval_transformers.py --model ${MODEL} --input ${CSV_PATH} --seed ${SEED} --device ${DEVICE} --quantization ${QUANTIZATION}

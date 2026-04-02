@@ -20,6 +20,12 @@ DATASET: 2012-2020_ICT_DSE
   mistral_latest                         |    62.36%    59.78%    -2.58pp |   7.645   9.547  +1.902 |    8.73   12.21   +3.48 |   40.6%   33.9%   -6.6pp |   0.7059   0.4008   no
   mistral-nemo_latest                    |    66.04%    61.62%    -4.42pp |   3.453   7.216  +3.763 |    3.59   10.27   +6.68 |   46.3%   36.9%   -9.4pp |   1.6393   0.2004   no
   mistral-small3.2_24b                   |    84.13%    82.29%    -1.85pp |   2.211   3.894  +1.683 |    3.52    7.14   +3.61 |   79.0%   73.1%   -5.9pp |   0.7619   0.3827   no
+  Qwen_Qwen2.5-1.5B-Instruct_transformers |    56.83%    55.72%    -1.11pp |  18.681  17.894  -0.787 |   21.62   19.21   -2.41 |   28.0%   28.0%   +0.0pp |   0.1212   0.7277   no
+  Qwen_Qwen2.5-3B-Instruct_transformers  |    62.73%    60.89%    -1.85pp |   5.325   6.517  +1.191 |    6.48    8.69   +2.21 |   52.8%   47.6%   -5.2pp |   0.3404   0.5596   no
+  Qwen_Qwen2.5-7B-Instruct_transformers  |    81.55%    77.12%    -4.43pp |   2.897   2.814  -0.083 |    3.43    4.44   +1.01 |   75.6%   67.5%   -8.1pp |   3.5588   0.0592   no
+  microsoft_Phi-3-mini-4k-instruct_transformers |    73.58%    70.11%    -3.47pp |   6.847   8.849  +2.002 |   11.25   14.79   +3.55 |   57.6%   44.6%  -13.0pp |   0.5517   0.4576   no
+  microsoft_Phi-3.5-mini-instruct_transformers |    71.59%    61.62%    -9.97pp |   5.580   8.162  +2.582 |    8.60   14.39   +5.80 |   63.4%   42.1%  -21.4pp |  14.6667   0.0001  YES
+  microsoft_Phi-4-mini-instruct_transformers |    68.63%    71.22%    +2.58pp |   6.558   6.097  -0.461 |   10.47   10.46   -0.01 |   53.9%   54.6%   +0.7pp |   1.7143   0.1904   no
 
   Comp 2: Baseline (raw) vs Agent+PriDe  — Does agent structure + PriDe beat single-call baseline?
 --------------------------------------------------------------------------------------------------------------
@@ -34,6 +40,12 @@ DATASET: 2012-2020_ICT_DSE
   mistral_latest                         |    62.36%    61.04%    -1.32pp |   7.645   7.601  -0.044 |    8.73    9.28   +0.55 |   40.6%   39.8%   -0.8pp |   0.2647   0.6069   no
   mistral-nemo_latest                    |    66.04%    65.80%    -0.24pp |   3.453   3.089  -0.364 |    3.59    3.98   +0.39 |   46.3%   44.6%   -1.7pp |   0.2143   0.6434   no
   mistral-small3.2_24b                   |    84.13%    86.58%    +2.45pp |   2.211   2.834  +0.622 |    3.52    5.97   +2.45 |   79.0%   77.1%   -1.9pp |   0.7500   0.3865   no
+  Qwen_Qwen2.5-1.5B-Instruct_transformers |    56.83%    56.71%    -0.12pp |  18.681  18.089  -0.593 |   21.62   19.05   -2.56 |   28.0%   29.0%   +1.0pp |   0.0000   1.0000   no
+  Qwen_Qwen2.5-3B-Instruct_transformers  |    62.73%    65.37%    +2.64pp |   5.325   4.740  -0.585 |    6.48    6.17   -0.31 |   52.8%   50.6%   -2.1pp |   0.0000   1.0000   no
+  Qwen_Qwen2.5-7B-Instruct_transformers  |    81.55%    79.65%    -1.90pp |   2.897   3.445  +0.548 |    3.43    5.49   +2.06 |   75.6%   68.4%   -7.2pp |   1.5652   0.2109   no
+  microsoft_Phi-3-mini-4k-instruct_transformers |    73.58%    72.73%    -0.86pp |   6.847   7.261  +0.414 |   11.25   11.48   +0.23 |   57.6%   48.1%   -9.6pp |   0.0000   1.0000   no
+  microsoft_Phi-3.5-mini-instruct_transformers |    71.59%    68.40%    -3.19pp |   5.580   4.918  -0.662 |    8.60    8.00   -0.60 |   63.4%   53.7%   -9.8pp |   0.5000   0.4795   no
+  microsoft_Phi-4-mini-instruct_transformers |    68.63%    71.86%    +3.23pp |   6.558   5.427  -1.131 |   10.47    9.39   -1.07 |   53.9%   56.7%   +2.8pp |   0.9412   0.3320   no
 
   Comp 3: Agent (raw)    vs Agent+PriDe  — Does PriDe debiasing add value on top of agents?
 --------------------------------------------------------------------------------------------------------------
@@ -48,6 +60,12 @@ DATASET: 2012-2020_ICT_DSE
   mistral_latest                         |    59.78%    61.04%    +1.26pp |   9.547   7.601  -1.946 |   12.21    9.28   -2.93 |   33.9%   39.8%   +5.9pp |   0.0000   1.0000   no
   mistral-nemo_latest                    |    61.62%    65.80%    +4.18pp |   7.216   3.089  -4.127 |   10.27    3.98   -6.29 |   36.9%   44.6%   +7.7pp |   2.8929   0.0890   no
   mistral-small3.2_24b                   |    82.29%    86.58%    +4.29pp |   3.894   2.834  -1.060 |    7.14    5.97   -1.17 |   73.1%   77.1%   +4.0pp |   4.0000   0.0455  YES
+  Qwen_Qwen2.5-1.5B-Instruct_transformers |    55.72%    56.71%    +0.99pp |  17.894  18.089  +0.194 |   19.21   19.05   -0.15 |   28.0%   29.0%   +1.0pp |   0.0000   1.0000   no
+  Qwen_Qwen2.5-3B-Instruct_transformers  |    60.89%    65.37%    +4.48pp |   6.517   4.740  -1.776 |    8.69    6.17   -2.52 |   47.6%   50.6%   +3.0pp |   4.1667   0.0412  YES
+  Qwen_Qwen2.5-7B-Instruct_transformers  |    77.12%    79.65%    +2.53pp |   2.814   3.445  +0.631 |    4.44    5.49   +1.05 |   67.5%   68.4%   +0.9pp |   0.7500   0.3865   no
+  microsoft_Phi-3-mini-4k-instruct_transformers |    70.11%    72.73%    +2.62pp |   8.849   7.261  -1.588 |   14.79   11.48   -3.31 |   44.6%   48.1%   +3.4pp |   2.2857   0.1306   no
+  microsoft_Phi-3.5-mini-instruct_transformers |    61.62%    68.40%    +6.77pp |   8.162   4.918  -3.244 |   14.39    8.00   -6.40 |   42.1%   53.7%  +11.6pp |  11.2500   0.0008  YES
+  microsoft_Phi-4-mini-instruct_transformers |    71.22%    71.86%    +0.64pp |   6.097   5.427  -0.670 |   10.46    9.39   -1.07 |   54.6%   56.7%   +2.1pp |   0.0000   1.0000   no
 
   DETAILED STATISTICS PER MODEL
 --------------------------------------------------------------------------------------------------------------
@@ -213,6 +231,114 @@ DATASET: 2012-2020_ICT_DSE
       McNemar: stat=4.0000  p=0.0455  *
         Contingency: both=192  A_only=1  B_only=8  neither=30
       Dist shift: chi2=4.6802  p=0.1968  ns  (sig=False)
+
+  [Qwen_Qwen2.5-1.5B-Instruct_transformers]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=54.34%  bias=18.681  rstd=21.62%  cons=28.0%  chi2=605.292(p=0.0000)  chi2_acc=204.174(p=0.0000)
+      Agent (raw)           : acc=52.03%  bias=17.894  rstd=19.21%  cons=28.0%  chi2=555.358(p=0.0000)  chi2_acc=160.234(p=0.0000)
+      Agent + PriDe         : acc=54.22%  bias=18.089  rstd=19.05%  cons=29.0%  chi2=483.732(p=0.0000)  chi2_acc=135.140(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=0.1212  p=0.7277  ns
+        Contingency: both=136  A_only=18  B_only=15  neither=102
+      Dist shift: chi2=35.4174  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=119  A_only=13  B_only=12  neither=87
+      Dist shift: chi2=27.2097  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=129  A_only=1  B_only=2  neither=99
+      Dist shift: chi2=3.2923  p=0.3487  ns  (sig=False)
+
+  [Qwen_Qwen2.5-3B-Instruct_transformers]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=66.51%  bias=5.325  rstd=6.48%  cons=52.8%  chi2=49.188(p=0.0000)  chi2_acc=20.456(p=0.0001)
+      Agent (raw)           : acc=63.84%  bias=6.517  rstd=8.69%  cons=47.6%  chi2=73.653(p=0.0000)  chi2_acc=35.453(p=0.0000)
+      Agent + PriDe         : acc=66.34%  bias=4.740  rstd=6.17%  cons=50.6%  chi2=33.221(p=0.0000)  chi2_acc=15.757(p=0.0013)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=0.3404  p=0.5596  ns
+        Contingency: both=144  A_only=26  B_only=21  neither=80
+      Dist shift: chi2=102.1137  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=135  A_only=15  B_only=16  neither=65
+      Dist shift: chi2=54.8036  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=4.1667  p=0.0412  *
+        Contingency: both=145  A_only=0  B_only=6  neither=80
+      Dist shift: chi2=7.2246  p=0.0651  ns  (sig=False)
+
+  [Qwen_Qwen2.5-7B-Instruct_transformers]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=81.27%  bias=2.897  rstd=3.43%  cons=75.6%  chi2=14.561(p=0.0022)  chi2_acc=8.358(p=0.0392)
+      Agent (raw)           : acc=78.04%  bias=2.814  rstd=4.44%  cons=67.5%  chi2=13.734(p=0.0033)  chi2_acc=12.469(p=0.0059)
+      Agent + PriDe         : acc=80.63%  bias=3.445  rstd=5.49%  cons=68.4%  chi2=17.550(p=0.0005)  chi2_acc=17.814(p=0.0005)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=3.5588  p=0.0592  ns
+        Contingency: both=198  A_only=23  B_only=11  neither=39
+      Dist shift: chi2=22.1421  p=0.0001  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=1.5652  p=0.2109  ns
+        Contingency: both=176  A_only=15  B_only=8  neither=32
+      Dist shift: chi2=11.0819  p=0.0113  *  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.7500  p=0.3865  ns
+        Contingency: both=176  A_only=4  B_only=8  neither=43
+      Dist shift: chi2=41.0398  p=0.0000  ***  (sig=True)
+
+  [microsoft_Phi-3-mini-4k-instruct_transformers]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=71.73%  bias=6.847  rstd=11.25%  cons=57.6%  chi2=79.070(p=0.0000)  chi2_acc=65.934(p=0.0000)
+      Agent (raw)           : acc=67.34%  bias=8.849  rstd=14.79%  cons=44.6%  chi2=135.815(p=0.0000)  chi2_acc=107.871(p=0.0000)
+      Agent + PriDe         : acc=69.05%  bias=7.261  rstd=11.48%  cons=48.1%  chi2=77.948(p=0.0000)  chi2_acc=56.979(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=0.5517  p=0.4576  ns
+        Contingency: both=178  A_only=17  B_only=12  neither=58
+      Dist shift: chi2=12.8567  p=0.0050  **  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=160  A_only=8  B_only=7  neither=50
+      Dist shift: chi2=6.6233  p=0.0849  ns  (sig=False)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=2.2857  p=0.1306  ns
+        Contingency: both=162  A_only=1  B_only=6  neither=62
+      Dist shift: chi2=6.7210  p=0.0813  ns  (sig=False)
+
+  [microsoft_Phi-3.5-mini-instruct_transformers]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=70.88%  bias=5.580  rstd=8.60%  cons=63.4%  chi2=52.859(p=0.0000)  chi2_acc=38.093(p=0.0000)
+      Agent (raw)           : acc=64.11%  bias=8.162  rstd=14.39%  cons=42.1%  chi2=115.550(p=0.0000)  chi2_acc=97.620(p=0.0000)
+      Agent + PriDe         : acc=69.37%  bias=4.918  rstd=8.00%  cons=53.7%  chi2=35.758(p=0.0000)  chi2_acc=27.806(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=14.6667  p=0.0001  ***
+        Contingency: both=161  A_only=28  B_only=5  neither=70
+      Dist shift: chi2=70.9978  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.5000  p=0.4795  ns
+        Contingency: both=151  A_only=11  B_only=7  neither=55
+      Dist shift: chi2=3.0881  p=0.3782  ns  (sig=False)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=11.2500  p=0.0008  ***
+        Contingency: both=140  A_only=2  B_only=18  neither=71
+      Dist shift: chi2=53.4921  p=0.0000  ***  (sig=True)
+
+  [microsoft_Phi-4-mini-instruct_transformers]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=66.33%  bias=6.558  rstd=10.47%  cons=53.9%  chi2=74.590(p=0.0000)  chi2_acc=53.181(p=0.0000)
+      Agent (raw)           : acc=67.90%  bias=6.097  rstd=10.46%  cons=54.6%  chi2=64.480(p=0.0000)  chi2_acc=54.410(p=0.0000)
+      Agent + PriDe         : acc=69.05%  bias=5.427  rstd=9.39%  cons=56.7%  chi2=43.541(p=0.0000)  chi2_acc=38.141(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=1.7143  p=0.1904  ns
+        Contingency: both=179  A_only=7  B_only=14  neither=71
+      Dist shift: chi2=0.4977  p=0.9194  ns  (sig=False)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.9412  p=0.3320  ns
+        Contingency: both=155  A_only=6  B_only=11  neither=59
+      Dist shift: chi2=2.8867  p=0.4094  ns  (sig=False)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=166  A_only=0  B_only=0  neither=65
+      Dist shift: chi2=1.0968  p=0.7778  ns  (sig=False)
 ==============================================================================================================
 DATASET: college_cs
 ==============================================================================================================
@@ -230,6 +356,12 @@ DATASET: college_cs
   mistral_latest                         |    49.49%    42.00%    -7.49pp |  14.090  13.882  -0.208 |   16.35   15.02   -1.33 |   22.0%   20.0%   -2.0pp |   1.5652   0.2109   no
   mistral-nemo_latest                    |    45.26%    40.00%    -5.26pp |   3.414   9.294  +5.879 |    4.84   11.26   +6.42 |   32.3%   16.0%  -16.3pp |   0.4091   0.5224   no
   mistral-small3.2_24b                   |    65.00%    61.00%    -4.00pp |   5.034  10.618  +5.584 |    6.87   15.18   +8.31 |   57.0%   34.0%  -23.0pp |   0.4500   0.5023   no
+  Qwen_Qwen2.5-1.5B-Instruct_transformers |    42.00%    42.00%    +0.00pp |  23.672  22.817  -0.856 |   25.69   24.37   -1.32 |   16.0%   16.0%   +0.0pp |   0.1250   0.7237   no
+  Qwen_Qwen2.5-3B-Instruct_transformers  |    54.00%    52.00%    -2.00pp |   7.325  10.132  +2.807 |    9.76   10.74   +0.98 |   21.0%   23.0%   +2.0pp |   0.0714   0.7893   no
+  Qwen_Qwen2.5-7B-Instruct_transformers  |    67.00%    58.00%    -9.00pp |   3.820   4.202  +0.382 |    5.05    5.52   +0.47 |   52.0%   45.0%   -7.0pp |   3.0476   0.0809   no
+  microsoft_Phi-3-mini-4k-instruct_transformers |    49.46%    38.00%   -11.46pp |  11.645  12.782  +1.137 |   15.69   16.19   +0.50 |   35.1%   19.0%  -16.1pp |   4.2667   0.0389  YES
+  microsoft_Phi-3.5-mini-instruct_transformers |    48.19%    38.00%   -10.19pp |   9.937  12.471  +2.534 |   13.18   18.17   +4.99 |   37.6%    8.0%  -29.6pp |   2.4000   0.1213   no
+  microsoft_Phi-4-mini-instruct_transformers |    48.00%    49.00%    +1.00pp |   9.121   9.726  +0.605 |   13.67   13.53   -0.14 |   31.0%   30.0%   -1.0pp |   0.0000   1.0000   no
 
   Comp 2: Baseline (raw) vs Agent+PriDe  — Does agent structure + PriDe beat single-call baseline?
 --------------------------------------------------------------------------------------------------------------
@@ -244,6 +376,12 @@ DATASET: college_cs
   mistral_latest                         |    49.49%    42.35%    -7.14pp |  14.090   6.095  -7.995 |   16.35    6.36   -9.99 |   22.0%   17.6%   -4.4pp |   1.2308   0.2673   no
   mistral-nemo_latest                    |    45.26%    41.18%    -4.09pp |   3.414   5.908  +2.494 |    4.84    6.36   +1.52 |   32.3%   22.4%  -10.0pp |   0.2353   0.6276   no
   mistral-small3.2_24b                   |    65.00%    61.18%    -3.82pp |   5.034   6.291  +1.257 |    6.87    9.81   +2.94 |   57.0%   44.7%  -12.3pp |   0.0833   0.7728   no
+  Qwen_Qwen2.5-1.5B-Instruct_transformers |    42.00%    38.82%    -3.18pp |  23.672  24.661  +0.989 |   25.69   25.77   +0.07 |   16.0%   14.1%   -1.9pp |   0.1667   0.6831   no
+  Qwen_Qwen2.5-3B-Instruct_transformers  |    54.00%    51.76%    -2.24pp |   7.325   9.506  +2.180 |    9.76   10.67   +0.91 |   21.0%   23.5%   +2.5pp |   0.0000   1.0000   no
+  Qwen_Qwen2.5-7B-Instruct_transformers  |    67.00%    58.82%    -8.18pp |   3.820   7.000  +3.180 |    5.05    9.36   +4.31 |   52.0%   41.2%  -10.8pp |   0.5625   0.4533   no
+  microsoft_Phi-3-mini-4k-instruct_transformers |    49.46%    43.53%    -5.93pp |  11.645   8.251  -3.394 |   15.69   10.75   -4.94 |   35.1%   22.4%  -12.7pp |   0.0000   1.0000   no
+  microsoft_Phi-3.5-mini-instruct_transformers |    48.19%    43.53%    -4.66pp |   9.937  10.334  +0.397 |   13.18   13.98   +0.80 |   37.6%   15.3%  -22.3pp |   0.0000   1.0000   no
+  microsoft_Phi-4-mini-instruct_transformers |    48.00%    45.88%    -2.12pp |   9.121  10.349  +1.228 |   13.67   14.10   +0.43 |   31.0%   25.9%   -5.1pp |   0.1667   0.6831   no
 
   Comp 3: Agent (raw)    vs Agent+PriDe  — Does PriDe debiasing add value on top of agents?
 --------------------------------------------------------------------------------------------------------------
@@ -258,6 +396,12 @@ DATASET: college_cs
   mistral_latest                         |    42.00%    42.35%    +0.35pp |  13.882   6.095  -7.787 |   15.02    6.36   -8.66 |   20.0%   17.6%   -2.4pp |   0.0000   1.0000   no
   mistral-nemo_latest                    |    40.00%    41.18%    +1.18pp |   9.294   5.908  -3.386 |   11.26    6.36   -4.90 |   16.0%   22.4%   +6.4pp |   0.1667   0.6831   no
   mistral-small3.2_24b                   |    61.00%    61.18%    +0.18pp |  10.618   6.291  -4.327 |   15.18    9.81   -5.37 |   34.0%   44.7%  +10.7pp |   0.1667   0.6831   no
+  Qwen_Qwen2.5-1.5B-Instruct_transformers |    42.00%    38.82%    -3.18pp |  22.817  24.661  +1.845 |   24.37   25.77   +1.39 |   16.0%   14.1%   -1.9pp |   0.0000   1.0000   no
+  Qwen_Qwen2.5-3B-Instruct_transformers  |    52.00%    51.76%    -0.24pp |  10.132   9.506  -0.626 |   10.74   10.67   -0.07 |   23.0%   23.5%   +0.5pp |   0.0000   1.0000   no
+  Qwen_Qwen2.5-7B-Instruct_transformers  |    58.00%    58.82%    +0.82pp |   4.202   7.000  +2.798 |    5.52    9.36   +3.83 |   45.0%   41.2%   -3.8pp |   0.1000   0.7518   no
+  microsoft_Phi-3-mini-4k-instruct_transformers |    38.00%    43.53%    +5.53pp |  12.782   8.251  -4.531 |   16.19   10.75   -5.44 |   19.0%   22.4%   +3.4pp |   4.1667   0.0412  YES
+  microsoft_Phi-3.5-mini-instruct_transformers |    38.00%    43.53%    +5.53pp |  12.471  10.334  -2.137 |   18.17   13.98   -4.19 |    8.0%   15.3%   +7.3pp |   4.9000   0.0269  YES
+  microsoft_Phi-4-mini-instruct_transformers |    49.00%    45.88%    -3.12pp |   9.726  10.349  +0.623 |   13.53   14.10   +0.57 |   30.0%   25.9%   -4.1pp |   0.0000   1.0000   no
 
   DETAILED STATISTICS PER MODEL
 --------------------------------------------------------------------------------------------------------------
@@ -423,6 +567,114 @@ DATASET: college_cs
       McNemar: stat=0.1667  p=0.6831  ns
         Contingency: both=48  A_only=2  B_only=4  neither=31
       Dist shift: chi2=21.0288  p=0.0001  ***  (sig=True)
+
+  [Qwen_Qwen2.5-1.5B-Instruct_transformers]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=39.25%  bias=23.672  rstd=25.69%  cons=16.0%  chi2=358.640(p=0.0000)  chi2_acc=110.749(p=0.0000)
+      Agent (raw)           : acc=39.00%  bias=22.817  rstd=24.37%  cons=16.0%  chi2=333.180(p=0.0000)  chi2_acc=99.874(p=0.0000)
+      Agent + PriDe         : acc=37.94%  bias=24.661  rstd=25.77%  cons=14.1%  chi2=330.847(p=0.0000)  chi2_acc=95.871(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=0.1250  p=0.7237  ns
+        Contingency: both=38  A_only=4  B_only=4  neither=54
+      Dist shift: chi2=7.5275  p=0.0569  ns  (sig=False)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.1667  p=0.6831  ns
+        Contingency: both=31  A_only=4  B_only=2  neither=48
+      Dist shift: chi2=4.1975  p=0.2409  ns  (sig=False)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=33  A_only=1  B_only=0  neither=51
+      Dist shift: chi2=3.7781  p=0.2864  ns  (sig=False)
+
+  [Qwen_Qwen2.5-3B-Instruct_transformers]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=50.25%  bias=7.325  rstd=9.76%  cons=21.0%  chi2=34.340(p=0.0000)  chi2_acc=15.230(p=0.0016)
+      Agent (raw)           : acc=48.50%  bias=10.132  rstd=10.74%  cons=23.0%  chi2=65.700(p=0.0000)  chi2_acc=18.457(p=0.0004)
+      Agent + PriDe         : acc=47.65%  bias=9.506  rstd=10.67%  cons=23.5%  chi2=49.153(p=0.0000)  chi2_acc=15.517(p=0.0014)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=0.0714  p=0.7893  ns
+        Contingency: both=46  A_only=8  B_only=6  neither=40
+      Dist shift: chi2=58.4872  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=38  A_only=7  B_only=6  neither=34
+      Dist shift: chi2=46.2827  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=43  A_only=0  B_only=1  neither=41
+      Dist shift: chi2=1.6683  p=0.6440  ns  (sig=False)
+
+  [Qwen_Qwen2.5-7B-Instruct_transformers]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=62.00%  bias=3.820  rstd=5.05%  cons=52.0%  chi2=9.340(p=0.0251)  chi2_acc=4.329(p=0.2280)
+      Agent (raw)           : acc=59.00%  bias=4.202  rstd=5.52%  cons=45.0%  chi2=11.300(p=0.0102)  chi2_acc=5.043(p=0.1686)
+      Agent + PriDe         : acc=58.24%  bias=7.000  rstd=9.36%  cons=41.2%  chi2=26.659(p=0.0000)  chi2_acc=12.238(p=0.0066)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=3.0476  p=0.0809  ns
+        Contingency: both=52  A_only=15  B_only=6  neither=27
+      Dist shift: chi2=11.1967  p=0.0107  *  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.5625  p=0.4533  ns
+        Contingency: both=44  A_only=10  B_only=6  neither=25
+      Dist shift: chi2=35.0650  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.1000  p=0.7518  ns
+        Contingency: both=44  A_only=4  B_only=6  neither=31
+      Dist shift: chi2=36.9157  p=0.0000  ***  (sig=True)
+
+  [microsoft_Phi-3-mini-4k-instruct_transformers]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=49.18%  bias=11.645  rstd=15.69%  cons=35.1%  chi2=79.848(p=0.0000)  chi2_acc=36.283(p=0.0000)
+      Agent (raw)           : acc=44.50%  bias=12.782  rstd=16.19%  cons=19.0%  chi2=104.560(p=0.0000)  chi2_acc=42.474(p=0.0000)
+      Agent + PriDe         : acc=42.35%  bias=8.251  rstd=10.75%  cons=22.4%  chi2=37.035(p=0.0000)  chi2_acc=16.094(p=0.0011)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=4.2667  p=0.0389  *
+        Contingency: both=34  A_only=12  B_only=3  neither=44
+      Dist shift: chi2=28.1773  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=32  A_only=5  B_only=4  neither=38
+      Dist shift: chi2=13.7438  p=0.0033  **  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=4.1667  p=0.0412  *
+        Contingency: both=31  A_only=0  B_only=6  neither=48
+      Dist shift: chi2=21.2108  p=0.0001  ***  (sig=True)
+
+  [microsoft_Phi-3.5-mini-instruct_transformers]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=53.20%  bias=9.937  rstd=13.18%  cons=37.6%  chi2=54.349(p=0.0000)  chi2_acc=23.693(p=0.0000)
+      Agent (raw)           : acc=41.25%  bias=12.471  rstd=18.17%  cons=8.0%  chi2=99.540(p=0.0000)  chi2_acc=54.499(p=0.0000)
+      Agent + PriDe         : acc=44.41%  bias=10.334  rstd=13.98%  cons=15.3%  chi2=58.094(p=0.0000)  chi2_acc=26.913(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=2.4000  p=0.1213  ns
+        Contingency: both=29  A_only=11  B_only=4  neither=39
+      Dist shift: chi2=32.8406  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=28  A_only=3  B_only=4  neither=34
+      Dist shift: chi2=18.9530  p=0.0003  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=4.9000  p=0.0269  *
+        Contingency: both=28  A_only=1  B_only=9  neither=47
+      Dist shift: chi2=60.4227  p=0.0000  ***  (sig=True)
+
+  [microsoft_Phi-4-mini-instruct_transformers]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=49.00%  bias=9.121  rstd=13.67%  cons=31.0%  chi2=53.240(p=0.0000)  chi2_acc=29.932(p=0.0000)
+      Agent (raw)           : acc=48.75%  bias=9.726  rstd=13.53%  cons=30.0%  chi2=60.540(p=0.0000)  chi2_acc=29.328(p=0.0000)
+      Agent + PriDe         : acc=46.18%  bias=10.349  rstd=14.10%  cons=25.9%  chi2=58.259(p=0.0000)  chi2_acc=27.206(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=46  A_only=2  B_only=3  neither=49
+      Dist shift: chi2=4.9360  p=0.1765  ns  (sig=False)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.1667  p=0.6831  ns
+        Contingency: both=35  A_only=2  B_only=4  neither=44
+      Dist shift: chi2=7.3610  p=0.0612  ns  (sig=False)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=38  A_only=0  B_only=1  neither=46
+      Dist shift: chi2=0.4423  p=0.9314  ns  (sig=False)
 ==============================================================================================================
 DATASET: sociology
 ==============================================================================================================
@@ -440,6 +692,12 @@ DATASET: sociology
   mistral_latest                         |    76.12%    72.64%    -3.48pp |   6.518   6.662  +0.144 |    7.53    9.09   +1.56 |   61.7%   54.2%   -7.5pp |   1.7143   0.1904   no
   mistral-nemo_latest                    |    78.11%    65.67%   -12.44pp |   3.564   7.789  +4.225 |    4.11    8.94   +4.84 |   60.2%   46.3%  -13.9pp |  18.5806   0.0000  YES
   mistral-small3.2_24b                   |    88.06%    78.61%    -9.45pp |   0.796   7.651  +6.854 |    2.68   13.60  +10.92 |   83.1%   57.2%  -25.9pp |  14.0870   0.0002  YES
+  Qwen_Qwen2.5-1.5B-Instruct_transformers |    72.64%    66.67%    -5.97pp |   9.377  11.730  +2.353 |   14.41   14.61   +0.20 |   47.8%   46.8%   -1.0pp |   3.1842   0.0744   no
+  Qwen_Qwen2.5-3B-Instruct_transformers  |    73.13%    78.11%    +4.98pp |   4.358   4.395  +0.037 |    6.62    8.58   +1.95 |   59.2%   59.7%   +0.5pp |   2.2500   0.1336   no
+  Qwen_Qwen2.5-7B-Instruct_transformers  |    88.56%    81.59%    -6.97pp |   1.533   2.628  +1.095 |    2.24    3.36   +1.12 |   82.1%   76.6%   -5.5pp |   8.4500   0.0037  YES
+  microsoft_Phi-3-mini-4k-instruct_transformers |    77.11%    76.62%    -0.50pp |   7.795   2.418  -5.377 |   13.54    7.67   -5.87 |   52.2%   50.2%   -2.0pp |   0.0000   1.0000   no
+  microsoft_Phi-3.5-mini-instruct_transformers |    80.50%    66.17%   -14.33pp |   5.262  16.743 +11.481 |   10.82   27.13  +16.31 |   64.7%   18.4%  -46.3pp |  17.3571   0.0000  YES
+  microsoft_Phi-4-mini-instruct_transformers |    82.59%    82.59%    +0.00pp |   2.572   2.371  -0.200 |    5.73    5.30   -0.43 |   77.1%   74.1%   -3.0pp |   0.1667   0.6831   no
 
   Comp 2: Baseline (raw) vs Agent+PriDe  — Does agent structure + PriDe beat single-call baseline?
 --------------------------------------------------------------------------------------------------------------
@@ -454,6 +712,12 @@ DATASET: sociology
   mistral_latest                         |    76.12%    71.35%    -4.77pp |   6.518   4.129  -2.390 |    7.53    5.81   -1.72 |   61.7%   57.9%   -3.8pp |   3.0476   0.0809   no
   mistral-nemo_latest                    |    78.11%    73.68%    -4.43pp |   3.564   3.009  -0.555 |    4.11    2.21   -1.90 |   60.2%   53.2%   -7.0pp |   4.5000   0.0339  YES
   mistral-small3.2_24b                   |    88.06%    87.13%    -0.93pp |   0.796   2.034  +1.237 |    2.68    4.02   +1.34 |   83.1%   77.8%   -5.3pp |   0.4444   0.5050   no
+  Qwen_Qwen2.5-1.5B-Instruct_transformers |    72.64%    66.67%    -5.97pp |   9.377  11.325  +1.948 |   14.41   13.98   -0.43 |   47.8%   46.8%   -1.0pp |   3.0303   0.0817   no
+  Qwen_Qwen2.5-3B-Instruct_transformers  |    73.13%    77.78%    +4.64pp |   4.358   1.956  -2.402 |    6.62    4.27   -2.36 |   59.2%   66.1%   +6.9pp |   0.3462   0.5563   no
+  Qwen_Qwen2.5-7B-Instruct_transformers  |    88.56%    84.21%    -4.35pp |   1.533   2.366  +0.833 |    2.24    3.34   +1.11 |   82.1%   76.6%   -5.5pp |   8.4706   0.0036  YES
+  microsoft_Phi-3-mini-4k-instruct_transformers |    77.11%    79.53%    +2.42pp |   7.795   5.141  -2.654 |   13.54   11.22   -2.32 |   52.2%   51.5%   -0.8pp |   0.0714   0.7893   no
+  microsoft_Phi-3.5-mini-instruct_transformers |    80.50%    78.95%    -1.55pp |   5.262   2.568  -2.695 |   10.82    6.57   -4.25 |   64.7%   63.2%   -1.5pp |   1.1250   0.2888   no
+  microsoft_Phi-4-mini-instruct_transformers |    82.59%    83.04%    +0.45pp |   2.572   2.126  -0.445 |    5.73    5.04   -0.69 |   77.1%   73.7%   -3.4pp |   0.1667   0.6831   no
 
   Comp 3: Agent (raw)    vs Agent+PriDe  — Does PriDe debiasing add value on top of agents?
 --------------------------------------------------------------------------------------------------------------
@@ -468,6 +732,12 @@ DATASET: sociology
   mistral_latest                         |    72.64%    71.35%    -1.29pp |   6.662   4.129  -2.533 |    9.09    5.81   -3.28 |   54.2%   57.9%   +3.7pp |   0.0000   1.0000   no
   mistral-nemo_latest                    |    65.67%    73.68%    +8.01pp |   7.789   3.009  -4.781 |    8.94    2.21   -6.74 |   46.3%   53.2%   +6.9pp |   6.6667   0.0098  YES
   mistral-small3.2_24b                   |    78.61%    87.13%    +8.53pp |   7.651   2.034  -5.617 |   13.60    4.02   -9.58 |   57.2%   77.8%  +20.6pp |   8.4706   0.0036  YES
+  Qwen_Qwen2.5-1.5B-Instruct_transformers |    66.67%    66.67%    +0.00pp |  11.730  11.325  -0.405 |   14.61   13.98   -0.63 |   46.8%   46.8%   +0.0pp |   0.0000   1.0000   no
+  Qwen_Qwen2.5-3B-Instruct_transformers  |    78.11%    77.78%    -0.33pp |   4.395   1.956  -2.439 |    8.58    4.27   -4.31 |   59.7%   66.1%   +6.4pp |   2.2857   0.1306   no
+  Qwen_Qwen2.5-7B-Instruct_transformers  |    81.59%    84.21%    +2.62pp |   2.628   2.366  -0.262 |    3.36    3.34   -0.01 |   76.6%   76.6%   -0.0pp |   0.5000   0.4795   no
+  microsoft_Phi-3-mini-4k-instruct_transformers |    76.62%    79.53%    +2.92pp |   2.418   5.141  +2.723 |    7.67   11.22   +3.55 |   50.2%   51.5%   +1.2pp |   1.7778   0.1824   no
+  microsoft_Phi-3.5-mini-instruct_transformers |    66.17%    78.95%   +12.78pp |  16.743   2.568 -14.175 |   27.13    6.57  -20.57 |   18.4%   63.2%  +44.7pp |  11.2812   0.0008  YES
+  microsoft_Phi-4-mini-instruct_transformers |    82.59%    83.04%    +0.45pp |   2.371   2.126  -0.245 |    5.30    5.04   -0.26 |   74.1%   73.7%   -0.4pp |   0.0000   1.0000   no
 
   DETAILED STATISTICS PER MODEL
 --------------------------------------------------------------------------------------------------------------
@@ -633,3 +903,111 @@ DATASET: sociology
       McNemar: stat=8.4706  p=0.0036  **
         Contingency: both=134  A_only=2  B_only=15  neither=20
       Dist shift: chi2=59.4097  p=0.0000  ***  (sig=True)
+
+  [Qwen_Qwen2.5-1.5B-Instruct_transformers]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=70.27%  bias=9.377  rstd=14.41%  cons=47.8%  chi2=113.104(p=0.0000)  chi2_acc=79.897(p=0.0000)
+      Agent (raw)           : acc=66.67%  bias=11.730  rstd=14.61%  cons=46.8%  chi2=176.985(p=0.0000)  chi2_acc=77.239(p=0.0000)
+      Agent + PriDe         : acc=67.25%  bias=11.325  rstd=13.98%  cons=46.8%  chi2=140.363(p=0.0000)  chi2_acc=60.700(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=3.1842  p=0.0744  ns
+        Contingency: both=121  A_only=25  B_only=13  neither=42
+      Dist shift: chi2=40.6184  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=3.0303  p=0.0817  ns
+        Contingency: both=103  A_only=22  B_only=11  neither=35
+      Dist shift: chi2=25.6537  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=114  A_only=0  B_only=0  neither=57
+      Dist shift: chi2=1.8020  p=0.6145  ns  (sig=False)
+
+  [Qwen_Qwen2.5-3B-Instruct_transformers]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=72.26%  bias=4.358  rstd=6.62%  cons=59.2%  chi2=24.428(p=0.0000)  chi2_acc=17.593(p=0.0005)
+      Agent (raw)           : acc=75.50%  bias=4.395  rstd=8.58%  cons=59.7%  chi2=24.846(p=0.0000)  chi2_acc=31.971(p=0.0000)
+      Agent + PriDe         : acc=76.90%  bias=1.956  rstd=4.27%  cons=66.1%  chi2=4.187(p=0.2420)  chi2_acc=7.012(p=0.0715)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=2.2500  p=0.1336  ns
+        Contingency: both=134  A_only=13  B_only=23  neither=31
+      Dist shift: chi2=10.1859  p=0.0170  *  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.3462  p=0.5563  ns
+        Contingency: both=118  A_only=11  B_only=15  neither=27
+      Dist shift: chi2=13.5787  p=0.0035  **  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=2.2857  p=0.1306  ns
+        Contingency: both=132  A_only=6  B_only=1  neither=32
+      Dist shift: chi2=8.5936  p=0.0352  *  (sig=True)
+
+  [Qwen_Qwen2.5-7B-Instruct_transformers]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=85.45%  bias=1.533  rstd=2.24%  cons=82.1%  chi2=3.025(p=0.3878)  chi2_acc=3.231(p=0.3574)
+      Agent (raw)           : acc=81.59%  bias=2.628  rstd=3.36%  cons=76.6%  chi2=8.886(p=0.0309)  chi2_acc=6.029(p=0.1102)
+      Agent + PriDe         : acc=83.77%  bias=2.366  rstd=3.34%  cons=76.6%  chi2=6.129(p=0.1055)  chi2_acc=5.624(p=0.1314)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=8.4500  p=0.0037  **
+        Contingency: both=161  A_only=17  B_only=3  neither=20
+      Dist shift: chi2=13.9684  p=0.0029  **  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=8.4706  p=0.0036  **
+        Contingency: both=142  A_only=15  B_only=2  neither=12
+      Dist shift: chi2=4.7049  p=0.1947  ns  (sig=False)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.5000  p=0.4795  ns
+        Contingency: both=142  A_only=0  B_only=2  neither=27
+      Dist shift: chi2=17.6900  p=0.0005  ***  (sig=True)
+
+  [microsoft_Phi-3-mini-4k-instruct_transformers]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=74.84%  bias=7.795  rstd=13.54%  cons=52.2%  chi2=78.071(p=0.0000)  chi2_acc=78.305(p=0.0000)
+      Agent (raw)           : acc=72.64%  bias=2.418  rstd=7.67%  cons=50.2%  chi2=7.522(p=0.0570)  chi2_acc=23.780(p=0.0000)
+      Agent + PriDe         : acc=75.15%  bias=5.141  rstd=11.22%  cons=51.5%  chi2=28.924(p=0.0000)  chi2_acc=46.122(p=0.0000)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=143  A_only=12  B_only=11  neither=35
+      Dist shift: chi2=43.4095  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.0714  p=0.7893  ns
+        Contingency: both=128  A_only=6  B_only=8  neither=29
+      Dist shift: chi2=30.7600  p=0.0000  ***  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=1.7778  p=0.1824  ns
+        Contingency: both=129  A_only=2  B_only=7  neither=33
+      Dist shift: chi2=12.8623  p=0.0049  **  (sig=True)
+
+  [microsoft_Phi-3.5-mini-instruct_transformers]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=80.67%  bias=5.262  rstd=10.82%  cons=64.7%  chi2=35.536(p=0.0000)  chi2_acc=60.114(p=0.0000)
+      Agent (raw)           : acc=61.44%  bias=16.743  rstd=27.13%  cons=18.4%  chi2=360.627(p=0.0000)  chi2_acc=249.884(p=0.0000)
+      Agent + PriDe         : acc=79.09%  bias=2.568  rstd=6.57%  cons=63.2%  chi2=7.216(p=0.0653)  chi2_acc=17.851(p=0.0005)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=17.3571  p=0.0000  ***
+        Contingency: both=126  A_only=35  B_only=7  neither=32
+      Dist shift: chi2=376.0046  p=0.0000  ***  (sig=True)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=1.1250  p=0.2888  ns
+        Contingency: both=133  A_only=6  B_only=2  neither=29
+      Dist shift: chi2=13.5428  p=0.0036  **  (sig=True)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=11.2812  p=0.0008  ***
+        Contingency: both=109  A_only=6  B_only=26  neither=30
+      Dist shift: chi2=419.0197  p=0.0000  ***  (sig=True)
+
+  [microsoft_Phi-4-mini-instruct_transformers]
+    Method metrics (all permutations):
+      Baseline (raw)        : acc=83.58%  bias=2.572  rstd=5.73%  cons=77.1%  chi2=8.507(p=0.0366)  chi2_acc=19.215(p=0.0002)
+      Agent (raw)           : acc=84.08%  bias=2.371  rstd=5.30%  cons=74.1%  chi2=7.234(p=0.0648)  chi2_acc=16.874(p=0.0008)
+      Agent + PriDe         : acc=84.06%  bias=2.126  rstd=5.04%  cons=73.7%  chi2=4.947(p=0.1757)  chi2_acc=12.954(p=0.0047)
+    Comp 1: Baseline (raw) vs Agent (raw):
+      McNemar: stat=0.1667  p=0.6831  ns
+        Contingency: both=163  A_only=3  B_only=3  neither=32
+      Dist shift: chi2=0.2299  p=0.9726  ns  (sig=False)
+    Comp 2: Baseline (raw) vs Agent+PriDe:
+      McNemar: stat=0.1667  p=0.6831  ns
+        Contingency: both=139  A_only=3  B_only=3  neither=26
+      Dist shift: chi2=0.3189  p=0.9564  ns  (sig=False)
+    Comp 3: Agent (raw)    vs Agent+PriDe:
+      McNemar: stat=0.0000  p=1.0000  ns
+        Contingency: both=141  A_only=0  B_only=1  neither=29
+      Dist shift: chi2=0.1581  p=0.9841  ns  (sig=False)

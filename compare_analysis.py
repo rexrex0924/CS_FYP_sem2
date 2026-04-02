@@ -111,7 +111,9 @@ COMP_B = {"comp1": "agent_raw",    "comp2": "agent_pride",  "comp3": "agent_prid
 MODEL_ORDER = [
     "gemma3_1b", "gemma3_4b", "gemma3_12b",
     "llama3.2_latest", "llama3_8b-instruct-q6_K", "llama3_8b-instruct-q8_0",
-    "mistral_latest", "mistral-nemo_latest", "mistral-small3.2_24b",
+    "mistral_latest", "mistral-nemo_latest", "mistral-small3.2_24b", 
+    "Qwen_Qwen2.5-1.5B-Instruct_transformers", "Qwen_Qwen2.5-3B-Instruct_transformers", "Qwen_Qwen2.5-7B-Instruct_transformers",
+    "microsoft_Phi-3-mini-4k-instruct_transformers", "microsoft_Phi-3.5-mini-instruct_transformers", "microsoft_Phi-4-mini-instruct_transformers"
 ]
 
 
@@ -406,7 +408,7 @@ def _load(path):
 
 def _parse_label(path: Path):
     name = path.stem.replace("_baseline", "").replace("_pride", "")
-    for prefix in ["ministral", "mistral", "gemma", "llama", "microsoft-Phi", "Qwen"]:
+    for prefix in ["ministral", "mistral", "gemma", "llama", "microsoft_Phi", "Qwen"]:
         if prefix in name:
             parts = name.split(prefix, 1)
             return parts[0].strip("-"), prefix + parts[1]
