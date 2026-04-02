@@ -1,0 +1,7 @@
+question_id,permutation_idx,prob_A,prob_B,prob_C,prob_D,predicted_answer,correct_position,correct_answer,model,temperature
+2012_q1,0,0.9333333333333333,0.0,0.0,0.06666666666666667,A,A,A,microsoft/Phi-3-mini-4k-instruct,0.7
+2012_q1,1,0.7857142857142857,0.0,0.0,0.21428571428571427,A,D,A,microsoft/Phi-3-mini-4k-instruct,0.7
+2012_q1,2,0.8,0.0,0.2,0.0,A,C,A,microsoft/Phi-3-mini-4k-instruct,0.7
+2012_q1,3,0.6666666666666666,0.3333333333333333,0.0,0.0,A,B,A,microsoft/Phi-3-mini-4k-instruct,0.7
+2012_q2,0,0.4444444444444444,0.2222222222222222,0.3333333333333333,0.0,A,C,C,microsoft/Phi-3-mini-4k-instruct,0.7
+2012_q2,1,0.4444444444444444,0.3333333333333333,0.2222222222222222,0.0,A,B,C,microsoft/Phi-3-mini-4k-instruct,0.7
