@@ -1,0 +1,42 @@
+
+================================================================================
+SELF-CORRECTION EVALUATION SUMMARY
+Dataset: college_physics
+Model:   llama3.2:latest
+Total Questions: 102
+================================================================================
+
+[1] ACCURACY
+--------------------------------------------------------------------------------
+Baseline (Initial): 32.35%
+After Correction:   48.04%
+Difference:         +15.69%
+
+[2] POSITIONAL BIAS SCORE (Lower is better)
+(Calculated as the Standard Deviation of choice percentages, same as PriDe)
+--------------------------------------------------------------------------------
+Baseline Bias:      17.63
+After Correction:   3.95
+Difference:         -13.67
+
+[3] CHOICE DISTRIBUTION (A, B, C, D)
+--------------------------------------------------------------------------------
+Baseline:
+  A: 14 (13.7%)
+  B: 21 (20.6%)
+  C: 56 (54.9%)
+  D: 11 (10.8%)
+
+After Correction:
+  A: 29 (28.4%)
+  B: 22 (21.6%)
+  C: 21 (20.6%)
+  D: 30 (29.4%)
+
+[4] DYNAMICS
+--------------------------------------------------------------------------------
+Total Answers Changed: 68 (66.7%)
+  - Improved (Wrong -> Right): 32
+  - Worsened (Right -> Wrong): 16
+  - Neutral (Wrong -> Wrong):  20
+================================================================================

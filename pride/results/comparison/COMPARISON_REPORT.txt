@@ -1,1013 +1,1458 @@
-==============================================================================================================
-COMPARATIVE ANALYSIS REPORT
-Baseline vs Agent  |  Baseline vs Agent+PriDe  |  Agent vs Agent+PriDe
-==============================================================================================================
+========================================================================================
+COMPARATIVE ANALYSIS REPORT  (up to 10 methods)
+NOTE: Agent1/2/3 raw = Phase-1 answers (temp>0). All others = temp=0.
+      Intra-agent comparisons (A1 vs A2 vs A3) are fair.
+      Run patch_agent_perm_answers.py to add Agent1/2/3+PriDe.
+========================================================================================
 
-==============================================================================================================
 DATASET: 2012-2020_ICT_DSE
-==============================================================================================================
 
-  Comp 1: Baseline (raw) vs Agent (raw)  — Does multi-agent debate improve raw accuracy?
---------------------------------------------------------------------------------------------------------------
-  Model                                  |  NatAcc_A  NatAcc_B  DeltaAcc |  Bias_A  Bias_B   DBias |  RStd_A  RStd_B   DRStd |  Cons_A  Cons_B   DCons |  McNemar        p  Sig
---------------------------------------------------------------------------------------------------------------
-  gemma3_1b                              |    36.53%    30.63%    -5.90pp |  14.511  28.765 +14.255 |   16.28   31.22  +14.94 |   10.0%    4.8%   -5.2pp |   3.6290   0.0568   no
-  gemma3_4b                              |    54.61%    50.18%    -4.43pp |   7.715  11.451  +3.736 |   14.17   19.26   +5.09 |   38.0%   21.0%  -17.0pp |   4.0333   0.0446  YES
-  gemma3_12b                             |    79.34%    75.65%    -3.69pp |   0.882   4.101  +3.219 |    1.93    6.19   +4.26 |   75.3%   64.9%  -10.3pp |   3.3750   0.0662   no
-  llama3.2_latest                        |    52.59%    32.84%   -19.75pp |  17.228  35.237 +18.009 |   19.26   36.12  +16.85 |   29.5%    6.3%  -23.2pp |  42.5606   0.0000  YES
-  llama3_8b-instruct-q6_K                |    72.69%    32.47%   -40.22pp |   1.988  19.190 +17.202 |    3.86   28.41  +24.55 |   64.6%    0.0%  -64.6pp |  76.2353   0.0000  YES
-  llama3_8b-instruct-q8_0                |    73.43%    32.47%   -40.96pp |   1.830  16.756 +14.926 |    3.01   27.06  +24.05 |   63.1%    0.0%  -63.1pp |  80.1325   0.0000  YES
-  mistral_latest                         |    62.36%    59.78%    -2.58pp |   7.645   9.547  +1.902 |    8.73   12.21   +3.48 |   40.6%   33.9%   -6.6pp |   0.7059   0.4008   no
-  mistral-nemo_latest                    |    66.04%    61.62%    -4.42pp |   3.453   7.216  +3.763 |    3.59   10.27   +6.68 |   46.3%   36.9%   -9.4pp |   1.6393   0.2004   no
-  mistral-small3.2_24b                   |    84.13%    82.29%    -1.85pp |   2.211   3.894  +1.683 |    3.52    7.14   +3.61 |   79.0%   73.1%   -5.9pp |   0.7619   0.3827   no
-  Qwen_Qwen2.5-1.5B-Instruct_transformers |    56.83%    55.72%    -1.11pp |  18.681  17.894  -0.787 |   21.62   19.21   -2.41 |   28.0%   28.0%   +0.0pp |   0.1212   0.7277   no
-  Qwen_Qwen2.5-3B-Instruct_transformers  |    62.73%    60.89%    -1.85pp |   5.325   6.517  +1.191 |    6.48    8.69   +2.21 |   52.8%   47.6%   -5.2pp |   0.3404   0.5596   no
-  Qwen_Qwen2.5-7B-Instruct_transformers  |    81.55%    77.12%    -4.43pp |   2.897   2.814  -0.083 |    3.43    4.44   +1.01 |   75.6%   67.5%   -8.1pp |   3.5588   0.0592   no
-  microsoft_Phi-3-mini-4k-instruct_transformers |    73.58%    70.11%    -3.47pp |   6.847   8.849  +2.002 |   11.25   14.79   +3.55 |   57.6%   44.6%  -13.0pp |   0.5517   0.4576   no
-  microsoft_Phi-3.5-mini-instruct_transformers |    71.59%    61.62%    -9.97pp |   5.580   8.162  +2.582 |    8.60   14.39   +5.80 |   63.4%   42.1%  -21.4pp |  14.6667   0.0001  YES
-  microsoft_Phi-4-mini-instruct_transformers |    68.63%    71.22%    +2.58pp |   6.558   6.097  -0.461 |   10.47   10.46   -0.01 |   53.9%   54.6%   +0.7pp |   1.7143   0.1904   no
+  Model: Qwen_Qwen2.5-1.5B-Instruct_transformers
+  Q=271  Confident=145 (54%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
 
-  Comp 2: Baseline (raw) vs Agent+PriDe  — Does agent structure + PriDe beat single-call baseline?
---------------------------------------------------------------------------------------------------------------
-  Model                                  |  NatAcc_A  NatAcc_B  DeltaAcc |  Bias_A  Bias_B   DBias |  RStd_A  RStd_B   DRStd |  Cons_A  Cons_B   DCons |  McNemar        p  Sig
---------------------------------------------------------------------------------------------------------------
-  gemma3_1b                              |    36.53%    30.30%    -6.23pp |  14.511  13.063  -1.448 |   16.28   15.08   -1.20 |   10.0%    9.1%   -0.9pp |   2.6304   0.1048   no
-  gemma3_4b                              |    54.61%    52.81%    -1.80pp |   7.715  10.640  +2.925 |   14.17   18.64   +4.47 |   38.0%   24.7%  -13.3pp |   2.2273   0.1356   no
-  gemma3_12b                             |    79.34%    75.76%    -3.58pp |   0.882   2.804  +1.922 |    1.93    4.80   +2.88 |   75.3%   68.0%   -7.3pp |   1.3889   0.2386   no
-  llama3.2_latest                        |    52.59%    58.44%    +5.85pp |  17.228   5.574 -11.654 |   19.26    9.22  -10.05 |   29.5%   39.0%   +9.4pp |   3.0638   0.0801   no
-  llama3_8b-instruct-q6_K                |    72.69%    54.11%   -18.58pp |   1.988  10.431  +8.443 |    3.86   19.32  +15.46 |   64.6%   16.5%  -48.1pp |  28.1250   0.0000  YES
-  llama3_8b-instruct-q8_0                |    73.43%    56.71%   -16.72pp |   1.830   9.632  +7.802 |    3.01   16.28  +13.27 |   63.1%   21.6%  -41.5pp |  22.8167   0.0000  YES
-  mistral_latest                         |    62.36%    61.04%    -1.32pp |   7.645   7.601  -0.044 |    8.73    9.28   +0.55 |   40.6%   39.8%   -0.8pp |   0.2647   0.6069   no
-  mistral-nemo_latest                    |    66.04%    65.80%    -0.24pp |   3.453   3.089  -0.364 |    3.59    3.98   +0.39 |   46.3%   44.6%   -1.7pp |   0.2143   0.6434   no
-  mistral-small3.2_24b                   |    84.13%    86.58%    +2.45pp |   2.211   2.834  +0.622 |    3.52    5.97   +2.45 |   79.0%   77.1%   -1.9pp |   0.7500   0.3865   no
-  Qwen_Qwen2.5-1.5B-Instruct_transformers |    56.83%    56.71%    -0.12pp |  18.681  18.089  -0.593 |   21.62   19.05   -2.56 |   28.0%   29.0%   +1.0pp |   0.0000   1.0000   no
-  Qwen_Qwen2.5-3B-Instruct_transformers  |    62.73%    65.37%    +2.64pp |   5.325   4.740  -0.585 |    6.48    6.17   -0.31 |   52.8%   50.6%   -2.1pp |   0.0000   1.0000   no
-  Qwen_Qwen2.5-7B-Instruct_transformers  |    81.55%    79.65%    -1.90pp |   2.897   3.445  +0.548 |    3.43    5.49   +2.06 |   75.6%   68.4%   -7.2pp |   1.5652   0.2109   no
-  microsoft_Phi-3-mini-4k-instruct_transformers |    73.58%    72.73%    -0.86pp |   6.847   7.261  +0.414 |   11.25   11.48   +0.23 |   57.6%   48.1%   -9.6pp |   0.0000   1.0000   no
-  microsoft_Phi-3.5-mini-instruct_transformers |    71.59%    68.40%    -3.19pp |   5.580   4.918  -0.662 |    8.60    8.00   -0.60 |   63.4%   53.7%   -9.8pp |   0.5000   0.4795   no
-  microsoft_Phi-4-mini-instruct_transformers |    68.63%    71.86%    +3.23pp |   6.558   5.427  -1.131 |   10.47    9.39   -1.07 |   53.9%   56.7%   +2.8pp |   0.9412   0.3320   no
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            56.8% 18.68 21.62 28.0%605.29 0.0000  91.2% 47.4% 32.8% 55.6%
+  Baseline+PriDe      57.1% 19.06 22.23 28.1%537.26 0.0000  91.4% 50.8% 29.8% 56.4%
+  Agent1/Analyst*     54.2% 12.85 17.90100.0% 71.57 0.0000  82.4% 39.5% 57.8% 38.1%
+  Agent2/Critic*      49.4% 16.05 19.18100.0%111.69 0.0000  76.5% 48.7% 48.4% 22.2%
+  Agent3/Intuitive*   57.6% 12.12 17.97100.0% 63.69 0.0000  82.4% 39.5% 42.2% 68.3%
+  AgentFull           55.7% 17.89 19.21 28.0%555.36 0.0000  86.8% 53.9% 39.1% 41.3%
+  AgentFull+PriDe     56.7% 18.09 19.05 29.0%483.73 0.0000  86.2% 54.1% 38.6% 47.3%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
 
-  Comp 3: Agent (raw)    vs Agent+PriDe  — Does PriDe debiasing add value on top of agents?
---------------------------------------------------------------------------------------------------------------
-  Model                                  |  NatAcc_A  NatAcc_B  DeltaAcc |  Bias_A  Bias_B   DBias |  RStd_A  RStd_B   DRStd |  Cons_A  Cons_B   DCons |  McNemar        p  Sig
---------------------------------------------------------------------------------------------------------------
-  gemma3_1b                              |    30.63%    30.30%    -0.32pp |  28.765  13.063 -15.702 |   31.22   15.08  -16.13 |    4.8%    9.1%   +4.3pp |   0.0278   0.8676   no
-  gemma3_4b                              |    50.18%    52.81%    +2.63pp |  11.451  10.640  -0.812 |   19.26   18.64   -0.62 |   21.0%   24.7%   +3.6pp |   0.0000   1.0000   no
-  gemma3_12b                             |    75.65%    75.76%    +0.11pp |   4.101   2.804  -1.297 |    6.19    4.80   -1.38 |   64.9%   68.0%   +3.0pp |   0.5000   0.4795   no
-  llama3.2_latest                        |    32.84%    58.44%   +25.60pp |  35.237   5.574 -29.663 |   36.12    9.22  -26.90 |    6.3%   39.0%  +32.7pp |  34.3059   0.0000  YES
-  llama3_8b-instruct-q6_K                |    32.47%    54.11%   +21.64pp |  19.190  10.431  -8.759 |   28.41   19.32   -9.09 |    0.0%   16.5%  +16.5pp |  35.8644   0.0000  YES
-  llama3_8b-instruct-q8_0                |    32.47%    56.71%   +24.24pp |  16.756   9.632  -7.124 |   27.06   16.28  -10.78 |    0.0%   21.6%  +21.6pp |  31.3548   0.0000  YES
-  mistral_latest                         |    59.78%    61.04%    +1.26pp |   9.547   7.601  -1.946 |   12.21    9.28   -2.93 |   33.9%   39.8%   +5.9pp |   0.0000   1.0000   no
-  mistral-nemo_latest                    |    61.62%    65.80%    +4.18pp |   7.216   3.089  -4.127 |   10.27    3.98   -6.29 |   36.9%   44.6%   +7.7pp |   2.8929   0.0890   no
-  mistral-small3.2_24b                   |    82.29%    86.58%    +4.29pp |   3.894   2.834  -1.060 |    7.14    5.97   -1.17 |   73.1%   77.1%   +4.0pp |   4.0000   0.0455  YES
-  Qwen_Qwen2.5-1.5B-Instruct_transformers |    55.72%    56.71%    +0.99pp |  17.894  18.089  +0.194 |   19.21   19.05   -0.15 |   28.0%   29.0%   +1.0pp |   0.0000   1.0000   no
-  Qwen_Qwen2.5-3B-Instruct_transformers  |    60.89%    65.37%    +4.48pp |   6.517   4.740  -1.776 |    8.69    6.17   -2.52 |   47.6%   50.6%   +3.0pp |   4.1667   0.0412  YES
-  Qwen_Qwen2.5-7B-Instruct_transformers  |    77.12%    79.65%    +2.53pp |   2.814   3.445  +0.631 |    4.44    5.49   +1.05 |   67.5%   68.4%   +0.9pp |   0.7500   0.3865   no
-  microsoft_Phi-3-mini-4k-instruct_transformers |    70.11%    72.73%    +2.62pp |   8.849   7.261  -1.588 |   14.79   11.48   -3.31 |   44.6%   48.1%   +3.4pp |   2.2857   0.1306   no
-  microsoft_Phi-3.5-mini-instruct_transformers |    61.62%    68.40%    +6.77pp |   8.162   4.918  -3.244 |   14.39    8.00   -6.40 |   42.1%   53.7%  +11.6pp |  11.2500   0.0008  YES
-  microsoft_Phi-4-mini-instruct_transformers |    71.22%    71.86%    +0.64pp |   6.097   5.427  -0.670 |   10.46    9.39   -1.07 |   54.6%   56.7%   +2.1pp |   0.0000   1.0000   no
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -1.11pp    -0.787     -2.41     +0.00pp    0.7277    ns      0.0000
+  Baseline vs AgentFull+PriDe          -0.12pp    -0.593     -2.56     +0.96pp    1.0000    ns      0.0000
+  AgentFull vs +PriDe                  +0.99pp    +0.194     -0.15     +0.96pp    1.0000    ns      0.3487
+  Baseline vs +PriDe                   +0.32pp    +0.382     +0.61     +0.09pp    1.0000    ns      0.9612
+  Baseline vs Agent1                   -2.58pp    -5.834     -3.72    +71.96pp    0.4098    ns      0.0000
+  Baseline vs Agent2                   -7.38pp    -2.632     -2.43    +71.96pp    0.0193     *      0.0000
+  Baseline vs Agent3                   +0.74pp    -6.562     -3.65    +71.96pp    0.8638    ns      0.0000
+  Agent1 vs Agent2                     -4.80pp    +3.202     +1.28     +0.00pp    0.1244    ns      0.0000
+  Agent2 vs Agent3                     +8.12pp    -3.930     -1.22     +0.00pp    0.0174     *      0.0000
+  Agent1 vs Agent3                     +3.32pp    -0.728     +0.07     +0.00pp    0.2626    ns      0.0000
 
-  DETAILED STATISTICS PER MODEL
---------------------------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------
 
-  [gemma3_1b]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=34.50%  bias=14.511  rstd=16.28%  cons=10.0%  chi2=365.203(p=0.0000)  chi2_acc=127.154(p=0.0000)
-      Agent (raw)           : acc=32.38%  bias=28.765  rstd=31.22%  cons=4.8%  chi2=1435.129(p=0.0000)  chi2_acc=482.481(p=0.0000)
-      Agent + PriDe         : acc=35.06%  bias=13.063  rstd=15.08%  cons=9.1%  chi2=252.286(p=0.0000)  chi2_acc=92.324(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=3.6290  p=0.0568  ns
-        Contingency: both=60  A_only=39  B_only=23  neither=149
-      Dist shift: chi2=507.9139  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=2.6304  p=0.1048  ns
-        Contingency: both=53  A_only=29  B_only=17  neither=132
-      Dist shift: chi2=109.2617  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.0278  p=0.8676  ns
-        Contingency: both=52  A_only=18  B_only=18  neither=143
-      Dist shift: chi2=339.0490  p=0.0000  ***  (sig=True)
+  Model: Qwen_Qwen2.5-3B-Instruct_transformers
+  Q=271  Confident=139 (51%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
 
-  [gemma3_4b]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=56.27%  bias=7.715  rstd=14.17%  cons=38.0%  chi2=103.232(p=0.0000)  chi2_acc=88.493(p=0.0000)
-      Agent (raw)           : acc=51.94%  bias=11.451  rstd=19.26%  cons=21.0%  chi2=227.432(p=0.0000)  chi2_acc=161.168(p=0.0000)
-      Agent + PriDe         : acc=54.33%  bias=10.640  rstd=18.64%  cons=24.7%  chi2=167.359(p=0.0000)  chi2_acc=129.438(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=4.0333  p=0.0446  *
-        Contingency: both=127  A_only=21  B_only=9  neither=114
-      Dist shift: chi2=84.4792  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=2.2273  p=0.1356  ns
-        Contingency: both=115  A_only=15  B_only=7  neither=94
-      Dist shift: chi2=47.8020  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=120  A_only=1  B_only=2  neither=108
-      Dist shift: chi2=3.1022  p=0.3761  ns  (sig=False)
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            62.7%  5.33  6.48 52.8% 49.19 0.0000  57.4% 43.4% 65.6% 88.9%
+  Baseline+PriDe      64.9%  5.23  6.54 55.0% 40.42 0.0000  58.6% 47.5% 64.9% 90.9%
+  Agent1/Analyst*     60.9% 12.38 18.63100.0% 66.46 0.0000  38.2% 51.3% 70.3% 87.3%
+  Agent2/Critic*      44.3% 17.28 26.40100.0%129.52 0.0000   7.4% 35.5% 76.6% 61.9%
+  Agent3/Intuitive*   62.4% 13.83 19.11100.0% 82.90 0.0000  51.5% 43.4% 65.6% 93.7%
+  AgentFull           60.9%  6.52  8.69 47.6% 73.65 0.0000  39.7% 48.7% 73.4% 85.7%
+  AgentFull+PriDe     65.4%  4.74  6.17 50.6% 33.22 0.0000  46.6% 57.4% 71.9% 87.3%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
 
-  [gemma3_12b]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=79.52%  bias=0.882  rstd=1.93%  cons=75.3%  chi2=1.351(p=0.7172)  chi2_acc=2.470(p=0.4808)
-      Agent (raw)           : acc=76.20%  bias=4.101  rstd=6.19%  cons=64.9%  chi2=29.173(p=0.0000)  chi2_acc=22.890(p=0.0000)
-      Agent + PriDe         : acc=76.95%  bias=2.804  rstd=4.80%  cons=68.0%  chi2=11.628(p=0.0088)  chi2_acc=12.026(p=0.0073)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=3.3750  p=0.0662  ns
-        Contingency: both=198  A_only=17  B_only=7  neither=49
-      Dist shift: chi2=28.5953  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=1.3889  p=0.2386  ns
-        Contingency: both=169  A_only=12  B_only=6  neither=44
-      Dist shift: chi2=13.3587  p=0.0039  **  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.5000  p=0.4795  ns
-        Contingency: both=174  A_only=1  B_only=1  neither=55
-      Dist shift: chi2=2.9730  p=0.3958  ns  (sig=False)
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -1.85pp    +1.191     +2.21     -5.17pp    0.5596    ns      0.0000
+  Baseline vs AgentFull+PriDe          +2.64pp    -0.585     -0.31     -2.12pp    1.0000    ns      0.0000
+  AgentFull vs +PriDe                  +4.48pp    -1.776     -2.52     +3.05pp    0.0412     *      0.0651
+  Baseline vs +PriDe                   +2.20pp    -0.097     +0.06     +2.21pp    1.0000    ns      0.9920
+  Baseline vs Agent1                   -1.85pp    +7.055    +12.14    +47.23pp    0.5677    ns      0.0000
+  Baseline vs Agent2                  -18.45pp   +11.958    +19.92    +47.23pp    0.0000   ***      0.0000
+  Baseline vs Agent3                   -0.37pp    +8.502    +12.63    +47.23pp    1.0000    ns      0.0000
+  Agent1 vs Agent2                    -16.61pp    +4.902     +7.78     +0.00pp    0.0000   ***      0.0000
+  Agent2 vs Agent3                    +18.08pp    -3.455     -7.29     +0.00pp    0.0000   ***      0.0000
+  Agent1 vs Agent3                     +1.48pp    +1.447     +0.49     +0.00pp    0.6434    ns      0.0045
 
-  [llama3.2_latest]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=51.29%  bias=17.228  rstd=19.26%  cons=29.5%  chi2=513.845(p=0.0000)  chi2_acc=160.198(p=0.0000)
-      Agent (raw)           : acc=33.67%  bias=35.237  rstd=36.12%  cons=6.3%  chi2=2153.542(p=0.0000)  chi2_acc=633.110(p=0.0000)
-      Agent + PriDe         : acc=56.49%  bias=5.574  rstd=9.22%  cons=39.0%  chi2=45.939(p=0.0000)  chi2_acc=31.933(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=42.5606  p=0.0000  ***
-        Contingency: both=82  A_only=60  B_only=6  neither=122
-      Dist shift: chi2=1016.2402  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=3.0638  p=0.0801  ns
-        Contingency: both=104  A_only=17  B_only=30  neither=79
-      Dist shift: chi2=217.6688  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=34.3059  p=0.0000  ***
-        Contingency: both=65  A_only=15  B_only=70  neither=81
-      Dist shift: chi2=1340.2119  p=0.0000  ***  (sig=True)
+  ----------------------------------------------------------------------------------------
 
-  [llama3_8b-instruct-q6_K]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=70.11%  bias=1.988  rstd=3.86%  cons=64.6%  chi2=6.856(p=0.0766)  chi2_acc=7.713(p=0.0523)
-      Agent (raw)           : acc=33.39%  bias=19.190  rstd=28.41%  cons=0.0%  chi2=638.716(p=0.0000)  chi2_acc=393.396(p=0.0000)
-      Agent + PriDe         : acc=53.14%  bias=10.431  rstd=19.32%  cons=16.5%  chi2=160.857(p=0.0000)  chi2_acc=138.463(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=76.2353  p=0.0000  ***
-        Contingency: both=66  A_only=131  B_only=22  neither=52
-      Dist shift: chi2=nan  p=nan  n/a  (sig=False)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=28.1250  p=0.0000  ***
-        Contingency: both=112  A_only=59  B_only=13  neither=47
-      Dist shift: chi2=409.6560  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=35.8644  p=0.0000  ***
-        Contingency: both=72  A_only=6  B_only=53  neither=100
-      Dist shift: chi2=447.8476  p=0.0000  ***  (sig=True)
+  Model: Qwen_Qwen2.5-7B-Instruct_transformers
+  Q=271  Confident=127 (47%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
 
-  [llama3_8b-instruct-q8_0]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=70.85%  bias=1.830  rstd=3.01%  cons=63.1%  chi2=5.808(p=0.1213)  chi2_acc=4.753(p=0.1908)
-      Agent (raw)           : acc=34.23%  bias=16.756  rstd=27.06%  cons=0.0%  chi2=486.959(p=0.0000)  chi2_acc=352.665(p=0.0000)
-      Agent + PriDe         : acc=56.71%  bias=9.632  rstd=16.28%  cons=21.6%  chi2=137.152(p=0.0000)  chi2_acc=99.736(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=80.1325  p=0.0000  ***
-        Contingency: both=68  A_only=131  B_only=20  neither=52
-      Dist shift: chi2=nan  p=nan  n/a  (sig=False)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=22.8167  p=0.0000  ***
-        Contingency: both=120  A_only=49  B_only=11  neither=51
-      Dist shift: chi2=265.5689  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=31.3548  p=0.0000  ***
-        Contingency: both=57  A_only=19  B_only=74  neither=81
-      Dist shift: chi2=862.8935  p=0.0000  ***  (sig=True)
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            81.5%  2.90  3.43 75.6% 14.56 0.0022  82.4% 80.3% 79.7% 84.1%
+  Baseline+PriDe      82.7%  2.95  3.28 76.2% 12.82 0.0050  81.0% 85.2% 78.9% 85.5%
+  Agent1/Analyst*     48.3% 11.45 14.55100.0% 56.87 0.0000  61.8% 53.9% 23.4% 52.4%
+  Agent2/Critic*      79.7%  5.92  8.21100.0% 15.21 0.0016  75.0% 89.5% 84.4% 68.3%
+  Agent3/Intuitive*   81.2%  1.72  0.28100.0%  1.28 0.7338  80.9% 81.6% 81.2% 81.0%
+  AgentFull           77.1%  2.81  4.44 67.5% 13.73 0.0033  82.4% 85.5% 68.8% 69.8%
+  AgentFull+PriDe     79.7%  3.45  5.49 68.4% 17.55 0.0005  82.8% 83.6% 80.7% 70.9%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
 
-  [mistral_latest]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=57.99%  bias=7.645  rstd=8.73%  cons=40.6%  chi2=101.284(p=0.0000)  chi2_acc=33.905(p=0.0000)
-      Agent (raw)           : acc=55.72%  bias=9.547  rstd=12.21%  cons=33.9%  chi2=158.089(p=0.0000)  chi2_acc=65.477(p=0.0000)
-      Agent + PriDe         : acc=58.77%  bias=7.601  rstd=9.28%  cons=39.8%  chi2=85.420(p=0.0000)  chi2_acc=32.850(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=0.7059  p=0.4008  ns
-        Contingency: both=140  A_only=29  B_only=22  neither=80
-      Dist shift: chi2=163.3581  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.2647  p=0.6069  ns
-        Contingency: both=126  A_only=19  B_only=15  neither=71
-      Dist shift: chi2=5.9444  p=0.1143  ns  (sig=False)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=122  A_only=20  B_only=19  neither=70
-      Dist shift: chi2=241.4610  p=0.0000  ***  (sig=True)
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -4.43pp    -0.083     +1.01     -8.12pp    0.0592    ns      0.0001
+  Baseline vs AgentFull+PriDe          -1.90pp    +0.548     +2.06     -7.25pp    0.2109    ns      0.0113
+  AgentFull vs +PriDe                  +2.53pp    +0.631     +1.05     +0.87pp    0.3865    ns      0.0000
+  Baseline vs +PriDe                   +1.13pp    +0.048     -0.14     +0.54pp    1.0000    ns      0.9993
+  Baseline vs Agent1                  -33.21pp    +8.555    +11.13    +24.35pp    0.0000   ***      0.0000
+  Baseline vs Agent2                   -1.85pp    +3.026     +4.79    +24.35pp    0.5322    ns      0.0000
+  Baseline vs Agent3                   -0.37pp    -1.179     -3.15    +24.35pp    1.0000    ns      0.0196
+  Agent1 vs Agent2                    +31.37pp    -5.529     -6.34     +0.00pp    0.0000   ***      0.0000
+  Agent2 vs Agent3                     +1.48pp    -4.205     -7.94     +0.00pp    0.5708    ns      0.0060
+  Agent1 vs Agent3                    +32.84pp    -9.734    -14.28     +0.00pp    0.0000   ***      0.0000
 
-  [mistral-nemo_latest]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=66.08%  bias=3.453  rstd=3.59%  cons=46.3%  chi2=20.469(p=0.0001)  chi2_acc=6.166(p=0.1038)
-      Agent (raw)           : acc=62.64%  bias=7.216  rstd=10.27%  cons=36.9%  chi2=90.310(p=0.0000)  chi2_acc=48.860(p=0.0000)
-      Agent + PriDe         : acc=67.10%  bias=3.089  rstd=3.98%  cons=44.6%  chi2=14.104(p=0.0028)  chi2_acc=6.628(p=0.0847)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=1.6393  p=0.2004  ns
-        Contingency: both=141  A_only=36  B_only=25  neither=66
-      Dist shift: chi2=26.0425  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.2143  p=0.6434  ns
-        Contingency: both=131  A_only=23  B_only=19  neither=55
-      Dist shift: chi2=1.7521  p=0.6254  ns  (sig=False)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=2.8929  p=0.0890  ns
-        Contingency: both=133  A_only=9  B_only=19  neither=70
-      Dist shift: chi2=36.3322  p=0.0000  ***  (sig=True)
+  ----------------------------------------------------------------------------------------
 
-  [mistral-small3.2_24b]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=83.95%  bias=2.211  rstd=3.52%  cons=79.0%  chi2=8.480(p=0.0371)  chi2_acc=9.995(p=0.0186)
-      Agent (raw)           : acc=83.30%  bias=3.894  rstd=7.14%  cons=73.1%  chi2=26.295(p=0.0000)  chi2_acc=39.707(p=0.0000)
-      Agent + PriDe         : acc=85.50%  bias=2.834  rstd=5.97%  cons=77.1%  chi2=11.870(p=0.0078)  chi2_acc=26.570(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=0.7619  p=0.3827  ns
-        Contingency: both=215  A_only=13  B_only=8  neither=35
-      Dist shift: chi2=6.3330  p=0.0965  ns  (sig=False)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.7500  p=0.3865  ns
-        Contingency: both=192  A_only=4  B_only=8  neither=27
-      Dist shift: chi2=1.3493  p=0.7175  ns  (sig=False)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=4.0000  p=0.0455  *
-        Contingency: both=192  A_only=1  B_only=8  neither=30
-      Dist shift: chi2=4.6802  p=0.1968  ns  (sig=False)
+  Model: gemma3_12b
+  Q=271  Confident=214 (79%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
 
-  [Qwen_Qwen2.5-1.5B-Instruct_transformers]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=54.34%  bias=18.681  rstd=21.62%  cons=28.0%  chi2=605.292(p=0.0000)  chi2_acc=204.174(p=0.0000)
-      Agent (raw)           : acc=52.03%  bias=17.894  rstd=19.21%  cons=28.0%  chi2=555.358(p=0.0000)  chi2_acc=160.234(p=0.0000)
-      Agent + PriDe         : acc=54.22%  bias=18.089  rstd=19.05%  cons=29.0%  chi2=483.732(p=0.0000)  chi2_acc=135.140(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=0.1212  p=0.7277  ns
-        Contingency: both=136  A_only=18  B_only=15  neither=102
-      Dist shift: chi2=35.4174  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=119  A_only=13  B_only=12  neither=87
-      Dist shift: chi2=27.2097  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=129  A_only=1  B_only=2  neither=99
-      Dist shift: chi2=3.2923  p=0.3487  ns  (sig=False)
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            79.3%  0.88  1.93 75.3%  1.35 0.7172  70.6% 85.5% 75.0% 85.7%
+  Baseline+PriDe      77.9%  1.00  1.78 76.2%  1.49 0.6848  65.5% 86.9% 71.9% 87.3%
+  Agent1/Analyst*     72.2%  9.78 11.91100.0% 40.74 0.0000  59.1% 75.0% 64.5% 90.3%
+  Agent2/Critic*      74.2%  8.07 13.61100.0% 28.23 0.0000  55.9% 77.6% 70.3% 93.7%
+  Agent3/Intuitive*   78.2%  4.86  6.32100.0% 10.23 0.0167  75.0% 80.3% 70.3% 87.3%
+  AgentFull           75.6%  4.10  6.19 64.9% 29.17 0.0000  64.7% 78.9% 67.2% 92.1%
+  AgentFull+PriDe     75.8%  2.80  4.80 68.0% 11.63 0.0088  63.8% 82.3% 66.1% 90.9%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
 
-  [Qwen_Qwen2.5-3B-Instruct_transformers]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=66.51%  bias=5.325  rstd=6.48%  cons=52.8%  chi2=49.188(p=0.0000)  chi2_acc=20.456(p=0.0001)
-      Agent (raw)           : acc=63.84%  bias=6.517  rstd=8.69%  cons=47.6%  chi2=73.653(p=0.0000)  chi2_acc=35.453(p=0.0000)
-      Agent + PriDe         : acc=66.34%  bias=4.740  rstd=6.17%  cons=50.6%  chi2=33.221(p=0.0000)  chi2_acc=15.757(p=0.0013)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=0.3404  p=0.5596  ns
-        Contingency: both=144  A_only=26  B_only=21  neither=80
-      Dist shift: chi2=102.1137  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=135  A_only=15  B_only=16  neither=65
-      Dist shift: chi2=54.8036  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=4.1667  p=0.0412  *
-        Contingency: both=145  A_only=0  B_only=6  neither=80
-      Dist shift: chi2=7.2246  p=0.0651  ns  (sig=False)
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -3.69pp    +3.219     +4.26    -10.33pp    0.0662    ns      0.0000
+  Baseline vs AgentFull+PriDe          -3.58pp    +1.922     +2.88     -7.31pp    0.2386    ns      0.0039
+  AgentFull vs +PriDe                  +0.11pp    -1.297     -1.38     +3.02pp    0.4795    ns      0.3958
+  Baseline vs +PriDe                   -1.41pp    +0.121     -0.14     +0.91pp    1.0000    ns      0.9952
+  Baseline vs Agent1                   -7.16pp    +8.901     +9.98    +24.72pp    0.0003   ***      0.0000
+  Baseline vs Agent2                   -5.17pp    +7.187    +11.68    +24.72pp    0.0449     *      0.0000
+  Baseline vs Agent3                   -1.11pp    +3.974     +4.39    +24.72pp    0.6056    ns      0.0000
+  Agent1 vs Agent2                     +1.99pp    -1.714     +1.70     +0.00pp    0.5959    ns      0.4289
+  Agent2 vs Agent3                     +4.06pp    -3.213     -7.29     +0.00pp    0.1093    ns      0.0391
+  Agent1 vs Agent3                     +6.05pp    -4.927     -5.59     +0.00pp    0.0021    **      0.0132
 
-  [Qwen_Qwen2.5-7B-Instruct_transformers]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=81.27%  bias=2.897  rstd=3.43%  cons=75.6%  chi2=14.561(p=0.0022)  chi2_acc=8.358(p=0.0392)
-      Agent (raw)           : acc=78.04%  bias=2.814  rstd=4.44%  cons=67.5%  chi2=13.734(p=0.0033)  chi2_acc=12.469(p=0.0059)
-      Agent + PriDe         : acc=80.63%  bias=3.445  rstd=5.49%  cons=68.4%  chi2=17.550(p=0.0005)  chi2_acc=17.814(p=0.0005)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=3.5588  p=0.0592  ns
-        Contingency: both=198  A_only=23  B_only=11  neither=39
-      Dist shift: chi2=22.1421  p=0.0001  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=1.5652  p=0.2109  ns
-        Contingency: both=176  A_only=15  B_only=8  neither=32
-      Dist shift: chi2=11.0819  p=0.0113  *  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.7500  p=0.3865  ns
-        Contingency: both=176  A_only=4  B_only=8  neither=43
-      Dist shift: chi2=41.0398  p=0.0000  ***  (sig=True)
+  ----------------------------------------------------------------------------------------
 
-  [microsoft_Phi-3-mini-4k-instruct_transformers]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=71.73%  bias=6.847  rstd=11.25%  cons=57.6%  chi2=79.070(p=0.0000)  chi2_acc=65.934(p=0.0000)
-      Agent (raw)           : acc=67.34%  bias=8.849  rstd=14.79%  cons=44.6%  chi2=135.815(p=0.0000)  chi2_acc=107.871(p=0.0000)
-      Agent + PriDe         : acc=69.05%  bias=7.261  rstd=11.48%  cons=48.1%  chi2=77.948(p=0.0000)  chi2_acc=56.979(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=0.5517  p=0.4576  ns
-        Contingency: both=178  A_only=17  B_only=12  neither=58
-      Dist shift: chi2=12.8567  p=0.0050  **  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=160  A_only=8  B_only=7  neither=50
-      Dist shift: chi2=6.6233  p=0.0849  ns  (sig=False)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=2.2857  p=0.1306  ns
-        Contingency: both=162  A_only=1  B_only=6  neither=62
-      Dist shift: chi2=6.7210  p=0.0813  ns  (sig=False)
+  Model: gemma3_1b
+  Q=271  Confident=127 (47%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
 
-  [microsoft_Phi-3.5-mini-instruct_transformers]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=70.88%  bias=5.580  rstd=8.60%  cons=63.4%  chi2=52.859(p=0.0000)  chi2_acc=38.093(p=0.0000)
-      Agent (raw)           : acc=64.11%  bias=8.162  rstd=14.39%  cons=42.1%  chi2=115.550(p=0.0000)  chi2_acc=97.620(p=0.0000)
-      Agent + PriDe         : acc=69.37%  bias=4.918  rstd=8.00%  cons=53.7%  chi2=35.758(p=0.0000)  chi2_acc=27.806(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=14.6667  p=0.0001  ***
-        Contingency: both=161  A_only=28  B_only=5  neither=70
-      Dist shift: chi2=70.9978  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.5000  p=0.4795  ns
-        Contingency: both=151  A_only=11  B_only=7  neither=55
-      Dist shift: chi2=3.0881  p=0.3782  ns  (sig=False)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=11.2500  p=0.0008  ***
-        Contingency: both=140  A_only=2  B_only=18  neither=71
-      Dist shift: chi2=53.4921  p=0.0000  ***  (sig=True)
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            36.5% 14.51 16.28 10.0%365.20 0.0000  48.5% 15.8% 57.8% 27.0%
+  Baseline+PriDe      37.7% 14.29 16.43 10.0%301.93 0.0000  51.7% 14.8% 55.2% 29.6%
+  Agent1/Analyst*     27.8% 27.40 30.12100.0%272.72 0.0000  19.3%  4.8% 80.8% 12.5%
+  Agent2/Critic*      28.0% 35.66 39.02100.0%551.24 0.0000   8.8%  5.3% 96.9%  6.3%
+  Agent3/Intuitive*   33.6% 11.25 14.42100.0% 54.83 0.0000  42.6% 21.1% 53.1% 19.0%
+  AgentFull           30.6% 28.77 31.22  4.8%1435.13 0.0000  20.6%  6.6% 85.9% 14.3%
+  AgentFull+PriDe     30.3% 13.06 15.08  9.1%252.29 0.0000  21.4% 23.1% 55.6% 23.2%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
 
-  [microsoft_Phi-4-mini-instruct_transformers]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=66.33%  bias=6.558  rstd=10.47%  cons=53.9%  chi2=74.590(p=0.0000)  chi2_acc=53.181(p=0.0000)
-      Agent (raw)           : acc=67.90%  bias=6.097  rstd=10.46%  cons=54.6%  chi2=64.480(p=0.0000)  chi2_acc=54.410(p=0.0000)
-      Agent + PriDe         : acc=69.05%  bias=5.427  rstd=9.39%  cons=56.7%  chi2=43.541(p=0.0000)  chi2_acc=38.141(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=1.7143  p=0.1904  ns
-        Contingency: both=179  A_only=7  B_only=14  neither=71
-      Dist shift: chi2=0.4977  p=0.9194  ns  (sig=False)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.9412  p=0.3320  ns
-        Contingency: both=155  A_only=6  B_only=11  neither=59
-      Dist shift: chi2=2.8867  p=0.4094  ns  (sig=False)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=166  A_only=0  B_only=0  neither=65
-      Dist shift: chi2=1.0968  p=0.7778  ns  (sig=False)
-==============================================================================================================
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -5.90pp   +14.255    +14.94     -5.17pp    0.0568    ns      0.0000
+  Baseline vs AgentFull+PriDe          -6.23pp    -1.448     -1.20     -0.87pp    0.1048    ns      0.0000
+  AgentFull vs +PriDe                  -0.32pp   -15.702    -16.13     +4.29pp    0.8676    ns      0.0000
+  Baseline vs +PriDe                   +1.13pp    -0.220     +0.15     -0.01pp    1.0000    ns      0.9533
+  Baseline vs Agent1                   -8.78pp   +12.891    +13.84    +90.04pp    0.0012    **      0.0000
+  Baseline vs Agent2                   -8.49pp   +21.145    +22.74    +90.04pp    0.0100     *      0.0000
+  Baseline vs Agent3                   -2.95pp    -3.266     -1.86    +90.04pp    0.3496    ns      0.0000
+  Agent1 vs Agent2                     +0.29pp    +8.253     +8.90     +0.00pp    1.0000    ns      0.0000
+  Agent2 vs Agent3                     +5.54pp   -24.410    -24.60     +0.00pp    0.0966    ns      0.0000
+  Agent1 vs Agent3                     +5.83pp   -16.157    -15.70     +0.00pp    0.0171     *      0.0000
+
+  ----------------------------------------------------------------------------------------
+
+  Model: gemma3_4b
+  Q=271  Confident=182 (67%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            54.6%  7.71 14.17 38.0%103.23 0.0000  29.4% 55.3% 57.8% 77.8%
+  Baseline+PriDe      55.0%  7.81 14.18 37.7% 90.14 0.0000  28.8% 57.4% 57.1% 78.2%
+  Agent1/Analyst*     52.2% 15.64 24.03100.0%105.64 0.0000  17.6% 55.3% 53.1% 85.5%
+  Agent2/Critic*      45.0% 18.66 24.16100.0%150.98 0.0000  14.7% 43.4% 42.2% 82.5%
+  Agent3/Intuitive*   53.9% 11.38 16.82100.0% 56.19 0.0000  27.9% 59.2% 54.7% 74.6%
+  AgentFull           50.2% 11.45 19.26 21.0%227.43 0.0000  17.6% 53.9% 50.0% 81.0%
+  AgentFull+PriDe     52.8% 10.64 18.64 24.7%167.36 0.0000  20.7% 56.1% 51.9% 83.6%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -4.43pp    +3.736     +5.09    -16.97pp    0.0446     *      0.0000
+  Baseline vs AgentFull+PriDe          -1.80pp    +2.925     +4.47    -13.33pp    0.1356    ns      0.0000
+  AgentFull vs +PriDe                  +2.63pp    -0.812     -0.62     +3.64pp    1.0000    ns      0.3761
+  Baseline vs +PriDe                   +0.37pp    +0.093     +0.01     -0.35pp    1.0000    ns      0.9948
+  Baseline vs Agent1                   -2.39pp    +7.923     +9.86    +61.99pp    0.3105    ns      0.0000
+  Baseline vs Agent2                   -9.59pp   +10.945     +9.99    +61.99pp    0.0002   ***      0.0000
+  Baseline vs Agent3                   -0.74pp    +3.669     +2.64    +61.99pp    0.8312    ns      0.0000
+  Agent1 vs Agent2                     -7.20pp    +3.022     +0.13     +0.00pp    0.0021    **      0.2267
+  Agent2 vs Agent3                     +8.86pp    -7.276     -7.35     +0.00pp    0.0005   ***      0.0000
+  Agent1 vs Agent3                     +1.65pp    -4.254     -7.22     +0.00pp    0.5108    ns      0.0196
+
+  ----------------------------------------------------------------------------------------
+
+  Model: llama3.2_latest
+  Q=271  Confident=86 (32%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            52.6% 17.23 19.26 29.5%513.84 0.0000  23.5% 50.0% 85.7% 54.0%
+  Baseline+PriDe      54.1% 17.47 19.06 28.6%451.41 0.0000  24.1% 50.8% 84.5% 57.7%
+  Agent1/Analyst*     21.4% 39.99 39.20100.0%442.65 0.0000   0.0%  0.0% 92.1%  5.1%
+  Agent2/Critic*      33.0% 34.00 35.86100.0%499.45 0.0000   4.4% 18.7% 95.3% 17.5%
+  Agent3/Intuitive*   59.8%  5.16 10.05100.0% 11.52 0.0092  47.1% 64.5% 73.4% 54.0%
+  AgentFull           32.8% 35.24 36.12  6.3%2153.54 0.0000   4.4% 19.7% 95.3% 15.9%
+  AgentFull+PriDe     58.4%  5.57  9.22 39.0% 45.94 0.0000  47.4% 64.1% 70.4% 51.8%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull               -19.75pp   +18.009    +16.85    -23.25pp    0.0000   ***      0.0000
+  Baseline vs AgentFull+PriDe          +5.85pp   -11.654    -10.05     +9.44pp    0.0801    ns      0.0000
+  AgentFull vs +PriDe                 +25.60pp   -29.663    -26.90    +32.69pp    0.0000   ***      0.0000
+  Baseline vs +PriDe                   +1.52pp    +0.246     -0.20     -0.95pp    1.0000    ns      0.9785
+  Baseline vs Agent1                  -31.21pp   +22.761    +19.94    +70.48pp    0.0000   ***         nan
+  Baseline vs Agent2                  -19.63pp   +16.774    +16.60    +70.48pp    0.0000   ***      0.0000
+  Baseline vs Agent3                   +7.19pp   -12.073     -9.21    +70.48pp    0.0134     *      0.0000
+  Agent1 vs Agent2                    +11.58pp    -5.988     -3.34     +0.00pp    0.0000   ***      0.0002
+  Agent2 vs Agent3                    +26.82pp   -28.847    -25.81     +0.00pp    0.0000   ***      0.0000
+  Agent1 vs Agent3                    +38.39pp   -34.834    -29.15     +0.00pp    0.0000   ***      0.0000
+
+  ----------------------------------------------------------------------------------------
+
+  Model: llama3_8b-instruct-q6_K
+  Q=271  Confident=22 (8%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            72.7%  1.99  3.86 64.6%  6.86 0.0766  76.5% 82.9% 59.4% 69.8%
+  Baseline+PriDe      74.0%  1.90  4.00 63.2%  5.32 0.1495  75.9% 87.1% 57.9% 74.1%
+  Agent1/Analyst*     24.3% 14.98 14.15100.0% 90.08 0.0000  36.5% 27.1% 31.7%  0.0%
+  Agent2/Critic*      23.6% 43.30 43.30100.0%813.00 0.0000   0.0%  0.0% 100.0%  0.0%
+  Agent3/Intuitive*   74.0%  4.49  7.06100.0%  8.67 0.0341  70.1% 85.5% 70.3% 67.7%
+  AgentFull           32.5% 19.19 28.41  0.0%638.72 0.0000  27.9% 26.3% 76.6%  0.0%
+  AgentFull+PriDe     54.1% 10.43 19.32 16.5%160.86 0.0000  50.0% 31.1% 69.6% 68.5%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull               -40.22pp   +17.202    +24.55    -64.58pp    0.0000   ***         nan
+  Baseline vs AgentFull+PriDe         -18.58pp    +8.443    +15.46    -48.13pp    0.0000   ***      0.0000
+  AgentFull vs +PriDe                 +21.64pp    -8.759     -9.09    +16.45pp    0.0000   ***      0.0000
+  Baseline vs +PriDe                   +1.33pp    -0.090     +0.14     -1.37pp    1.0000    ns      0.9812
+  Baseline vs Agent1                  -48.39pp   +12.989    +10.29    +35.42pp    0.0000   ***         nan
+  Baseline vs Agent2                  -49.08pp   +41.313    +39.44    +35.42pp    0.0000   ***         nan
+  Baseline vs Agent3                   +1.28pp    +2.499     +3.19    +35.42pp    0.5403    ns      0.0168
+  Agent1 vs Agent2                     -0.69pp   +28.324    +29.15     +0.00pp    1.0000    ns         nan
+  Agent2 vs Agent3                    +50.36pp   -38.814    -36.25     +0.00pp    0.0000   ***      0.0000
+  Agent1 vs Agent3                    +49.67pp   -10.490     -7.09     +0.00pp    0.0000   ***      0.0000
+
+  ----------------------------------------------------------------------------------------
+
+  Model: llama3_8b-instruct-q8_0
+  Q=271  Confident=20 (7%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            73.4%  1.83  3.01 63.1%  5.81 0.1213  77.9% 82.9% 60.9% 69.8%
+  Baseline+PriDe      73.2%  1.70  2.94 61.5%  4.29 0.2314  75.4% 82.5% 58.9% 74.5%
+  Agent1/Analyst*     25.2% 15.11 14.45100.0% 92.77 0.0000  32.8% 36.6% 28.8%  0.0%
+  Agent2/Critic*      23.6% 43.30 43.30100.0%813.00 0.0000   0.0%  0.0% 100.0%  0.0%
+  Agent3/Intuitive*   74.1%  4.84  7.95100.0% 10.12 0.0176  72.1% 86.8% 67.2% 67.7%
+  AgentFull           32.5% 16.76 27.06  0.0%486.96 0.0000  23.5% 32.9% 73.4%  0.0%
+  AgentFull+PriDe     56.7%  9.63 16.28 21.6%137.15 0.0000  83.0% 34.9% 43.9% 69.0%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull               -40.96pp   +14.926    +24.05    -63.10pp    0.0000   ***         nan
+  Baseline vs AgentFull+PriDe         -16.72pp    +7.802    +13.27    -41.45pp    0.0000   ***      0.0000
+  AgentFull vs +PriDe                 +24.24pp    -7.124    -10.78    +21.65pp    0.0000   ***      0.0000
+  Baseline vs +PriDe                   -0.27pp    -0.126     -0.07     -1.63pp    1.0000    ns      0.9980
+  Baseline vs Agent1                  -48.23pp   +13.279    +11.44    +36.90pp    0.0000   ***         nan
+  Baseline vs Agent2                  -49.82pp   +41.471    +40.29    +36.90pp    0.0000   ***         nan
+  Baseline vs Agent3                   +0.64pp    +3.010     +4.95    +36.90pp    0.8383    ns      0.0006
+  Agent1 vs Agent2                     -1.58pp   +28.192    +28.85     +0.00pp    0.6716    ns         nan
+  Agent2 vs Agent3                    +50.46pp   -38.462    -35.35     +0.00pp    0.0000   ***      0.0000
+  Agent1 vs Agent3                    +48.88pp   -10.269     -6.49     +0.00pp    0.0000   ***      0.0000
+
+  ----------------------------------------------------------------------------------------
+
+  Model: mistral-nemo_latest
+  Q=271  Confident=99 (37%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            66.0%  3.45  3.59 46.3% 20.47 0.0001  58.8% 68.9% 68.3% 68.3%
+  Baseline+PriDe      67.5%  3.30  3.26 47.2% 16.15 0.0011  57.9% 75.8% 64.9% 70.9%
+  Agent1/Analyst*     61.1%  5.78  9.71100.0% 14.00 0.0029  68.2% 70.3% 57.4% 45.9%
+  Agent2/Critic*      41.7% 26.75 28.25100.0%310.33 0.0000  17.6% 43.4% 87.5% 19.0%
+  Agent3/Intuitive*   72.0%  2.59  7.09100.0%  2.90 0.4067  82.4% 73.7% 64.1% 66.7%
+  AgentFull           61.6%  7.22 10.27 36.9% 90.31 0.0000  63.2% 64.5% 71.9% 46.0%
+  AgentFull+PriDe     65.8%  3.09  3.98 44.6% 14.10 0.0028  70.2% 69.8% 61.4% 61.1%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -4.42pp    +3.763     +6.68     -9.40pp    0.2004    ns      0.0000
+  Baseline vs AgentFull+PriDe          -0.24pp    -0.364     +0.39     -1.71pp    0.6434    ns      0.6254
+  AgentFull vs +PriDe                  +4.18pp    -4.127     -6.29     +7.69pp    0.0890    ns      0.0000
+  Baseline vs +PriDe                   +1.49pp    -0.148     -0.33     +0.89pp    1.0000    ns      0.9705
+  Baseline vs Agent1                   -4.98pp    +2.326     +6.12    +53.70pp    0.0282     *      0.0000
+  Baseline vs Agent2                  -24.35pp   +23.300    +24.66    +53.70pp    0.0000   ***      0.0000
+  Baseline vs Agent3                   +5.91pp    -0.865     +3.50    +53.70pp    0.0223     *      0.0000
+  Agent1 vs Agent2                    -19.37pp   +20.974    +18.54     +0.00pp    0.0000   ***      0.0000
+  Agent2 vs Agent3                    +30.26pp   -24.165    -21.16     +0.00pp    0.0000   ***      0.0000
+  Agent1 vs Agent3                    +10.89pp    -3.191     -2.62     +0.00pp    0.0001   ***      0.0676
+
+  ----------------------------------------------------------------------------------------
+
+  Model: mistral-small3.2_24b
+  Q=271  Confident=210 (77%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            84.1%  2.21  3.52 79.0%  8.48 0.0371  72.1% 85.5% 85.9% 93.7%
+  Baseline+PriDe      84.8%  2.33  3.54 77.9%  8.03 0.0455  72.4% 86.9% 84.2% 96.4%
+  Agent1/Analyst*     81.4%  3.78  7.90100.0%  5.91 0.1162  68.8% 81.9% 85.7% 89.8%
+  Agent2/Critic*      76.8%  9.53 15.33100.0% 39.42 0.0000  54.4% 75.0% 96.9% 82.5%
+  Agent3/Intuitive*   85.6%  3.39  7.09100.0%  4.97 0.1740  73.5% 88.2% 90.6% 90.5%
+  AgentFull           82.3%  3.89  7.14 73.1% 26.30 0.0000  67.6% 80.3% 93.8% 88.9%
+  AgentFull+PriDe     86.6%  2.83  5.97 77.1% 11.87 0.0078  72.4% 90.2% 93.0% 90.9%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -1.85pp    +1.683     +3.61     -5.90pp    0.3827    ns      0.0965
+  Baseline vs AgentFull+PriDe          +2.45pp    +0.622     +2.45     -1.91pp    0.3865    ns      0.7175
+  AgentFull vs +PriDe                  +4.29pp    -1.060     -1.17     +3.99pp    0.0455     *      0.1968
+  Baseline vs +PriDe                   +0.72pp    +0.119     +0.01     -1.04pp    1.0000    ns      0.9920
+  Baseline vs Agent1                   -2.74pp    +1.572     +4.38    +21.03pp    0.0550    ns      0.0181
+  Baseline vs Agent2                   -7.38pp    +7.324    +11.80    +21.03pp    0.0042    **      0.0000
+  Baseline vs Agent3                   +1.48pp    +1.175     +3.57    +21.03pp    0.3428    ns      0.1087
+  Agent1 vs Agent2                     -4.64pp    +5.752     +7.42     +0.00pp    0.3239    ns      0.0000
+  Agent2 vs Agent3                     +8.86pp    -6.149     -8.23     +0.00pp    0.0003   ***      0.0000
+  Agent1 vs Agent3                     +4.21pp    -0.397     -0.81     +0.00pp    0.0035    **      0.4126
+
+  ----------------------------------------------------------------------------------------
+
+  Model: mistral_latest
+  Q=271  Confident=55 (20%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            62.4%  7.65  8.73 40.6%101.28 0.0000  83.8% 52.6% 54.7% 58.7%
+  Baseline+PriDe      62.8%  8.21  9.23 41.1% 99.56 0.0000  82.5% 56.5% 52.6% 60.0%
+  Agent1/Analyst*     60.8%  4.63  8.80100.0%  8.76 0.0326  75.0% 52.8% 61.7% 54.2%
+  Agent2/Critic*      28.0% 39.90 39.90100.0%690.23 0.0000   8.8%  3.9% 98.4%  6.3%
+  Agent3/Intuitive*   62.7%  8.17 10.53100.0% 28.97 0.0000  80.9% 55.3% 56.2% 58.7%
+  AgentFull           59.8%  9.55 12.21 33.9%158.09 0.0000  69.1% 46.1% 75.0% 50.8%
+  AgentFull+PriDe     61.0%  7.60  9.28 39.8% 85.42 0.0000  82.8% 63.1% 43.9% 52.9%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -2.58pp    +1.902     +3.48     -6.64pp    0.4008    ns      0.0000
+  Baseline vs AgentFull+PriDe          -1.32pp    -0.044     +0.55     -0.76pp    0.6069    ns      0.1143
+  AgentFull vs +PriDe                  +1.26pp    -1.946     -2.93     +5.88pp    1.0000    ns      0.0000
+  Baseline vs +PriDe                   +0.41pp    +0.561     +0.50     +0.54pp    1.0000    ns      0.8760
+  Baseline vs Agent1                   -1.58pp    -3.010     +0.07    +59.41pp    0.2801    ns      0.0010
+  Baseline vs Agent2                  -34.32pp   +32.253    +31.17    +59.41pp    0.0000   ***      0.0000
+  Baseline vs Agent3                   +0.37pp    +0.529     +1.79    +59.41pp    1.0000    ns      0.0000
+  Agent1 vs Agent2                    -32.74pp   +35.263    +31.10     +0.00pp    0.0000   ***      0.0000
+  Agent2 vs Agent3                    +34.69pp   -31.724    -29.38     +0.00pp    0.0000   ***      0.0000
+  Agent1 vs Agent3                     +1.95pp    +3.539     +1.73     +0.00pp    0.1748    ns      0.0178
+
+  ----------------------------------------------------------------------------------------
+
+DATASET: 2012-2020_ICT_DSE-microsoft_
+
+  Model: Phi-3-mini-4k-instruct_transformers
+  Q=271  Confident=112 (41%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            73.6%  6.85 11.25 57.6% 79.07 0.0000  61.5% 85.5% 80.6% 64.5%
+  Baseline+PriDe      74.0%  5.89 10.46 54.1% 51.32 0.0000  63.8% 90.2% 77.2% 63.6%
+  Agent1/Analyst*     41.6% 12.37 15.27100.0% 59.47 0.0000  25.8% 58.7% 54.1% 26.3%
+  Agent2/Critic*      65.3% 12.31 22.53100.0% 65.75 0.0000  30.9% 82.9% 87.5% 58.7%
+  Agent3/Intuitive*   66.3% 10.97 13.78100.0% 51.99 0.0000  67.2% 86.8% 56.2% 50.8%
+  AgentFull           70.1%  8.85 14.79 44.6%135.82 0.0000  50.0% 90.8% 75.0% 61.9%
+  AgentFull+PriDe     72.7%  7.26 11.48 48.1% 77.95 0.0000  58.6% 90.2% 75.4% 65.5%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -3.47pp    +2.002     +3.55    -12.97pp    0.4576    ns      0.0050
+  Baseline vs AgentFull+PriDe          -0.86pp    +0.414     +0.23     -9.57pp    1.0000    ns      0.0849
+  AgentFull vs +PriDe                  +2.62pp    -1.588     -3.31     +3.40pp    0.1306    ns      0.0813
+  Baseline vs +PriDe                   +0.44pp    -0.956     -0.78     -3.51pp    1.0000    ns      0.1630
+  Baseline vs Agent1                  -32.02pp    +5.520     +4.02    +42.38pp    0.0000   ***      0.0000
+  Baseline vs Agent2                   -8.27pp    +5.467    +11.28    +42.38pp    0.0049    **      0.0000
+  Baseline vs Agent3                   -7.29pp    +4.122     +2.54    +42.38pp    0.0270     *      0.0000
+  Agent1 vs Agent2                    +23.75pp    -0.053     +7.26     +0.00pp    0.0000   ***      0.0003
+  Agent2 vs Agent3                     +0.98pp    -1.345     -8.74     +0.00pp    0.9005    ns      0.0000
+  Agent1 vs Agent3                    +24.73pp    -1.398     -1.48     +0.00pp    0.0000   ***      0.0000
+
+  ----------------------------------------------------------------------------------------
+
+  Model: Phi-3.5-mini-instruct_transformers
+  Q=271  Confident=152 (56%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            71.6%  5.58  8.60 63.4% 52.86 0.0000  58.2% 84.0% 76.2% 66.1%
+  Baseline+PriDe      70.6%  4.75  8.40 59.7% 33.40 0.0000  56.9% 86.9% 73.7% 63.6%
+  Agent1/Analyst*     36.1% 11.67 15.87100.0% 31.39 0.0000   8.6% 42.9% 42.9% 48.7%
+  Agent2/Critic*      66.8% 10.38 20.09100.0% 46.68 0.0000  33.8% 81.6% 84.4% 66.7%
+  Agent3/Intuitive*   69.0%  5.88  9.23100.0% 14.98 0.0018  64.7% 84.2% 62.5% 61.9%
+  AgentFull           61.6%  8.16 14.39 42.1%115.55 0.0000  36.8% 71.1% 70.3% 68.3%
+  AgentFull+PriDe     68.4%  4.92  8.00 53.7% 35.76 0.0000  56.9% 82.0% 68.4% 65.5%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -9.97pp    +2.582     +5.80    -21.37pp    0.0001   ***      0.0000
+  Baseline vs AgentFull+PriDe          -3.19pp    -0.662     -0.60     -9.75pp    0.4795    ns      0.3782
+  AgentFull vs +PriDe                  +6.77pp    -3.244     -6.40    +11.61pp    0.0008   ***      0.0000
+  Baseline vs +PriDe                   -1.03pp    -0.827     -0.20     -3.69pp    1.0000    ns      0.5203
+  Baseline vs Agent1                  -35.48pp    +6.092     +7.27    +36.57pp    0.0000   ***      0.0000
+  Baseline vs Agent2                   -4.80pp    +4.796    +11.49    +36.57pp    0.1547    ns      0.0000
+  Baseline vs Agent3                   -2.59pp    +0.297     +0.63    +36.57pp    0.3588    ns      0.0000
+  Agent1 vs Agent2                    +30.68pp    -1.296     +4.22     +0.00pp    0.0000   ***      0.0028
+  Agent2 vs Agent3                     +2.21pp    -4.499    -10.86     +0.00pp    0.5040    ns      0.0000
+  Agent1 vs Agent3                    +32.89pp    -5.795     -6.65     +0.00pp    0.0000   ***      0.0000
+
+  ----------------------------------------------------------------------------------------
+
+  Model: Phi-4-mini-instruct_transformers
+  Q=271  Confident=148 (55%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            68.6%  6.56 10.47 53.9% 74.59 0.0000  60.3% 80.3% 75.0% 57.1%
+  Baseline+PriDe      69.7%  6.14  9.91 55.8% 55.65 0.0000  60.3% 83.6% 73.7% 60.0%
+  Agent1/Analyst*     64.9%  9.31 16.03100.0% 37.56 0.0000  60.3% 78.9% 78.1% 39.7%
+  Agent2/Critic*      59.0% 17.33 30.85100.0%130.23 0.0000  91.2% 80.3% 45.3% 12.7%
+  Agent3/Intuitive*   68.6%  8.41  9.38100.0% 30.68 0.0000  61.8% 71.1% 82.8% 58.7%
+  AgentFull           71.2%  6.10 10.46 54.6% 64.48 0.0000  64.7% 84.2% 75.0% 58.7%
+  AgentFull+PriDe     71.9%  5.43  9.39 56.7% 43.54 0.0000  63.8% 85.2% 73.7% 63.6%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                +2.58pp    -0.461     -0.01     +0.74pp    0.1904    ns      0.9194
+  Baseline vs AgentFull+PriDe          +3.23pp    -1.131     -1.07     +2.84pp    0.3320    ns      0.4094
+  AgentFull vs +PriDe                  +0.64pp    -0.670     -1.07     +2.10pp    1.0000    ns      0.7778
+  Baseline vs +PriDe                   +1.06pp    -0.423     -0.56     +1.97pp    1.0000    ns      0.9467
+  Baseline vs Agent1                   -3.69pp    +2.749     +5.56    +46.13pp    0.0662    ns      0.0000
+  Baseline vs Agent2                   -9.59pp   +10.772    +20.39    +46.13pp    0.0058    **      0.0000
+  Baseline vs Agent3                   +0.00pp    +1.854     -1.08    +46.13pp    0.8551    ns      0.0000
+  Agent1 vs Agent2                     -5.90pp    +8.023    +14.82     +0.00pp    0.0771    ns      0.0000
+  Agent2 vs Agent3                     +9.59pp    -8.918    -21.47     +0.00pp    0.0077    **      0.0000
+  Agent1 vs Agent3                     +3.69pp    -0.895     -6.65     +0.00pp    0.0776    ns      0.0104
+
+  ----------------------------------------------------------------------------------------
+
 DATASET: college_cs
-==============================================================================================================
 
-  Comp 1: Baseline (raw) vs Agent (raw)  — Does multi-agent debate improve raw accuracy?
---------------------------------------------------------------------------------------------------------------
-  Model                                  |  NatAcc_A  NatAcc_B  DeltaAcc |  Bias_A  Bias_B   DBias |  RStd_A  RStd_B   DRStd |  Cons_A  Cons_B   DCons |  McNemar        p  Sig
---------------------------------------------------------------------------------------------------------------
-  gemma3_1b                              |    35.71%    27.00%    -8.71pp |  14.992  36.407 +21.415 |   16.41   35.69  +19.28 |    2.0%    0.0%   -2.0pp |   2.5600   0.1096   no
-  gemma3_4b                              |    49.00%    47.00%    -2.00pp |  10.273  15.571  +5.299 |   12.50   19.49   +6.99 |   20.0%   10.0%  -10.0pp |   0.0455   0.8312   no
-  gemma3_12b                             |    58.00%    56.00%    -2.00pp |   4.870   9.814  +4.944 |    6.80   12.46   +5.66 |   45.0%   35.0%  -10.0pp |   0.0833   0.7728   no
-  llama3.2_latest                        |    29.90%    28.00%    -1.90pp |  26.068  38.709 +12.641 |   26.01   39.68  +13.67 |   10.2%    1.0%   -9.2pp |   0.0714   0.7893   no
-  llama3_8b-instruct-q6_K                |    40.00%    21.00%   -19.00pp |   7.420  21.222 +13.802 |    7.04   21.99  +14.95 |   36.0%    0.0%  -36.0pp |   9.8182   0.0017  YES
-  llama3_8b-instruct-q8_0                |    42.00%    26.00%   -16.00pp |   7.951  19.603 +11.652 |    7.89   21.98  +14.09 |   36.0%    0.0%  -36.0pp |   5.9211   0.0150  YES
-  mistral_latest                         |    49.49%    42.00%    -7.49pp |  14.090  13.882  -0.208 |   16.35   15.02   -1.33 |   22.0%   20.0%   -2.0pp |   1.5652   0.2109   no
-  mistral-nemo_latest                    |    45.26%    40.00%    -5.26pp |   3.414   9.294  +5.879 |    4.84   11.26   +6.42 |   32.3%   16.0%  -16.3pp |   0.4091   0.5224   no
-  mistral-small3.2_24b                   |    65.00%    61.00%    -4.00pp |   5.034  10.618  +5.584 |    6.87   15.18   +8.31 |   57.0%   34.0%  -23.0pp |   0.4500   0.5023   no
-  Qwen_Qwen2.5-1.5B-Instruct_transformers |    42.00%    42.00%    +0.00pp |  23.672  22.817  -0.856 |   25.69   24.37   -1.32 |   16.0%   16.0%   +0.0pp |   0.1250   0.7237   no
-  Qwen_Qwen2.5-3B-Instruct_transformers  |    54.00%    52.00%    -2.00pp |   7.325  10.132  +2.807 |    9.76   10.74   +0.98 |   21.0%   23.0%   +2.0pp |   0.0714   0.7893   no
-  Qwen_Qwen2.5-7B-Instruct_transformers  |    67.00%    58.00%    -9.00pp |   3.820   4.202  +0.382 |    5.05    5.52   +0.47 |   52.0%   45.0%   -7.0pp |   3.0476   0.0809   no
-  microsoft_Phi-3-mini-4k-instruct_transformers |    49.46%    38.00%   -11.46pp |  11.645  12.782  +1.137 |   15.69   16.19   +0.50 |   35.1%   19.0%  -16.1pp |   4.2667   0.0389  YES
-  microsoft_Phi-3.5-mini-instruct_transformers |    48.19%    38.00%   -10.19pp |   9.937  12.471  +2.534 |   13.18   18.17   +4.99 |   37.6%    8.0%  -29.6pp |   2.4000   0.1213   no
-  microsoft_Phi-4-mini-instruct_transformers |    48.00%    49.00%    +1.00pp |   9.121   9.726  +0.605 |   13.67   13.53   -0.14 |   31.0%   30.0%   -1.0pp |   0.0000   1.0000   no
+  Model: Qwen_Qwen2.5-1.5B-Instruct_transformers
+  Q=100  Confident=59 (59%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
 
-  Comp 2: Baseline (raw) vs Agent+PriDe  — Does agent structure + PriDe beat single-call baseline?
---------------------------------------------------------------------------------------------------------------
-  Model                                  |  NatAcc_A  NatAcc_B  DeltaAcc |  Bias_A  Bias_B   DBias |  RStd_A  RStd_B   DRStd |  Cons_A  Cons_B   DCons |  McNemar        p  Sig
---------------------------------------------------------------------------------------------------------------
-  gemma3_1b                              |    35.71%    28.24%    -7.48pp |  14.992  18.628  +3.636 |   16.41   16.74   +0.33 |    2.0%    1.2%   -0.9pp |   2.1176   0.1456   no
-  gemma3_4b                              |    49.00%    45.88%    -3.12pp |  10.273  13.739  +3.466 |   12.50   16.68   +4.18 |   20.0%   14.1%   -5.9pp |   0.1905   0.6625   no
-  gemma3_12b                             |    58.00%    54.12%    -3.88pp |   4.870   7.444  +2.573 |    6.80   10.29   +3.49 |   45.0%   36.5%   -8.5pp |   0.5714   0.4497   no
-  llama3.2_latest                        |    29.90%    35.29%    +5.40pp |  26.068  17.101  -8.968 |   26.01   17.58   -8.43 |   10.2%   12.9%   +2.7pp |   0.6429   0.4227   no
-  llama3_8b-instruct-q6_K                |    40.00%    32.94%    -7.06pp |   7.420  10.710  +3.290 |    7.04   12.24   +5.20 |   36.0%   14.1%  -21.9pp |   0.6957   0.4042   no
-  llama3_8b-instruct-q8_0                |    42.00%    30.59%   -11.41pp |   7.951  14.446  +6.495 |    7.89   17.93  +10.04 |   36.0%    4.7%  -31.3pp |   2.5600   0.1096   no
-  mistral_latest                         |    49.49%    42.35%    -7.14pp |  14.090   6.095  -7.995 |   16.35    6.36   -9.99 |   22.0%   17.6%   -4.4pp |   1.2308   0.2673   no
-  mistral-nemo_latest                    |    45.26%    41.18%    -4.09pp |   3.414   5.908  +2.494 |    4.84    6.36   +1.52 |   32.3%   22.4%  -10.0pp |   0.2353   0.6276   no
-  mistral-small3.2_24b                   |    65.00%    61.18%    -3.82pp |   5.034   6.291  +1.257 |    6.87    9.81   +2.94 |   57.0%   44.7%  -12.3pp |   0.0833   0.7728   no
-  Qwen_Qwen2.5-1.5B-Instruct_transformers |    42.00%    38.82%    -3.18pp |  23.672  24.661  +0.989 |   25.69   25.77   +0.07 |   16.0%   14.1%   -1.9pp |   0.1667   0.6831   no
-  Qwen_Qwen2.5-3B-Instruct_transformers  |    54.00%    51.76%    -2.24pp |   7.325   9.506  +2.180 |    9.76   10.67   +0.91 |   21.0%   23.5%   +2.5pp |   0.0000   1.0000   no
-  Qwen_Qwen2.5-7B-Instruct_transformers  |    67.00%    58.82%    -8.18pp |   3.820   7.000  +3.180 |    5.05    9.36   +4.31 |   52.0%   41.2%  -10.8pp |   0.5625   0.4533   no
-  microsoft_Phi-3-mini-4k-instruct_transformers |    49.46%    43.53%    -5.93pp |  11.645   8.251  -3.394 |   15.69   10.75   -4.94 |   35.1%   22.4%  -12.7pp |   0.0000   1.0000   no
-  microsoft_Phi-3.5-mini-instruct_transformers |    48.19%    43.53%    -4.66pp |   9.937  10.334  +0.397 |   13.18   13.98   +0.80 |   37.6%   15.3%  -22.3pp |   0.0000   1.0000   no
-  microsoft_Phi-4-mini-instruct_transformers |    48.00%    45.88%    -2.12pp |   9.121  10.349  +1.228 |   13.67   14.10   +0.43 |   31.0%   25.9%   -5.1pp |   0.1667   0.6831   no
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            42.0% 23.67 25.69 16.0%358.64 0.0000  84.6% 40.0% 30.8% 18.2%
+  Baseline+PriDe      41.2% 24.96 26.81 14.1%338.89 0.0000  85.7% 38.5% 28.6% 20.0%
+  Agent1/Analyst*     43.0% 19.91 25.26100.0% 63.44 0.0000  73.1% 20.0% 61.5% 15.2%
+  Agent2/Critic*      38.0% 17.68 24.35100.0% 50.00 0.0000  69.2% 26.7% 53.8%  6.1%
+  Agent3/Intuitive*   47.0% 17.51 22.64100.0% 49.04 0.0000  76.9% 13.3% 46.2% 39.4%
+  AgentFull           42.0% 22.82 24.37 16.0%333.18 0.0000  76.9% 33.3% 42.3% 18.2%
+  AgentFull+PriDe     38.8% 24.66 25.77 14.1%330.85 0.0000  76.2% 30.8% 33.3% 20.0%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
 
-  Comp 3: Agent (raw)    vs Agent+PriDe  — Does PriDe debiasing add value on top of agents?
---------------------------------------------------------------------------------------------------------------
-  Model                                  |  NatAcc_A  NatAcc_B  DeltaAcc |  Bias_A  Bias_B   DBias |  RStd_A  RStd_B   DRStd |  Cons_A  Cons_B   DCons |  McNemar        p  Sig
---------------------------------------------------------------------------------------------------------------
-  gemma3_1b                              |    27.00%    28.24%    +1.24pp |  36.407  18.628 -17.779 |   35.69   16.74  -18.95 |    0.0%    1.2%   +1.2pp |   0.0625   0.8026   no
-  gemma3_4b                              |    47.00%    45.88%    -1.12pp |  15.571  13.739  -1.833 |   19.49   16.68   -2.81 |   10.0%   14.1%   +4.1pp |   0.0000   1.0000   no
-  gemma3_12b                             |    56.00%    54.12%    -1.88pp |   9.814   7.444  -2.370 |   12.46   10.29   -2.17 |   35.0%   36.5%   +1.5pp |   0.1667   0.6831   no
-  llama3.2_latest                        |    28.00%    35.29%    +7.29pp |  38.709  17.101 -21.609 |   39.68   17.58  -22.10 |    1.0%   12.9%  +11.9pp |   1.2308   0.2673   no
-  llama3_8b-instruct-q6_K                |    21.00%    32.94%   +11.94pp |  21.222  10.710 -10.512 |   21.99   12.24   -9.75 |    0.0%   14.1%  +14.1pp |   8.4706   0.0036  YES
-  llama3_8b-instruct-q8_0                |    26.00%    30.59%    +4.59pp |  19.603  14.446  -5.157 |   21.98   17.93   -4.05 |    0.0%    4.7%   +4.7pp |   1.7857   0.1814   no
-  mistral_latest                         |    42.00%    42.35%    +0.35pp |  13.882   6.095  -7.787 |   15.02    6.36   -8.66 |   20.0%   17.6%   -2.4pp |   0.0000   1.0000   no
-  mistral-nemo_latest                    |    40.00%    41.18%    +1.18pp |   9.294   5.908  -3.386 |   11.26    6.36   -4.90 |   16.0%   22.4%   +6.4pp |   0.1667   0.6831   no
-  mistral-small3.2_24b                   |    61.00%    61.18%    +0.18pp |  10.618   6.291  -4.327 |   15.18    9.81   -5.37 |   34.0%   44.7%  +10.7pp |   0.1667   0.6831   no
-  Qwen_Qwen2.5-1.5B-Instruct_transformers |    42.00%    38.82%    -3.18pp |  22.817  24.661  +1.845 |   24.37   25.77   +1.39 |   16.0%   14.1%   -1.9pp |   0.0000   1.0000   no
-  Qwen_Qwen2.5-3B-Instruct_transformers  |    52.00%    51.76%    -0.24pp |  10.132   9.506  -0.626 |   10.74   10.67   -0.07 |   23.0%   23.5%   +0.5pp |   0.0000   1.0000   no
-  Qwen_Qwen2.5-7B-Instruct_transformers  |    58.00%    58.82%    +0.82pp |   4.202   7.000  +2.798 |    5.52    9.36   +3.83 |   45.0%   41.2%   -3.8pp |   0.1000   0.7518   no
-  microsoft_Phi-3-mini-4k-instruct_transformers |    38.00%    43.53%    +5.53pp |  12.782   8.251  -4.531 |   16.19   10.75   -5.44 |   19.0%   22.4%   +3.4pp |   4.1667   0.0412  YES
-  microsoft_Phi-3.5-mini-instruct_transformers |    38.00%    43.53%    +5.53pp |  12.471  10.334  -2.137 |   18.17   13.98   -4.19 |    8.0%   15.3%   +7.3pp |   4.9000   0.0269  YES
-  microsoft_Phi-4-mini-instruct_transformers |    49.00%    45.88%    -3.12pp |   9.726  10.349  +0.623 |   13.53   14.10   +0.57 |   30.0%   25.9%   -4.1pp |   0.0000   1.0000   no
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                +0.00pp    -0.856     -1.32     +0.00pp    0.7237    ns      0.0569
+  Baseline vs AgentFull+PriDe          -3.18pp    +0.989     +0.07     -1.88pp    0.6831    ns      0.2409
+  AgentFull vs +PriDe                  -3.18pp    +1.845     +1.39     -1.88pp    1.0000    ns      0.2864
+  Baseline vs +PriDe                   -0.82pp    +1.287     +1.11     -1.88pp    1.0000    ns      0.6090
+  Baseline vs Agent1                   +1.00pp    -3.760     -0.44    +84.00pp    1.0000    ns      0.0000
+  Baseline vs Agent2                   -4.00pp    -5.995     -1.35    +84.00pp    0.4795    ns      0.0000
+  Baseline vs Agent3                   +5.00pp    -6.165     -3.05    +84.00pp    0.3827    ns      0.0000
+  Agent1 vs Agent2                     -5.00pp    -2.235     -0.91     +0.00pp    0.2278    ns      0.0000
+  Agent2 vs Agent3                     +9.00pp    -0.171     -1.71     +0.00pp    0.0953    ns      0.0000
+  Agent1 vs Agent3                     +4.00pp    -2.405     -2.62     +0.00pp    0.4533    ns      0.0008
 
-  DETAILED STATISTICS PER MODEL
---------------------------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------
 
-  [gemma3_1b]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=29.74%  bias=14.992  rstd=16.41%  cons=2.0%  chi2=140.256(p=0.0000)  chi2_acc=50.210(p=0.0000)
-      Agent (raw)           : acc=25.25%  bias=36.407  rstd=35.69%  cons=0.0%  chi2=848.300(p=0.0000)  chi2_acc=269.929(p=0.0000)
-      Agent + PriDe         : acc=24.71%  bias=18.628  rstd=16.74%  cons=1.2%  chi2=188.776(p=0.0000)  chi2_acc=51.228(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=2.5600  p=0.1096  ns
-        Contingency: both=18  A_only=17  B_only=8  neither=55
-      Dist shift: chi2=792.0482  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=2.1176  p=0.1456  ns
-        Contingency: both=19  A_only=12  B_only=5  neither=47
-      Dist shift: chi2=22.8390  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.0625  p=0.8026  ns
-        Contingency: both=15  A_only=7  B_only=9  neither=54
-      Dist shift: chi2=179.6368  p=0.0000  ***  (sig=True)
+  Model: Qwen_Qwen2.5-3B-Instruct_transformers
+  Q=100  Confident=56 (56%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
 
-  [gemma3_4b]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=42.75%  bias=10.273  rstd=12.50%  cons=20.0%  chi2=67.540(p=0.0000)  chi2_acc=25.527(p=0.0000)
-      Agent (raw)           : acc=37.25%  bias=15.571  rstd=19.49%  cons=10.0%  chi2=155.180(p=0.0000)  chi2_acc=64.975(p=0.0000)
-      Agent + PriDe         : acc=38.82%  bias=13.739  rstd=16.68%  cons=14.1%  chi2=102.682(p=0.0000)  chi2_acc=39.825(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=0.0455  p=0.8312  ns
-        Contingency: both=37  A_only=12  B_only=10  neither=41
-      Dist shift: chi2=64.4030  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.1905  p=0.6625  ns
-        Contingency: both=30  A_only=12  B_only=9  neither=34
-      Dist shift: chi2=13.7796  p=0.0032  **  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=38  A_only=2  B_only=1  neither=44
-      Dist shift: chi2=16.2567  p=0.0010  **  (sig=True)
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            54.0%  7.33  9.76 21.0% 34.34 0.0000  42.3% 33.3% 50.0% 75.8%
+  Baseline+PriDe      52.9%  7.98 11.82 17.6% 34.61 0.0000  42.9% 30.8% 42.9% 76.7%
+  Agent1/Analyst*     49.0% 16.17 17.20100.0% 41.84 0.0000  23.1% 40.0% 53.8% 69.7%
+  Agent2/Critic*      49.0% 18.37 25.19100.0% 54.00 0.0000  26.9% 26.7% 88.5% 45.5%
+  Agent3/Intuitive*   55.0% 16.99 19.19100.0% 46.16 0.0000  38.5% 26.7% 61.5% 75.8%
+  AgentFull           52.0% 10.13 10.74 23.0% 65.70 0.0000  26.9% 40.0% 65.4% 66.7%
+  AgentFull+PriDe     51.8%  9.51 10.67 23.5% 49.15 0.0000  33.3% 38.5% 57.1% 66.7%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
 
-  [gemma3_12b]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=57.50%  bias=4.870  rstd=6.80%  cons=45.0%  chi2=15.180(p=0.0017)  chi2_acc=7.570(p=0.0558)
-      Agent (raw)           : acc=49.50%  bias=9.814  rstd=12.46%  cons=35.0%  chi2=61.640(p=0.0000)  chi2_acc=24.842(p=0.0000)
-      Agent + PriDe         : acc=49.41%  bias=7.444  rstd=10.29%  cons=36.5%  chi2=30.141(p=0.0000)  chi2_acc=14.402(p=0.0024)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=0.0833  p=0.7728  ns
-        Contingency: both=51  A_only=7  B_only=5  neither=37
-      Dist shift: chi2=34.8452  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.5714  p=0.4497  ns
-        Contingency: both=44  A_only=5  B_only=2  neither=34
-      Dist shift: chi2=19.0766  p=0.0003  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.1667  p=0.6831  ns
-        Contingency: both=44  A_only=4  B_only=2  neither=35
-      Dist shift: chi2=4.1988  p=0.2408  ns  (sig=False)
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -2.00pp    +2.807     +0.98     +2.00pp    0.7893    ns      0.0000
+  Baseline vs AgentFull+PriDe          -2.24pp    +2.180     +0.91     +2.53pp    1.0000    ns      0.0000
+  AgentFull vs +PriDe                  -0.24pp    -0.626     -0.07     +0.53pp    1.0000    ns      0.6440
+  Baseline vs +PriDe                   -1.06pp    +0.651     +2.07     -3.35pp    1.0000    ns      0.7856
+  Baseline vs Agent1                   -5.00pp    +8.846     +7.44    +79.00pp    0.3017    ns      0.0000
+  Baseline vs Agent2                   -5.00pp   +11.046    +15.43    +79.00pp    0.4862    ns      0.0000
+  Baseline vs Agent3                   +1.00pp    +9.660     +9.43    +79.00pp    1.0000    ns      0.0000
+  Agent1 vs Agent2                     +0.00pp    +2.200     +7.99     +0.00pp    0.8445    ns      0.0000
+  Agent2 vs Agent3                     +6.00pp    -1.386     -6.00     +0.00pp    0.3447    ns      0.0000
+  Agent1 vs Agent3                     +6.00pp    +0.814     +1.99     +0.00pp    0.1489    ns      0.3129
 
-  [llama3.2_latest]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=30.59%  bias=26.068  rstd=26.01%  cons=10.2%  chi2=422.959(p=0.0000)  chi2_acc=123.682(p=0.0000)
-      Agent (raw)           : acc=27.50%  bias=38.709  rstd=39.68%  cons=1.0%  chi2=958.980(p=0.0000)  chi2_acc=315.937(p=0.0000)
-      Agent + PriDe         : acc=35.88%  bias=17.101  rstd=17.58%  cons=12.9%  chi2=159.082(p=0.0000)  chi2_acc=45.664(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=0.0714  p=0.7893  ns
-        Contingency: both=21  A_only=8  B_only=6  neither=62
-      Dist shift: chi2=303.1270  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.6429  p=0.4227  ns
-        Contingency: both=20  A_only=5  B_only=9  neither=48
-      Dist shift: chi2=42.5188  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=1.2308  p=0.2673  ns
-        Contingency: both=21  A_only=4  B_only=9  neither=51
-      Dist shift: chi2=229.2944  p=0.0000  ***  (sig=True)
+  ----------------------------------------------------------------------------------------
 
-  [llama3_8b-instruct-q6_K]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=44.00%  bias=7.420  rstd=7.04%  cons=36.0%  chi2=35.240(p=0.0000)  chi2_acc=8.036(p=0.0453)
-      Agent (raw)           : acc=26.00%  bias=21.222  rstd=21.99%  cons=0.0%  chi2=288.240(p=0.0000)  chi2_acc=100.520(p=0.0000)
-      Agent + PriDe         : acc=35.88%  bias=10.710  rstd=12.24%  cons=14.1%  chi2=62.400(p=0.0000)  chi2_acc=22.142(p=0.0001)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=9.8182  p=0.0017  **
-        Contingency: both=14  A_only=26  B_only=7  neither=53
-      Dist shift: chi2=nan  p=nan  n/a  (sig=False)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.6957  p=0.4042  ns
-        Contingency: both=19  A_only=14  B_only=9  neither=43
-      Dist shift: chi2=141.9377  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=8.4706  p=0.0036  **
-        Contingency: both=13  A_only=2  B_only=15  neither=55
-      Dist shift: chi2=173.8658  p=0.0000  ***  (sig=True)
+  Model: Qwen_Qwen2.5-7B-Instruct_transformers
+  Q=100  Confident=40 (40%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
 
-  [llama3_8b-instruct-q8_0]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=42.50%  bias=7.951  rstd=7.89%  cons=36.0%  chi2=40.460(p=0.0000)  chi2_acc=10.189(p=0.0170)
-      Agent (raw)           : acc=28.25%  bias=19.603  rstd=21.98%  cons=0.0%  chi2=245.940(p=0.0000)  chi2_acc=95.353(p=0.0000)
-      Agent + PriDe         : acc=33.53%  bias=14.446  rstd=17.93%  cons=4.7%  chi2=113.529(p=0.0000)  chi2_acc=49.039(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=5.9211  p=0.0150  *
-        Contingency: both=15  A_only=27  B_only=11  neither=47
-      Dist shift: chi2=nan  p=nan  n/a  (sig=False)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=2.5600  p=0.1096  ns
-        Contingency: both=18  A_only=17  B_only=8  neither=42
-      Dist shift: chi2=732.6644  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=1.7857  p=0.1814  ns
-        Contingency: both=16  A_only=4  B_only=10  neither=55
-      Dist shift: chi2=296.2165  p=0.0000  ***  (sig=True)
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            67.0%  3.82  5.05 52.0%  9.34 0.0251  80.8% 46.7% 69.2% 63.6%
+  Baseline+PriDe      63.5%  4.28  6.46 50.6%  9.98 0.0188  76.2% 46.2% 66.7% 60.0%
+  Agent1/Analyst*     46.0% 10.70 11.52100.0% 18.32 0.0004  57.7% 46.7% 26.9% 51.5%
+  Agent2/Critic*      55.0%  5.39 16.78100.0%  4.64 0.2001  65.4% 46.7% 76.9% 33.3%
+  Agent3/Intuitive*   63.0%  6.44 16.33100.0%  6.64 0.0843  80.8% 40.0% 73.1% 51.5%
+  AgentFull           58.0%  4.20  5.52 45.0% 11.30 0.0102  65.4% 60.0% 65.4% 45.5%
+  AgentFull+PriDe     58.8%  7.00  9.36 41.2% 26.66 0.0000  81.0% 46.2% 66.7% 43.3%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
 
-  [mistral_latest]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=42.86%  bias=14.090  rstd=16.35%  cons=22.0%  chi2=126.744(p=0.0000)  chi2_acc=43.362(p=0.0000)
-      Agent (raw)           : acc=39.75%  bias=13.882  rstd=15.02%  cons=20.0%  chi2=123.340(p=0.0000)  chi2_acc=37.694(p=0.0000)
-      Agent + PriDe         : acc=39.41%  bias=6.095  rstd=6.36%  cons=17.6%  chi2=20.212(p=0.0002)  chi2_acc=5.764(p=0.1237)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=1.5652  p=0.2109  ns
-        Contingency: both=34  A_only=15  B_only=8  neither=42
-      Dist shift: chi2=178.1090  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=1.2308  p=0.2673  ns
-        Contingency: both=31  A_only=9  B_only=4  neither=40
-      Dist shift: chi2=44.3262  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=30  A_only=5  B_only=6  neither=44
-      Dist shift: chi2=93.7798  p=0.0000  ***  (sig=True)
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -9.00pp    +0.382     +0.47     -7.00pp    0.0809    ns      0.0107
+  Baseline vs AgentFull+PriDe          -8.18pp    +3.180     +4.31    -10.82pp    0.4533    ns      0.0000
+  AgentFull vs +PriDe                  +0.82pp    +2.798     +3.83     -3.82pp    0.7518    ns      0.0000
+  Baseline vs +PriDe                   -3.47pp    +0.462     +1.41     -1.41pp    1.0000    ns      0.9678
+  Baseline vs Agent1                  -21.00pp    +6.880     +6.47    +48.00pp    0.0014    **      0.0000
+  Baseline vs Agent2                  -12.00pp    +1.565    +11.73    +48.00pp    0.0190     *      0.0000
+  Baseline vs Agent3                   -4.00pp    +2.622    +11.28    +48.00pp    0.4227    ns      0.0029
+  Agent1 vs Agent2                     +9.00pp    -5.315     +5.25     +0.00pp    0.2225    ns      0.0000
+  Agent2 vs Agent3                     +8.00pp    +1.057     -0.44     +0.00pp    0.1356    ns      0.0035
+  Agent1 vs Agent3                    +17.00pp    -4.258     +4.81     +0.00pp    0.0068    **      0.0000
 
-  [mistral-nemo_latest]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=46.39%  bias=3.414  rstd=4.84%  cons=32.3%  chi2=7.237(p=0.0647)  chi2_acc=3.624(p=0.3050)
-      Agent (raw)           : acc=41.75%  bias=9.294  rstd=11.26%  cons=16.0%  chi2=55.280(p=0.0000)  chi2_acc=20.837(p=0.0001)
-      Agent + PriDe         : acc=45.00%  bias=5.908  rstd=6.36%  cons=22.4%  chi2=18.988(p=0.0003)  chi2_acc=5.550(p=0.1357)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=0.4091  p=0.5224  ns
-        Contingency: both=30  A_only=13  B_only=9  neither=43
-      Dist shift: chi2=66.5643  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.2353  p=0.6276  ns
-        Contingency: both=27  A_only=10  B_only=7  neither=37
-      Dist shift: chi2=26.5656  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.1667  p=0.6831  ns
-        Contingency: both=32  A_only=3  B_only=3  neither=47
-      Dist shift: chi2=41.9398  p=0.0000  ***  (sig=True)
+  ----------------------------------------------------------------------------------------
 
-  [mistral-small3.2_24b]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=64.75%  bias=5.034  rstd=6.87%  cons=57.0%  chi2=16.220(p=0.0010)  chi2_acc=8.270(p=0.0408)
-      Agent (raw)           : acc=59.00%  bias=10.618  rstd=15.18%  cons=34.0%  chi2=72.160(p=0.0000)  chi2_acc=38.115(p=0.0000)
-      Agent + PriDe         : acc=61.18%  bias=6.291  rstd=9.81%  cons=44.7%  chi2=21.529(p=0.0001)  chi2_acc=13.770(p=0.0032)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=0.4500  p=0.5023  ns
-        Contingency: both=53  A_only=12  B_only=8  neither=27
-      Dist shift: chi2=27.1564  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.0833  p=0.7728  ns
-        Contingency: both=46  A_only=6  B_only=6  neither=27
-      Dist shift: chi2=9.6703  p=0.0216  *  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.1667  p=0.6831  ns
-        Contingency: both=48  A_only=2  B_only=4  neither=31
-      Dist shift: chi2=21.0288  p=0.0001  ***  (sig=True)
+  Model: gemma3_12b
+  Q=100  Confident=76 (76%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
 
-  [Qwen_Qwen2.5-1.5B-Instruct_transformers]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=39.25%  bias=23.672  rstd=25.69%  cons=16.0%  chi2=358.640(p=0.0000)  chi2_acc=110.749(p=0.0000)
-      Agent (raw)           : acc=39.00%  bias=22.817  rstd=24.37%  cons=16.0%  chi2=333.180(p=0.0000)  chi2_acc=99.874(p=0.0000)
-      Agent + PriDe         : acc=37.94%  bias=24.661  rstd=25.77%  cons=14.1%  chi2=330.847(p=0.0000)  chi2_acc=95.871(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=0.1250  p=0.7237  ns
-        Contingency: both=38  A_only=4  B_only=4  neither=54
-      Dist shift: chi2=7.5275  p=0.0569  ns  (sig=False)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.1667  p=0.6831  ns
-        Contingency: both=31  A_only=4  B_only=2  neither=48
-      Dist shift: chi2=4.1975  p=0.2409  ns  (sig=False)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=33  A_only=1  B_only=0  neither=51
-      Dist shift: chi2=3.7781  p=0.2864  ns  (sig=False)
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            58.0%  4.87  6.80 45.0% 15.18 0.0017  65.4% 40.0% 57.7% 60.6%
+  Baseline+PriDe      57.6%  4.69  6.46 47.1% 11.98 0.0075  63.6% 38.5% 60.0% 60.0%
+  Agent1/Analyst*     62.0%  8.22  6.72100.0%  8.54 0.0360  57.1% 54.5% 59.1% 72.0%
+  Agent2/Critic*      55.0%  8.22  8.85100.0% 10.80 0.0129  50.0% 40.0% 57.7% 63.6%
+  Agent3/Intuitive*   57.0%  6.60 12.69100.0%  6.96 0.0732  61.5% 33.3% 53.8% 66.7%
+  AgentFull           56.0%  9.81 12.46 35.0% 61.64 0.0000  50.0% 46.7% 50.0% 69.7%
+  AgentFull+PriDe     54.1%  7.44 10.29 36.5% 30.14 0.0000  54.5% 30.8% 57.1% 62.1%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
 
-  [Qwen_Qwen2.5-3B-Instruct_transformers]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=50.25%  bias=7.325  rstd=9.76%  cons=21.0%  chi2=34.340(p=0.0000)  chi2_acc=15.230(p=0.0016)
-      Agent (raw)           : acc=48.50%  bias=10.132  rstd=10.74%  cons=23.0%  chi2=65.700(p=0.0000)  chi2_acc=18.457(p=0.0004)
-      Agent + PriDe         : acc=47.65%  bias=9.506  rstd=10.67%  cons=23.5%  chi2=49.153(p=0.0000)  chi2_acc=15.517(p=0.0014)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=0.0714  p=0.7893  ns
-        Contingency: both=46  A_only=8  B_only=6  neither=40
-      Dist shift: chi2=58.4872  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=38  A_only=7  B_only=6  neither=34
-      Dist shift: chi2=46.2827  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=43  A_only=0  B_only=1  neither=41
-      Dist shift: chi2=1.6683  p=0.6440  ns  (sig=False)
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -2.00pp    +4.944     +5.66    -10.00pp    0.7728    ns      0.0000
+  Baseline vs AgentFull+PriDe          -3.88pp    +2.573     +3.49     -8.53pp    0.4497    ns      0.0003
+  AgentFull vs +PriDe                  -1.88pp    -2.370     -2.17     +1.47pp    0.6831    ns      0.2408
+  Baseline vs +PriDe                   -0.35pp    -0.178     -0.34     +2.06pp    1.0000    ns      0.9947
+  Baseline vs Agent1                   +4.03pp    +3.352     -0.08    +55.00pp    0.5465    ns      0.0011
+  Baseline vs Agent2                   -3.00pp    +3.346     +2.05    +55.00pp    0.6056    ns      0.0000
+  Baseline vs Agent3                   -1.00pp    +1.725     +5.89    +55.00pp    1.0000    ns      0.0000
+  Agent1 vs Agent2                     -7.03pp    -0.006     +2.12     +0.00pp    1.0000    ns      0.6611
+  Agent2 vs Agent3                     +2.00pp    -1.620     +3.85     +0.00pp    0.7728    ns      0.2275
+  Agent1 vs Agent3                     -5.03pp    -1.626     +5.97     +0.00pp    0.5465    ns      0.5702
 
-  [Qwen_Qwen2.5-7B-Instruct_transformers]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=62.00%  bias=3.820  rstd=5.05%  cons=52.0%  chi2=9.340(p=0.0251)  chi2_acc=4.329(p=0.2280)
-      Agent (raw)           : acc=59.00%  bias=4.202  rstd=5.52%  cons=45.0%  chi2=11.300(p=0.0102)  chi2_acc=5.043(p=0.1686)
-      Agent + PriDe         : acc=58.24%  bias=7.000  rstd=9.36%  cons=41.2%  chi2=26.659(p=0.0000)  chi2_acc=12.238(p=0.0066)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=3.0476  p=0.0809  ns
-        Contingency: both=52  A_only=15  B_only=6  neither=27
-      Dist shift: chi2=11.1967  p=0.0107  *  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.5625  p=0.4533  ns
-        Contingency: both=44  A_only=10  B_only=6  neither=25
-      Dist shift: chi2=35.0650  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.1000  p=0.7518  ns
-        Contingency: both=44  A_only=4  B_only=6  neither=31
-      Dist shift: chi2=36.9157  p=0.0000  ***  (sig=True)
+  ----------------------------------------------------------------------------------------
 
-  [microsoft_Phi-3-mini-4k-instruct_transformers]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=49.18%  bias=11.645  rstd=15.69%  cons=35.1%  chi2=79.848(p=0.0000)  chi2_acc=36.283(p=0.0000)
-      Agent (raw)           : acc=44.50%  bias=12.782  rstd=16.19%  cons=19.0%  chi2=104.560(p=0.0000)  chi2_acc=42.474(p=0.0000)
-      Agent + PriDe         : acc=42.35%  bias=8.251  rstd=10.75%  cons=22.4%  chi2=37.035(p=0.0000)  chi2_acc=16.094(p=0.0011)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=4.2667  p=0.0389  *
-        Contingency: both=34  A_only=12  B_only=3  neither=44
-      Dist shift: chi2=28.1773  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=32  A_only=5  B_only=4  neither=38
-      Dist shift: chi2=13.7438  p=0.0033  **  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=4.1667  p=0.0412  *
-        Contingency: both=31  A_only=0  B_only=6  neither=48
-      Dist shift: chi2=21.2108  p=0.0001  ***  (sig=True)
+  Model: gemma3_1b
+  Q=100  Confident=49 (49%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
 
-  [microsoft_Phi-3.5-mini-instruct_transformers]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=53.20%  bias=9.937  rstd=13.18%  cons=37.6%  chi2=54.349(p=0.0000)  chi2_acc=23.693(p=0.0000)
-      Agent (raw)           : acc=41.25%  bias=12.471  rstd=18.17%  cons=8.0%  chi2=99.540(p=0.0000)  chi2_acc=54.499(p=0.0000)
-      Agent + PriDe         : acc=44.41%  bias=10.334  rstd=13.98%  cons=15.3%  chi2=58.094(p=0.0000)  chi2_acc=26.913(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=2.4000  p=0.1213  ns
-        Contingency: both=29  A_only=11  B_only=4  neither=39
-      Dist shift: chi2=32.8406  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=28  A_only=3  B_only=4  neither=34
-      Dist shift: chi2=18.9530  p=0.0003  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=4.9000  p=0.0269  *
-        Contingency: both=28  A_only=1  B_only=9  neither=47
-      Dist shift: chi2=60.4227  p=0.0000  ***  (sig=True)
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            35.7% 14.99 16.41  2.0%140.26 0.0000  19.2%  0.0% 72.0% 36.4%
+  Baseline+PriDe      35.3% 13.25 14.41  1.2% 95.46 0.0000  19.0%  6.7% 66.7% 39.3%
+  Agent1/Analyst*     39.5% 26.33 31.32100.0% 47.70 0.0000  20.0%  0.0% 81.2% 12.5%
+  Agent2/Critic*      27.0% 41.58 42.77100.0%276.56 0.0000   3.8%  0.0% 100.0%  0.0%
+  Agent3/Intuitive*   32.0% 17.99 20.73100.0% 51.76 0.0000  34.6%  0.0% 57.7% 24.2%
+  AgentFull           27.0% 36.41 35.69  0.0%848.30 0.0000   7.7%  0.0% 92.3%  3.0%
+  AgentFull+PriDe     28.2% 18.63 16.74  1.2%188.78 0.0000  20.0%  0.0% 61.9% 22.6%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
 
-  [microsoft_Phi-4-mini-instruct_transformers]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=49.00%  bias=9.121  rstd=13.67%  cons=31.0%  chi2=53.240(p=0.0000)  chi2_acc=29.932(p=0.0000)
-      Agent (raw)           : acc=48.75%  bias=9.726  rstd=13.53%  cons=30.0%  chi2=60.540(p=0.0000)  chi2_acc=29.328(p=0.0000)
-      Agent + PriDe         : acc=46.18%  bias=10.349  rstd=14.10%  cons=25.9%  chi2=58.259(p=0.0000)  chi2_acc=27.206(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=46  A_only=2  B_only=3  neither=49
-      Dist shift: chi2=4.9360  p=0.1765  ns  (sig=False)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.1667  p=0.6831  ns
-        Contingency: both=35  A_only=2  B_only=4  neither=44
-      Dist shift: chi2=7.3610  p=0.0612  ns  (sig=False)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=38  A_only=0  B_only=1  neither=46
-      Dist shift: chi2=0.4423  p=0.9314  ns  (sig=False)
-==============================================================================================================
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -8.71pp   +21.415    +19.28     -2.04pp    0.1096    ns      0.0000
+  Baseline vs AgentFull+PriDe          -7.48pp    +3.636     +0.33     -0.86pp    0.1456    ns      0.0000
+  AgentFull vs +PriDe                  +1.24pp   -17.779    -18.95     +1.18pp    0.8026    ns      0.0000
+  Baseline vs +PriDe                   -0.42pp    -1.746     -2.00     -0.86pp    1.0000    ns      0.0855
+  Baseline vs Agent1                   +3.82pp   +11.338    +14.91    +97.96pp    0.7518    ns      0.0000
+  Baseline vs Agent2                   -8.71pp   +26.583    +26.37    +97.96pp    0.0953    ns         nan
+  Baseline vs Agent3                   -3.71pp    +2.994     +4.32    +97.96pp    0.7103    ns      0.0000
+  Agent1 vs Agent2                    -12.53pp   +15.245    +11.46     +0.00pp    0.6831    ns         nan
+  Agent2 vs Agent3                     +5.00pp   -23.589    -22.05     +0.00pp    0.4414    ns      0.0000
+  Agent1 vs Agent3                     -7.53pp    -8.344    -10.59     +0.00pp    1.0000    ns      0.0494
+
+  ----------------------------------------------------------------------------------------
+
+  Model: gemma3_4b
+  Q=100  Confident=55 (55%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            49.0% 10.27 12.50 20.0% 67.54 0.0000  34.6% 33.3% 57.7% 60.6%
+  Baseline+PriDe      47.1% 10.28 11.72 18.8% 57.53 0.0000  36.0% 36.4% 55.0% 55.2%
+  Agent1/Analyst*     49.0% 17.89 24.42100.0% 50.16 0.0000  20.0% 20.0% 65.4% 71.9%
+  Agent2/Critic*      42.0% 17.25 28.69100.0% 47.60 0.0000  11.5%  6.7% 73.1% 57.6%
+  Agent3/Intuitive*   44.0% 10.68 15.10100.0% 18.24 0.0004  23.1% 40.0% 65.4% 45.5%
+  AgentFull           47.0% 15.57 19.49 10.0%155.18 0.0000  19.2% 20.0% 73.1% 60.6%
+  AgentFull+PriDe     45.9% 13.74 16.68 14.1%102.68 0.0000  18.2% 21.4% 81.0% 53.6%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -2.00pp    +5.299     +6.99    -10.00pp    0.8312    ns      0.0000
+  Baseline vs AgentFull+PriDe          -3.12pp    +3.466     +4.18     -5.88pp    0.6625    ns      0.0032
+  AgentFull vs +PriDe                  -1.12pp    -1.833     -2.81     +4.12pp    1.0000    ns      0.0010
+  Baseline vs +PriDe                   -1.94pp    +0.011     -0.78     -1.18pp    1.0000    ns      0.9728
+  Baseline vs Agent1                   -0.02pp    +7.613    +11.93    +80.00pp    0.8231    ns      0.0000
+  Baseline vs Agent2                   -7.00pp    +6.975    +16.20    +80.00pp    0.2652    ns      0.0000
+  Baseline vs Agent3                   -5.00pp    +0.404     +2.60    +80.00pp    0.3827    ns      0.0019
+  Agent1 vs Agent2                     -6.98pp    -0.638     +4.27     +0.00pp    0.1456    ns      0.4552
+  Agent2 vs Agent3                     +2.00pp    -6.571    -13.59     +0.00pp    0.8231    ns      0.0004
+  Agent1 vs Agent3                     -4.98pp    -7.209     -9.32     +0.00pp    0.3827    ns      0.0000
+
+  ----------------------------------------------------------------------------------------
+
+  Model: llama3.2_latest
+  Q=100  Confident=62 (62%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            29.9% 26.07 26.01 10.2%422.96 0.0000  19.2% 14.3% 76.0%  9.4%
+  Baseline+PriDe      25.9% 24.01 23.97  8.2%313.67 0.0000  20.0% 16.7% 63.2% 10.3%
+  Agent1/Analyst*     29.2% 38.50 42.15100.0%113.83 0.0000   0.0%  0.0% 100.0%  9.1%
+  Agent2/Critic*      28.0% 39.30 39.67100.0%247.12 0.0000   7.7%  6.7% 96.2%  0.0%
+  Agent3/Intuitive*   36.0% 21.08 24.63100.0% 71.12 0.0000  15.4% 20.0% 76.9% 27.3%
+  AgentFull           28.0% 38.71 39.68  1.0%958.98 0.0000   7.7%  0.0% 96.2%  3.0%
+  AgentFull+PriDe     35.3% 17.10 17.58 12.9%159.08 0.0000  19.0%  8.3% 78.3% 24.1%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -1.90pp   +12.641    +13.67     -9.20pp    0.7893    ns      0.0000
+  Baseline vs AgentFull+PriDe          +5.40pp    -8.968     -8.43     +2.74pp    0.4227    ns      0.0000
+  AgentFull vs +PriDe                  +7.29pp   -21.609    -22.10    +11.94pp    0.2673    ns      0.0000
+  Baseline vs +PriDe                   -4.01pp    -2.056     -2.04     -1.97pp    1.0000    ns      0.1633
+  Baseline vs Agent1                   -0.73pp   +12.431    +16.14    +89.80pp    1.0000    ns      0.0000
+  Baseline vs Agent2                   -1.90pp   +13.232    +13.66    +89.80pp    0.7728    ns         nan
+  Baseline vs Agent3                   +6.10pp    -4.985     -1.38    +89.80pp    0.2386    ns      0.0000
+  Agent1 vs Agent2                     -1.17pp    +0.801     -2.48     +0.00pp    1.0000    ns         nan
+  Agent2 vs Agent3                     +8.00pp   -18.217    -15.04     +0.00pp    0.1175    ns      0.0000
+  Agent1 vs Agent3                     +6.83pp   -17.416    -17.52     +0.00pp    0.5791    ns      0.0002
+
+  ----------------------------------------------------------------------------------------
+
+  Model: llama3_8b-instruct-q6_K
+  Q=100  Confident=11 (11%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            40.0%  7.42  7.04 36.0% 35.24 0.0000  42.3% 46.7% 50.0% 27.3%
+  Baseline+PriDe      36.5%  7.84  8.25 32.9% 33.41 0.0000  36.4% 46.2% 45.0% 26.7%
+  Agent1/Analyst*     18.8% 18.06 20.07100.0% 50.08 0.0000   4.0% 33.3% 48.0%  0.0%
+  Agent2/Critic*      26.0% 43.30 43.30100.0%300.00 0.0000   0.0%  0.0% 100.0%  0.0%
+  Agent3/Intuitive*   40.0%  6.36  4.66100.0%  6.48 0.0905  46.2% 40.0% 42.3% 33.3%
+  AgentFull           21.0% 21.22 21.99  0.0%288.24 0.0000   3.8% 26.7% 61.5%  0.0%
+  AgentFull+PriDe     32.9% 10.71 12.24 14.1% 62.40 0.0000  18.2% 16.7% 52.4% 36.7%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull               -19.00pp   +13.802    +14.95    -36.00pp    0.0017    **         nan
+  Baseline vs AgentFull+PriDe          -7.06pp    +3.290     +5.20    -21.88pp    0.4042    ns      0.0000
+  AgentFull vs +PriDe                 +11.94pp   -10.512     -9.75    +14.12pp    0.0036    **      0.0000
+  Baseline vs +PriDe                   -3.53pp    +0.417     +1.22     -3.06pp    1.0000    ns      0.9600
+  Baseline vs Agent1                  -21.25pp   +10.637    +13.03    +64.00pp    0.0003   ***         nan
+  Baseline vs Agent2                  -14.00pp   +35.881    +36.27    +64.00pp    0.0398     *         nan
+  Baseline vs Agent3                   +0.00pp    -1.056     -2.38    +64.00pp    0.8026    ns      0.8141
+  Agent1 vs Agent2                     +7.25pp   +25.244    +23.23     +0.00pp    0.1687    ns         nan
+  Agent2 vs Agent3                    +14.00pp   -36.937    -38.64     +0.00pp    0.0500    ns      0.0000
+  Agent1 vs Agent3                    +21.25pp   -11.693    -15.41     +0.00pp    0.0011    **      0.0000
+
+  ----------------------------------------------------------------------------------------
+
+  Model: llama3_8b-instruct-q8_0
+  Q=100  Confident=8 (8%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            42.0%  7.95  7.89 36.0% 40.46 0.0000  46.2% 40.0% 53.8% 30.3%
+  Baseline+PriDe      41.2%  8.36  8.58 34.1% 38.05 0.0000  43.5% 41.7% 52.4% 31.0%
+  Agent1/Analyst*     23.2% 18.79 25.40100.0% 53.67 0.0000  12.5% 66.7% 36.0%  0.0%
+  Agent2/Critic*      26.0% 43.30 43.30100.0%300.00 0.0000   0.0%  0.0% 100.0%  0.0%
+  Agent3/Intuitive*   41.0%  8.69  6.94100.0% 12.08 0.0071  46.2% 46.7% 46.2% 30.3%
+  AgentFull           26.0% 19.60 21.98  0.0%245.94 0.0000  11.5% 46.7% 61.5%  0.0%
+  AgentFull+PriDe     30.6% 14.45 17.93  4.7%113.53 0.0000   0.0% 35.7% 52.4% 34.5%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull               -16.00pp   +11.652    +14.09    -36.00pp    0.0150     *         nan
+  Baseline vs AgentFull+PriDe         -11.41pp    +6.495    +10.04    -31.29pp    0.1096    ns      0.0000
+  AgentFull vs +PriDe                  +4.59pp    -5.157     -4.05     +4.71pp    0.1814    ns      0.0000
+  Baseline vs +PriDe                   -0.82pp    +0.412     +0.69     -1.88pp    1.0000    ns      0.9193
+  Baseline vs Agent1                  -18.84pp   +10.840    +17.51    +64.00pp    0.0085    **         nan
+  Baseline vs Agent2                  -16.00pp   +35.350    +35.41    +64.00pp    0.0177     *         nan
+  Baseline vs Agent3                   -1.00pp    +0.738     -0.95    +64.00pp    1.0000    ns      0.8867
+  Agent1 vs Agent2                     +2.84pp   +24.510    +17.90     +0.00pp    0.7103    ns         nan
+  Agent2 vs Agent3                    +15.00pp   -34.612    -36.36     +0.00pp    0.0328     *      0.0000
+  Agent1 vs Agent3                    +17.84pp   -10.102    -18.46     +0.00pp    0.0101     *      0.0000
+
+  ----------------------------------------------------------------------------------------
+
+  Model: mistral-nemo_latest
+  Q=100  Confident=34 (34%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            45.3%  3.41  4.84 32.3%  7.24 0.0647  60.0% 33.3% 54.2% 32.3%
+  Baseline+PriDe      42.4%  2.42  2.70 28.2%  3.18 0.3652  59.1% 33.3% 42.9% 33.3%
+  Agent1/Analyst*     41.4% 11.93 18.59100.0% 19.80 0.0002  66.7% 40.0% 47.6% 14.8%
+  Agent2/Critic*      29.0% 21.39 24.72100.0% 73.20 0.0000  15.4% 46.7% 65.4%  3.0%
+  Agent3/Intuitive*   46.0% 12.10 21.34100.0% 23.44 0.0000  76.9% 40.0% 53.8% 18.2%
+  AgentFull           40.0%  9.29 11.26 16.0% 55.28 0.0000  65.4% 40.0% 53.8%  9.1%
+  AgentFull+PriDe     41.2%  5.91  6.36 22.4% 18.99 0.0003  69.6% 45.5% 40.9% 17.2%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -5.26pp    +5.879     +6.42    -16.32pp    0.5224    ns      0.0000
+  Baseline vs AgentFull+PriDe          -4.09pp    +2.494     +1.52     -9.97pp    0.6276    ns      0.0000
+  AgentFull vs +PriDe                  +1.18pp    -3.386     -4.90     +6.35pp    0.6831    ns      0.0000
+  Baseline vs +PriDe                   -2.91pp    -0.998     -2.14     -4.09pp    1.0000    ns      0.5263
+  Baseline vs Agent1                   -3.88pp    +8.514    +13.75    +67.68pp    0.3320    ns      0.0000
+  Baseline vs Agent2                  -16.26pp   +17.975    +19.88    +67.68pp    0.0101     *      0.0000
+  Baseline vs Agent3                   +0.74pp    +8.689    +16.50    +67.68pp    0.8026    ns      0.0000
+  Agent1 vs Agent2                    -12.38pp    +9.461     +6.12     +0.00pp    0.0310     *      0.0000
+  Agent2 vs Agent3                    +17.00pp    -9.286     -3.38     +0.00pp    0.0085    **      0.0000
+  Agent1 vs Agent3                     +4.62pp    +0.176     +2.75     +0.00pp    0.0455     *      0.9739
+
+  ----------------------------------------------------------------------------------------
+
+  Model: mistral-small3.2_24b
+  Q=100  Confident=44 (44%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            65.0%  5.03  6.87 57.0% 16.22 0.0010  57.7% 46.7% 69.2% 75.8%
+  Baseline+PriDe      60.0%  5.33  7.41 52.9% 15.46 0.0015  47.6% 46.2% 61.9% 73.3%
+  Agent1/Analyst*     58.0% 11.70 16.15100.0% 19.27 0.0002  60.9% 30.8% 50.0% 75.0%
+  Agent2/Critic*      47.0% 24.40 26.88100.0% 95.28 0.0000  19.2% 26.7% 88.5% 45.5%
+  Agent3/Intuitive*   65.0%  8.09 10.91100.0% 10.48 0.0149  61.5% 46.7% 76.9% 66.7%
+  AgentFull           61.0% 10.62 15.18 34.0% 72.16 0.0000  61.5% 26.7% 88.5% 54.5%
+  AgentFull+PriDe     61.2%  6.29  9.81 44.7% 21.53 0.0001  63.6% 41.7% 76.2% 56.7%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -4.00pp    +5.584     +8.31    -23.00pp    0.5023    ns      0.0000
+  Baseline vs AgentFull+PriDe          -3.82pp    +1.257     +2.94    -12.29pp    0.7728    ns      0.0216
+  AgentFull vs +PriDe                  +0.18pp    -4.327     -5.37    +10.71pp    0.6831    ns      0.0001
+  Baseline vs +PriDe                   -5.00pp    +0.296     +0.54     -4.06pp    1.0000    ns      0.9797
+  Baseline vs Agent1                   -7.05pp    +6.665     +9.28    +43.00pp    0.0550    ns      0.0000
+  Baseline vs Agent2                  -18.00pp   +19.369    +20.01    +43.00pp    0.0019    **      0.0000
+  Baseline vs Agent3                   +0.00pp    +3.059     +4.04    +43.00pp    0.7518    ns      0.0000
+  Agent1 vs Agent2                    -10.95pp   +12.703    +10.72     +0.00pp    0.5108    ns      0.0000
+  Agent2 vs Agent3                    +18.00pp   -16.310    -15.96     +0.00pp    0.0027    **      0.0000
+  Agent1 vs Agent3                     +7.05pp    -3.606     -5.24     +0.00pp    0.0455     *      0.0039
+
+  ----------------------------------------------------------------------------------------
+
+  Model: mistral_latest
+  Q=100  Confident=22 (22%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            49.5% 14.09 16.35 22.0%126.74 0.0000  84.0% 33.3% 38.5% 39.4%
+  Baseline+PriDe      45.9% 14.77 17.58 20.0%118.61 0.0000  77.3% 23.1% 38.1% 37.9%
+  Agent1/Analyst*     46.6%  8.84 21.53100.0%  9.14 0.0275  80.0% 25.0% 42.9% 30.0%
+  Agent2/Critic*      31.0% 39.84 40.36100.0%253.92 0.0000   7.7%  6.7% 100.0%  6.1%
+  Agent3/Intuitive*   44.4% 16.12 19.92100.0% 41.16 0.0000  76.9% 26.7% 40.0% 30.3%
+  AgentFull           42.0% 13.88 15.02 20.0%123.34 0.0000  57.7% 20.0% 61.5% 24.2%
+  AgentFull+PriDe     42.4%  6.10  6.36 17.6% 20.21 0.0002  73.9% 25.0% 33.3% 31.0%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -7.49pp    -0.208     -1.33     -2.00pp    0.2109    ns      0.0000
+  Baseline vs AgentFull+PriDe          -7.14pp    -7.995     -9.99     -4.35pp    0.2673    ns      0.0000
+  AgentFull vs +PriDe                  +0.35pp    -7.787     -8.66     -2.35pp    1.0000    ns      0.0000
+  Baseline vs +PriDe                   -3.61pp    +0.676     +1.23     -2.00pp    1.0000    ns      0.8828
+  Baseline vs Agent1                   -2.92pp    -5.246     +5.17    +78.00pp    0.3865    ns      0.0000
+  Baseline vs Agent2                  -18.49pp   +25.747    +24.01    +78.00pp    0.0162     *      0.0000
+  Baseline vs Agent3                   -5.05pp    +2.030     +3.56    +78.00pp    0.2673    ns      0.2618
+  Agent1 vs Agent2                    -15.58pp   +30.993    +18.83     +0.00pp    0.2159    ns      0.0000
+  Agent2 vs Agent3                    +13.44pp   -23.717    -20.44     +0.00pp    0.0500    ns      0.0000
+  Agent1 vs Agent3                     -2.13pp    +7.275     -1.61     +0.00pp    0.2888    ns      0.0051
+
+  ----------------------------------------------------------------------------------------
+
+DATASET: college_cs-microsoft_
+
+  Model: Phi-3-mini-4k-instruct_transformers
+  Q=100  Confident=27 (27%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            49.5% 11.65 15.69 35.1% 79.85 0.0000  45.8% 40.0% 73.1% 35.7%
+  Baseline+PriDe      48.2% 11.16 14.63 25.9% 67.74 0.0000  38.1% 38.5% 66.7% 46.7%
+  Agent1/Analyst*     22.2% 20.52 20.31100.0% 54.56 0.0000   5.3% 58.3% 30.0% 13.3%
+  Agent2/Critic*      39.0% 16.26 22.60100.0% 42.32 0.0000  19.2% 40.0% 76.9% 24.2%
+  Agent3/Intuitive*   33.0% 15.30 16.53100.0% 37.44 0.0000  50.0% 53.3% 30.8% 12.1%
+  AgentFull           38.0% 12.78 16.19 19.0%104.56 0.0000  34.6% 40.0% 61.5% 21.2%
+  AgentFull+PriDe     43.5%  8.25 10.75 22.4% 37.04 0.0000  47.6% 38.5% 61.9% 30.0%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull               -11.46pp    +1.137     +0.50    -16.05pp    0.0389     *      0.0000
+  Baseline vs AgentFull+PriDe          -5.93pp    -3.394     -4.94    -12.70pp    1.0000    ns      0.0033
+  AgentFull vs +PriDe                  +5.53pp    -4.531     -5.44     +3.35pp    0.0412     *      0.0001
+  Baseline vs +PriDe                   -1.23pp    -0.486     -1.06     -9.17pp    1.0000    ns      0.0242
+  Baseline vs Agent1                  -27.24pp    +8.872     +4.62    +64.95pp    0.0046    **      0.0000
+  Baseline vs Agent2                  -10.46pp    +4.618     +6.91    +64.95pp    0.0389     *      0.0000
+  Baseline vs Agent3                  -16.46pp    +3.652     +0.84    +64.95pp    0.0080    **      0.0000
+  Agent1 vs Agent2                    +16.78pp    -4.254     +2.29     +0.00pp    0.0258     *      0.0000
+  Agent2 vs Agent3                     -6.00pp    -0.966     -6.07     +0.00pp    0.3447    ns      0.0000
+  Agent1 vs Agent3                    +10.78pp    -5.220     -3.78     +0.00pp    0.3074    ns      0.0000
+
+  ----------------------------------------------------------------------------------------
+
+  Model: Phi-3.5-mini-instruct_transformers
+  Q=100  Confident=43 (43%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            48.2%  9.94 13.18 37.6% 54.35 0.0000  41.7% 38.5% 60.9% 47.8%
+  Baseline+PriDe      38.8%  4.18  5.70 28.2%  9.51 0.0233  42.9% 30.8% 47.6% 33.3%
+  Agent1/Analyst*     16.7% 29.67 24.45100.0% 76.07 0.0000   7.1% 62.5%  0.0% 15.0%
+  Agent2/Critic*      40.0% 16.90 20.96100.0% 45.68 0.0000  15.4% 33.3% 73.1% 36.4%
+  Agent3/Intuitive*   48.0%  7.58  2.26100.0%  9.20 0.0267  46.2% 46.7% 46.2% 51.5%
+  AgentFull           38.0% 12.47 18.17  8.0% 99.54 0.0000  11.5% 33.3% 65.4% 39.4%
+  AgentFull+PriDe     43.5% 10.33 13.98 15.3% 58.09 0.0000  33.3% 46.2% 57.1% 40.0%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull               -10.19pp    +2.534     +4.99    -29.63pp    0.1213    ns      0.0000
+  Baseline vs AgentFull+PriDe          -4.66pp    +0.397     +0.80    -22.34pp    1.0000    ns      0.0003
+  AgentFull vs +PriDe                  +5.53pp    -2.137     -4.19     +7.29pp    0.0269     *      0.0000
+  Baseline vs +PriDe                   -9.37pp    -5.757     -7.48     -9.40pp    1.0000    ns      0.0000
+  Baseline vs Agent1                  -31.53pp   +19.736    +11.27    +62.37pp    0.0614    ns      0.0000
+  Baseline vs Agent2                   -8.19pp    +6.960     +7.77    +62.37pp    0.3320    ns      0.0000
+  Baseline vs Agent3                   -0.19pp    -2.354    -10.93    +62.37pp    0.7728    ns      0.0000
+  Agent1 vs Agent2                    +23.33pp   -12.776     -3.49     +0.00pp    0.1904    ns      0.0000
+  Agent2 vs Agent3                     +8.00pp    -9.314    -18.70     +0.00pp    0.2012    ns      0.0000
+  Agent1 vs Agent3                    +31.33pp   -22.090    -22.19     +0.00pp    0.0339     *      0.0000
+
+  ----------------------------------------------------------------------------------------
+
+  Model: Phi-4-mini-instruct_transformers
+  Q=100  Confident=45 (45%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            48.0%  9.12 13.67 31.0% 53.24 0.0000  53.8% 53.3% 65.4% 27.3%
+  Baseline+PriDe      43.5%  9.77 14.56 24.7% 51.95 0.0000  47.6% 53.8% 57.1% 26.7%
+  Agent1/Analyst*     43.0% 14.82 21.73100.0% 35.12 0.0000  53.8% 33.3% 73.1% 15.2%
+  Agent2/Critic*      40.0% 18.34 29.40100.0% 53.84 0.0000  73.1% 73.3% 34.6%  3.0%
+  Agent3/Intuitive*   49.0% 13.98 17.82100.0% 31.28 0.0000  50.0% 33.3% 76.9% 33.3%
+  AgentFull           49.0%  9.73 13.53 30.0% 60.54 0.0000  53.8% 53.3% 69.2% 27.3%
+  AgentFull+PriDe     45.9% 10.35 14.10 25.9% 58.26 0.0000  47.6% 53.8% 61.9% 30.0%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                +1.00pp    +0.605     -0.14     -1.00pp    1.0000    ns      0.1765
+  Baseline vs AgentFull+PriDe          -2.12pp    +1.228     +0.43     -5.12pp    0.6831    ns      0.0612
+  AgentFull vs +PriDe                  -3.12pp    +0.623     +0.57     -4.12pp    1.0000    ns      0.9314
+  Baseline vs +PriDe                   -4.47pp    +0.652     +0.89     -6.29pp    1.0000    ns      0.9505
+  Baseline vs Agent1                   -5.00pp    +5.695     +8.05    +69.00pp    0.3017    ns      0.0000
+  Baseline vs Agent2                   -8.00pp    +9.223    +15.72    +69.00pp    0.1698    ns      0.0000
+  Baseline vs Agent3                   +1.00pp    +4.861     +4.14    +69.00pp    1.0000    ns      0.0000
+  Agent1 vs Agent2                     -3.00pp    +3.528     +7.67     +0.00pp    0.6892    ns      0.0000
+  Agent2 vs Agent3                     +9.00pp    -4.362    -11.58     +0.00pp    0.1763    ns      0.0000
+  Agent1 vs Agent3                     +6.00pp    -0.833     -3.91     +0.00pp    0.1138    ns      0.0460
+
+  ----------------------------------------------------------------------------------------
+
 DATASET: sociology
-==============================================================================================================
 
-  Comp 1: Baseline (raw) vs Agent (raw)  — Does multi-agent debate improve raw accuracy?
---------------------------------------------------------------------------------------------------------------
-  Model                                  |  NatAcc_A  NatAcc_B  DeltaAcc |  Bias_A  Bias_B   DBias |  RStd_A  RStd_B   DRStd |  Cons_A  Cons_B   DCons |  McNemar        p  Sig
---------------------------------------------------------------------------------------------------------------
-  gemma3_1b                              |    49.25%    39.80%    -9.45pp |  15.977  30.097 +14.120 |   20.69   31.65  +10.96 |   17.4%    6.5%  -10.9pp |   8.7568   0.0031  YES
-  gemma3_4b                              |    72.14%    67.66%    -4.48pp |   3.791   6.537  +2.746 |    8.83   11.69   +2.86 |   58.2%   49.8%   -8.5pp |   2.0645   0.1508   no
-  gemma3_12b                             |    87.06%    88.06%    +1.00pp |   0.839   2.371  +1.532 |    1.47    3.47   +2.01 |   82.6%   75.1%   -7.5pp |   0.1000   0.7518   no
-  llama3.2_latest                        |    69.50%    57.71%   -11.79pp |   2.878  12.179  +9.300 |    4.86   15.88  +11.02 |   61.7%   36.8%  -24.9pp |  13.9211   0.0002  YES
-  llama3_8b-instruct-q6_K                |    80.60%    25.87%   -54.73pp |   2.405  34.680 +32.275 |    3.84   38.16  +34.33 |   73.1%    1.0%  -72.1pp |  95.8145   0.0000  YES
-  llama3_8b-instruct-q8_0                |    80.60%    27.36%   -53.23pp |   2.204  29.924 +27.720 |    3.66   36.07  +32.40 |   72.6%    1.0%  -71.6pp |  91.3496   0.0000  YES
-  mistral_latest                         |    76.12%    72.64%    -3.48pp |   6.518   6.662  +0.144 |    7.53    9.09   +1.56 |   61.7%   54.2%   -7.5pp |   1.7143   0.1904   no
-  mistral-nemo_latest                    |    78.11%    65.67%   -12.44pp |   3.564   7.789  +4.225 |    4.11    8.94   +4.84 |   60.2%   46.3%  -13.9pp |  18.5806   0.0000  YES
-  mistral-small3.2_24b                   |    88.06%    78.61%    -9.45pp |   0.796   7.651  +6.854 |    2.68   13.60  +10.92 |   83.1%   57.2%  -25.9pp |  14.0870   0.0002  YES
-  Qwen_Qwen2.5-1.5B-Instruct_transformers |    72.64%    66.67%    -5.97pp |   9.377  11.730  +2.353 |   14.41   14.61   +0.20 |   47.8%   46.8%   -1.0pp |   3.1842   0.0744   no
-  Qwen_Qwen2.5-3B-Instruct_transformers  |    73.13%    78.11%    +4.98pp |   4.358   4.395  +0.037 |    6.62    8.58   +1.95 |   59.2%   59.7%   +0.5pp |   2.2500   0.1336   no
-  Qwen_Qwen2.5-7B-Instruct_transformers  |    88.56%    81.59%    -6.97pp |   1.533   2.628  +1.095 |    2.24    3.36   +1.12 |   82.1%   76.6%   -5.5pp |   8.4500   0.0037  YES
-  microsoft_Phi-3-mini-4k-instruct_transformers |    77.11%    76.62%    -0.50pp |   7.795   2.418  -5.377 |   13.54    7.67   -5.87 |   52.2%   50.2%   -2.0pp |   0.0000   1.0000   no
-  microsoft_Phi-3.5-mini-instruct_transformers |    80.50%    66.17%   -14.33pp |   5.262  16.743 +11.481 |   10.82   27.13  +16.31 |   64.7%   18.4%  -46.3pp |  17.3571   0.0000  YES
-  microsoft_Phi-4-mini-instruct_transformers |    82.59%    82.59%    +0.00pp |   2.572   2.371  -0.200 |    5.73    5.30   -0.43 |   77.1%   74.1%   -3.0pp |   0.1667   0.6831   no
+  Model: Qwen_Qwen2.5-1.5B-Instruct_transformers
+  Q=201  Confident=126 (63%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
 
-  Comp 2: Baseline (raw) vs Agent+PriDe  — Does agent structure + PriDe beat single-call baseline?
---------------------------------------------------------------------------------------------------------------
-  Model                                  |  NatAcc_A  NatAcc_B  DeltaAcc |  Bias_A  Bias_B   DBias |  RStd_A  RStd_B   DRStd |  Cons_A  Cons_B   DCons |  McNemar        p  Sig
---------------------------------------------------------------------------------------------------------------
-  gemma3_1b                              |    49.25%    48.54%    -0.72pp |  15.977  12.537  -3.440 |   20.69   11.14   -9.55 |   17.4%   20.5%   +3.1pp |   0.9730   0.3239   no
-  gemma3_4b                              |    72.14%    69.59%    -2.55pp |   3.791   6.463  +2.672 |    8.83   12.39   +3.55 |   58.2%   48.0%  -10.3pp |   0.8929   0.3447   no
-  gemma3_12b                             |    87.06%    86.55%    -0.51pp |   0.839   1.942  +1.103 |    1.47    2.91   +1.44 |   82.6%   75.4%   -7.1pp |   0.1250   0.7237   no
-  llama3.2_latest                        |    69.50%    65.50%    -4.00pp |   2.878   1.903  -0.975 |    4.86    3.64   -1.22 |   61.7%   53.8%   -7.9pp |   2.0833   0.1489   no
-  llama3_8b-instruct-q6_K                |    80.60%    60.23%   -20.36pp |   2.405  13.401 +10.996 |    3.84   26.61  +22.77 |   73.1%   13.5%  -59.7pp |  26.8837   0.0000  YES
-  llama3_8b-instruct-q8_0                |    80.60%    58.48%   -22.12pp |   2.204  11.702  +9.498 |    3.66   24.43  +20.77 |   72.6%   17.5%  -55.1pp |  28.5208   0.0000  YES
-  mistral_latest                         |    76.12%    71.35%    -4.77pp |   6.518   4.129  -2.390 |    7.53    5.81   -1.72 |   61.7%   57.9%   -3.8pp |   3.0476   0.0809   no
-  mistral-nemo_latest                    |    78.11%    73.68%    -4.43pp |   3.564   3.009  -0.555 |    4.11    2.21   -1.90 |   60.2%   53.2%   -7.0pp |   4.5000   0.0339  YES
-  mistral-small3.2_24b                   |    88.06%    87.13%    -0.93pp |   0.796   2.034  +1.237 |    2.68    4.02   +1.34 |   83.1%   77.8%   -5.3pp |   0.4444   0.5050   no
-  Qwen_Qwen2.5-1.5B-Instruct_transformers |    72.64%    66.67%    -5.97pp |   9.377  11.325  +1.948 |   14.41   13.98   -0.43 |   47.8%   46.8%   -1.0pp |   3.0303   0.0817   no
-  Qwen_Qwen2.5-3B-Instruct_transformers  |    73.13%    77.78%    +4.64pp |   4.358   1.956  -2.402 |    6.62    4.27   -2.36 |   59.2%   66.1%   +6.9pp |   0.3462   0.5563   no
-  Qwen_Qwen2.5-7B-Instruct_transformers  |    88.56%    84.21%    -4.35pp |   1.533   2.366  +0.833 |    2.24    3.34   +1.11 |   82.1%   76.6%   -5.5pp |   8.4706   0.0036  YES
-  microsoft_Phi-3-mini-4k-instruct_transformers |    77.11%    79.53%    +2.42pp |   7.795   5.141  -2.654 |   13.54   11.22   -2.32 |   52.2%   51.5%   -0.8pp |   0.0714   0.7893   no
-  microsoft_Phi-3.5-mini-instruct_transformers |    80.50%    78.95%    -1.55pp |   5.262   2.568  -2.695 |   10.82    6.57   -4.25 |   64.7%   63.2%   -1.5pp |   1.1250   0.2888   no
-  microsoft_Phi-4-mini-instruct_transformers |    82.59%    83.04%    +0.45pp |   2.572   2.126  -0.445 |    5.73    5.04   -0.69 |   77.1%   73.7%   -3.4pp |   0.1667   0.6831   no
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            72.6%  9.38 14.41 47.8%113.10 0.0000  87.8% 70.8% 58.0% 74.1%
+  Baseline+PriDe      73.1%  9.25 13.90 48.5% 93.70 0.0000  86.8% 72.5% 57.8% 77.1%
+  Agent1/Analyst*     67.7%  9.62 14.53100.0% 29.75 0.0000  83.7% 70.8% 74.0% 44.4%
+  Agent2/Critic*      55.2% 15.02 28.56100.0% 72.57 0.0000  89.8% 58.3% 66.0% 11.1%
+  Agent3/Intuitive*   74.1%  6.23  6.34100.0% 12.47 0.0059  83.7% 68.8% 68.0% 75.9%
+  AgentFull           66.7% 11.73 14.61 46.8%176.99 0.0000  89.8% 72.9% 66.0% 40.7%
+  AgentFull+PriDe     66.7% 11.32 13.98 46.8%140.36 0.0000  89.5% 72.5% 66.7% 43.8%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
 
-  Comp 3: Agent (raw)    vs Agent+PriDe  — Does PriDe debiasing add value on top of agents?
---------------------------------------------------------------------------------------------------------------
-  Model                                  |  NatAcc_A  NatAcc_B  DeltaAcc |  Bias_A  Bias_B   DBias |  RStd_A  RStd_B   DRStd |  Cons_A  Cons_B   DCons |  McNemar        p  Sig
---------------------------------------------------------------------------------------------------------------
-  gemma3_1b                              |    39.80%    48.54%    +8.74pp |  30.097  12.537 -17.560 |   31.65   11.14  -20.50 |    6.5%   20.5%  +14.0pp |   3.0250   0.0820   no
-  gemma3_4b                              |    67.66%    69.59%    +1.93pp |   6.537   6.463  -0.075 |   11.69   12.39   +0.69 |   49.8%   48.0%   -1.8pp |   0.5000   0.4795   no
-  gemma3_12b                             |    88.06%    86.55%    -1.51pp |   2.371   1.942  -0.429 |    3.47    2.91   -0.56 |   75.1%   75.4%   +0.3pp |   0.5000   0.4795   no
-  llama3.2_latest                        |    57.71%    65.50%    +7.79pp |  12.179   1.903 -10.275 |   15.88    3.64  -12.24 |   36.8%   53.8%  +17.0pp |   9.3750   0.0022  YES
-  llama3_8b-instruct-q6_K                |    25.87%    60.23%   +34.36pp |  34.680  13.401 -21.279 |   38.16   26.61  -11.56 |    1.0%   13.5%  +12.5pp |  48.2462   0.0000  YES
-  llama3_8b-instruct-q8_0                |    27.36%    58.48%   +31.12pp |  29.924  11.702 -18.222 |   36.07   24.43  -11.64 |    1.0%   17.5%  +16.5pp |  39.4091   0.0000  YES
-  mistral_latest                         |    72.64%    71.35%    -1.29pp |   6.662   4.129  -2.533 |    9.09    5.81   -3.28 |   54.2%   57.9%   +3.7pp |   0.0000   1.0000   no
-  mistral-nemo_latest                    |    65.67%    73.68%    +8.01pp |   7.789   3.009  -4.781 |    8.94    2.21   -6.74 |   46.3%   53.2%   +6.9pp |   6.6667   0.0098  YES
-  mistral-small3.2_24b                   |    78.61%    87.13%    +8.53pp |   7.651   2.034  -5.617 |   13.60    4.02   -9.58 |   57.2%   77.8%  +20.6pp |   8.4706   0.0036  YES
-  Qwen_Qwen2.5-1.5B-Instruct_transformers |    66.67%    66.67%    +0.00pp |  11.730  11.325  -0.405 |   14.61   13.98   -0.63 |   46.8%   46.8%   +0.0pp |   0.0000   1.0000   no
-  Qwen_Qwen2.5-3B-Instruct_transformers  |    78.11%    77.78%    -0.33pp |   4.395   1.956  -2.439 |    8.58    4.27   -4.31 |   59.7%   66.1%   +6.4pp |   2.2857   0.1306   no
-  Qwen_Qwen2.5-7B-Instruct_transformers  |    81.59%    84.21%    +2.62pp |   2.628   2.366  -0.262 |    3.36    3.34   -0.01 |   76.6%   76.6%   -0.0pp |   0.5000   0.4795   no
-  microsoft_Phi-3-mini-4k-instruct_transformers |    76.62%    79.53%    +2.92pp |   2.418   5.141  +2.723 |    7.67   11.22   +3.55 |   50.2%   51.5%   +1.2pp |   1.7778   0.1824   no
-  microsoft_Phi-3.5-mini-instruct_transformers |    66.17%    78.95%   +12.78pp |  16.743   2.568 -14.175 |   27.13    6.57  -20.57 |   18.4%   63.2%  +44.7pp |  11.2812   0.0008  YES
-  microsoft_Phi-4-mini-instruct_transformers |    82.59%    83.04%    +0.45pp |   2.371   2.126  -0.245 |    5.30    5.04   -0.26 |   74.1%   73.7%   -0.4pp |   0.0000   1.0000   no
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -5.97pp    +2.353     +0.20     -1.00pp    0.0744    ns      0.0000
+  Baseline vs AgentFull+PriDe          -5.97pp    +1.948     -0.43     -0.98pp    0.0817    ns      0.0000
+  AgentFull vs +PriDe                  +0.00pp    -0.405     -0.63     +0.02pp    1.0000    ns      0.6145
+  Baseline vs +PriDe                   +0.46pp    -0.124     -0.51     +0.78pp    1.0000    ns      0.9895
+  Baseline vs Agent1                   -4.98pp    +0.241     +0.12    +52.24pp    0.1649    ns      0.0000
+  Baseline vs Agent2                  -17.41pp    +5.645    +14.15    +52.24pp    0.0000   ***      0.0000
+  Baseline vs Agent3                   +1.49pp    -3.149     -8.07    +52.24pp    0.6056    ns      0.0001
+  Agent1 vs Agent2                    -12.44pp    +5.405    +14.03     +0.00pp    0.0002   ***      0.0000
+  Agent2 vs Agent3                    +18.91pp    -8.794    -22.22     +0.00pp    0.0000   ***      0.0000
+  Agent1 vs Agent3                     +6.47pp    -3.390     -8.19     +0.00pp    0.0425     *      0.0012
 
-  DETAILED STATISTICS PER MODEL
---------------------------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------
 
-  [gemma3_1b]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=47.76%  bias=15.977  rstd=20.69%  cons=17.4%  chi2=328.368(p=0.0000)  chi2_acc=137.988(p=0.0000)
-      Agent (raw)           : acc=38.18%  bias=30.097  rstd=31.65%  cons=6.5%  chi2=1165.244(p=0.0000)  chi2_acc=341.178(p=0.0000)
-      Agent + PriDe         : acc=48.68%  bias=12.537  rstd=11.14%  cons=20.5%  chi2=172.012(p=0.0000)  chi2_acc=34.006(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=8.7568  p=0.0031  **
-        Contingency: both=71  A_only=28  B_only=9  neither=93
-      Dist shift: chi2=306.3263  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.9730  p=0.3239  ns
-        Contingency: both=68  A_only=22  B_only=15  neither=66
-      Dist shift: chi2=78.7009  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=3.0250  p=0.0820  ns
-        Contingency: both=57  A_only=14  B_only=26  neither=74
-      Dist shift: chi2=316.9909  p=0.0000  ***  (sig=True)
+  Model: Qwen_Qwen2.5-3B-Instruct_transformers
+  Q=201  Confident=110 (55%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
 
-  [gemma3_4b]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=71.39%  bias=3.791  rstd=8.83%  cons=58.2%  chi2=18.488(p=0.0003)  chi2_acc=30.718(p=0.0000)
-      Agent (raw)           : acc=66.17%  bias=6.537  rstd=11.69%  cons=49.8%  chi2=54.975(p=0.0000)  chi2_acc=49.117(p=0.0000)
-      Agent + PriDe         : acc=66.52%  bias=6.463  rstd=12.39%  cons=48.0%  chi2=45.708(p=0.0000)  chi2_acc=47.127(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=2.0645  p=0.1508  ns
-        Contingency: both=125  A_only=20  B_only=11  neither=45
-      Dist shift: chi2=20.5699  p=0.0001  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.8929  p=0.3447  ns
-        Contingency: both=108  A_only=17  B_only=11  neither=35
-      Dist shift: chi2=18.9711  p=0.0003  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.5000  p=0.4795  ns
-        Contingency: both=117  A_only=0  B_only=2  neither=52
-      Dist shift: chi2=0.3411  p=0.9521  ns  (sig=False)
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            73.1%  4.36  6.62 59.2% 24.43 0.0000  59.2% 75.0% 70.0% 87.0%
+  Baseline+PriDe      75.4%  4.04  6.28 59.6% 17.91 0.0005  60.5% 80.0% 71.1% 87.5%
+  Agent1/Analyst*     77.6%  7.52 16.41100.0% 18.20 0.0004  51.0% 89.6% 76.0% 92.6%
+  Agent2/Critic*      52.2% 13.16 19.05100.0% 55.66 0.0000  26.5% 41.7% 76.0% 63.0%
+  Agent3/Intuitive*   80.1%  3.44  7.86100.0%  3.80 0.2843  69.4% 89.6% 76.0% 85.2%
+  AgentFull           78.1%  4.39  8.58 59.7% 24.85 0.0000  55.1% 89.6% 80.0% 87.0%
+  AgentFull+PriDe     77.8%  1.96  4.27 66.1%  4.19 0.2420  63.2% 85.0% 77.8% 83.3%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
 
-  [gemma3_12b]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=85.20%  bias=0.839  rstd=1.47%  cons=82.6%  chi2=0.905(p=0.8241)  chi2_acc=1.371(p=0.7123)
-      Agent (raw)           : acc=83.46%  bias=2.371  rstd=3.47%  cons=75.1%  chi2=7.234(p=0.0648)  chi2_acc=7.018(p=0.0713)
-      Agent + PriDe         : acc=83.92%  bias=1.942  rstd=2.91%  cons=75.4%  chi2=4.129(p=0.2479)  chi2_acc=4.290(p=0.2318)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=0.1000  p=0.7518  ns
-        Contingency: both=171  A_only=4  B_only=6  neither=20
-      Dist shift: chi2=8.3202  p=0.0398  *  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.1250  p=0.7237  ns
-        Contingency: both=145  A_only=5  B_only=3  neither=18
-      Dist shift: chi2=7.0717  p=0.0696  ns  (sig=False)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.5000  p=0.4795  ns
-        Contingency: both=148  A_only=2  B_only=0  neither=21
-      Dist shift: chi2=0.6411  p=0.8870  ns  (sig=False)
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                +4.98pp    +0.037     +1.95     +0.50pp    0.1336    ns      0.0170
+  Baseline vs AgentFull+PriDe          +4.64pp    -2.402     -2.36     +6.88pp    0.5563    ns      0.0035
+  AgentFull vs +PriDe                  -0.33pp    -2.439     -4.31     +6.38pp    0.1306    ns      0.0352
+  Baseline vs +PriDe                   +2.30pp    -0.313     -0.34     +0.45pp    1.0000    ns      0.9855
+  Baseline vs Agent1                   +4.48pp    +3.166     +9.79    +40.80pp    0.1884    ns      0.0000
+  Baseline vs Agent2                  -20.90pp    +8.798    +12.43    +40.80pp    0.0000   ***      0.0000
+  Baseline vs Agent3                   +6.97pp    -0.922     +1.24    +40.80pp    0.0140     *      0.0182
+  Agent1 vs Agent2                    -25.37pp    +5.632     +2.64     +0.00pp    0.0000   ***      0.0000
+  Agent2 vs Agent3                    +27.86pp    -9.720    -11.19     +0.00pp    0.0000   ***      0.0000
+  Agent1 vs Agent3                     +2.49pp    -4.088     -8.55     +0.00pp    0.4414    ns      0.0091
 
-  [llama3.2_latest]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=69.74%  bias=2.878  rstd=4.86%  cons=61.7%  chi2=10.644(p=0.0138)  chi2_acc=8.993(p=0.0294)
-      Agent (raw)           : acc=59.20%  bias=12.179  rstd=15.88%  cons=36.8%  chi2=190.796(p=0.0000)  chi2_acc=83.918(p=0.0000)
-      Agent + PriDe         : acc=65.79%  bias=1.903  rstd=3.64%  cons=53.8%  chi2=3.965(p=0.2653)  chi2_acc=4.027(p=0.2585)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=13.9211  p=0.0002  ***
-        Contingency: both=108  A_only=31  B_only=7  neither=54
-      Dist shift: chi2=167.7515  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=2.0833  p=0.1489  ns
-        Contingency: both=109  A_only=9  B_only=3  neither=50
-      Dist shift: chi2=12.2950  p=0.0064  **  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=9.3750  p=0.0022  **
-        Contingency: both=92  A_only=4  B_only=20  neither=55
-      Dist shift: chi2=158.6048  p=0.0000  ***  (sig=True)
+  ----------------------------------------------------------------------------------------
 
-  [llama3_8b-instruct-q6_K]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=80.60%  bias=2.405  rstd=3.84%  cons=73.1%  chi2=7.443(p=0.0590)  chi2_acc=7.572(p=0.0557)
-      Agent (raw)           : acc=28.48%  bias=34.680  rstd=38.16%  cons=1.0%  chi2=1547.164(p=0.0000)  chi2_acc=574.856(p=0.0000)
-      Agent + PriDe         : acc=62.28%  bias=13.401  rstd=26.61%  cons=13.5%  chi2=196.550(p=0.0000)  chi2_acc=206.143(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=95.8145  p=0.0000  ***
-        Contingency: both=45  A_only=117  B_only=7  neither=32
-      Dist shift: chi2=18197.0419  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=26.8837  p=0.0000  ***
-        Contingency: both=99  A_only=39  B_only=4  neither=29
-      Dist shift: chi2=736.9644  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=48.2462  p=0.0000  ***
-        Contingency: both=42  A_only=4  B_only=61  neither=64
-      Dist shift: chi2=691.4337  p=0.0000  ***  (sig=True)
+  Model: Qwen_Qwen2.5-7B-Instruct_transformers
+  Q=201  Confident=124 (62%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
 
-  [llama3_8b-instruct-q8_0]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=81.22%  bias=2.204  rstd=3.66%  cons=72.6%  chi2=6.249(p=0.1001)  chi2_acc=7.069(p=0.0697)
-      Agent (raw)           : acc=30.10%  bias=29.924  rstd=36.07%  cons=1.0%  chi2=1151.891(p=0.0000)  chi2_acc=497.070(p=0.0000)
-      Agent + PriDe         : acc=62.72%  bias=11.702  rstd=24.43%  cons=17.5%  chi2=149.860(p=0.0000)  chi2_acc=174.591(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=91.3496  p=0.0000  ***
-        Contingency: both=47  A_only=115  B_only=8  neither=31
-      Dist shift: chi2=17566.2225  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=28.5208  p=0.0000  ***
-        Contingency: both=95  A_only=43  B_only=5  neither=28
-      Dist shift: chi2=478.9726  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=39.4091  p=0.0000  ***
-        Contingency: both=41  A_only=7  B_only=59  neither=64
-      Dist shift: chi2=730.5707  p=0.0000  ***  (sig=True)
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            88.6%  1.53  2.24 82.1%  3.02 0.3878  85.7% 91.7% 86.0% 90.7%
+  Baseline+PriDe      91.8%  1.37  1.94 83.6%  2.05 0.5628  89.5% 95.0% 88.9% 93.8%
+  Agent1/Analyst*     61.2%  5.39  7.62100.0%  9.33 0.0252  71.4% 62.5% 62.0% 50.0%
+  Agent2/Critic*      84.6%  3.07  6.02100.0%  3.04 0.3855  77.6% 93.8% 86.0% 81.5%
+  Agent3/Intuitive*   84.1%  1.08  3.68100.0%  0.37 0.9457  81.6% 89.6% 80.0% 85.2%
+  AgentFull           81.6%  2.63  3.36 76.6%  8.89 0.0309  77.6% 91.7% 80.0% 77.8%
+  AgentFull+PriDe     84.2%  2.37  3.34 76.6%  6.13 0.1055  81.6% 95.0% 84.4% 77.1%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
 
-  [mistral_latest]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=72.89%  bias=6.518  rstd=7.53%  cons=61.7%  chi2=54.657(p=0.0000)  chi2_acc=23.085(p=0.0000)
-      Agent (raw)           : acc=68.03%  bias=6.662  rstd=9.09%  cons=54.2%  chi2=57.095(p=0.0000)  chi2_acc=30.535(p=0.0000)
-      Agent + PriDe         : acc=69.74%  bias=4.129  rstd=5.81%  cons=57.9%  chi2=18.655(p=0.0003)  chi2_acc=10.938(p=0.0121)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=1.7143  p=0.1904  ns
-        Contingency: both=139  A_only=14  B_only=7  neither=41
-      Dist shift: chi2=14.8236  p=0.0020  **  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=3.0476  p=0.0809  ns
-        Contingency: both=116  A_only=15  B_only=6  neither=34
-      Dist shift: chi2=8.9911  p=0.0294  *  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=116  A_only=7  B_only=6  neither=42
-      Dist shift: chi2=19.1986  p=0.0002  ***  (sig=True)
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -6.97pp    +1.095     +1.12     -5.47pp    0.0037    **      0.0029
+  Baseline vs AgentFull+PriDe          -4.35pp    +0.833     +1.11     -5.48pp    0.0036    **      0.1947
+  AgentFull vs +PriDe                  +2.62pp    -0.262     -0.01     -0.01pp    0.4795    ns      0.0005
+  Baseline vs +PriDe                   +3.26pp    -0.166     -0.30     +1.54pp    1.0000    ns      0.9972
+  Baseline vs Agent1                  -27.36pp    +3.852     +5.38    +17.91pp    0.0000   ***      0.0000
+  Baseline vs Agent2                   -3.98pp    +1.541     +3.79    +17.91pp    0.1175    ns      0.0000
+  Baseline vs Agent3                   -4.48pp    -0.456     +1.44    +17.91pp    0.0389     *      0.1810
+  Agent1 vs Agent2                    +23.38pp    -2.311     -1.59     +0.00pp    0.0000   ***      0.0686
+  Agent2 vs Agent3                     -0.50pp    -1.997     -2.34     +0.00pp    1.0000    ns      0.4798
+  Agent1 vs Agent3                    +22.89pp    -4.309     -3.94     +0.00pp    0.0000   ***      0.0799
 
-  [mistral-nemo_latest]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=75.00%  bias=3.564  rstd=4.11%  cons=60.2%  chi2=16.338(p=0.0010)  chi2_acc=7.237(p=0.0647)
-      Agent (raw)           : acc=66.54%  bias=7.789  rstd=8.94%  cons=46.3%  chi2=78.050(p=0.0000)  chi2_acc=28.888(p=0.0000)
-      Agent + PriDe         : acc=68.71%  bias=3.009  rstd=2.21%  cons=53.2%  chi2=9.906(p=0.0194)  chi2_acc=1.551(p=0.6707)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=18.5806  p=0.0000  ***
-        Contingency: both=129  A_only=28  B_only=3  neither=41
-      Dist shift: chi2=21.7114  p=0.0001  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=4.5000  p=0.0339  *
-        Contingency: both=122  A_only=14  B_only=4  neither=31
-      Dist shift: chi2=4.8553  p=0.1827  ns  (sig=False)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=6.6667  p=0.0098  **
-        Contingency: both=113  A_only=2  B_only=13  neither=43
-      Dist shift: chi2=35.6330  p=0.0000  ***  (sig=True)
+  ----------------------------------------------------------------------------------------
 
-  [mistral-small3.2_24b]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=86.57%  bias=0.796  rstd=2.68%  cons=83.1%  chi2=0.816(p=0.8457)  chi2_acc=4.963(p=0.1745)
-      Agent (raw)           : acc=76.00%  bias=7.651  rstd=13.60%  cons=57.2%  chi2=75.294(p=0.0000)  chi2_acc=81.509(p=0.0000)
-      Agent + PriDe         : acc=84.36%  bias=2.034  rstd=4.02%  cons=77.8%  chi2=4.526(p=0.2100)  chi2_acc=8.365(p=0.0390)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=14.0870  p=0.0002  ***
-        Contingency: both=156  A_only=21  B_only=2  neither=22
-      Dist shift: chi2=74.4563  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.4444  p=0.5050  ns
-        Contingency: both=146  A_only=6  B_only=3  neither=16
-      Dist shift: chi2=1.9492  p=0.5830  ns  (sig=False)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=8.4706  p=0.0036  **
-        Contingency: both=134  A_only=2  B_only=15  neither=20
-      Dist shift: chi2=59.4097  p=0.0000  ***  (sig=True)
+  Model: gemma3_12b
+  Q=201  Confident=176 (88%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
 
-  [Qwen_Qwen2.5-1.5B-Instruct_transformers]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=70.27%  bias=9.377  rstd=14.41%  cons=47.8%  chi2=113.104(p=0.0000)  chi2_acc=79.897(p=0.0000)
-      Agent (raw)           : acc=66.67%  bias=11.730  rstd=14.61%  cons=46.8%  chi2=176.985(p=0.0000)  chi2_acc=77.239(p=0.0000)
-      Agent + PriDe         : acc=67.25%  bias=11.325  rstd=13.98%  cons=46.8%  chi2=140.363(p=0.0000)  chi2_acc=60.700(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=3.1842  p=0.0744  ns
-        Contingency: both=121  A_only=25  B_only=13  neither=42
-      Dist shift: chi2=40.6184  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=3.0303  p=0.0817  ns
-        Contingency: both=103  A_only=22  B_only=11  neither=35
-      Dist shift: chi2=25.6537  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=114  A_only=0  B_only=0  neither=57
-      Dist shift: chi2=1.8020  p=0.6145  ns  (sig=False)
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            87.1%  0.84  1.47 82.6%  0.91 0.8241  87.8% 91.7% 82.0% 87.0%
+  Baseline+PriDe      88.3%  0.75  1.31 84.2%  0.61 0.8946  86.8% 92.9% 88.4% 85.4%
+  Agent1/Analyst*     85.6%  3.74  7.41100.0%  4.21 0.2394  84.8% 89.6% 73.9% 93.8%
+  Agent2/Critic*      86.1%  1.55  3.60100.0%  0.77 0.8564  81.6% 91.7% 86.0% 85.2%
+  Agent3/Intuitive*   88.1%  0.82  3.35100.0%  0.21 0.9753  87.8% 93.8% 86.0% 85.2%
+  AgentFull           88.1%  2.37  3.47 75.1%  7.23 0.0648  83.7% 93.8% 86.0% 88.9%
+  AgentFull+PriDe     86.5%  1.94  2.91 75.4%  4.13 0.2479  78.4% 97.6% 86.0% 84.0%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
 
-  [Qwen_Qwen2.5-3B-Instruct_transformers]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=72.26%  bias=4.358  rstd=6.62%  cons=59.2%  chi2=24.428(p=0.0000)  chi2_acc=17.593(p=0.0005)
-      Agent (raw)           : acc=75.50%  bias=4.395  rstd=8.58%  cons=59.7%  chi2=24.846(p=0.0000)  chi2_acc=31.971(p=0.0000)
-      Agent + PriDe         : acc=76.90%  bias=1.956  rstd=4.27%  cons=66.1%  chi2=4.187(p=0.2420)  chi2_acc=7.012(p=0.0715)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=2.2500  p=0.1336  ns
-        Contingency: both=134  A_only=13  B_only=23  neither=31
-      Dist shift: chi2=10.1859  p=0.0170  *  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.3462  p=0.5563  ns
-        Contingency: both=118  A_only=11  B_only=15  neither=27
-      Dist shift: chi2=13.5787  p=0.0035  **  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=2.2857  p=0.1306  ns
-        Contingency: both=132  A_only=6  B_only=1  neither=32
-      Dist shift: chi2=8.5936  p=0.0352  *  (sig=True)
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                +1.00pp    +1.532     +2.01     -7.46pp    0.7518    ns      0.0398
+  Baseline vs AgentFull+PriDe          -0.51pp    +1.103     +1.44     -7.15pp    0.7237    ns      0.0696
+  AgentFull vs +PriDe                  -1.51pp    -0.429     -0.56     +0.31pp    0.4795    ns      0.8870
+  Baseline vs +PriDe                   +1.24pp    -0.094     -0.16     +1.62pp    1.0000    ns      0.9917
+  Baseline vs Agent1                   -1.43pp    +2.903     +5.94    +17.41pp    0.4533    ns      0.0002
+  Baseline vs Agent2                   -1.00pp    +0.710     +2.13    +17.41pp    0.7728    ns      0.0568
+  Baseline vs Agent3                   +1.00pp    -0.023     +1.88    +17.41pp    0.7237    ns      0.5600
+  Agent1 vs Agent2                     +0.43pp    -2.194     -3.81     +0.00pp    0.6056    ns      0.3871
+  Agent2 vs Agent3                     +1.99pp    -0.733     -0.25     +0.00pp    0.2888    ns      0.8577
+  Agent1 vs Agent3                     +2.42pp    -2.927     -4.06     +0.00pp    0.2386    ns      0.2377
 
-  [Qwen_Qwen2.5-7B-Instruct_transformers]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=85.45%  bias=1.533  rstd=2.24%  cons=82.1%  chi2=3.025(p=0.3878)  chi2_acc=3.231(p=0.3574)
-      Agent (raw)           : acc=81.59%  bias=2.628  rstd=3.36%  cons=76.6%  chi2=8.886(p=0.0309)  chi2_acc=6.029(p=0.1102)
-      Agent + PriDe         : acc=83.77%  bias=2.366  rstd=3.34%  cons=76.6%  chi2=6.129(p=0.1055)  chi2_acc=5.624(p=0.1314)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=8.4500  p=0.0037  **
-        Contingency: both=161  A_only=17  B_only=3  neither=20
-      Dist shift: chi2=13.9684  p=0.0029  **  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=8.4706  p=0.0036  **
-        Contingency: both=142  A_only=15  B_only=2  neither=12
-      Dist shift: chi2=4.7049  p=0.1947  ns  (sig=False)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.5000  p=0.4795  ns
-        Contingency: both=142  A_only=0  B_only=2  neither=27
-      Dist shift: chi2=17.6900  p=0.0005  ***  (sig=True)
+  ----------------------------------------------------------------------------------------
 
-  [microsoft_Phi-3-mini-4k-instruct_transformers]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=74.84%  bias=7.795  rstd=13.54%  cons=52.2%  chi2=78.071(p=0.0000)  chi2_acc=78.305(p=0.0000)
-      Agent (raw)           : acc=72.64%  bias=2.418  rstd=7.67%  cons=50.2%  chi2=7.522(p=0.0570)  chi2_acc=23.780(p=0.0000)
-      Agent + PriDe         : acc=75.15%  bias=5.141  rstd=11.22%  cons=51.5%  chi2=28.924(p=0.0000)  chi2_acc=46.122(p=0.0000)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=143  A_only=12  B_only=11  neither=35
-      Dist shift: chi2=43.4095  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.0714  p=0.7893  ns
-        Contingency: both=128  A_only=6  B_only=8  neither=29
-      Dist shift: chi2=30.7600  p=0.0000  ***  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=1.7778  p=0.1824  ns
-        Contingency: both=129  A_only=2  B_only=7  neither=33
-      Dist shift: chi2=12.8623  p=0.0049  **  (sig=True)
+  Model: gemma3_1b
+  Q=201  Confident=110 (55%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
 
-  [microsoft_Phi-3.5-mini-instruct_transformers]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=80.67%  bias=5.262  rstd=10.82%  cons=64.7%  chi2=35.536(p=0.0000)  chi2_acc=60.114(p=0.0000)
-      Agent (raw)           : acc=61.44%  bias=16.743  rstd=27.13%  cons=18.4%  chi2=360.627(p=0.0000)  chi2_acc=249.884(p=0.0000)
-      Agent + PriDe         : acc=79.09%  bias=2.568  rstd=6.57%  cons=63.2%  chi2=7.216(p=0.0653)  chi2_acc=17.851(p=0.0005)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=17.3571  p=0.0000  ***
-        Contingency: both=126  A_only=35  B_only=7  neither=32
-      Dist shift: chi2=376.0046  p=0.0000  ***  (sig=True)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=1.1250  p=0.2888  ns
-        Contingency: both=133  A_only=6  B_only=2  neither=29
-      Dist shift: chi2=13.5428  p=0.0036  **  (sig=True)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=11.2812  p=0.0008  ***
-        Contingency: both=109  A_only=6  B_only=26  neither=30
-      Dist shift: chi2=419.0197  p=0.0000  ***  (sig=True)
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            49.3% 15.98 20.69 17.4%328.37 0.0000  34.7% 33.3% 78.0% 50.0%
+  Baseline+PriDe      52.6% 16.09 20.78 16.4%283.17 0.0000  36.8% 39.0% 77.8% 53.2%
+  Agent1/Analyst*     37.5% 30.79 31.24100.0%303.32 0.0000  18.8% 10.4% 90.0% 29.6%
+  Agent2/Critic*      35.3% 33.58 35.38100.0%362.72 0.0000  12.2% 10.4% 96.0% 22.2%
+  Agent3/Intuitive*   46.8% 14.09 11.28100.0% 63.82 0.0000  40.8% 43.8% 66.0% 37.0%
+  AgentFull           39.8% 30.10 31.65  6.5%1165.24 0.0000  20.4% 16.7% 90.0% 31.5%
+  AgentFull+PriDe     48.5% 12.54 11.14 20.5%172.01 0.0000  47.4% 42.5% 60.9% 42.6%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
 
-  [microsoft_Phi-4-mini-instruct_transformers]
-    Method metrics (all permutations):
-      Baseline (raw)        : acc=83.58%  bias=2.572  rstd=5.73%  cons=77.1%  chi2=8.507(p=0.0366)  chi2_acc=19.215(p=0.0002)
-      Agent (raw)           : acc=84.08%  bias=2.371  rstd=5.30%  cons=74.1%  chi2=7.234(p=0.0648)  chi2_acc=16.874(p=0.0008)
-      Agent + PriDe         : acc=84.06%  bias=2.126  rstd=5.04%  cons=73.7%  chi2=4.947(p=0.1757)  chi2_acc=12.954(p=0.0047)
-    Comp 1: Baseline (raw) vs Agent (raw):
-      McNemar: stat=0.1667  p=0.6831  ns
-        Contingency: both=163  A_only=3  B_only=3  neither=32
-      Dist shift: chi2=0.2299  p=0.9726  ns  (sig=False)
-    Comp 2: Baseline (raw) vs Agent+PriDe:
-      McNemar: stat=0.1667  p=0.6831  ns
-        Contingency: both=139  A_only=3  B_only=3  neither=26
-      Dist shift: chi2=0.3189  p=0.9564  ns  (sig=False)
-    Comp 3: Agent (raw)    vs Agent+PriDe:
-      McNemar: stat=0.0000  p=1.0000  ns
-        Contingency: both=141  A_only=0  B_only=1  neither=29
-      Dist shift: chi2=0.1581  p=0.9841  ns  (sig=False)
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -9.45pp   +14.120    +10.96    -10.95pp    0.0031    **      0.0000
+  Baseline vs AgentFull+PriDe          -0.72pp    -3.440     -9.55     +3.05pp    0.3239    ns      0.0000
+  AgentFull vs +PriDe                  +8.74pp   -17.560    -20.50    +14.00pp    0.0820    ns      0.0000
+  Baseline vs +PriDe                   +3.38pp    +0.109     +0.09     -1.04pp    1.0000    ns      0.9975
+  Baseline vs Agent1                  -11.75pp   +14.811    +10.54    +82.59pp    0.0010    **      0.0000
+  Baseline vs Agent2                  -13.93pp   +17.607    +14.68    +82.59pp    0.0001   ***      0.0000
+  Baseline vs Agent3                   -2.49pp    -1.890     -9.41    +82.59pp    0.5510    ns      0.0000
+  Agent1 vs Agent2                     -2.18pp    +2.796     +4.14     +0.00pp    0.5403    ns      0.0103
+  Agent2 vs Agent3                    +11.44pp   -19.497    -24.10     +0.00pp    0.0030    **      0.0000
+  Agent1 vs Agent3                     +9.27pp   -16.701    -19.96     +0.00pp    0.0256     *      0.0000
+
+  ----------------------------------------------------------------------------------------
+
+  Model: gemma3_4b
+  Q=201  Confident=135 (67%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            72.1%  3.79  8.83 58.2% 18.49 0.0003  65.3% 81.2% 74.0% 68.5%
+  Baseline+PriDe      71.9%  4.03  9.29 56.7% 17.77 0.0005  63.2% 82.5% 75.6% 66.7%
+  Agent1/Analyst*     66.0%  5.71 11.39100.0% 10.29 0.0163  46.9% 76.6% 68.1% 72.2%
+  Agent2/Critic*      61.2%  6.78  9.42100.0% 14.78 0.0020  46.9% 72.9% 60.0% 64.8%
+  Agent3/Intuitive*   69.7%  5.49 10.35100.0%  9.69 0.0214  57.1% 83.3% 76.0% 63.0%
+  AgentFull           67.7%  6.54 11.69 49.8% 54.98 0.0000  57.1% 81.2% 66.0% 66.7%
+  AgentFull+PriDe     69.6%  6.46 12.39 48.0% 45.71 0.0000  48.6% 83.7% 72.1% 70.0%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -4.48pp    +2.746     +2.86     -8.46pp    0.1508    ns      0.0001
+  Baseline vs AgentFull+PriDe          -2.55pp    +2.672     +3.55    -10.26pp    0.3447    ns      0.0003
+  AgentFull vs +PriDe                  +1.93pp    -0.075     +0.69     -1.80pp    0.4795    ns      0.9521
+  Baseline vs +PriDe                   -0.21pp    +0.238     +0.46     -1.48pp    1.0000    ns      0.9910
+  Baseline vs Agent1                   -6.15pp    +1.922     +2.55    +41.79pp    0.0820    ns      0.0213
+  Baseline vs Agent2                  -10.95pp    +2.988     +0.59    +41.79pp    0.0024    **      0.0000
+  Baseline vs Agent3                   -2.49pp    +1.697     +1.52    +41.79pp    0.4042    ns      0.0081
+  Agent1 vs Agent2                     -4.80pp    +1.066     -1.96     +0.00pp    0.2433    ns      0.7101
+  Agent2 vs Agent3                     +8.46pp    -1.291     +0.93     +0.00pp    0.0068    **      0.0007
+  Agent1 vs Agent3                     +3.66pp    -0.225     -1.04     +0.00pp    0.2012    ns      0.0511
+
+  ----------------------------------------------------------------------------------------
+
+  Model: llama3.2_latest
+  Q=201  Confident=101 (50%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            69.5%  2.88  4.86 61.7% 10.64 0.0138  51.0% 79.2% 73.5% 74.1%
+  Baseline+PriDe      69.6%  2.30  4.36 63.7%  5.80 0.1217  50.0% 78.0% 73.8% 75.0%
+  Agent1/Analyst*     48.0% 24.93 30.03100.0%198.88 0.0000  14.3% 54.2% 94.0% 30.2%
+  Agent2/Critic*      53.0% 15.28 22.91100.0% 73.92 0.0000  23.4% 70.8% 79.6% 38.9%
+  Agent3/Intuitive*   65.7%  6.77 12.79100.0% 14.74 0.0021  44.9% 79.2% 72.0% 66.7%
+  AgentFull           57.7% 12.18 15.88 36.8%190.80 0.0000  28.6% 70.8% 86.0% 46.3%
+  AgentFull+PriDe     65.5%  1.90  3.64 53.8%  3.96 0.2653  47.5% 68.3% 73.2% 71.4%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull               -11.79pp    +9.300    +11.02    -24.88pp    0.0002   ***      0.0000
+  Baseline vs AgentFull+PriDe          -4.00pp    -0.975     -1.22     -7.89pp    0.1489    ns      0.0064
+  AgentFull vs +PriDe                  +7.79pp   -10.275    -12.24    +16.99pp    0.0022    **      0.0000
+  Baseline vs +PriDe                   +0.09pp    -0.576     -0.50     +2.05pp    1.0000    ns      0.9307
+  Baseline vs Agent1                  -21.50pp   +22.052    +25.17    +38.31pp    0.0000   ***      0.0000
+  Baseline vs Agent2                  -16.47pp   +12.397    +18.05    +38.31pp    0.0000   ***      0.0000
+  Baseline vs Agent3                   -3.83pp    +3.892     +7.93    +38.31pp    0.0433     *      0.0000
+  Agent1 vs Agent2                     +5.03pp    -9.655     -7.12     +0.00pp    0.1845    ns      0.0000
+  Agent2 vs Agent3                    +12.64pp    -8.505    -10.12     +0.00pp    0.0001   ***      0.0000
+  Agent1 vs Agent3                    +17.67pp   -18.160    -17.24     +0.00pp    0.0000   ***      0.0000
+
+  ----------------------------------------------------------------------------------------
+
+  Model: llama3_8b-instruct-q6_K
+  Q=201  Confident=39 (19%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            80.6%  2.41  3.84 73.1%  7.44 0.0590  79.6% 91.7% 78.0% 74.1%
+  Baseline+PriDe      81.3%  1.91  3.39 74.3%  4.01 0.2602  78.9% 92.7% 82.2% 72.3%
+  Agent1/Analyst*     22.9% 32.46 31.29100.0%316.98 0.0000   0.0% 16.7% 76.1%  0.0%
+  Agent2/Critic*      25.4% 43.01 43.01100.0%595.04 0.0000   2.0%  0.0% 100.0%  0.0%
+  Agent3/Intuitive*   76.8%  4.38  6.07100.0%  6.08 0.1077  75.5% 87.2% 72.0% 73.1%
+  AgentFull           25.9% 34.68 38.16  1.0%1547.16 0.0000   2.0% 14.6% 88.0%  0.0%
+  AgentFull+PriDe     60.2% 13.40 26.61 13.5%196.55 0.0000  73.7% 12.5% 82.2% 68.8%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull               -54.73pp   +32.275    +34.33    -72.14pp    0.0000   ***      0.0000
+  Baseline vs AgentFull+PriDe         -20.36pp   +10.996    +22.77    -59.68pp    0.0000   ***      0.0000
+  AgentFull vs +PriDe                 +34.36pp   -21.279    -11.56    +12.46pp    0.0000   ***      0.0000
+  Baseline vs +PriDe                   +0.69pp    -0.491     -0.44     +1.13pp    1.0000    ns      0.9467
+  Baseline vs Agent1                  -57.72pp   +30.057    +27.45    +26.87pp    0.0000   ***         nan
+  Baseline vs Agent2                  -55.22pp   +40.609    +39.18    +26.87pp    0.0000   ***         nan
+  Baseline vs Agent3                   -3.83pp    +1.976     +2.23    +26.87pp    0.0265     *      0.1876
+  Agent1 vs Agent2                     +2.50pp   +10.552    +11.73     +0.00pp    0.5023    ns         nan
+  Agent2 vs Agent3                    +51.39pp   -38.633    -36.95     +0.00pp    0.0000   ***      0.0000
+  Agent1 vs Agent3                    +53.90pp   -28.081    -25.22     +0.00pp    0.0000   ***      0.0000
+
+  ----------------------------------------------------------------------------------------
+
+  Model: llama3_8b-instruct-q8_0
+  Q=201  Confident=31 (15%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            80.6%  2.20  3.66 72.6%  6.25 0.1001  81.6% 91.7% 78.0% 72.2%
+  Baseline+PriDe      82.5%  1.68  3.28 73.7%  3.10 0.3765  82.1% 95.2% 82.2% 71.1%
+  Agent1/Analyst*     20.6% 24.26 21.75100.0%177.96 0.0000   4.5% 22.9% 55.3%  0.0%
+  Agent2/Critic*      25.4% 43.01 43.01100.0%595.04 0.0000   2.0%  0.0% 100.0%  0.0%
+  Agent3/Intuitive*   75.4%  3.75  4.76100.0%  4.48 0.2143  75.5% 83.0% 74.0% 69.8%
+  AgentFull           27.4% 29.92 36.07  1.0%1151.89 0.0000   6.1% 18.8% 86.0%  0.0%
+  AgentFull+PriDe     58.5% 11.70 24.43 17.5%149.86 0.0000  76.3% 12.2% 77.3% 66.7%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull               -53.23pp   +27.720    +32.40    -71.64pp    0.0000   ***      0.0000
+  Baseline vs AgentFull+PriDe         -22.12pp    +9.498    +20.77    -55.09pp    0.0000   ***      0.0000
+  AgentFull vs +PriDe                 +31.12pp   -18.222    -11.64    +16.55pp    0.0000   ***      0.0000
+  Baseline vs +PriDe                   +1.86pp    -0.521     -0.38     +1.05pp    1.0000    ns      0.9487
+  Baseline vs Agent1                  -59.96pp   +22.055    +18.09    +27.36pp    0.0000   ***         nan
+  Baseline vs Agent2                  -55.22pp   +40.811    +39.35    +27.36pp    0.0000   ***         nan
+  Baseline vs Agent3                   -5.22pp    +1.546     +1.09    +27.36pp    0.0055    **      0.2034
+  Agent1 vs Agent2                     +4.74pp   +18.755    +21.26     +0.00pp    0.1763    ns         nan
+  Agent2 vs Agent3                    +50.00pp   -39.265    -38.26     +0.00pp    0.0000   ***      0.0000
+  Agent1 vs Agent3                    +54.74pp   -20.509    -17.00     +0.00pp    0.0000   ***      0.0000
+
+  ----------------------------------------------------------------------------------------
+
+  Model: mistral-nemo_latest
+  Q=201  Confident=113 (56%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            78.1%  3.56  4.11 60.2% 16.34 0.0010  71.4% 89.6% 70.0% 81.5%
+  Baseline+PriDe      76.6%  3.51  4.06 57.9% 13.51 0.0037  67.6% 88.1% 69.8% 79.6%
+  Agent1/Analyst*     66.5%  8.26 11.69100.0% 21.18 0.0001  65.2% 86.7% 57.1% 59.3%
+  Agent2/Critic*      46.3% 18.98 27.71100.0%115.84 0.0000  30.6% 85.4% 60.0% 13.0%
+  Agent3/Intuitive*   76.1%  4.54  8.04100.0%  6.62 0.0850  73.5% 89.6% 68.0% 74.1%
+  AgentFull           65.7%  7.79  8.94 46.3% 78.05 0.0000  57.1% 85.4% 64.0% 57.4%
+  AgentFull+PriDe     73.7%  3.01  2.21 53.2%  9.91 0.0194  73.0% 79.1% 68.9% 73.9%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull               -12.44pp    +4.225     +4.84    -13.93pp    0.0000   ***      0.0001
+  Baseline vs AgentFull+PriDe          -4.43pp    -0.555     -1.90     -6.98pp    0.0339     *      0.1827
+  AgentFull vs +PriDe                  +8.01pp    -4.781     -6.74     +6.95pp    0.0098    **      0.0000
+  Baseline vs +PriDe                   -1.50pp    -0.050     -0.05     -2.30pp    1.0000    ns      0.9963
+  Baseline vs Agent1                  -11.61pp    +4.696     +7.59    +39.80pp    0.0000   ***      0.0000
+  Baseline vs Agent2                  -31.84pp   +15.415    +23.60    +39.80pp    0.0000   ***      0.0000
+  Baseline vs Agent3                   -1.99pp    +0.974     +3.93    +39.80pp    0.3865    ns      0.5283
+  Agent1 vs Agent2                    -20.23pp   +10.719    +16.02     +0.00pp    0.0000   ***      0.0000
+  Agent2 vs Agent3                    +29.85pp   -14.441    -19.68     +0.00pp    0.0000   ***      0.0000
+  Agent1 vs Agent3                     +9.62pp    -3.722     -3.66     +0.00pp    0.0001   ***      0.2790
+
+  ----------------------------------------------------------------------------------------
+
+  Model: mistral-small3.2_24b
+  Q=201  Confident=135 (67%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            88.1%  0.80  2.68 83.1%  0.82 0.8457  79.6% 95.8% 86.0% 90.7%
+  Baseline+PriDe      88.9%  0.92  2.76 83.6%  0.92 0.8196  78.9% 95.0% 88.9% 91.7%
+  Agent1/Analyst*     68.3% 14.41 16.22100.0% 59.78 0.0000  45.5% 68.3% 67.3% 91.3%
+  Agent2/Critic*      72.6% 11.25 12.55100.0% 40.69 0.0000  57.1% 68.8% 92.0% 72.2%
+  Agent3/Intuitive*   86.6%  2.55  6.06100.0%  2.08 0.5550  79.6% 95.8% 88.0% 83.3%
+  AgentFull           78.6%  7.65 13.60 57.2% 75.29 0.0000  57.1% 81.2% 90.0% 85.2%
+  AgentFull+PriDe     87.1%  2.03  4.02 77.8%  4.53 0.2100  78.9% 95.0% 93.3% 81.2%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -9.45pp    +6.854    +10.92    -25.87pp    0.0002   ***      0.0000
+  Baseline vs AgentFull+PriDe          -0.93pp    +1.237     +1.34     -5.31pp    0.5050    ns      0.5830
+  AgentFull vs +PriDe                  +8.53pp    -5.617     -9.58    +20.56pp    0.0036    **      0.0000
+  Baseline vs +PriDe                   +0.83pp    +0.122     +0.08     +0.54pp    1.0000    ns      0.9855
+  Baseline vs Agent1                  -19.73pp   +13.611    +13.54    +16.92pp    0.0000   ***      0.0000
+  Baseline vs Agent2                  -15.42pp   +10.452     +9.87    +16.92pp    0.0000   ***      0.0000
+  Baseline vs Agent3                   -1.49pp    +1.750     +3.38    +16.92pp    0.4497    ns      0.1195
+  Agent1 vs Agent2                     +4.30pp    -3.159     -3.66     +0.00pp    0.1508    ns      0.0000
+  Agent2 vs Agent3                    +13.93pp    -8.703     -6.49     +0.00pp    0.0000   ***      0.0000
+  Agent1 vs Agent3                    +18.23pp   -11.861    -10.15     +0.00pp    0.0000   ***      0.0000
+
+  ----------------------------------------------------------------------------------------
+
+  Model: mistral_latest
+  Q=201  Confident=68 (34%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            76.1%  6.52  7.53 61.7% 54.66 0.0000  83.7% 70.8% 72.0% 77.8%
+  Baseline+PriDe      76.6%  6.43  7.75 60.8% 45.18 0.0000  84.2% 70.0% 72.7% 79.6%
+  Agent1/Analyst*     72.2%  5.41  8.47100.0%  9.09 0.0281  78.7% 68.8% 59.6% 80.8%
+  Agent2/Critic*      40.0% 32.47 35.32100.0%337.48 0.0000  32.7% 10.4% 100.0% 18.5%
+  Agent3/Intuitive*   75.1%  5.36  7.01100.0%  9.25 0.0262  85.7% 75.0% 66.0% 74.1%
+  AgentFull           72.6%  6.66  9.09 54.2% 57.09 0.0000  75.5% 66.7% 72.0% 75.9%
+  AgentFull+PriDe     71.3%  4.13  5.81 57.9% 18.65 0.0003  71.8% 70.7% 60.0% 82.6%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -3.48pp    +0.144     +1.56     -7.46pp    0.1904    ns      0.0020
+  Baseline vs AgentFull+PriDe          -4.77pp    -2.390     -1.72     -3.80pp    0.0809    ns      0.0294
+  AgentFull vs +PriDe                  -1.29pp    -2.533     -3.28     +3.67pp    1.0000    ns      0.0002
+  Baseline vs +PriDe                   +0.49pp    -0.093     +0.21     -0.87pp    1.0000    ns      0.9923
+  Baseline vs Agent1                   -3.95pp    -1.106     +0.94    +38.31pp    0.0442     *      0.0847
+  Baseline vs Agent2                  -36.12pp   +25.957    +27.79    +38.31pp    0.0000   ***      0.0000
+  Baseline vs Agent3                   -1.00pp    -1.156     -0.52    +38.31pp    0.8026    ns      0.0560
+  Agent1 vs Agent2                    -32.16pp   +27.063    +26.85     +0.00pp    0.0000   ***      0.0000
+  Agent2 vs Agent3                    +35.12pp   -27.112    -28.31     +0.00pp    0.0000   ***      0.0000
+  Agent1 vs Agent3                     +2.96pp    -0.050     -1.46     +0.00pp    0.2109    ns      0.9054
+
+  ----------------------------------------------------------------------------------------
+
+DATASET: sociology-microsoft_
+
+  Model: Phi-3-mini-4k-instruct_transformers
+  Q=201  Confident=64 (32%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            77.1%  7.80 13.54 52.2% 78.07 0.0000  57.1% 95.8% 82.0% 74.1%
+  Baseline+PriDe      78.4%  7.58 13.75 51.5% 62.91 0.0000  55.3% 100.0% 84.4% 72.9%
+  Agent1/Analyst*     38.1% 24.00 26.04100.0%166.87 0.0000  50.0% 19.0% 74.5%  8.3%
+  Agent2/Critic*      68.7% 11.95 24.27100.0% 45.95 0.0000  32.7% 93.8% 88.0% 61.1%
+  Agent3/Intuitive*   72.1%  9.12 16.63100.0% 26.76 0.0000  79.6% 91.7% 74.0% 46.3%
+  AgentFull           76.6%  2.42  7.67 50.2%  7.52 0.0570  71.4% 89.6% 84.0% 63.0%
+  AgentFull+PriDe     79.5%  5.14 11.22 51.5% 28.92 0.0000  65.8% 92.5% 86.7% 72.9%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                -0.50pp    -5.377     -5.87     -1.99pp    1.0000    ns      0.0000
+  Baseline vs AgentFull+PriDe          +2.42pp    -2.654     -2.32     -0.78pp    0.7893    ns      0.0000
+  AgentFull vs +PriDe                  +2.92pp    +2.723     +3.55     +1.21pp    0.1824    ns      0.0049
+  Baseline vs +PriDe                   +1.25pp    -0.213     +0.20     -0.78pp    1.0000    ns      0.9912
+  Baseline vs Agent1                  -38.99pp   +16.209    +12.50    +47.76pp    0.0000   ***      0.0000
+  Baseline vs Agent2                   -8.46pp    +4.157    +10.73    +47.76pp    0.0021    **      0.0000
+  Baseline vs Agent3                   -4.98pp    +1.327     +3.09    +47.76pp    0.1227    ns      0.0000
+  Agent1 vs Agent2                    +30.54pp   -12.052     -1.77     +0.00pp    0.0000   ***      0.0000
+  Agent2 vs Agent3                     +3.48pp    -2.831     -7.65     +0.00pp    0.4008    ns      0.0000
+  Agent1 vs Agent3                    +34.02pp   -14.882     -9.42     +0.00pp    0.0000   ***      0.0000
+
+  ----------------------------------------------------------------------------------------
+
+  Model: Phi-3.5-mini-instruct_transformers
+  Q=201  Confident=87 (43%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            80.5%  5.26 10.82 64.7% 35.54 0.0000  62.5% 93.8% 84.0% 81.5%
+  Baseline+PriDe      81.9%  4.97 10.51 65.5% 26.99 0.0000  63.2% 97.5% 86.7% 79.2%
+  Agent1/Analyst*     25.8% 34.86 32.77100.0%241.10 0.0000   0.0%  0.0% 80.0% 20.5%
+  Agent2/Critic*      70.6%  9.38 16.89100.0% 28.31 0.0000  44.9% 87.5% 84.0% 66.7%
+  Agent3/Intuitive*   77.6%  6.34  9.77100.0% 12.91 0.0048  67.3% 93.8% 74.0% 75.9%
+  AgentFull           66.2% 16.74 27.13 18.4%360.63 0.0000  26.5% 64.6% 82.0% 88.9%
+  AgentFull+PriDe     78.9%  2.57  6.57 63.2%  7.22 0.0653  60.5% 95.0% 84.4% 75.0%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull               -14.33pp   +11.481    +16.31    -46.27pp    0.0000   ***      0.0000
+  Baseline vs AgentFull+PriDe          -1.55pp    -2.695     -4.25     -1.52pp    0.2888    ns      0.0036
+  AgentFull vs +PriDe                 +12.78pp   -14.175    -20.57    +44.75pp    0.0008   ***      0.0000
+  Baseline vs +PriDe                   +1.37pp    -0.296     -0.31     +0.82pp    1.0000    ns      0.9724
+  Baseline vs Agent1                  -54.69pp   +29.597    +21.95    +35.32pp    0.0000   ***         nan
+  Baseline vs Agent2                   -9.85pp    +4.120     +6.07    +35.32pp    0.0008   ***      0.0000
+  Baseline vs Agent3                   -2.89pp    +1.074     -1.05    +35.32pp    0.1814    ns      0.0000
+  Agent1 vs Agent2                    +44.84pp   -25.477    -15.88     +0.00pp    0.0000   ***      0.0000
+  Agent2 vs Agent3                     +6.97pp    -3.047     -7.12     +0.00pp    0.0216     *      0.0000
+  Agent1 vs Agent3                    +51.81pp   -28.524    -23.00     +0.00pp    0.0000   ***      0.0000
+
+  ----------------------------------------------------------------------------------------
+
+  Model: Phi-4-mini-instruct_transformers
+  Q=201  Confident=133 (66%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline            82.6%  2.57  5.73 77.1%  8.51 0.0366  77.6% 89.6% 84.0% 79.6%
+  Baseline+PriDe      83.0%  2.65  6.01 76.6%  7.68 0.0530  76.3% 92.5% 86.7% 77.1%
+  Agent1/Analyst*     80.1%  2.47  4.92100.0%  1.97 0.5797  75.5% 87.5% 82.0% 75.9%
+  Agent2/Critic*      65.2% 14.13 25.98100.0% 64.21 0.0000  93.9% 83.3% 62.0% 25.9%
+  Agent3/Intuitive*   84.1%  2.99  7.11100.0%  2.88 0.4104  75.5% 93.8% 88.0% 79.6%
+  AgentFull           82.6%  2.37  5.30 74.1%  7.23 0.0648  79.6% 91.7% 82.0% 77.8%
+  AgentFull+PriDe     83.0%  2.13  5.04 73.7%  4.95 0.1757  81.6% 92.5% 84.4% 75.0%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                +0.00pp    -0.200     -0.43     -2.99pp    0.6831    ns      0.9726
+  Baseline vs AgentFull+PriDe          +0.45pp    -0.445     -0.69     -3.43pp    0.6831    ns      0.9564
+  AgentFull vs +PriDe                  +0.45pp    -0.245     -0.26     -0.45pp    1.0000    ns      0.9841
+  Baseline vs +PriDe                   +0.45pp    +0.078     +0.28     -0.51pp    1.0000    ns      0.9967
+  Baseline vs Agent1                   -2.49pp    -0.100     -0.81    +22.89pp    0.1824    ns      0.4145
+  Baseline vs Agent2                  -17.41pp   +11.559    +20.25    +22.89pp    0.0000   ***      0.0000
+  Baseline vs Agent3                   +1.49pp    +0.421     +1.38    +22.89pp    0.5050    ns      0.0432
+  Agent1 vs Agent2                    -14.93pp   +11.659    +21.06     +0.00pp    0.0001   ***      0.0000
+  Agent2 vs Agent3                    +18.91pp   -11.138    -18.87     +0.00pp    0.0000   ***      0.0000
+  Agent1 vs Agent3                     +3.98pp    +0.521     +2.19     +0.00pp    0.0269     *      0.8861
+
+  ----------------------------------------------------------------------------------------

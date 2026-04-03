@@ -1,0 +1,42 @@
+
+================================================================================
+SELF-CORRECTION EVALUATION SUMMARY
+Dataset: college_cs
+Model:   llama3.2:latest
+Total Questions: 100
+================================================================================
+
+[1] ACCURACY
+--------------------------------------------------------------------------------
+Baseline (Initial): 42.00%
+After Correction:   43.00%
+Difference:         +1.00%
+
+[2] POSITIONAL BIAS SCORE (Lower is better)
+(Calculated as the Standard Deviation of choice percentages, same as PriDe)
+--------------------------------------------------------------------------------
+Baseline Bias:      8.22
+After Correction:   6.82
+Difference:         -1.40
+
+[3] CHOICE DISTRIBUTION (A, B, C, D)
+--------------------------------------------------------------------------------
+Baseline:
+  A: 22 (22.0%)
+  B: 18 (18.0%)
+  C: 39 (39.0%)
+  D: 21 (21.0%)
+
+After Correction:
+  A: 15 (15.0%)
+  B: 27 (27.0%)
+  C: 24 (24.0%)
+  D: 34 (34.0%)
+
+[4] DYNAMICS
+--------------------------------------------------------------------------------
+Total Answers Changed: 63 (63.0%)
+  - Improved (Wrong -> Right): 25
+  - Worsened (Right -> Wrong): 24
+  - Neutral (Wrong -> Wrong):  14
+================================================================================

@@ -1,0 +1,56 @@
+================================================================================
+STATISTICAL ANALYSIS: 2012-2020_ICT_DSE - llama3.2_latest
+================================================================================
+
+BASIC STATISTICS:
+   - Total Questions: 1084
+   - Overall Accuracy: 53.97%
+
+CHOICE DISTRIBUTION:
+   - A: 219 (20.20%)
+   - B: 273 (25.18%)
+   - C: 412 (38.01%)
+   - D: 180 (16.61%)
+
+CHI-SQUARE TEST vs Uniform Distribution:
+   - Chi-square statistic: 113.91
+   - p-value: 0.000000
+   - Degrees of freedom: 3
+   - Result: SIGNIFICANT bias detected (p < 0.05)
+
+POSITION BIAS SCORE:
+   - Standard deviation of choice percentages: 8.10
+
+CHI-SQUARE TEST for Accuracy vs Position:
+   - Chi-square statistic: 57.79
+   - p-value: 0.000000
+   - Degrees of freedom: 3
+   - Result: Accuracy IS dependent on position (p < 0.05)
+
+CONSISTENCY SCORE:
+   - Consistency Rate: 35.42% (Questions with same content answer across permutations)
+
+RECALL STANDARD DEVIATION (RStd):
+   - Recall per position:
+     A: 0.4207
+     B: 0.5572
+     C: 0.7196
+     D: 0.4613
+   - Standard Deviation: 11.51%
+
+PAIRWISE CHOICE COMPARISONS (Bonferroni-corrected):
+   - Corrected significance level (alpha/k): 0.0083
+   - A vs B: chi2=5.93, p=0.0149
+   - A vs C: chi2=59.03, p=0.0000 (Significant)
+   - A vs D: chi2=3.81, p=0.0509
+   - B vs C: chi2=28.21, p=0.0000 (Significant)
+   - B vs D: chi2=19.09, p=0.0000 (Significant)
+   - C vs D: chi2=90.92, p=0.0000 (Significant)
+
+ACCURACY BY CORRECT ANSWER POSITION:
+   - Position A: 42.07%
+   - Position B: 55.72%
+   - Position C: 71.96%
+   - Position D: 46.13%
+
+================================================================================

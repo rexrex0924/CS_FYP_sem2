@@ -1,0 +1,56 @@
+================================================================================
+STATISTICAL ANALYSIS: 2012-2020_ICT_DSE - llama3_8b-instruct-q6_K
+================================================================================
+
+BASIC STATISTICS:
+   - Total Questions: 1084
+   - Overall Accuracy: 70.02%
+
+CHOICE DISTRIBUTION:
+   - A: 266 (24.54%)
+   - B: 306 (28.23%)
+   - C: 248 (22.88%)
+   - D: 264 (24.35%)
+
+CHI-SQUARE TEST vs Uniform Distribution:
+   - Chi-square statistic: 6.75
+   - p-value: 0.080471
+   - Degrees of freedom: 3
+   - Result: No significant bias (p >= 0.05)
+
+POSITION BIAS SCORE:
+   - Standard deviation of choice percentages: 1.97
+
+CHI-SQUARE TEST for Accuracy vs Position:
+   - Chi-square statistic: 5.85
+   - p-value: 0.119192
+   - Degrees of freedom: 3
+   - Result: Accuracy is independent of position (p >= 0.05)
+
+CONSISTENCY SCORE:
+   - Consistency Rate: 65.68% (Questions with same content answer across permutations)
+
+RECALL STANDARD DEVIATION (RStd):
+   - Recall per position:
+     A: 0.6790
+     B: 0.7528
+     C: 0.6642
+     D: 0.7048
+   - Standard Deviation: 3.37%
+
+PAIRWISE CHOICE COMPARISONS (Bonferroni-corrected):
+   - Corrected significance level (alpha/k): 0.0083
+   - A vs B: chi2=2.80, p=0.0944
+   - A vs C: chi2=0.63, p=0.4272
+   - A vs D: chi2=0.01, p=0.9308
+   - B vs C: chi2=6.07, p=0.0137
+   - B vs D: chi2=3.09, p=0.0785
+   - C vs D: chi2=0.50, p=0.4795
+
+ACCURACY BY CORRECT ANSWER POSITION:
+   - Position A: 67.90%
+   - Position B: 75.28%
+   - Position C: 66.42%
+   - Position D: 70.48%
+
+================================================================================

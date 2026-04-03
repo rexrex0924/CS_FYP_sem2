@@ -1,0 +1,56 @@
+================================================================================
+STATISTICAL ANALYSIS: sociology - gemma3_1b
+================================================================================
+
+BASIC STATISTICS:
+   - Total Questions: 804
+   - Overall Accuracy: 46.52%
+
+CHOICE DISTRIBUTION:
+   - A: 118 (14.68%)
+   - B: 64 (7.96%)
+   - C: 446 (55.47%)
+   - D: 176 (21.89%)
+
+CHI-SQUARE TEST vs Uniform Distribution:
+   - Chi-square statistic: 429.39
+   - p-value: 0.000000
+   - Degrees of freedom: 3
+   - Result: SIGNIFICANT bias detected (p < 0.05)
+
+POSITION BIAS SCORE:
+   - Standard deviation of choice percentages: 18.27
+
+CHI-SQUARE TEST for Accuracy vs Position:
+   - Chi-square statistic: 211.99
+   - p-value: 0.000000
+   - Degrees of freedom: 3
+   - Result: Accuracy IS dependent on position (p < 0.05)
+
+CONSISTENCY SCORE:
+   - Consistency Rate: 11.94% (Questions with same content answer across permutations)
+
+RECALL STANDARD DEVIATION (RStd):
+   - Recall per position:
+     A: 0.3134
+     B: 0.1990
+     C: 0.8756
+     D: 0.4726
+   - Standard Deviation: 25.61%
+
+PAIRWISE CHOICE COMPARISONS (Bonferroni-corrected):
+   - Corrected significance level (alpha/k): 0.0083
+   - A vs B: chi2=16.02, p=0.0001 (Significant)
+   - A vs C: chi2=190.75, p=0.0000 (Significant)
+   - A vs D: chi2=11.44, p=0.0007 (Significant)
+   - B vs C: chi2=286.13, p=0.0000 (Significant)
+   - B vs D: chi2=52.27, p=0.0000 (Significant)
+   - C vs D: chi2=117.20, p=0.0000 (Significant)
+
+ACCURACY BY CORRECT ANSWER POSITION:
+   - Position A: 31.34%
+   - Position B: 19.90%
+   - Position C: 87.56%
+   - Position D: 47.26%
+
+================================================================================
