@@ -372,7 +372,7 @@ def main():
     parser.add_argument("--input", type=str, required=True, help="Path to MCQ CSV file")
     parser.add_argument("--n-permutations", type=int, default=4, help="Number of permutations per question")
     parser.add_argument("--sampling-n", type=int, default=15, help="Number of samples for probability estimation")
-    parser.add_argument("--sampling-temp", type=float, default=0.7, help="Sampling temperature")
+    parser.add_argument("--sampling-temp", type=float, default=0.5, help="Sampling temperature")
     parser.add_argument("--seed", type=int, default=42, help="Random seed")
     parser.add_argument("--max-questions", type=int, default=None, help="Maximum number of questions to evaluate")
     parser.add_argument("--num-workers", type=int, default=8, help="Parallel workers for Ollama / Batch size for Transformers")

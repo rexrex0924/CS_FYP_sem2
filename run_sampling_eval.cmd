@@ -5,11 +5,11 @@
 #SBATCH --partition=gpu_24h
 #SBATCH --qos=gpu
 #SBATCH --cpus-per-task=2
-#SBATCH --output=/research/d7/fyp25/bhtang2/mad_graph/CS_FYP_sem2/slurm_output/sampling/dse-Phi3_%j.txt 
+#SBATCH --output=/research/d7/fyp25/bhtang2/mad_graph/CS_FYP_sem2/slurm_output/sampling/cs-Phi4_%j.txt 
 #SBATCH --gres=gpu:1
 
-MODEL="microsoft/Phi-3-mini-4k-instruct"
-CSV_PATH="dataset/2012-2020_ICT_DSE.csv"
+MODEL="microsoft/Phi-4-mini-instruct"
+CSV_PATH="dataset/sociology.csv"
 SEED="42"
 DEVICE="cuda"
 QUANTIZATION="fp16"
@@ -26,4 +26,4 @@ conda activate mad
 
 python sampling_eval.py --backend transformers --model ${MODEL} \
        --input ${CSV_PATH} --sampling-n 15 \
-       --sampling-temp 0.7 --num-workers 4 --quantization ${QUANTIZATION}
+       --sampling-temp 0.5 --num-workers 4 --quantization ${QUANTIZATION}
