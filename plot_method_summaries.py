@@ -10,7 +10,7 @@ from pathlib import Path
 
 # Constants
 POSITIONS = ["A", "B", "C", "D"]
-METHODS = ["baseline", "pride", "agents", "agents_pride"]
+METHODS = ["baseline", "sampling", "pride", "agents", "agents_pride"]
 
 def calculate_metrics(df, pred_col, ground_truth_col="correct_position"):
     df = df.copy()
@@ -66,7 +66,8 @@ def parse_model_dataset(filename):
     # Strip all known extra suffixes
     suffixes = [
         "_pride", "_baseline", ".csv",
-        "_transformers", "_sampling_n15_debiased", "_debiased"
+        "_transformers", "_sampling_n15_debiased", "_debiased",
+        "_sampling_n15"
     ]
     for suffix in suffixes:
         name = name.replace(suffix, "")
@@ -104,6 +105,7 @@ def main():
         "pride": base_dir / "pride_csv",
         "agents": base_dir / "agents_csv",
         "agents_pride": base_dir / "agents_pride_csv",
+        "sampling": base_dir / "sampling_csv",
     }
     
     print("Gathering data...")
@@ -133,11 +135,15 @@ def main():
     # Plot graphs and generate report
     print("\nGenerating plots and summary report...")
     metrics_list = ["Accuracy", "Consistency", "Bias", "RStd"]
-    bar_colors = ["#2ECC71", "#3498DB", "#E74C3C", "#9B59B6"] # Green, Blue, Red, Purple
+    bar_colors = ["#2ECC71", "#3498DB", "#E74C3C", "#9B59B6", "#F1C40F"] # Green, Blue, Red, Purple, Yellow
     
     report_lines = ["METHOD SUMMARIES REPORT", "="*80, ""]
     
-    for ds, models_dict in results.items():
+    datasets = sorted(results.keys())
+    
+    # 1. Generate text report
+    for ds in datasets:
+        models_dict = results[ds]
         models = sorted(models_dict.keys())
         if not models: continue
         
@@ -160,37 +166,52 @@ def main():
                         f"{m_dict.get('Consistency',0):>12.2f}"
                     )
             report_lines.append("")
-        
-        # We will make 1 plot per metric
-        for metric in metrics_list:
-            fig, ax = plt.subplots(figsize=(max(10, len(models)*1.5), 6))
+            
+    # 2. Generate exactly 4 PNGs, one per metric. Each PNG has subplots for datasets.
+    for metric in metrics_list:
+        # Create a figure with N subplots (1 per dataset)
+        n_ds = len(datasets)
+        # Avoid creating 0 subplots
+        if n_ds == 0:
+            continue
+            
+        fig, axes = plt.subplots(n_ds, 1, figsize=(12, max(6, n_ds * 5)))
+        if n_ds == 1:
+            axes = [axes]
+            
+        for idx, ds in enumerate(datasets):
+            ax = axes[idx]
+            models_dict = results[ds]
+            models = sorted(models_dict.keys())
+            if not models: continue
+            
             x = np.arange(len(models))
-            width = 0.2
+            width = 0.8 / len(METHODS)
             
             for i, method in enumerate(METHODS):
                 vals = [models_dict[m].get(method, {}).get(metric, 0) for m in models]
                 offset = (i - len(METHODS)/2 + 0.5) * width
                 bars = ax.bar(x + offset, vals, width, label=method, color=bar_colors[i], alpha=0.85)
                 
-                # Add text labels on bars
                 for j, val in enumerate(vals):
                     ax.text(x[j] + offset, val + 1, f"{val:.1f}", ha='center', va='bottom', fontsize=8, rotation=90)
 
             ax.set_xticks(x)
             ax.set_xticklabels(models, rotation=30, ha="right", fontsize=9)
             ax.set_ylabel("Score")
-            ax.set_title(f"Dataset: {ds} | Metric: {metric}\nMethods Comparison", fontweight="bold")
-            ax.legend(title="Methods", bbox_to_anchor=(1.01, 1), loc='upper left')
+            ax.set_title(f"Dataset: {ds}", fontweight="bold")
+            if idx == 0:
+                ax.legend(title="Methods", bbox_to_anchor=(1.01, 1), loc='upper left')
             ax.grid(axis='y', alpha=0.3)
-            # Expand y limit slightly to fit text
-            ymax = max([models_dict[m].get(meth, {}).get(metric, 0) for m in models for meth in METHODS])
+            
+            ymax = max((models_dict[m].get(meth, {}).get(metric, 0) for m in models for meth in METHODS), default=10)
             ax.set_ylim(0, ymax * 1.25 if ymax > 0 else 100)
             
-            plt.tight_layout()
-            out_path = out_dir / f"{ds}_{metric}_methods.png"
-            plt.savefig(out_path, dpi=150)
-            plt.close()
-            print(f"Saved plot -> {out_path}")
+        plt.tight_layout()
+        out_path = out_dir / f"Combined_{metric}_methods.png"
+        plt.savefig(out_path, dpi=150)
+        plt.close()
+        print(f"Saved combined plot -> {out_path}")
             
     report_path = out_dir / "SUMMARY_REPORT.txt"
     report_path.write_text("\n".join(report_lines), encoding="utf-8")
@@ -200,4 +221,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
