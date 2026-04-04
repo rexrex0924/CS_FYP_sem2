@@ -131,14 +131,28 @@ def main():
                 
         # Run PriDe
         deb_df, best_alpha = run_pride(df, fixed_alpha)
+        before_acc = deb_df["is_correct_fixed"].mean() * 100
+        after_acc = deb_df["debiased_is_correct"].mean() * 100
+        
+        def calculate_bias(d, col):
+            valid = d[d[col].isin(POSITIONS)]
+            if len(valid) == 0: return 0.0
+            counts = valid[col].value_counts().reindex(POSITIONS, fill_value=0)
+            return float(np.std((counts / len(valid) * 100).values))
+            
+        before_bias = calculate_bias(deb_df, "predicted_answer")
+        after_bias = calculate_bias(deb_df, "debiased_predicted_answer")
+
         print(f"  -> Best Alpha Used: {best_alpha:.1f}")
+        print(f"  -> Accuracy: {before_acc:.2f}% -> {after_acc:.2f}% ({(after_acc - before_acc):+.2f}%)")
+        print(f"  -> Bias Score: {before_bias:.2f} -> {after_bias:.2f} (lower is better)")
         
         # Ensure we only export the requested columns (in order)
         final_df = deb_df[cols_order]
         
         out_fp = out_dir / fp.name
         final_df.to_csv(out_fp, index=False)
-        print(f"  -> Saved {len(final_df)} structured rows to {out_fp}")
+        print(f"  -> Saved {len(final_df)} structured rows to {out_fp}\n")
 
 if __name__ == "__main__":
     main()
