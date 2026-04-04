@@ -198,7 +198,7 @@ def main():
 
             ax.set_xticks(x)
             ax.set_xticklabels(models, rotation=30, ha="right", fontsize=9)
-            ax.set_ylabel("Score")
+            ax.set_ylabel(metric)
             ax.set_title(f"Dataset: {ds}", fontweight="bold")
             if idx == 0:
                 ax.legend(title="Methods", bbox_to_anchor=(1.01, 1), loc='upper left')
@@ -207,6 +207,7 @@ def main():
             ymax = max((models_dict[m].get(meth, {}).get(metric, 0) for m in models for meth in METHODS), default=10)
             ax.set_ylim(0, ymax * 1.25 if ymax > 0 else 100)
             
+        fig.suptitle(f"Method Comparison: {metric}", fontsize=16, fontweight="bold")
         plt.tight_layout()
         out_path = out_dir / f"Combined_{metric}_methods.png"
         plt.savefig(out_path, dpi=150)
