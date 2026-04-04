@@ -1,0 +1,171 @@
+================================================================================
+PriDe COMPREHENSIVE DEBIASING ANALYSIS REPORT
+================================================================================
+Dataset: results/sampling/2012-2020_ICT_DSE-microsoft_Phi-4-mini-instruct_sampling_n15.csv
+Model: microsoft_Phi-4-mini-instruct
+================================================================================
+
+CONFIGURATION:
+  Calibration Ratio: 15%
+  Alpha (Debiasing Strength): 0.60
+  Calibration Questions: 40
+  Test Questions: 231
+  Total Evaluations (Test Set): 924
+
+================================================================================
+1. CHOICE DISTRIBUTION (Predicted Answers)
+================================================================================
+
+BASELINE (Before PriDe):
+Position     Count      Percentage      Expected        Deviation      
+--------------------------------------------------------------------------------
+A            461         49.89%           231.0          +230.0
+B            172         18.61%           231.0           -59.0
+C            174         18.83%           231.0           -57.0
+D            117         12.66%           231.0          -114.0
+
+AFTER PriDe:
+Position     Count      Percentage      Expected        Deviation      
+--------------------------------------------------------------------------------
+A            242         26.19%           231.0           +11.0
+B            282         30.52%           231.0           +51.0
+C            249         26.95%           231.0           +18.0
+D            151         16.34%           231.0           -80.0
+
+================================================================================
+2. CHI-SQUARE TEST: Choice Distribution vs Uniform (25/25/25/25)
+================================================================================
+
+BASELINE:
+  Observed Frequencies: A=461, B=172, C=174, D=117
+  Expected Frequencies: A=231.0, B=231.0, C=231.0, D=231.0
+  Chi-square Statistic (χ²): 314.3983
+  Degrees of Freedom: 3
+  P-value: 0.000000
+  Interpretation: *** Highly significant deviation (p < 0.001)
+
+AFTER PriDe:
+  Observed Frequencies: A=242, B=282, C=249, D=151
+  Expected Frequencies: A=231.0, B=231.0, C=231.0, D=231.0
+  Chi-square Statistic (χ²): 40.8918
+  Degrees of Freedom: 3
+  P-value: 0.000000
+  Interpretation: *** Highly significant deviation (p < 0.001)
+
+CHANGE:
+  Δχ²: -273.5065
+  Δp-value: +0.000000
+
+================================================================================
+3. POSITION BIAS SCORE (Standard Deviation of Choice Percentages)
+================================================================================
+
+BASELINE:
+  Choice Percentages: A=49.89%, B=18.61%, C=18.83%, D=12.66%
+  Position Bias Score: 14.5829
+
+AFTER PriDe:
+  Choice Percentages: A=26.19%, B=30.52%, C=26.95%, D=16.34%
+  Position Bias Score: 5.2592
+
+CHANGE: -9.3237 ✅ (Improved - bias reduced)
+
+================================================================================
+4. ACCURACY BY CORRECT ANSWER POSITION
+================================================================================
+
+BASELINE:
+  Overall Accuracy: 0.5985 (59.85%)
+
+  Position     Accuracy        Deviation from Mean 
+  --------------------------------------------------
+  A            0.8571          +0.2587
+  B            0.5455          -0.0530
+  C            0.5628          -0.0357
+  D            0.4286          -0.1699
+
+AFTER PriDe:
+  Overall Accuracy: 0.6721 (67.21%)
+
+  Position     Accuracy        Deviation from Mean 
+  --------------------------------------------------
+  A            0.6797          +0.0076
+  B            0.7749          +0.1028
+  C            0.7186          +0.0465
+  D            0.5152          -0.1569
+
+OVERALL ACCURACY CHANGE: +0.0736 ✅ (Improved)
+
+================================================================================
+5. CHI-SQUARE TEST: Accuracy vs Position (Independence Test)
+================================================================================
+
+BASELINE:
+  Chi-square Statistic (χ²): 95.9971
+  P-value: 0.000000
+  Interpretation: *** Accuracy STRONGLY depends on position (p < 0.001)
+
+AFTER PriDe:
+  Chi-square Statistic (χ²): 39.2212
+  P-value: 0.000000
+  Interpretation: *** Accuracy STRONGLY depends on position (p < 0.001)
+
+CHANGE:
+  Δχ²: -56.7759
+  Δp-value: +0.000000 ✅ (More independent)
+
+================================================================================
+6. RECALL BY POSITION (PriDe Paper's RStd Metric)
+================================================================================
+
+BASELINE:
+  Position     Recall Rate    
+  ------------------------------
+  A            0.8571          (85.71%)
+  B            0.5455          (54.55%)
+  C            0.5628          (56.28%)
+  D            0.4286          (42.86%)
+  Recall Std Dev (RStd): 15.80%
+
+AFTER PriDe:
+  Position     Recall Rate    
+  ------------------------------
+  A            0.6797          (67.97%)
+  B            0.7749          (77.49%)
+  C            0.7186          (71.86%)
+  D            0.5152          (51.52%)
+  Recall Std Dev (RStd): 9.67%
+
+CHANGE: -6.13% ✅ (Improved - more balanced)
+
+================================================================================
+7. ESTIMATED PRIOR (Token Bias from Calibration Set)
+================================================================================
+
+Position     Prior Probability    Percentage     
+--------------------------------------------------
+A            0.7519                75.19%
+B            0.0640                 6.40%
+C            0.0867                 8.67%
+D            0.0973                 9.73%
+
+Note: Prior represents the model's inherent bias toward each token/position.
+      Uniform (unbiased) would be: A=0.25, B=0.25, C=0.25, D=0.25
+
+================================================================================
+8. SUMMARY TABLE
+================================================================================
+
+Metric                              Baseline        After PriDe     Change         
+--------------------------------------------------------------------------------
+Overall Accuracy                    0.5985          0.6721          +0.0736        
+Position Bias Score                 14.5829         5.2592          -9.3237        
+Recall Std (RStd) %                 15.80           9.67            -6.13          
+Chi² (Distribution)                 314.3983        40.8918         -273.5065      
+Chi² p-value (Distribution)         0.000000        0.000000        +0.000000      
+Chi² (Accuracy vs Position)         95.9971         39.2212         -56.7759       
+Chi² p-value (Acc vs Pos)           0.000000        0.000000        +0.000000      
+
+================================================================================
+END OF REPORT
+================================================================================
