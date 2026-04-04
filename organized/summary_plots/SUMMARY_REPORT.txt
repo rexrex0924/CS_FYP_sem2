@@ -3,39 +3,27 @@ METHOD SUMMARIES REPORT
 
 DATASET: 2012-2020_ICT_DSE
 --------------------------------------------------------------------------------
-  Model: Qwen_Qwen2.5-1.5B-Instruct_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                62.12       5.09       7.02        39.83
-
-  Model: Qwen_Qwen2.5-1.5B-Instruct_transformers
+  Model: Qwen_Qwen2.5-1.5B-Instruct
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             54.34      18.68      21.62        28.04
+    pride                62.12       5.09       7.02        39.83
     agents               52.03      17.89      19.21        28.04
     agents_pride         54.22      18.09      19.05        29.00
 
-  Model: Qwen_Qwen2.5-3B-Instruct_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                44.70       3.54       6.94         9.52
-
-  Model: Qwen_Qwen2.5-3B-Instruct_transformers
+  Model: Qwen_Qwen2.5-3B-Instruct
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             66.51       5.33       6.48        52.77
+    pride                44.70       3.54       6.94         9.52
     agents               63.84       6.52       8.69        47.60
     agents_pride         66.34       4.74       6.17        50.65
 
-  Model: Qwen_Qwen2.5-7B-Instruct_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                39.83      18.00      17.77         8.66
-
-  Model: Qwen_Qwen2.5-7B-Instruct_transformers
+  Model: Qwen_Qwen2.5-7B-Instruct
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             81.27       2.90       3.43        75.65
+    pride                39.83      18.00      17.77         8.66
     agents               78.04       2.81       4.44        67.53
     agents_pride         80.63       3.45       5.49        68.40
 
@@ -43,73 +31,73 @@ DATASET: 2012-2020_ICT_DSE
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             79.52       0.88       1.93        75.28
+    pride                79.71       1.72       3.07        75.41
     agents               76.20       4.10       6.19        64.94
     agents_pride         76.95       2.80       4.80        67.97
-
-  Model: gemma3_12b_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                79.71       1.72       3.07        75.41
 
   Model: gemma3_1b
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             34.50      14.51      16.28         9.96
+    pride                35.04      19.66      23.58         6.15
     agents               32.38      28.77      31.22         4.80
     agents_pride         35.06      13.06      15.08         9.09
-
-  Model: gemma3_1b_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                35.04      19.66      23.58         6.15
 
   Model: gemma3_4b
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             56.27       7.71      14.17        38.01
+    pride                54.61       6.34      10.41        46.31
     agents               51.94      11.45      19.26        21.03
     agents_pride         54.33      10.64      18.64        24.68
-
-  Model: gemma3_4b_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                54.61       6.34      10.41        46.31
 
   Model: llama3.2_latest
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             51.29      17.23      19.26        29.52
+    pride                55.33       5.43       7.20        38.93
     agents               33.67      35.24      36.12         6.27
     agents_pride         56.49       5.57       9.22        38.96
-
-  Model: llama3.2_latest_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                55.33       5.43       7.20        38.93
 
   Model: llama3_8b-instruct-q6_K
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             70.11       1.99       3.86        64.58
+    pride                71.93       1.65       3.51        65.16
     agents               33.39      19.19      28.41         0.00
     agents_pride         53.14      10.43      19.32        16.45
-
-  Model: llama3_8b-instruct-q6_K_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                71.93       1.65       3.51        65.16
 
   Model: llama3_8b-instruct-q8_0
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             70.85       1.83       3.01        63.10
+    pride                73.05       1.46       2.75        66.39
     agents               34.23      16.76      27.06         0.00
     agents_pride         56.71       9.63      16.28        21.65
 
-  Model: llama3_8b-instruct-q8_0_sampling_n15_debiased
+  Model: microsoft_Phi-3-mini-4k-instruct
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
-    pride                73.05       1.46       2.75        66.39
+    baseline             71.73       6.85      11.25        57.62
+    pride                49.78       7.01      10.37        14.72
+    agents               67.34       8.85      14.79        44.65
+    agents_pride         69.05       7.26      11.48        48.05
+
+  Model: microsoft_Phi-3.5-mini-instruct
+    Method           Accuracy%       Bias       RStd Consistency%
+    ------------------------------------------------------------
+    baseline             70.88       5.58       8.60        63.43
+    pride                36.80       3.20       5.06        12.99
+    agents               64.11       8.16      14.39        42.07
+    agents_pride         69.37       4.92       8.00        53.68
+
+  Model: microsoft_Phi-4-mini-instruct
+    Method           Accuracy%       Bias       RStd Consistency%
+    ------------------------------------------------------------
+    baseline             66.33       6.56      10.47        53.87
+    pride                67.21       5.26       9.67        53.25
+    agents               67.90       6.10      10.46        54.61
+    agents_pride         69.05       5.43       9.39        56.71
 
   Model: ministral-3_14b
     Method           Accuracy%       Bias       RStd Consistency%
@@ -127,111 +115,49 @@ DATASET: 2012-2020_ICT_DSE
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             66.08       3.45       3.59        46.30
+    pride                70.70       2.14       2.79        53.69
     agents               62.64       7.22      10.27        36.90
     agents_pride         67.10       3.09       3.98        44.59
-
-  Model: mistral-nemo_latest_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                70.70       2.14       2.79        53.69
 
   Model: mistral-small3.2_24b
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             83.95       2.21       3.52        78.97
+    pride                86.17       1.93       3.83        83.20
     agents               83.30       3.89       7.14        73.06
     agents_pride         85.50       2.83       5.97        77.06
-
-  Model: mistral-small3.2_24b_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                86.17       1.93       3.83        83.20
 
   Model: mistral_latest
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             57.99       7.65       8.73        40.59
+    pride                58.50       8.70       8.52        39.75
     agents               55.72       9.55      12.21        33.95
     agents_pride         58.77       7.60       9.28        39.83
 
-  Model: mistral_latest_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                58.50       8.70       8.52        39.75
-
-DATASET: 2012-2020_ICT_DSE-microsoft_
---------------------------------------------------------------------------------
-  Model: Phi-3-mini-4k-instruct_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                49.78       7.01      10.37        14.72
-
-  Model: Phi-3-mini-4k-instruct_transformers
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    baseline             71.73       6.85      11.25        57.62
-    agents               67.34       8.85      14.79        44.65
-    agents_pride         69.05       7.26      11.48        48.05
-
-  Model: Phi-3.5-mini-instruct_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                36.80       3.20       5.06        12.99
-
-  Model: Phi-3.5-mini-instruct_transformers
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    baseline             70.88       5.58       8.60        63.43
-    agents               64.11       8.16      14.39        42.07
-    agents_pride         69.37       4.92       8.00        53.68
-
-  Model: Phi-4-mini-instruct_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                67.21       5.26       9.67        53.25
-
-  Model: Phi-4-mini-instruct_transformers
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    baseline             66.33       6.56      10.47        53.87
-    agents               67.90       6.10      10.46        54.61
-    agents_pride         69.05       5.43       9.39        56.71
-
 DATASET: college_cs
 --------------------------------------------------------------------------------
-  Model: Qwen_Qwen2.5-1.5B-Instruct_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                41.18      10.38      13.23        14.12
-
-  Model: Qwen_Qwen2.5-1.5B-Instruct_transformers
+  Model: Qwen_Qwen2.5-1.5B-Instruct
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             39.25      23.67      25.69        16.00
+    pride                41.18      10.38      13.23        14.12
     agents               39.00      22.82      24.37        16.00
     agents_pride         37.94      24.66      25.77        14.12
 
-  Model: Qwen_Qwen2.5-3B-Instruct_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                44.12      12.06      13.86        16.47
-
-  Model: Qwen_Qwen2.5-3B-Instruct_transformers
+  Model: Qwen_Qwen2.5-3B-Instruct
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             50.25       7.33       9.76        21.00
+    pride                44.12      12.06      13.86        16.47
     agents               48.50      10.13      10.74        23.00
     agents_pride         47.65       9.51      10.67        23.53
 
-  Model: Qwen_Qwen2.5-7B-Instruct_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                45.29       8.58       9.90        20.00
-
-  Model: Qwen_Qwen2.5-7B-Instruct_transformers
+  Model: Qwen_Qwen2.5-7B-Instruct
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             62.00       3.82       5.05        52.00
+    pride                45.29       8.58       9.90        20.00
     agents               59.00       4.20       5.52        45.00
     agents_pride         58.24       7.00       9.36        41.18
 
@@ -239,73 +165,73 @@ DATASET: college_cs
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             57.50       4.87       6.80        45.00
+    pride                53.33       6.42       6.85        46.67
     agents               49.50       9.81      12.46        35.00
     agents_pride         49.41       7.44      10.29        36.47
-
-  Model: gemma3_12b_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                53.33       6.42       6.85        46.67
 
   Model: gemma3_1b
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             29.74      14.99      16.41         2.04
+    pride                28.22      19.96      20.20         4.44
     agents               25.25      36.41      35.69         0.00
     agents_pride         24.71      18.63      16.74         1.18
-
-  Model: gemma3_1b_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                28.22      19.96      20.20         4.44
 
   Model: gemma3_4b
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             42.75      10.27      12.50        20.00
+    pride                41.67       9.76      11.77        16.67
     agents               37.25      15.57      19.49        10.00
     agents_pride         38.82      13.74      16.68        14.12
-
-  Model: gemma3_4b_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                41.67       9.76      11.77        16.67
 
   Model: llama3.2_latest
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             30.59      26.07      26.01        10.20
+    pride                39.17       7.06       7.13        16.67
     agents               27.50      38.71      39.68         1.00
     agents_pride         35.88      17.10      17.58        12.94
-
-  Model: llama3.2_latest_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                39.17       7.06       7.13        16.67
 
   Model: llama3_8b-instruct-q6_K
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             44.00       7.42       7.04        36.00
+    pride                42.50       5.38       5.11        30.00
     agents               26.00      21.22      21.99         0.00
     agents_pride         35.88      10.71      12.24        14.12
-
-  Model: llama3_8b-instruct-q6_K_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                42.50       5.38       5.11        30.00
 
   Model: llama3_8b-instruct-q8_0
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             42.50       7.95       7.89        36.00
+    pride                42.50       1.93       0.92        37.78
     agents               28.25      19.60      21.98         0.00
     agents_pride         33.53      14.45      17.93         4.71
 
-  Model: llama3_8b-instruct-q8_0_sampling_n15_debiased
+  Model: microsoft_Phi-3-mini-4k-instruct
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
-    pride                42.50       1.93       0.92        37.78
+    baseline             49.18      11.65      15.69        35.05
+    pride                34.71       6.84       6.73         4.71
+    agents               44.50      12.78      16.19        19.00
+    agents_pride         42.35       8.25      10.75        22.35
+
+  Model: microsoft_Phi-3.5-mini-instruct
+    Method           Accuracy%       Bias       RStd Consistency%
+    ------------------------------------------------------------
+    baseline             53.20       9.94      13.18        37.63
+    pride                34.41       7.31       9.13         9.41
+    agents               41.25      12.47      18.17         8.00
+    agents_pride         44.41      10.33      13.98        15.29
+
+  Model: microsoft_Phi-4-mini-instruct
+    Method           Accuracy%       Bias       RStd Consistency%
+    ------------------------------------------------------------
+    baseline             49.00       9.12      13.67        31.00
+    pride                45.00       7.33       9.24        22.35
+    agents               48.75       9.73      13.53        30.00
+    agents_pride         46.18      10.35      14.10        25.88
 
   Model: ministral-3_14b
     Method           Accuracy%       Bias       RStd Consistency%
@@ -323,111 +249,49 @@ DATASET: college_cs
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             46.39       3.41       4.84        32.32
+    pride                49.17       7.53       8.83        27.78
     agents               41.75       9.29      11.26        16.00
     agents_pride         45.00       5.91       6.36        22.35
-
-  Model: mistral-nemo_latest_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                49.17       7.53       8.83        27.78
 
   Model: mistral-small3.2_24b
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             64.75       5.03       6.87        57.00
+    pride                65.00       4.58       7.26        56.67
     agents               59.00      10.62      15.18        34.00
     agents_pride         61.18       6.29       9.81        44.71
-
-  Model: mistral-small3.2_24b_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                65.00       4.58       7.26        56.67
 
   Model: mistral_latest
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             42.86      14.09      16.35        22.00
+    pride                39.72      13.33      14.94        20.00
     agents               39.75      13.88      15.02        20.00
     agents_pride         39.41       6.10       6.36        17.65
 
-  Model: mistral_latest_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                39.72      13.33      14.94        20.00
-
-DATASET: college_cs-microsoft_
---------------------------------------------------------------------------------
-  Model: Phi-3-mini-4k-instruct_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                34.71       6.84       6.73         4.71
-
-  Model: Phi-3-mini-4k-instruct_transformers
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    baseline             49.18      11.65      15.69        35.05
-    agents               44.50      12.78      16.19        19.00
-    agents_pride         42.35       8.25      10.75        22.35
-
-  Model: Phi-3.5-mini-instruct_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                34.41       7.31       9.13         9.41
-
-  Model: Phi-3.5-mini-instruct_transformers
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    baseline             53.20       9.94      13.18        37.63
-    agents               41.25      12.47      18.17         8.00
-    agents_pride         44.41      10.33      13.98        15.29
-
-  Model: Phi-4-mini-instruct_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                45.00       7.33       9.24        22.35
-
-  Model: Phi-4-mini-instruct_transformers
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    baseline             49.00       9.12      13.67        31.00
-    agents               48.75       9.73      13.53        30.00
-    agents_pride         46.18      10.35      14.10        25.88
-
 DATASET: sociology
 --------------------------------------------------------------------------------
-  Model: Qwen_Qwen2.5-1.5B-Instruct_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                73.83       5.68       8.37        58.48
-
-  Model: Qwen_Qwen2.5-1.5B-Instruct_transformers
+  Model: Qwen_Qwen2.5-1.5B-Instruct
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             70.27       9.38      14.41        47.76
+    pride                73.83       5.68       8.37        58.48
     agents               66.67      11.73      14.61        46.77
     agents_pride         67.25      11.32      13.98        46.78
 
-  Model: Qwen_Qwen2.5-3B-Instruct_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                76.17       3.43       3.47        60.82
-
-  Model: Qwen_Qwen2.5-3B-Instruct_transformers
+  Model: Qwen_Qwen2.5-3B-Instruct
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             72.26       4.36       6.62        59.20
+    pride                76.17       3.43       3.47        60.82
     agents               75.50       4.39       8.58        59.70
     agents_pride         76.90       1.96       4.27        66.08
 
-  Model: Qwen_Qwen2.5-7B-Instruct_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                44.01      10.01       7.62        11.70
-
-  Model: Qwen_Qwen2.5-7B-Instruct_transformers
+  Model: Qwen_Qwen2.5-7B-Instruct
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             85.45       1.53       2.24        82.09
+    pride                44.01      10.01       7.62        11.70
     agents               81.59       2.63       3.36        76.62
     agents_pride         83.77       2.37       3.34        76.61
 
@@ -435,73 +299,73 @@ DATASET: sociology
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             85.20       0.84       1.47        82.59
+    pride                84.53       0.76       1.51        79.56
     agents               83.46       2.37       3.47        75.12
     agents_pride         83.92       1.94       2.91        75.44
-
-  Model: gemma3_12b_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                84.53       0.76       1.51        79.56
 
   Model: gemma3_1b
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             47.76      15.98      20.69        17.41
+    pride                48.48      16.57      24.60        12.15
     agents               38.18      30.10      31.65         6.47
     agents_pride         48.68      12.54      11.14        20.47
-
-  Model: gemma3_1b_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                48.48      16.57      24.60        12.15
 
   Model: gemma3_4b
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             71.39       3.79       8.83        58.21
+    pride                68.51       4.00       7.76        55.25
     agents               66.17       6.54      11.69        49.75
     agents_pride         66.52       6.46      12.39        47.95
-
-  Model: gemma3_4b_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                68.51       4.00       7.76        55.25
 
   Model: llama3.2_latest
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             69.74       2.88       4.86        61.69
+    pride                68.41       4.19       4.81        60.22
     agents               59.20      12.18      15.88        36.82
     agents_pride         65.79       1.90       3.64        53.80
-
-  Model: llama3.2_latest_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                68.41       4.19       4.81        60.22
 
   Model: llama3_8b-instruct-q6_K
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             80.60       2.41       3.84        73.13
+    pride                78.45       3.20       4.80        70.17
     agents               28.48      34.68      38.16         1.00
     agents_pride         62.28      13.40      26.61        13.45
-
-  Model: llama3_8b-instruct-q6_K_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                78.45       3.20       4.80        70.17
 
   Model: llama3_8b-instruct-q8_0
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             81.22       2.20       3.66        72.64
+    pride                78.87       3.15       4.66        69.61
     agents               30.10      29.92      36.07         1.00
     agents_pride         62.72      11.70      24.43        17.54
 
-  Model: llama3_8b-instruct-q8_0_sampling_n15_debiased
+  Model: microsoft_Phi-3-mini-4k-instruct
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
-    pride                78.87       3.15       4.66        69.61
+    baseline             74.84       7.80      13.54        52.24
+    pride                48.39       7.28       6.04        14.04
+    agents               72.64       2.42       7.67        50.25
+    agents_pride         75.15       5.14      11.22        51.46
+
+  Model: microsoft_Phi-3.5-mini-instruct
+    Method           Accuracy%       Bias       RStd Consistency%
+    ------------------------------------------------------------
+    baseline             80.67       5.26      10.82        64.68
+    pride                27.63       3.64       2.93         0.00
+    agents               61.44      16.74      27.13        18.41
+    agents_pride         79.09       2.57       6.57        63.16
+
+  Model: microsoft_Phi-4-mini-instruct
+    Method           Accuracy%       Bias       RStd Consistency%
+    ------------------------------------------------------------
+    baseline             83.58       2.57       5.73        77.11
+    pride                84.06       2.42       5.72        76.02
+    agents               84.08       2.37       5.30        74.13
+    agents_pride         84.06       2.13       5.04        73.68
 
   Model: ministral-3_14b
     Method           Accuracy%       Bias       RStd Consistency%
@@ -513,72 +377,22 @@ DATASET: sociology
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             75.00       3.56       4.11        60.20
+    pride                73.62       2.93       2.72        56.35
     agents               66.54       7.79       8.94        46.27
     agents_pride         68.71       3.01       2.21        53.22
-
-  Model: mistral-nemo_latest_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                73.62       2.93       2.72        56.35
 
   Model: mistral-small3.2_24b
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             86.57       0.80       2.68        83.08
+    pride                86.88       1.70       4.10        81.77
     agents               76.00       7.65      13.60        57.21
     agents_pride         84.36       2.03       4.02        77.78
-
-  Model: mistral-small3.2_24b_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                86.88       1.70       4.10        81.77
 
   Model: mistral_latest
     Method           Accuracy%       Bias       RStd Consistency%
     ------------------------------------------------------------
     baseline             72.89       6.52       7.53        61.69
+    pride                73.90       6.24       8.05        61.33
     agents               68.03       6.66       9.09        54.23
     agents_pride         69.74       4.13       5.81        57.89
-
-  Model: mistral_latest_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                73.90       6.24       8.05        61.33
-
-DATASET: sociology-microsoft_
---------------------------------------------------------------------------------
-  Model: Phi-3-mini-4k-instruct_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                48.39       7.28       6.04        14.04
-
-  Model: Phi-3-mini-4k-instruct_transformers
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    baseline             74.84       7.80      13.54        52.24
-    agents               72.64       2.42       7.67        50.25
-    agents_pride         75.15       5.14      11.22        51.46
-
-  Model: Phi-3.5-mini-instruct_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                27.63       3.64       2.93         0.00
-
-  Model: Phi-3.5-mini-instruct_transformers
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    baseline             80.67       5.26      10.82        64.68
-    agents               61.44      16.74      27.13        18.41
-    agents_pride         79.09       2.57       6.57        63.16
-
-  Model: Phi-4-mini-instruct_sampling_n15_debiased
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    pride                84.06       2.42       5.72        76.02
-
-  Model: Phi-4-mini-instruct_transformers
-    Method           Accuracy%       Bias       RStd Consistency%
-    ------------------------------------------------------------
-    baseline             83.58       2.57       5.73        77.11
-    agents               84.08       2.37       5.30        74.13
-    agents_pride         84.06       2.13       5.04        73.68

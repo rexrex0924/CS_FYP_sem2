@@ -61,17 +61,22 @@ def calculate_metrics(df, pred_col, ground_truth_col="correct_position"):
 
 def parse_model_dataset(filename):
     """Attempt to split filename into dataset and model"""
-    # Ex: 2012-2020_ICT_DSE-gemma3_12b_pride.csv -> 2012-2020_ICT_DSE, gemma3_12b
     name = Path(filename).stem
-    for suffix in ["_pride", "_baseline", ".csv"]:
+    
+    # Strip all known extra suffixes
+    suffixes = [
+        "_pride", "_baseline", ".csv",
+        "_transformers", "_sampling_n15_debiased", "_debiased"
+    ]
+    for suffix in suffixes:
         name = name.replace(suffix, "")
         
-    for prefix in ["ministral", "mistral", "gemma", "llama", "phi", "qwen", "microsoft", "Qwen"]:
-        if prefix.lower() in name.lower():
-            idx = name.lower().index(prefix.lower())
-            ds = name[:idx].strip("-")
-            mdl = name[idx:]
+    known_datasets = ["2012-2020_ICT_DSE", "2010-2022_ICT_DSE", "college_cs", "sociology"]
+    for ds in known_datasets:
+        if name.startswith(ds):
+            mdl = name[len(ds):].strip("-_ ")
             return ds, mdl
+            
     return "unknown", name
 
 def get_target_col(method_name, df):
@@ -156,38 +161,33 @@ def main():
                     )
             report_lines.append("")
         
-        # We will make 1 plot per method
-        for method in METHODS:
-            # Check if this method has any data for this dataset
-            valid_models = [m for m in models if method in models_dict[m]]
-            if not valid_models:
-                continue
-                
-            fig, ax = plt.subplots(figsize=(max(10, len(valid_models)*1.5), 6))
-            x = np.arange(len(valid_models))
+        # We will make 1 plot per metric
+        for metric in metrics_list:
+            fig, ax = plt.subplots(figsize=(max(10, len(models)*1.5), 6))
+            x = np.arange(len(models))
             width = 0.2
             
-            for i, metric in enumerate(metrics_list):
-                vals = [models_dict[m][method].get(metric, 0) for m in valid_models]
-                offset = (i - len(metrics_list)/2 + 0.5) * width
-                bars = ax.bar(x + offset, vals, width, label=metric, color=bar_colors[i], alpha=0.85)
+            for i, method in enumerate(METHODS):
+                vals = [models_dict[m].get(method, {}).get(metric, 0) for m in models]
+                offset = (i - len(METHODS)/2 + 0.5) * width
+                bars = ax.bar(x + offset, vals, width, label=method, color=bar_colors[i], alpha=0.85)
                 
                 # Add text labels on bars
                 for j, val in enumerate(vals):
                     ax.text(x[j] + offset, val + 1, f"{val:.1f}", ha='center', va='bottom', fontsize=8, rotation=90)
 
             ax.set_xticks(x)
-            ax.set_xticklabels(valid_models, rotation=30, ha="right", fontsize=9)
+            ax.set_xticklabels(models, rotation=30, ha="right", fontsize=9)
             ax.set_ylabel("Score")
-            ax.set_title(f"Dataset: {ds} | Method: {method.upper()}\nMetrics Comparison", fontweight="bold")
-            ax.legend(title="Metrics", bbox_to_anchor=(1.01, 1), loc='upper left')
+            ax.set_title(f"Dataset: {ds} | Metric: {metric}\nMethods Comparison", fontweight="bold")
+            ax.legend(title="Methods", bbox_to_anchor=(1.01, 1), loc='upper left')
             ax.grid(axis='y', alpha=0.3)
             # Expand y limit slightly to fit text
-            ymax = max([models_dict[m][method].get(met, 0) for m in valid_models for met in metrics_list])
+            ymax = max([models_dict[m].get(meth, {}).get(metric, 0) for m in models for meth in METHODS])
             ax.set_ylim(0, ymax * 1.25 if ymax > 0 else 100)
             
             plt.tight_layout()
-            out_path = out_dir / f"{ds}_{method}_metrics.png"
+            out_path = out_dir / f"{ds}_{metric}_methods.png"
             plt.savefig(out_path, dpi=150)
             plt.close()
             print(f"Saved plot -> {out_path}")
