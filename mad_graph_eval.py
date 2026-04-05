@@ -35,6 +35,7 @@ D. {D}
 
 {agent_prompt}
 
+IMPORTANT: Do NOT use <think> tags, do NOT output any internal monologue, and do NOT use chain-of-thought. Output your reasoning in 1-2 short sentences ONLY.
 End your response by clearly stating your final answer as exactly one letter (A, B, C, or D) inside <answer> tags, like this: <answer>A</answer>"""
 
 DEBATE_PROMPT_TEMPLATE = """Question: {question}
@@ -50,11 +51,12 @@ Other agents' current answers and reasoning:
 {other_responses}
 Carefully review the reasoning above. You may keep your answer or change it to any option (A, B, C, or D) if you find another argument more convincing.
 
+IMPORTANT: Do NOT use <think> tags, do NOT output any internal monologue, and do NOT use chain-of-thought. Output your reasoning in 1-2 short sentences ONLY.
 End your response by clearly stating your final answer as exactly one letter (A, B, C, or D) inside <answer> tags, like this: <answer>B</answer>"""
 
 # The three agent personas (Phase 1)
 AGENT_PROMPTS = {
-    1: "Solve this step-by-step using logical deduction.",
+    1: "Solve this question directly with logical deduction.",
     2: "Identify the most common trap or misconception in this question and avoid it.",
     3: "Give your immediate, most confident answer based on core principles."
 }
@@ -394,7 +396,7 @@ def run_evaluation(model: str, host: str, csv_path: str, seed: int,
             "predicted_answer", "correct_position", "model",
         ]
     else:
-        csv_dir = Path("results/mad_graph")
+        csv_dir = Path("mad_graph/results")
         csv_output_file = csv_dir / f"{dataset_name}-{model_name}_mad_graph.csv"
         fieldnames = [
             "question_id", "model", "predicted_answer", "correct_answer", "is_correct",

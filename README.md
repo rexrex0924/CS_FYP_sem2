@@ -516,3 +516,50 @@ python transformers/mad_graph_analysis_transformers.py \
 - **Datasets**: aim for 100–300 questions. Fewer than 50 makes bias statistics too noisy; more than 500 can take hours on a single GPU.
 - **Model selection**: models in the 4B–12B range reveal clear positional bias without being so weak that accuracy collapses. Very strong models (>30B) may show ceiling effects.
 - **Alpha**: `run_all_analysis.py` uses `--fixed-alpha 0.3` by default to avoid data leakage from tuning alpha on the test set. Set `--fixed-alpha 0` to grid-search per CSV instead.
+
+
+
+---
+
+## 🗂️ Script Guide
+
+If you ever forget what a newly added script does or where its output goes, here is a quick reference for the major Python scripts in the root directory:
+
+### 1. Data Preparation
+* `extract_mmlu_dataset.py` - Extracts HuggingFace MMLU/MMLU-PRO benchmarks and formats them into our A/B/C/D CSV format.
+  * **Outputs to:** `dataset/`
+
+### 2. Baseline Testing
+* `baseline_cyclic_eval.py` - Tests a model *without* debate to see its baseline positional bias using 4x cyclic permutations.
+  * **Run:** `python baseline_cyclic_eval.py --model gemma3:4b --input dataset/college_cs.csv`
+  * **Outputs to:** `results/baseline/`
+
+### 3. Pure MAD-Graph (AgentFull, No PriDe)
+* `mad_graph_eval.py` - Runs the original 3-persona Multi-Agent Debate without cyclic permutations.
+  * **Run:** `python mad_graph_eval.py --model gemma3:4b --input dataset/college_cs.csv`
+  * **Outputs to:** `mad_graph/results/`
+* `analyze_original_mad.py` - Compiles the raw CSVs from pure MAD runs into the sem1-comparable metrics table.
+  * **Run:** `python analyze_original_mad.py`
+  * **Outputs to:** `original_mad_graph_summary.txt`
+* `mad_graph_analysis.py` - Legacy detailed analysis script for pure MAD runs.
+
+### 4. Selective MAD-Graph + PriDe (AgentFull + PriDe)
+* `mad_graph_selective_pride_eval.py` - Runs the full Pipeline C (MAD-Graph + Confident-selective PriDe debiasing).
+  * **Run:** `python mad_graph_selective_pride_eval.py --model gemma3:4b --input dataset/college_cs.csv`
+  * **Outputs to:** `results/mad_graph_selective/output/`
+* `mad_graph_selective_analysis.py` - Single-model analysis plotting for Pipeline C outputs.
+
+### 5. Final Reporting & Academic Aggregation
+* `run_all_analysis.py` - Master parsing script. Scans all your output CSVs across pipelines, calculates statistics, and plots distribution graphs.
+  * **Run:** `python run_all_analysis.py`
+  * **Outputs to:** `pride/results/comparison/COMPARISON_REPORT.txt` and `results/plots/`
+* `compare_semesters.py` - Matches old Semester 1 baseline metrics with the new Semester 2 metrics into one comparison file.
+  * **Outputs to:** `semester_comparison_summary.txt`
+* `generate_academic_stats.py` - Your custom script that reads `COMPARISON_REPORT.txt` and `original_mad_graph_summary.txt` to calculate the exact grouped averages across the datasets for inserting right into the academic paper.
+  * **Run:** `python generate_academic_stats.py`
+  * **Outputs to:** `academic_paper_summary.txt`
+
+### 6. Miscellaneous
+* `sampling_eval.py` - Alternative script for token-level stochastic sampling approaches.
+* `compare_analysis.py` - Script for rapidly comparing two result CSVs side-by-side.
+* `app.py` - An interactive frontend (like Streamlit/Gradio) to test the debate graph loop visually.

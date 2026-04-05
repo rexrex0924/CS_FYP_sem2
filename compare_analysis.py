@@ -205,7 +205,7 @@ def _run_pride(df, fixed_alpha):
 
 def _build_agent_pride_df(sl, perm_col):
     """One-hot prob vector from per-permutation individual agent answers."""
-    if perm_col not in sl.columns or sl[perm_col].str.strip().eq("").all():
+    if perm_col not in sl.columns or sl[perm_col].fillna("").astype(str).str.strip().eq("").all():
         return None
     df = sl[["question_id", "permutation_idx", "correct_position"]].copy()
     ans = sl[perm_col].astype(str).str.upper().str.strip()
@@ -363,7 +363,7 @@ def _load(path):
 def _parse_label(path: Path):
     name = path.stem.replace("_baseline","").replace("_pride","")
     for prefix in ["ministral","mistral","gemma","llama","phi","qwen",
-                   "Qwen","microsoft","Phi"]:
+                   "Qwen","microsoft","Phi","gpt-oss"]:
         if prefix.lower() in name.lower():
             idx = name.lower().index(prefix.lower())
             return name[:idx].strip("-"), name[idx:]
@@ -421,7 +421,7 @@ def process_pair(ds, mdl, bl_path, sl_path, fixed_alpha):
     # Only cross-perm bias metrics are unavailable; natural accuracy is valid.
     for i, col in [(1,"agent_1_ans"),(2,"agent_2_ans"),(3,"agent_3_ans")]:
         key = f"agent{i}_raw"
-        if col in p0.columns and p0[col].str.strip().ne("").any():
+        if col in p0.columns and p0[col].fillna("").astype(str).str.strip().ne("").any():
             sub = p0[["question_id","correct_position",col]].copy()
             sub["predicted_answer"] = sub[col]
             sub["permutation_idx"]  = 0

@@ -1,0 +1,202 @@
+question_id,model,predicted_answer,correct_answer,is_correct,agent_1_ans,agent_2_ans,agent_3_ans,question
+q3,mistral-nemo:latest,B,B,1,B,B,B,Becker proclaimed that cannabis use was:
+q2,mistral-nemo:latest,A,A,1,A,A,A,The ecological approach to urban sociology involved studying:
+q1,mistral-nemo:latest,C,C,1,C,C,C,Mass-society theory suggests that:
+q4,mistral-nemo:latest,D,D,1,D,B,D,The middle classes that developed over the nineteenth century were:
+q5,mistral-nemo:latest,D,D,1,D,D,D,Technological forms of surveillance have made it easier to:
+q9,mistral-nemo:latest,B,A,0,B,B,B,"In the debate about the 'managerial revolution', John Scott (1997) argued that:"
+q6,mistral-nemo:latest,B,B,1,B,C,B,The concept of gemeinschaft developed by Ferdinand Tönnies describes basically the same relational characteristics as
+q7,mistral-nemo:latest,C,D,0,C,A,C,There was a growth in income inequality in the 1980s because:
+q10,mistral-nemo:latest,B,C,0,B,B,B,Marxist feminists explain patriarchy in terms of:
+q8,mistral-nemo:latest,A,B,0,A,D,C,"If a deviant act is 'normalized', it is:"
+q12,mistral-nemo:latest,D,D,1,D,D,A,Anti-psychiatrists like Laing & Esterson believed that:
+q14,mistral-nemo:latest,A,A,1,A,A,A,"In contemporary societies, social institutions are:"
+q13,mistral-nemo:latest,A,A,1,D,A,A,Butler & Stokes (1969) suggested that working class support for the Labour Party arose from:
+q11,mistral-nemo:latest,B,B,1,A,B,B,Which of the following was not defined by Giddens (1998) as part of New Labour's 'third way':
+q15,mistral-nemo:latest,A,A,1,A,A,A,The term 'emotion work' (Hochschild 1983) refers to:
+q16,mistral-nemo:latest,A,A,1,A,A,A,"When sociologists study the structure of layers in society and people's movement between them, they call this:"
+q19,mistral-nemo:latest,C,A,0,C,C,C,"After slavery was abolished in the USA and British Empire, policy makers claimed that former slaves migrating to these cities would experience:"
+q17,mistral-nemo:latest,A,A,1,B,A,A,"The four ideal types of social action that Weber identified were as follows: instrumentally-rational, value-rational, traditional, and..."
+q20,mistral-nemo:latest,A,A,1,D,A,A,Sutherland's study of the 'professional thief' suggested that:
+q22,mistral-nemo:latest,C,C,1,C,C,C,"Stone's research suggests that prior to industrialization, the nuclear family:"
+q18,mistral-nemo:latest,A,A,1,B,B,A,An ecclesia is:
+q23,mistral-nemo:latest,B,B,1,B,B,B,"Statistics about rural, suburban, and urban patterns of development and mobility are almost always reported based on a geographical area labeled as Metropolitan Statistical Areas (MSA). What constitutes an MSA?"
+q25,mistral-nemo:latest,C,C,1,C,C,C,Bourdieu attributed the reproduction of class to:
+q21,mistral-nemo:latest,D,C,0,A,A,B,Which of the following policies did the New Labour government not pursue?
+q26,mistral-nemo:latest,C,C,1,C,C,C,Secularization involves the two related ideas of:
+q27,mistral-nemo:latest,A,A,1,A,A,A,The general fertility rate fell between 1964 and 2000 because of:
+q24,mistral-nemo:latest,A,D,0,D,D,A,Mosca and Pareto identified the ruling elite as:
+q30,mistral-nemo:latest,B,B,1,B,B,B,Weber (1919) said that the state's monopoly of the use of force was legitimated by:
+q28,mistral-nemo:latest,A,A,1,A,A,B,Howard's idea of the garden city consisted of:
+q29,mistral-nemo:latest,A,A,1,A,C,A,The 'third age' of the life course is said to involve:
+q31,mistral-nemo:latest,D,D,1,D,D,D,Sullivan's (2000) study suggested that the proportion of housework men did was greatest when:
+q32,mistral-nemo:latest,C,C,1,C,C,C,The shift from custodial to joint parenthood after divorce means that:
+q33,mistral-nemo:latest,B,B,1,B,B,B,Émile Durkheim believed the primary focus of sociology should be which of the following?
+q34,mistral-nemo:latest,A,A,1,A,A,A,"The term ""sociology"" was coined in the early 1800s by which of the following?"
+q36,mistral-nemo:latest,A,A,1,A,A,A,The alternative form of 'network organization' means that:
+q35,mistral-nemo:latest,A,A,1,C,A,A,"In their study of depression, Brown & Harris (1978) found that:"
+q37,mistral-nemo:latest,A,A,1,D,A,A,Margaret Mead suggested that:
+q38,mistral-nemo:latest,C,D,0,B,C,C,The term 'secondary deviation' refers to:
+q41,mistral-nemo:latest,A,A,1,A,A,A,The terms 'crisis of the 1970s' is used to refer to:
+q42,mistral-nemo:latest,B,B,1,B,B,B,The Macpherson Report highlighted the increasing problem of:
+q40,mistral-nemo:latest,D,D,1,D,D,B,Weber said that the 'spirit of capitalism' could be traced back to:
+q39,mistral-nemo:latest,B,B,1,C,B,B,The effect of the Internet upon the public sphere has been to:
+q43,mistral-nemo:latest,C,C,1,C,C,C,Seven people standing silently while waiting for a bus at a bus stop is an example of which of the following?
+q44,mistral-nemo:latest,D,D,1,D,D,D,Environmentalist social movements are global in the sense that:
+q47,mistral-nemo:latest,B,B,1,B,B,B,"In the 1960s, comprehensive schools did not eradicate class inequalities in education because:"
+q48,mistral-nemo:latest,B,B,1,B,B,B,"In idealized views of science, the experimental method is said to involve:"
+q46,mistral-nemo:latest,A,A,1,A,B,A,The 'new man' of the 1980s was alleged to be:
+q50,mistral-nemo:latest,C,C,1,C,C,C,The Nation of Islam group appealed to:
+q45,mistral-nemo:latest,C,A,0,B,C,A,Chodorow (1978) argued that gender socialization occurred through:
+q51,mistral-nemo:latest,B,B,1,B,B,B,Comte's term 'positivism' refers to:
+q49,mistral-nemo:latest,B,D,0,D,B,B,An 'open' society is one that:
+q52,mistral-nemo:latest,B,B,1,B,B,B,Theories of racialized discourse suggest that:
+q55,mistral-nemo:latest,A,A,1,A,A,A,"According to W. E. B. Dubois, progress for African Americans in the aftermath of slavery"
+q53,mistral-nemo:latest,C,B,0,B,C,C,"A major car accident occurs. One man stops his car and starts helping people. After seeing him stop, others also stop and start helping. Which of the following theories best explains the scenario?"
+q54,mistral-nemo:latest,C,C,1,C,A,C,A new highway extends from a major city though an area used for farmland. Which of the following is most likely to happen as a result?
+q57,mistral-nemo:latest,B,B,1,B,B,B,The term 'over-urbanization' means that:
+q56,mistral-nemo:latest,A,C,0,B,C,A,Pluralist theories suggest that:
+q59,mistral-nemo:latest,B,B,1,B,B,B,The term inter-generational mobility refers to:
+q60,mistral-nemo:latest,B,B,1,B,B,B,"The term 'culture industry', used by members of the Frankfurt School, referred to:"
+q63,mistral-nemo:latest,D,D,1,D,D,D,What is the name of the process by which we acquire a sense of identity and become members of society?
+q58,mistral-nemo:latest,C,C,1,C,B,B,The capitalist class of the mid-twentieth century were said to join the upper class because they:
+q64,mistral-nemo:latest,C,C,1,C,C,C,Pre-testing a questionnaire is useful for:
+q61,mistral-nemo:latest,C,B,0,C,C,B,"According to Hakim (1995, 1996), the majority of part-time work is done by women because:"
+q65,mistral-nemo:latest,D,D,1,D,D,D,Judith Butler (1999) suggested that:
+q62,mistral-nemo:latest,A,C,0,D,A,A,A sect is organised around:
+q68,mistral-nemo:latest,D,D,1,D,D,D,"Religious organizations such as the Church of Norway, Islam, the Church of England, and the Church of Greece have which of the following characteristics in common?"
+q69,mistral-nemo:latest,A,A,1,A,A,A,"A researcher mailed 1,000 questionnaires to members of a labor union and received 300 back. Most of those who returned the questionnaires indicated that they were dissatisfied with the union. Results based only on the returned questionnaires are most likely contaminated by"
+q66,mistral-nemo:latest,A,A,1,C,D,A,Patterns of drug use in Britain reveal that:
+q71,mistral-nemo:latest,D,A,0,D,D,D,Post-modernist writers have argued that:
+q72,mistral-nemo:latest,A,A,1,A,A,A,"Leroy visits his parents, who live in a primarily African American working-class neighborhood. During his visit, he notices that the community is changing. Several developments have been built to accommodate single-family homes, and upscale shopping centers have been added. While Leroy appreciates these changes, he is worried that his parents will not be able to afford to continue living in their neighborhood because property values are rising. Which of the following best explains what is happening to Leroy's old neighborhood?"
+q67,mistral-nemo:latest,D,D,1,C,D,C,Murray thought that the 'underclass' consisted of people who:
+q73,mistral-nemo:latest,D,D,1,D,D,D,Warner's study of the city of Natchez in the American Deep South showed that the 'colour line' there was:
+q75,mistral-nemo:latest,C,C,1,C,C,C,"In Marx's theory, the 'mode of production' means:"
+q70,mistral-nemo:latest,C,A,0,B,C,B,Role-learning theory suggests that
+q76,mistral-nemo:latest,A,A,1,A,A,A,The trend of decarceration involves:
+q74,mistral-nemo:latest,D,D,1,D,A,D,The social construction of childhood can be traced back to:
+q79,mistral-nemo:latest,C,C,1,C,C,C,Which of the following best describes the practice of placing the blame for the problems of a society on one particular group?
+q80,mistral-nemo:latest,D,D,1,D,D,D,"Dahrendorf, Rex, and Habermas focused their attention on:"
+q77,mistral-nemo:latest,C,C,1,D,C,C,The work of Smart suggested that:
+q78,mistral-nemo:latest,D,D,1,B,D,D,Allen's (2001) study of nurses showed that:
+q82,mistral-nemo:latest,D,D,1,D,D,D,Mulholland (1998) argued that privatization changed the relationship between companies and managers in that:
+q83,mistral-nemo:latest,D,D,1,D,D,D,Which of the following is consistent with results of current research conducted in the area of gender roles and the workplace?
+q84,mistral-nemo:latest,C,C,1,C,C,C,Socialization is:
+q85,mistral-nemo:latest,C,C,1,C,C,C,The term 'assets' refers to:
+q87,mistral-nemo:latest,D,D,1,D,D,D,Social norms are:
+q81,mistral-nemo:latest,A,D,0,A,A,C,Sreberny-Mohammadi (1996) argues that national cultures can resist American cultural domination of the media by:
+q88,mistral-nemo:latest,D,D,1,D,D,D,The 'nuclear family' means:
+q86,mistral-nemo:latest,B,D,0,B,C,D,"In the traditional hierarchy of status and precedence, which of these members of the upper class are in the right order (from highest to lowest status)?"
+q90,mistral-nemo:latest,A,A,1,A,A,A,Which of the following sociological perspectives views society as a system of interdependent and coordinated parts?
+q91,mistral-nemo:latest,C,C,1,C,C,C,Post-Fordist forms of media production and consumption involve:
+q92,mistral-nemo:latest,C,C,1,C,C,C,Marx said that the development of the labour movement through factory-based production would turn the working class into:
+q93,mistral-nemo:latest,C,C,1,C,C,C,"In stage 3 of the 'health transition', the main causes of illness and death are:"
+q95,mistral-nemo:latest,A,A,1,A,A,A,One of the difficulties in 'operationalizing' concepts like social class is that:
+q89,mistral-nemo:latest,C,D,0,C,D,C,The rise of new social movements indicates that:
+q96,mistral-nemo:latest,A,A,1,A,A,A,"In the 1990 reform of the National Health Service, hospitals became:"
+q94,mistral-nemo:latest,C,D,0,D,C,C,Sociologists like Bordo (1993) have attributed the 'epidemic' of anorexia in Western cultures to:
+q98,mistral-nemo:latest,A,A,1,A,A,A,The 'correspondence principle' (Bowles & Gintis) suggests that:
+q99,mistral-nemo:latest,B,B,1,B,B,B,Class segregation was apparent in mid-twentieth century Britain insofar as:
+q100,mistral-nemo:latest,C,C,1,C,C,C,Charles Cooley's theory of the looking-glass self emphasizes
+q101,mistral-nemo:latest,D,D,1,D,D,D,Queer Theory makes the claim that:
+q102,mistral-nemo:latest,D,D,1,D,D,D,Scott (1991) introduced the term 'power elite' to describe:
+q103,mistral-nemo:latest,C,C,1,C,C,C,"A sociologist is conducting research on institutional power relations at a local hospital. The sociologist is on staff at the hospital for several weeks, recording data as field notes. This method of research is called"
+q97,mistral-nemo:latest,D,D,1,B,D,B,Law and order was privatized in the 1980s and 1990s through:
+q104,mistral-nemo:latest,D,D,1,D,D,D,"In Symbolic Interactionist theory, Mead defined the 'generalized other' as:"
+q105,mistral-nemo:latest,B,C,0,B,B,B,"According to Davis (1995), women may seek cosmetic surgery because:"
+q106,mistral-nemo:latest,D,D,1,D,D,D,Marx (1844) claimed that capitalism had alienated workers from:
+q108,mistral-nemo:latest,D,D,1,D,D,D,Structural-Functionalists describe society as:
+q111,mistral-nemo:latest,B,D,0,B,B,B,Bernstein thought that using 'restricted codes' of language disadvantaged pupils at school because:
+q110,mistral-nemo:latest,C,C,1,C,C,B,Traditional working class identity was based around:
+q107,mistral-nemo:latest,B,D,0,B,B,C,Herberg's (1955) study of religion in America suggested that:
+q112,mistral-nemo:latest,B,B,1,B,B,B,Telework is a form of employment that involves:
+q109,mistral-nemo:latest,D,A,0,D,D,A,Booth's (1901) study revealed that the percentage of people in London who were living in poverty was:
+q113,mistral-nemo:latest,C,C,1,C,C,C,Frank (1967) made the claim that 'underdeveloped' societies were:
+q114,mistral-nemo:latest,C,A,0,C,C,C,The case of the former Soviet Union supports Kerr et al.'s (1960) claim that:
+q116,mistral-nemo:latest,B,B,1,B,B,B,The term 'feminist standpoint' suggests:
+q117,mistral-nemo:latest,C,C,1,C,C,C,Ethnographic research produces qualitative data because:
+q118,mistral-nemo:latest,B,B,1,B,B,B,Marx proclaimed that religion would disappear when:
+q115,mistral-nemo:latest,A,A,1,A,B,A,The print revolution of the nineteenth century resulted in:
+q119,mistral-nemo:latest,B,B,1,B,B,B,Which of the following is not a feature of globalization?
+q120,mistral-nemo:latest,C,C,1,C,C,C,Someone who gains a higher (or lower) social position than he or she was born into has experienced
+q121,mistral-nemo:latest,C,C,1,C,C,C,A survey should avoid asking:
+q122,mistral-nemo:latest,B,B,1,B,B,B,"The theory of development which suggests that societies move from traditional to modern, industrial forms of organization is called:"
+q126,mistral-nemo:latest,B,B,1,B,B,B,The 'extension pattern' that Parker (1976) identified was said to be:
+q125,mistral-nemo:latest,D,A,0,D,C,D,World-affirming religions:
+q123,mistral-nemo:latest,B,D,0,D,B,D,"In modern societies, social status is typically measured by a person's:"
+q124,mistral-nemo:latest,B,C,0,C,B,B,Sociology differs from common sense in that:
+q127,mistral-nemo:latest,C,C,1,C,B,C,Weber defined a 'class situation' as:
+q130,mistral-nemo:latest,C,C,1,C,C,C,The 'post-industrial society' identified by Bell (1973) involved:
+q131,mistral-nemo:latest,D,D,1,D,D,D,White-collar crime is low in visibility because:
+q128,mistral-nemo:latest,D,D,1,D,B,D,The introduction of market principles to educational policy in the 1980s resulted in:
+q133,mistral-nemo:latest,A,A,1,A,A,A,A moral panic occurs when:
+q129,mistral-nemo:latest,B,C,0,B,B,C,Smith & Tomlinson argued that:
+q134,mistral-nemo:latest,D,D,1,D,D,D,The 'demographic transition' is a social trend that involves:
+q135,mistral-nemo:latest,B,B,1,B,B,B,'Snowballing' is an example of:
+q132,mistral-nemo:latest,A,D,0,A,D,D,"With industrial capitalism, leisure emerged as a concept that meant:"
+q138,mistral-nemo:latest,A,A,1,A,A,A,Millions of immigrant children who entered the United States learned English and the duties of citizenship while attending public schools in the communities in which they settled. This is an example of which of the following sociological concepts?
+q139,mistral-nemo:latest,D,D,1,D,D,D,The capitalist world economy is what Wallerstein (1974) would call a 'world system'. This term refers to:
+q137,mistral-nemo:latest,D,D,1,D,D,B,"In the context of the labour movement in the nineteenth century, 'incorporation' meant:"
+q140,mistral-nemo:latest,D,D,1,D,D,D,"According to Foucault, carceral organizations:"
+q136,mistral-nemo:latest,A,B,0,B,A,B,The 'class polarization' that Marx predicted referred to:
+q144,mistral-nemo:latest,D,A,0,D,D,D,The market model of state welfare is based on the principle of:
+q141,mistral-nemo:latest,C,B,0,B,C,C,Which of the following is not recognised as a level of society?
+q142,mistral-nemo:latest,B,B,1,B,B,A,Ethnic identity refers to:
+q143,mistral-nemo:latest,B,B,1,B,D,B,Marriage appears to be in decline because:
+q145,mistral-nemo:latest,B,B,1,B,B,B,The term feminization of poverty refers to:
+q146,mistral-nemo:latest,C,C,1,C,C,C,Which of the following is not identified as a new form of community?
+q147,mistral-nemo:latest,A,A,1,A,A,A,The use of 'indentured labour' in the nineteenth century involved:
+q148,mistral-nemo:latest,D,D,1,D,D,D,Cultural restructuring has involved:
+q149,mistral-nemo:latest,D,B,0,D,D,D,Which of the following was not part of Weber's ideal type of bureaucracy?
+q150,mistral-nemo:latest,D,D,1,D,D,D,Which of the following is the most important agent of socialization in early childhood?
+q153,mistral-nemo:latest,C,C,1,C,C,C,Which of the following is not a regular national survey carried out by the British government?
+q154,mistral-nemo:latest,A,C,0,C,A,A,Which of the following industries did Blauner (1964) suggest was most alienating to its employees?
+q151,mistral-nemo:latest,C,A,0,D,A,C,Which of the following is not a 'research purpose'?
+q152,mistral-nemo:latest,A,C,0,A,B,B,'Scientific' theories in the nineteenth century tried to explain race in naturalistic terms. Which of the following ideas was not considered?
+q156,mistral-nemo:latest,C,C,1,C,C,C,Lombroso claimed that:
+q157,mistral-nemo:latest,D,D,1,D,D,D,Warner and Myrdal claimed that black former slaves were not joining the 'ethnic melting pot' of the North American cities because:
+q158,mistral-nemo:latest,B,B,1,B,B,B,"When Berger & Luckmann said that reality is socially constructed, they meant:"
+q155,mistral-nemo:latest,A,D,0,A,C,C,The 'decentralized city' can be identified by:
+q160,mistral-nemo:latest,B,B,1,B,B,B,Pilcher (1999) identified soap operas as a 'feminine genre' of media because:
+q161,mistral-nemo:latest,C,C,1,C,C,C,Which of these was not one of Townsend's (1979) indicators of relative deprivation?
+q162,mistral-nemo:latest,D,D,1,D,D,D,Children who are still sucking their thumbs when they enter kindergarten are often subject to teasing and ridicule for this behavior. What type of social sanction is applied in this instance?
+q163,mistral-nemo:latest,B,B,1,B,B,B,The concept of political culture refers to the
+q164,mistral-nemo:latest,B,A,0,B,B,B,"Walt Disney, Sony and Time Warner are examples of:"
+q165,mistral-nemo:latest,B,B,1,B,B,B,Equilibrium theories of social change emphasize
+q159,mistral-nemo:latest,B,B,1,B,B,A,Which of the following groups or organizations can be identified as having the characteristics of a bureaucracy?
+q167,mistral-nemo:latest,B,B,1,B,B,B,The 'absolute' poverty line is drawn to show:
+q168,mistral-nemo:latest,C,C,1,C,C,C,'Eyeballing' is a technique that involves:
+q169,mistral-nemo:latest,A,A,1,A,C,A,Which of the following was not a strategy used by the Conservative government of 1979 to reduce the power of the labour movement?
+q166,mistral-nemo:latest,A,A,1,A,A,C,Which of the following best describes the definition of poverty used by the United States government?
+q172,mistral-nemo:latest,A,A,1,A,A,A,The 'new racism' refers to:
+q173,mistral-nemo:latest,A,A,1,A,A,A,Giselle graduated from college with high honors in management. She was recruited immediately following college by a large corporation and accepted a position in junior management. She quickly advanced to middle management. Ten years later Giselle was still in a middle-management position and had witnessed junior male colleagues promoted over her. Which of the following is a phenomenon that is most likely to explain Giselle's lack of promotion?
+q170,mistral-nemo:latest,B,C,0,D,B,B,"In the nineteenth century, homosexuality was understood as:"
+q171,mistral-nemo:latest,A,B,0,A,C,B,The population pyramid of a population that has had a slightly larger birth rate than death rate for several generations will most likely have which of the following shapes?
+q174,mistral-nemo:latest,B,B,1,B,B,B,The Mafia is an example of:
+q175,mistral-nemo:latest,A,A,1,A,A,A,Goldthorpe identified the 'service class' as:
+q176,mistral-nemo:latest,D,D,1,D,D,D,Industrial production in the nineteenth century was characterized by:
+q177,mistral-nemo:latest,D,D,1,D,D,D,The term 'collective consumption' (Castells 1977) refers to:
+q178,mistral-nemo:latest,B,B,1,B,B,B,The deviant subculture of homosexuals who met in seventeenth and eighteenth century London was called the:
+q179,mistral-nemo:latest,B,B,1,B,B,B,Robert and Tanya are married and live with their three children. Their family unit is called
+q180,mistral-nemo:latest,C,C,1,C,C,C,"In Durkheim's work, the term 'collective representations' refers to:"
+q182,mistral-nemo:latest,C,C,1,C,C,C,Freud's notion of the 'ego' referred to:
+q183,mistral-nemo:latest,A,A,1,A,A,A,Which of the following theories focuses on how society manages to carry out the activities necessary to maintain order and stability?
+q184,mistral-nemo:latest,B,C,0,B,B,B,Which of the following is a personal document with closed access?
+q185,mistral-nemo:latest,C,C,1,C,C,C,The tripartite system used the 11+ exam to select pupils for:
+q186,mistral-nemo:latest,A,A,1,A,A,A,Durkheim defined social facts as:
+q181,mistral-nemo:latest,B,B,1,B,D,B,Which of the following is not a characteristic of totalitarian societies?
+q188,mistral-nemo:latest,B,B,1,B,B,B,Bowlby's maternal deprivation thesis claimed that:
+q190,mistral-nemo:latest,C,C,1,C,C,C,Which of the following is not identified by Fulcher & Scott as a criterion of community?
+q191,mistral-nemo:latest,C,C,1,C,C,C,The 'Great Migration' of 1916-1919 meant that Chicago became an ethnically diverse city. The consequence of this was:
+q189,mistral-nemo:latest,D,D,1,B,D,D,War became possible between nation states in the nineteenth century because:
+q187,mistral-nemo:latest,A,D,0,A,B,B,The media-themes model of media influence claims that:
+q192,mistral-nemo:latest,D,D,1,D,D,D,"According to Scott (1990), a document is 'authentic' if it:"
+q194,mistral-nemo:latest,C,C,1,C,C,C,Which of the following did Thatcher's government not strive to achieve:
+q195,mistral-nemo:latest,B,B,1,B,B,B,One of the ethical problems with covert participant observation is:
+q196,mistral-nemo:latest,B,B,1,B,D,B,The embourgeoisement thesis suggests that:
+q193,mistral-nemo:latest,C,A,0,A,B,A,Which of the following is not a consequence of global tourism?
+q197,mistral-nemo:latest,D,D,1,C,D,D,Women have been excluded from the public sphere because:
+q199,mistral-nemo:latest,D,D,1,D,D,D,How is terrorism different from the types of crime described by the Chicago School?
+q200,mistral-nemo:latest,B,B,1,B,B,B,The human relations approach emphasized the importance of:
+q198,mistral-nemo:latest,A,C,0,C,A,C,Economic aid has largely failed to promote modernization in the developing countries because:
+q201,mistral-nemo:latest,D,B,0,A,D,B,Which of the following did Domhoff not identify as a process of decision-making in the USA?

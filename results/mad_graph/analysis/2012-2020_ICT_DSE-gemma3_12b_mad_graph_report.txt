@@ -1,0 +1,39 @@
+
+====================================================
+  2012-2020_ICT_DSE-gemma3_12b_mad_graph
+====================================================
+  Total rows : 271
+
+----------------------------------------------------
+  Phase 1  (before debate - majority vote)
+----------------------------------------------------
+  Valid responses : 271
+  Accuracy        : 0.878  (238/271)
+  Selection freq  : A=0.225  B=0.280  C=0.236  D=0.258
+  Bias score (MAD): 0.0194
+
+----------------------------------------------------
+  Final  (after debate / graph resolution)
+----------------------------------------------------
+  Valid responses : 271
+  Accuracy        : 0.867  (235/271)
+  Selection freq  : A=0.251  B=0.262  C=0.229  D=0.258
+  Bias score (MAD): 0.0106
+
+  Delta Accuracy  (Final - Phase1) : -0.011
+  Delta Bias (MAD)(Final - Phase1) : -0.0088  (reduced [OK])
+
+  Agent agreement (Phase 1):
+    Unanimous (no debate needed) :  222  (81.9%)
+    Debate triggered             :   49  (18.1%)
+    Accuracy when unanimous      : 0.932
+    Accuracy after debate        : 0.571
+
+  Individual Agent Accuracies (Phase 1):
+    Agent 1 Accuracy : 0.863
+    Agent 2 Accuracy : 0.860
+    Agent 3 Accuracy : 0.838
+
+  Agreement summary saved -> results\mad_graph\analysis\2012-2020_ICT_DSE-gemma3_12b_mad_graph_agreement.txt
+
+  Plot saved -> results\mad_graph\analysis\2012-2020_ICT_DSE-gemma3_12b_mad_graph_comparison.png

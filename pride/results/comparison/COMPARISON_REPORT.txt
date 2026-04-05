@@ -199,6 +199,29 @@ DATASET: 2012-2020_ICT_DSE
 
   ----------------------------------------------------------------------------------------
 
+  Model: gpt-oss_20b
+  Q=271  Confident=0 (0%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 4/10  |  Missing: Agent1/Analyst, Agent2/Critic, Agent3/Intuitive, Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline             0.0%  0.00  0.00  0.0%   nan    nan   0.0%  0.0%  0.0%  0.0%
+  Baseline+PriDe      25.1% 43.30 43.30  0.0%2772.00 0.0000  100.0%  0.0%  0.0%  0.0%
+  AgentFull            0.0%  0.00  0.00  0.0%   nan    nan   0.0%  0.0%  0.0%  0.0%
+  AgentFull+PriDe     25.1% 43.30 43.30  0.0%2772.00 0.0000  100.0%  0.0%  0.0%  0.0%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                +0.00pp    +0.000     +0.00     +0.00pp       nan   n/a         nan
+  Baseline vs AgentFull+PriDe         +25.11pp   +43.301    +43.30     +0.00pp       nan   n/a         nan
+  AgentFull vs +PriDe                 +25.11pp   +43.301    +43.30     +0.00pp       nan   n/a         nan
+  Baseline vs +PriDe                  +25.11pp   +43.301    +43.30     +0.00pp       nan   n/a         nan
+
+  ----------------------------------------------------------------------------------------
+
   Model: llama3.2_latest
   Q=271  Confident=86 (32%)  alpha_agent=0.3  alpha_baseline=0.3
   Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
@@ -683,6 +706,29 @@ DATASET: college_cs
 
   ----------------------------------------------------------------------------------------
 
+  Model: gpt-oss_20b
+  Q=100  Confident=0 (0%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 4/10  |  Missing: Agent1/Analyst, Agent2/Critic, Agent3/Intuitive, Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline             0.0%  0.00  0.00  0.0%   nan    nan   0.0%  0.0%  0.0%  0.0%
+  Baseline+PriDe      24.7% 43.30 43.30  0.0%1020.00 0.0000  100.0%  0.0%  0.0%  0.0%
+  AgentFull            0.0%  0.00  0.00  0.0%   nan    nan   0.0%  0.0%  0.0%  0.0%
+  AgentFull+PriDe     24.7% 43.30 43.30  0.0%1020.00 0.0000  100.0%  0.0%  0.0%  0.0%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                +0.00pp    +0.000     +0.00     +0.00pp       nan   n/a         nan
+  Baseline vs AgentFull+PriDe         +24.71pp   +43.301    +43.30     +0.00pp       nan   n/a         nan
+  AgentFull vs +PriDe                 +24.71pp   +43.301    +43.30     +0.00pp       nan   n/a         nan
+  Baseline vs +PriDe                  +24.71pp   +43.301    +43.30     +0.00pp       nan   n/a         nan
+
+  ----------------------------------------------------------------------------------------
+
   Model: llama3.2_latest
   Q=100  Confident=62 (62%)  alpha_agent=0.3  alpha_baseline=0.3
   Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
@@ -1164,6 +1210,29 @@ DATASET: sociology
   Agent1 vs Agent2                     -4.80pp    +1.066     -1.96     +0.00pp    0.2433    ns      0.7101
   Agent2 vs Agent3                     +8.46pp    -1.291     +0.93     +0.00pp    0.0068    **      0.0007
   Agent1 vs Agent3                     +3.66pp    -0.225     -1.04     +0.00pp    0.2012    ns      0.0511
+
+  ----------------------------------------------------------------------------------------
+
+  Model: gpt-oss_20b
+  Q=201  Confident=0 (0%)  alpha_agent=0.3  alpha_baseline=0.3
+  Available methods: 4/10  |  Missing: Agent1/Analyst, Agent2/Critic, Agent3/Intuitive, Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
+
+  METRICS:
+  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
+  --------------------------------------------------------------------------------------
+  Baseline             0.0%  0.00  0.00  0.0%   nan    nan   0.0%  0.0%  0.0%  0.0%
+  Baseline+PriDe      22.2% 43.30 43.30  0.0%2052.00 0.0000  100.0%  0.0%  0.0%  0.0%
+  AgentFull            0.0%  0.00  0.00  0.0%   nan    nan   0.0%  0.0%  0.0%  0.0%
+  AgentFull+PriDe     22.2% 43.30 43.30  0.0%2052.00 0.0000  100.0%  0.0%  0.0%  0.0%
+  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
+
+  KEY COMPARISONS:
+  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
+  ----------------------------------------------------------------------------------------------------
+  Baseline vs AgentFull                +0.00pp    +0.000     +0.00     +0.00pp       nan   n/a         nan
+  Baseline vs AgentFull+PriDe         +22.22pp   +43.301    +43.30     +0.00pp       nan   n/a         nan
+  AgentFull vs +PriDe                 +22.22pp   +43.301    +43.30     +0.00pp       nan   n/a         nan
+  Baseline vs +PriDe                  +22.22pp   +43.301    +43.30     +0.00pp       nan   n/a         nan
 
   ----------------------------------------------------------------------------------------
 
