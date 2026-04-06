@@ -550,16 +550,27 @@ If you ever forget what a newly added script does or where its output goes, here
 * `mad_graph_selective_analysis.py` - Single-model analysis plotting for Pipeline C outputs.
 
 ### 5. Final Reporting & Academic Aggregation
-* `run_all_analysis.py` - Master parsing script. Scans all your output CSVs across pipelines, calculates statistics, and plots distribution graphs.
+The pipeline for generating final thesis charts and reports follows a strict sequence:
+
+1. **Compile Reports:**
+   * `compare_analysis.py` - Processes all generated CSVs and rebuilds the main comparison report.
+   * **Run:** `python compare_analysis.py`
+   * **Outputs to:** `COMPARISON_REPORT.txt`
+
+2. **Generate Summary Text:**
+   * `generate_academic_stats.py` - Parses the main report to calculate grouped averages across datasets for the academic paper.
+   * **Run:** `python generate_academic_stats.py`
+   * **Outputs to:** `academic_paper_summary.txt`
+
+3. **Generate Visualizations:**
+   * `visualize_results.py` - Reads the academic summary text and renders final, presentation-ready individual model heatmaps and grouped bar charts (without taking macro-averages).
+   * **Run:** `python visualize_results.py`
+   * **Outputs to:** `visualizations/`
+
+* `run_all_analysis.py` - Master parsing script for legacy distribution graphs.
   * **Run:** `python run_all_analysis.py`
-  * **Outputs to:** `pride/results/comparison/COMPARISON_REPORT.txt` and `results/plots/`
-* `compare_semesters.py` - Matches old Semester 1 baseline metrics with the new Semester 2 metrics into one comparison file.
-  * **Outputs to:** `semester_comparison_summary.txt`
-* `generate_academic_stats.py` - Your custom script that reads `COMPARISON_REPORT.txt` and `original_mad_graph_summary.txt` to calculate the exact grouped averages across the datasets for inserting right into the academic paper.
-  * **Run:** `python generate_academic_stats.py`
-  * **Outputs to:** `academic_paper_summary.txt`
+  * **Outputs to:** `results/plots/`
 
 ### 6. Miscellaneous
 * `sampling_eval.py` - Alternative script for token-level stochastic sampling approaches.
-* `compare_analysis.py` - Script for rapidly comparing two result CSVs side-by-side.
 * `app.py` - An interactive frontend (like Streamlit/Gradio) to test the debate graph loop visually.

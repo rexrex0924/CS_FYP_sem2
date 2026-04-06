@@ -199,29 +199,6 @@ DATASET: 2012-2020_ICT_DSE
 
   ----------------------------------------------------------------------------------------
 
-  Model: gpt-oss_20b
-  Q=271  Confident=0 (0%)  alpha_agent=0.3  alpha_baseline=0.3
-  Available methods: 4/10  |  Missing: Agent1/Analyst, Agent2/Critic, Agent3/Intuitive, Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
-
-  METRICS:
-  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
-  --------------------------------------------------------------------------------------
-  Baseline             0.0%  0.00  0.00  0.0%   nan    nan   0.0%  0.0%  0.0%  0.0%
-  Baseline+PriDe      25.1% 43.30 43.30  0.0%2772.00 0.0000  100.0%  0.0%  0.0%  0.0%
-  AgentFull            0.0%  0.00  0.00  0.0%   nan    nan   0.0%  0.0%  0.0%  0.0%
-  AgentFull+PriDe     25.1% 43.30 43.30  0.0%2772.00 0.0000  100.0%  0.0%  0.0%  0.0%
-  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
-
-  KEY COMPARISONS:
-  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
-  ----------------------------------------------------------------------------------------------------
-  Baseline vs AgentFull                +0.00pp    +0.000     +0.00     +0.00pp       nan   n/a         nan
-  Baseline vs AgentFull+PriDe         +25.11pp   +43.301    +43.30     +0.00pp       nan   n/a         nan
-  AgentFull vs +PriDe                 +25.11pp   +43.301    +43.30     +0.00pp       nan   n/a         nan
-  Baseline vs +PriDe                  +25.11pp   +43.301    +43.30     +0.00pp       nan   n/a         nan
-
-  ----------------------------------------------------------------------------------------
-
   Model: llama3.2_latest
   Q=271  Confident=86 (32%)  alpha_agent=0.3  alpha_baseline=0.3
   Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
@@ -347,38 +324,6 @@ DATASET: 2012-2020_ICT_DSE
   Agent1 vs Agent2                    -19.37pp   +20.974    +18.54     +0.00pp    0.0000   ***      0.0000
   Agent2 vs Agent3                    +30.26pp   -24.165    -21.16     +0.00pp    0.0000   ***      0.0000
   Agent1 vs Agent3                    +10.89pp    -3.191     -2.62     +0.00pp    0.0001   ***      0.0676
-
-  ----------------------------------------------------------------------------------------
-
-  Model: mistral-small3.2_24b
-  Q=271  Confident=210 (77%)  alpha_agent=0.3  alpha_baseline=0.3
-  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
-
-  METRICS:
-  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
-  --------------------------------------------------------------------------------------
-  Baseline            84.1%  2.21  3.52 79.0%  8.48 0.0371  72.1% 85.5% 85.9% 93.7%
-  Baseline+PriDe      84.8%  2.33  3.54 77.9%  8.03 0.0455  72.4% 86.9% 84.2% 96.4%
-  Agent1/Analyst*     81.4%  3.78  7.90100.0%  5.91 0.1162  68.8% 81.9% 85.7% 89.8%
-  Agent2/Critic*      76.8%  9.53 15.33100.0% 39.42 0.0000  54.4% 75.0% 96.9% 82.5%
-  Agent3/Intuitive*   85.6%  3.39  7.09100.0%  4.97 0.1740  73.5% 88.2% 90.6% 90.5%
-  AgentFull           82.3%  3.89  7.14 73.1% 26.30 0.0000  67.6% 80.3% 93.8% 88.9%
-  AgentFull+PriDe     86.6%  2.83  5.97 77.1% 11.87 0.0078  72.4% 90.2% 93.0% 90.9%
-  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
-
-  KEY COMPARISONS:
-  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
-  ----------------------------------------------------------------------------------------------------
-  Baseline vs AgentFull                -1.85pp    +1.683     +3.61     -5.90pp    0.3827    ns      0.0965
-  Baseline vs AgentFull+PriDe          +2.45pp    +0.622     +2.45     -1.91pp    0.3865    ns      0.7175
-  AgentFull vs +PriDe                  +4.29pp    -1.060     -1.17     +3.99pp    0.0455     *      0.1968
-  Baseline vs +PriDe                   +0.72pp    +0.119     +0.01     -1.04pp    1.0000    ns      0.9920
-  Baseline vs Agent1                   -2.74pp    +1.572     +4.38    +21.03pp    0.0550    ns      0.0181
-  Baseline vs Agent2                   -7.38pp    +7.324    +11.80    +21.03pp    0.0042    **      0.0000
-  Baseline vs Agent3                   +1.48pp    +1.175     +3.57    +21.03pp    0.3428    ns      0.1087
-  Agent1 vs Agent2                     -4.64pp    +5.752     +7.42     +0.00pp    0.3239    ns      0.0000
-  Agent2 vs Agent3                     +8.86pp    -6.149     -8.23     +0.00pp    0.0003   ***      0.0000
-  Agent1 vs Agent3                     +4.21pp    -0.397     -0.81     +0.00pp    0.0035    **      0.4126
 
   ----------------------------------------------------------------------------------------
 
@@ -706,29 +651,6 @@ DATASET: college_cs
 
   ----------------------------------------------------------------------------------------
 
-  Model: gpt-oss_20b
-  Q=100  Confident=0 (0%)  alpha_agent=0.3  alpha_baseline=0.3
-  Available methods: 4/10  |  Missing: Agent1/Analyst, Agent2/Critic, Agent3/Intuitive, Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
-
-  METRICS:
-  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
-  --------------------------------------------------------------------------------------
-  Baseline             0.0%  0.00  0.00  0.0%   nan    nan   0.0%  0.0%  0.0%  0.0%
-  Baseline+PriDe      24.7% 43.30 43.30  0.0%1020.00 0.0000  100.0%  0.0%  0.0%  0.0%
-  AgentFull            0.0%  0.00  0.00  0.0%   nan    nan   0.0%  0.0%  0.0%  0.0%
-  AgentFull+PriDe     24.7% 43.30 43.30  0.0%1020.00 0.0000  100.0%  0.0%  0.0%  0.0%
-  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
-
-  KEY COMPARISONS:
-  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
-  ----------------------------------------------------------------------------------------------------
-  Baseline vs AgentFull                +0.00pp    +0.000     +0.00     +0.00pp       nan   n/a         nan
-  Baseline vs AgentFull+PriDe         +24.71pp   +43.301    +43.30     +0.00pp       nan   n/a         nan
-  AgentFull vs +PriDe                 +24.71pp   +43.301    +43.30     +0.00pp       nan   n/a         nan
-  Baseline vs +PriDe                  +24.71pp   +43.301    +43.30     +0.00pp       nan   n/a         nan
-
-  ----------------------------------------------------------------------------------------
-
   Model: llama3.2_latest
   Q=100  Confident=62 (62%)  alpha_agent=0.3  alpha_baseline=0.3
   Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
@@ -854,38 +776,6 @@ DATASET: college_cs
   Agent1 vs Agent2                    -12.38pp    +9.461     +6.12     +0.00pp    0.0310     *      0.0000
   Agent2 vs Agent3                    +17.00pp    -9.286     -3.38     +0.00pp    0.0085    **      0.0000
   Agent1 vs Agent3                     +4.62pp    +0.176     +2.75     +0.00pp    0.0455     *      0.9739
-
-  ----------------------------------------------------------------------------------------
-
-  Model: mistral-small3.2_24b
-  Q=100  Confident=44 (44%)  alpha_agent=0.3  alpha_baseline=0.3
-  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
-
-  METRICS:
-  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
-  --------------------------------------------------------------------------------------
-  Baseline            65.0%  5.03  6.87 57.0% 16.22 0.0010  57.7% 46.7% 69.2% 75.8%
-  Baseline+PriDe      60.0%  5.33  7.41 52.9% 15.46 0.0015  47.6% 46.2% 61.9% 73.3%
-  Agent1/Analyst*     58.0% 11.70 16.15100.0% 19.27 0.0002  60.9% 30.8% 50.0% 75.0%
-  Agent2/Critic*      47.0% 24.40 26.88100.0% 95.28 0.0000  19.2% 26.7% 88.5% 45.5%
-  Agent3/Intuitive*   65.0%  8.09 10.91100.0% 10.48 0.0149  61.5% 46.7% 76.9% 66.7%
-  AgentFull           61.0% 10.62 15.18 34.0% 72.16 0.0000  61.5% 26.7% 88.5% 54.5%
-  AgentFull+PriDe     61.2%  6.29  9.81 44.7% 21.53 0.0001  63.6% 41.7% 76.2% 56.7%
-  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
-
-  KEY COMPARISONS:
-  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
-  ----------------------------------------------------------------------------------------------------
-  Baseline vs AgentFull                -4.00pp    +5.584     +8.31    -23.00pp    0.5023    ns      0.0000
-  Baseline vs AgentFull+PriDe          -3.82pp    +1.257     +2.94    -12.29pp    0.7728    ns      0.0216
-  AgentFull vs +PriDe                  +0.18pp    -4.327     -5.37    +10.71pp    0.6831    ns      0.0001
-  Baseline vs +PriDe                   -5.00pp    +0.296     +0.54     -4.06pp    1.0000    ns      0.9797
-  Baseline vs Agent1                   -7.05pp    +6.665     +9.28    +43.00pp    0.0550    ns      0.0000
-  Baseline vs Agent2                  -18.00pp   +19.369    +20.01    +43.00pp    0.0019    **      0.0000
-  Baseline vs Agent3                   +0.00pp    +3.059     +4.04    +43.00pp    0.7518    ns      0.0000
-  Agent1 vs Agent2                    -10.95pp   +12.703    +10.72     +0.00pp    0.5108    ns      0.0000
-  Agent2 vs Agent3                    +18.00pp   -16.310    -15.96     +0.00pp    0.0027    **      0.0000
-  Agent1 vs Agent3                     +7.05pp    -3.606     -5.24     +0.00pp    0.0455     *      0.0039
 
   ----------------------------------------------------------------------------------------
 
@@ -1213,29 +1103,6 @@ DATASET: sociology
 
   ----------------------------------------------------------------------------------------
 
-  Model: gpt-oss_20b
-  Q=201  Confident=0 (0%)  alpha_agent=0.3  alpha_baseline=0.3
-  Available methods: 4/10  |  Missing: Agent1/Analyst, Agent2/Critic, Agent3/Intuitive, Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
-
-  METRICS:
-  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
-  --------------------------------------------------------------------------------------
-  Baseline             0.0%  0.00  0.00  0.0%   nan    nan   0.0%  0.0%  0.0%  0.0%
-  Baseline+PriDe      22.2% 43.30 43.30  0.0%2052.00 0.0000  100.0%  0.0%  0.0%  0.0%
-  AgentFull            0.0%  0.00  0.00  0.0%   nan    nan   0.0%  0.0%  0.0%  0.0%
-  AgentFull+PriDe     22.2% 43.30 43.30  0.0%2052.00 0.0000  100.0%  0.0%  0.0%  0.0%
-  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
-
-  KEY COMPARISONS:
-  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
-  ----------------------------------------------------------------------------------------------------
-  Baseline vs AgentFull                +0.00pp    +0.000     +0.00     +0.00pp       nan   n/a         nan
-  Baseline vs AgentFull+PriDe         +22.22pp   +43.301    +43.30     +0.00pp       nan   n/a         nan
-  AgentFull vs +PriDe                 +22.22pp   +43.301    +43.30     +0.00pp       nan   n/a         nan
-  Baseline vs +PriDe                  +22.22pp   +43.301    +43.30     +0.00pp       nan   n/a         nan
-
-  ----------------------------------------------------------------------------------------
-
   Model: llama3.2_latest
   Q=201  Confident=101 (50%)  alpha_agent=0.3  alpha_baseline=0.3
   Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
@@ -1361,38 +1228,6 @@ DATASET: sociology
   Agent1 vs Agent2                    -20.23pp   +10.719    +16.02     +0.00pp    0.0000   ***      0.0000
   Agent2 vs Agent3                    +29.85pp   -14.441    -19.68     +0.00pp    0.0000   ***      0.0000
   Agent1 vs Agent3                     +9.62pp    -3.722     -3.66     +0.00pp    0.0001   ***      0.2790
-
-  ----------------------------------------------------------------------------------------
-
-  Model: mistral-small3.2_24b
-  Q=201  Confident=135 (67%)  alpha_agent=0.3  alpha_baseline=0.3
-  Available methods: 7/10  |  Missing: Agent1+PriDe, Agent2+PriDe, Agent3+PriDe
-
-  METRICS:
-  Method               Acc%   Bias   RStd  Cons%   Chi2   Chi2p   AccA   AccB   AccC   AccD
-  --------------------------------------------------------------------------------------
-  Baseline            88.1%  0.80  2.68 83.1%  0.82 0.8457  79.6% 95.8% 86.0% 90.7%
-  Baseline+PriDe      88.9%  0.92  2.76 83.6%  0.92 0.8196  78.9% 95.0% 88.9% 91.7%
-  Agent1/Analyst*     68.3% 14.41 16.22100.0% 59.78 0.0000  45.5% 68.3% 67.3% 91.3%
-  Agent2/Critic*      72.6% 11.25 12.55100.0% 40.69 0.0000  57.1% 68.8% 92.0% 72.2%
-  Agent3/Intuitive*   86.6%  2.55  6.06100.0%  2.08 0.5550  79.6% 95.8% 88.0% 83.3%
-  AgentFull           78.6%  7.65 13.60 57.2% 75.29 0.0000  57.1% 81.2% 90.0% 85.2%
-  AgentFull+PriDe     87.1%  2.03  4.02 77.8%  4.53 0.2100  78.9% 95.0% 93.3% 81.2%
-  (* = Phase-1 temp>0; interpret cross-method accuracy gaps cautiously)
-
-  KEY COMPARISONS:
-  Comparison                          DeltaAcc  DeltaBias  DeltaRStd  DeltaCons  McNemar-p  Sig  DistShift-p
-  ----------------------------------------------------------------------------------------------------
-  Baseline vs AgentFull                -9.45pp    +6.854    +10.92    -25.87pp    0.0002   ***      0.0000
-  Baseline vs AgentFull+PriDe          -0.93pp    +1.237     +1.34     -5.31pp    0.5050    ns      0.5830
-  AgentFull vs +PriDe                  +8.53pp    -5.617     -9.58    +20.56pp    0.0036    **      0.0000
-  Baseline vs +PriDe                   +0.83pp    +0.122     +0.08     +0.54pp    1.0000    ns      0.9855
-  Baseline vs Agent1                  -19.73pp   +13.611    +13.54    +16.92pp    0.0000   ***      0.0000
-  Baseline vs Agent2                  -15.42pp   +10.452     +9.87    +16.92pp    0.0000   ***      0.0000
-  Baseline vs Agent3                   -1.49pp    +1.750     +3.38    +16.92pp    0.4497    ns      0.1195
-  Agent1 vs Agent2                     +4.30pp    -3.159     -3.66     +0.00pp    0.1508    ns      0.0000
-  Agent2 vs Agent3                    +13.93pp    -8.703     -6.49     +0.00pp    0.0000   ***      0.0000
-  Agent1 vs Agent3                    +18.23pp   -11.861    -10.15     +0.00pp    0.0000   ***      0.0000
 
   ----------------------------------------------------------------------------------------
 

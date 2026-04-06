@@ -25,12 +25,6 @@ gemma3_4b                      | Pure MAD-Graph               |     63.50% |    
 gemma3_4b                      | AgentFull (Semantic)         |     50.20% |      11.45 |      19.26
 gemma3_4b                      | AgentFull+PriDe (Semantic)   |     52.80% |      10.64 |      18.64
 -----------------------------------------------------------------------------------------------
-gpt-oss_20b                    | Baseline                     |      0.00% |       0.00 |       0.00
-gpt-oss_20b                    | Baseline+PriDe               |     25.10% |      43.30 |      43.30
-gpt-oss_20b                    | Pure MAD-Graph               |     93.00% |       1.31 |       4.45
-gpt-oss_20b                    | AgentFull (Semantic)         |      0.00% |       0.00 |       0.00
-gpt-oss_20b                    | AgentFull+PriDe (Semantic)   |     25.10% |      43.30 |      43.30
------------------------------------------------------------------------------------------------
 llama3.2_latest                | Baseline                     |     52.60% |      17.23 |      19.26
 llama3.2_latest                | Baseline+PriDe               |     54.10% |      17.47 |      19.06
 llama3.2_latest                | Pure MAD-Graph               |     61.30% |       7.36 |       9.08
@@ -54,11 +48,6 @@ mistral-nemo_latest            | Baseline+PriDe               |     67.50% |    
 mistral-nemo_latest            | Pure MAD-Graph               |     77.50% |       1.12 |       1.93
 mistral-nemo_latest            | AgentFull (Semantic)         |     61.60% |       7.22 |      10.27
 mistral-nemo_latest            | AgentFull+PriDe (Semantic)   |     65.80% |       3.09 |       3.98
------------------------------------------------------------------------------------------------
-mistral-small3.2_24b           | Baseline                     |     84.10% |       2.21 |       3.52
-mistral-small3.2_24b           | Baseline+PriDe               |     84.80% |       2.33 |       3.54
-mistral-small3.2_24b           | AgentFull (Semantic)         |     82.30% |       3.89 |       7.14
-mistral-small3.2_24b           | AgentFull+PriDe (Semantic)   |     86.60% |       2.83 |       5.97
 -----------------------------------------------------------------------------------------------
 mistral_latest                 | Baseline                     |     62.40% |       7.65 |       8.73
 mistral_latest                 | Baseline+PriDe               |     62.80% |       8.21 |       9.23
@@ -126,12 +115,6 @@ gemma3_4b                      | Pure MAD-Graph               |     59.00% |    
 gemma3_4b                      | AgentFull (Semantic)         |     47.00% |      15.57 |      19.49
 gemma3_4b                      | AgentFull+PriDe (Semantic)   |     45.90% |      13.74 |      16.68
 -----------------------------------------------------------------------------------------------
-gpt-oss_20b                    | Baseline                     |      0.00% |       0.00 |       0.00
-gpt-oss_20b                    | Baseline+PriDe               |     24.70% |      43.30 |      43.30
-gpt-oss_20b                    | Pure MAD-Graph               |     95.00% |       4.36 |       3.23
-gpt-oss_20b                    | AgentFull (Semantic)         |      0.00% |       0.00 |       0.00
-gpt-oss_20b                    | AgentFull+PriDe (Semantic)   |     24.70% |      43.30 |      43.30
------------------------------------------------------------------------------------------------
 llama3.2_latest                | Baseline                     |     29.90% |      26.07 |      26.01
 llama3.2_latest                | Baseline+PriDe               |     25.90% |      24.01 |      23.97
 llama3.2_latest                | Pure MAD-Graph               |     41.70% |      11.57 |      17.24
@@ -155,11 +138,6 @@ mistral-nemo_latest            | Baseline+PriDe               |     42.40% |    
 mistral-nemo_latest            | Pure MAD-Graph               |     67.00% |       5.96 |      11.17
 mistral-nemo_latest            | AgentFull (Semantic)         |     40.00% |       9.29 |      11.26
 mistral-nemo_latest            | AgentFull+PriDe (Semantic)   |     41.20% |       5.91 |       6.36
------------------------------------------------------------------------------------------------
-mistral-small3.2_24b           | Baseline                     |     65.00% |       5.03 |       6.87
-mistral-small3.2_24b           | Baseline+PriDe               |     60.00% |       5.33 |       7.41
-mistral-small3.2_24b           | AgentFull (Semantic)         |     61.00% |      10.62 |      15.18
-mistral-small3.2_24b           | AgentFull+PriDe (Semantic)   |     61.20% |       6.29 |       9.81
 -----------------------------------------------------------------------------------------------
 mistral_latest                 | Baseline                     |     49.50% |      14.09 |      16.35
 mistral_latest                 | Baseline+PriDe               |     45.90% |      14.77 |      17.58
@@ -219,12 +197,6 @@ gemma3_4b                      | Pure MAD-Graph               |     73.60% |    
 gemma3_4b                      | AgentFull (Semantic)         |     67.70% |       6.54 |      11.69
 gemma3_4b                      | AgentFull+PriDe (Semantic)   |     69.60% |       6.46 |      12.39
 -----------------------------------------------------------------------------------------------
-gpt-oss_20b                    | Baseline                     |      0.00% |       0.00 |       0.00
-gpt-oss_20b                    | Baseline+PriDe               |     22.20% |      43.30 |      43.30
-gpt-oss_20b                    | Pure MAD-Graph               |     83.60% |       2.03 |       4.10
-gpt-oss_20b                    | AgentFull (Semantic)         |      0.00% |       0.00 |       0.00
-gpt-oss_20b                    | AgentFull+PriDe (Semantic)   |     22.20% |      43.30 |      43.30
------------------------------------------------------------------------------------------------
 llama3.2_latest                | Baseline                     |     69.50% |       2.88 |       4.86
 llama3.2_latest                | Baseline+PriDe               |     69.60% |       2.30 |       4.36
 llama3.2_latest                | Pure MAD-Graph               |     73.10% |       4.84 |       6.65
@@ -248,11 +220,6 @@ mistral-nemo_latest            | Baseline+PriDe               |     76.60% |    
 mistral-nemo_latest            | Pure MAD-Graph               |     77.10% |       1.08 |       3.59
 mistral-nemo_latest            | AgentFull (Semantic)         |     65.70% |       7.79 |       8.94
 mistral-nemo_latest            | AgentFull+PriDe (Semantic)   |     73.70% |       3.01 |       2.21
------------------------------------------------------------------------------------------------
-mistral-small3.2_24b           | Baseline                     |     88.10% |       0.80 |       2.68
-mistral-small3.2_24b           | Baseline+PriDe               |     88.90% |       0.92 |       2.76
-mistral-small3.2_24b           | AgentFull (Semantic)         |     78.60% |       7.65 |      13.60
-mistral-small3.2_24b           | AgentFull+PriDe (Semantic)   |     87.10% |       2.03 |       4.02
 -----------------------------------------------------------------------------------------------
 mistral_latest                 | Baseline                     |     76.10% |       6.52 |       7.53
 mistral_latest                 | Baseline+PriDe               |     76.60% |       6.43 |       7.75
@@ -295,8 +262,8 @@ qwen2.5-7b-instruct            | AgentFull+PriDe (Semantic)   |     84.20% |    
 === GLOBAL AVERAGES (OVER ALL DATASETS AND ALL MODELS) ===
 Method                         | Global Avg Acc%      | Global Avg Bias      | Global Avg RStd     
 -----------------------------------------------------------------------------------------------
-Baseline                       |               59.91% |                 6.93 |                 9.06
-Baseline+PriDe                 |               61.04% |                 9.43 |                11.57
-Pure MAD-Graph                 |               65.91% |                 7.78 |                11.28
-AgentFull (Semantic)           |               51.14% |                12.75 |                15.97
-AgentFull+PriDe (Semantic)     |               57.78% |                10.26 |                13.09
+Baseline                       |               62.82% |                 7.73 |                10.05
+Baseline+PriDe                 |               62.48% |                 7.48 |                 9.81
+Pure MAD-Graph                 |               63.44% |                 8.30 |                12.02
+AgentFull (Semantic)           |               53.16% |                14.04 |                17.39
+AgentFull+PriDe (Semantic)     |               58.73% |                 8.37 |                11.39
