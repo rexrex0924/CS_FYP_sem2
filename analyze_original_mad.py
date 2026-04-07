@@ -23,10 +23,17 @@ def compute_metrics(df, pred_col):
     if total == 0:
         return None
 
-    # Bias (std of choice distribution %)
+    # Calculate empirical ground-truth distribution percentage
+    emp_counts = valid["correct_answer"].value_counts().reindex(POSITIONS, fill_value=0)
+    emp_pcts = emp_counts / total * 100
+
+    # Calculate model's predicted distribution percentage
     counts = valid[pred_col].value_counts().reindex(POSITIONS, fill_value=0)
     pcts = counts / total * 100
-    bias = float(np.std(pcts.values))
+    
+    # Bias: standard deviation of (Predicted % - Empirical Ground-Truth %)
+    # This perfectly aligns the metric scale with cyclic permutations (where empirical is uniformly 25%)
+    bias = float(np.std(pcts.values - emp_pcts.values))
     
     # Chi2
     try:

@@ -9,89 +9,87 @@ Model                          | Method                       | Acc%       | Bia
 -----------------------------------------------------------------------------------------------
 gemma3_12b                     | Baseline                     |     79.30% |       0.88 |       1.93
 gemma3_12b                     | Baseline+PriDe               |     77.90% |       1.00 |       1.78
-gemma3_12b                     | Pure MAD-Graph               |     86.70% |       1.29 |       2.57
+gemma3_12b                     | Pure MAD-Graph               |     86.70% |       1.63 |       2.57
 gemma3_12b                     | AgentFull (Semantic)         |     75.60% |       4.10 |       6.19
 gemma3_12b                     | AgentFull+PriDe (Semantic)   |     75.80% |       2.80 |       4.80
 -----------------------------------------------------------------------------------------------
 gemma3_1b                      | Baseline                     |     36.50% |      14.51 |      16.28
 gemma3_1b                      | Baseline+PriDe               |     37.70% |      14.29 |      16.43
-gemma3_1b                      | Pure MAD-Graph               |     41.00% |      18.62 |      23.32
+gemma3_1b                      | Pure MAD-Graph               |     41.00% |      18.77 |      23.32
 gemma3_1b                      | AgentFull (Semantic)         |     30.60% |      28.77 |      31.22
 gemma3_1b                      | AgentFull+PriDe (Semantic)   |     30.30% |      13.06 |      15.08
 -----------------------------------------------------------------------------------------------
 gemma3_4b                      | Baseline                     |     54.60% |       7.71 |      14.17
 gemma3_4b                      | Baseline+PriDe               |     55.00% |       7.81 |      14.18
-gemma3_4b                      | Pure MAD-Graph               |     63.50% |       9.94 |      11.84
+gemma3_4b                      | Pure MAD-Graph               |     63.50% |      10.75 |      11.84
 gemma3_4b                      | AgentFull (Semantic)         |     50.20% |      11.45 |      19.26
 gemma3_4b                      | AgentFull+PriDe (Semantic)   |     52.80% |      10.64 |      18.64
 -----------------------------------------------------------------------------------------------
 llama3.2_latest                | Baseline                     |     52.60% |      17.23 |      19.26
 llama3.2_latest                | Baseline+PriDe               |     54.10% |      17.47 |      19.06
-llama3.2_latest                | Pure MAD-Graph               |     61.30% |       7.36 |       9.08
+llama3.2_latest                | Pure MAD-Graph               |     61.30% |       9.05 |       9.08
 llama3.2_latest                | AgentFull (Semantic)         |     32.80% |      35.24 |      36.12
 llama3.2_latest                | AgentFull+PriDe (Semantic)   |     58.40% |       5.57 |       9.22
 -----------------------------------------------------------------------------------------------
 llama3_8b-instruct-q6_k        | Baseline                     |     72.70% |       1.99 |       3.86
 llama3_8b-instruct-q6_k        | Baseline+PriDe               |     74.00% |       1.90 |       4.00
-llama3_8b-instruct-q6_k        | Pure MAD-Graph               |     73.40% |       3.71 |       2.76
+llama3_8b-instruct-q6_k        | Pure MAD-Graph               |     73.40% |       4.81 |       2.76
 llama3_8b-instruct-q6_k        | AgentFull (Semantic)         |     32.50% |      19.19 |      28.41
 llama3_8b-instruct-q6_k        | AgentFull+PriDe (Semantic)   |     54.10% |      10.43 |      19.32
 -----------------------------------------------------------------------------------------------
 llama3_8b-instruct-q8_0        | Baseline                     |     73.40% |       1.83 |       3.01
 llama3_8b-instruct-q8_0        | Baseline+PriDe               |     73.20% |       1.70 |       2.94
-llama3_8b-instruct-q8_0        | Pure MAD-Graph               |     72.00% |       3.61 |       4.44
+llama3_8b-instruct-q8_0        | Pure MAD-Graph               |     72.00% |       4.26 |       4.44
 llama3_8b-instruct-q8_0        | AgentFull (Semantic)         |     32.50% |      16.76 |      27.06
 llama3_8b-instruct-q8_0        | AgentFull+PriDe (Semantic)   |     56.70% |       9.63 |      16.28
 -----------------------------------------------------------------------------------------------
 mistral-nemo_latest            | Baseline                     |     66.00% |       3.45 |       3.59
 mistral-nemo_latest            | Baseline+PriDe               |     67.50% |       3.30 |       3.26
-mistral-nemo_latest            | Pure MAD-Graph               |     77.50% |       1.12 |       1.93
+mistral-nemo_latest            | Pure MAD-Graph               |     77.50% |       2.26 |       1.93
 mistral-nemo_latest            | AgentFull (Semantic)         |     61.60% |       7.22 |      10.27
 mistral-nemo_latest            | AgentFull+PriDe (Semantic)   |     65.80% |       3.09 |       3.98
 -----------------------------------------------------------------------------------------------
 mistral_latest                 | Baseline                     |     62.40% |       7.65 |       8.73
 mistral_latest                 | Baseline+PriDe               |     62.80% |       8.21 |       9.23
-mistral_latest                 | Pure MAD-Graph               |     71.20% |       2.98 |       3.92
+mistral_latest                 | Pure MAD-Graph               |     71.20% |       4.53 |       3.92
 mistral_latest                 | AgentFull (Semantic)         |     59.80% |       9.55 |      12.21
 mistral_latest                 | AgentFull+PriDe (Semantic)   |     61.00% |       7.60 |       9.28
 -----------------------------------------------------------------------------------------------
 phi-3-mini-4k-instruct         | Baseline                     |     73.60% |       6.85 |      11.25
 phi-3-mini-4k-instruct         | Baseline+PriDe               |     74.00% |       5.89 |      10.46
-phi-3-mini-4k-instruct         | Pure MAD-Graph               |     36.70% |      12.30 |      18.22
+phi-3-mini-4k-instruct         | Pure MAD-Graph               |     35.30% |      15.26 |      19.78
 phi-3-mini-4k-instruct         | AgentFull (Semantic)         |     70.10% |       8.85 |      14.79
 phi-3-mini-4k-instruct         | AgentFull+PriDe (Semantic)   |     72.70% |       7.26 |      11.48
 -----------------------------------------------------------------------------------------------
 phi-3.5-mini-instruct          | Baseline                     |     71.60% |       5.58 |       8.60
 phi-3.5-mini-instruct          | Baseline+PriDe               |     70.60% |       4.75 |       8.40
+phi-3.5-mini-instruct          | Pure MAD-Graph               |     50.20% |      12.35 |      15.97
 phi-3.5-mini-instruct          | AgentFull (Semantic)         |     61.60% |       8.16 |      14.39
 phi-3.5-mini-instruct          | AgentFull+PriDe (Semantic)   |     68.40% |       4.92 |       8.00
 -----------------------------------------------------------------------------------------------
 phi-4-mini-instruct            | Baseline                     |     68.60% |       6.56 |      10.47
 phi-4-mini-instruct            | Baseline+PriDe               |     69.70% |       6.14 |       9.91
+phi-4-mini-instruct            | Pure MAD-Graph               |     56.50% |       4.46 |       8.99
 phi-4-mini-instruct            | AgentFull (Semantic)         |     71.20% |       6.10 |      10.46
 phi-4-mini-instruct            | AgentFull+PriDe (Semantic)   |     71.90% |       5.43 |       9.39
 -----------------------------------------------------------------------------------------------
-phi-4-mini-reasoning           | Pure MAD-Graph               |     77.80% |      12.11 |      28.87
------------------------------------------------------------------------------------------------
 qwen2.5-1.5b-instruct          | Baseline                     |     56.80% |      18.68 |      21.62
 qwen2.5-1.5b-instruct          | Baseline+PriDe               |     57.10% |      19.06 |      22.23
-qwen2.5-1.5b-instruct          | Pure MAD-Graph               |     48.00% |      13.36 |      21.73
+qwen2.5-1.5b-instruct          | Pure MAD-Graph               |     50.40% |       8.82 |      15.04
 qwen2.5-1.5b-instruct          | AgentFull (Semantic)         |     55.70% |      17.89 |      19.21
 qwen2.5-1.5b-instruct          | AgentFull+PriDe (Semantic)   |     56.70% |      18.09 |      19.05
 -----------------------------------------------------------------------------------------------
 qwen2.5-3b-instruct            | Baseline                     |     62.70% |       5.33 |       6.48
 qwen2.5-3b-instruct            | Baseline+PriDe               |     64.90% |       5.23 |       6.54
-qwen2.5-3b-instruct            | Pure MAD-Graph               |     69.00% |       7.65 |      17.53
+qwen2.5-3b-instruct            | Pure MAD-Graph               |     67.20% |       9.46 |      14.86
 qwen2.5-3b-instruct            | AgentFull (Semantic)         |     60.90% |       6.52 |       8.69
 qwen2.5-3b-instruct            | AgentFull+PriDe (Semantic)   |     65.40% |       4.74 |       6.17
 -----------------------------------------------------------------------------------------------
 qwen2.5-7b-instruct            | Baseline                     |     81.50% |       2.90 |       3.43
 qwen2.5-7b-instruct            | Baseline+PriDe               |     82.70% |       2.95 |       3.28
-qwen2.5-7b-instruct            | Pure MAD-Graph               |     84.00% |       2.24 |       4.00
+qwen2.5-7b-instruct            | Pure MAD-Graph               |     84.90% |       3.03 |       4.10
 qwen2.5-7b-instruct            | AgentFull (Semantic)         |     77.10% |       2.81 |       4.44
 qwen2.5-7b-instruct            | AgentFull+PriDe (Semantic)   |     79.70% |       3.45 |       5.49
------------------------------------------------------------------------------------------------
-tinyllama-1.1b-chat-v1.0       | Pure MAD-Graph               |     27.00% |      43.30 |      43.30
 -----------------------------------------------------------------------------------------------
 
 === DATASET: college_cs ===
@@ -99,79 +97,85 @@ Model                          | Method                       | Acc%       | Bia
 -----------------------------------------------------------------------------------------------
 gemma3_12b                     | Baseline                     |     58.00% |       4.87 |       6.80
 gemma3_12b                     | Baseline+PriDe               |     57.60% |       4.69 |       6.46
-gemma3_12b                     | Pure MAD-Graph               |     75.00% |       5.10 |       8.92
+gemma3_12b                     | Pure MAD-Graph               |     75.00% |       1.58 |       8.92
 gemma3_12b                     | AgentFull (Semantic)         |     56.00% |       9.81 |      12.46
 gemma3_12b                     | AgentFull+PriDe (Semantic)   |     54.10% |       7.44 |      10.29
 -----------------------------------------------------------------------------------------------
 gemma3_1b                      | Baseline                     |     35.70% |      14.99 |      16.41
 gemma3_1b                      | Baseline+PriDe               |     35.30% |      13.25 |      14.41
-gemma3_1b                      | Pure MAD-Graph               |     31.00% |      20.53 |      28.81
+gemma3_1b                      | Pure MAD-Graph               |     31.00% |      21.15 |      28.81
 gemma3_1b                      | AgentFull (Semantic)         |     27.00% |      36.41 |      35.69
 gemma3_1b                      | AgentFull+PriDe (Semantic)   |     28.20% |      18.63 |      16.74
 -----------------------------------------------------------------------------------------------
 gemma3_4b                      | Baseline                     |     49.00% |      10.27 |      12.50
 gemma3_4b                      | Baseline+PriDe               |     47.10% |      10.28 |      11.72
-gemma3_4b                      | Pure MAD-Graph               |     59.00% |       8.51 |       8.94
+gemma3_4b                      | Pure MAD-Graph               |     59.00% |       4.74 |       8.94
 gemma3_4b                      | AgentFull (Semantic)         |     47.00% |      15.57 |      19.49
 gemma3_4b                      | AgentFull+PriDe (Semantic)   |     45.90% |      13.74 |      16.68
 -----------------------------------------------------------------------------------------------
 llama3.2_latest                | Baseline                     |     29.90% |      26.07 |      26.01
 llama3.2_latest                | Baseline+PriDe               |     25.90% |      24.01 |      23.97
-llama3.2_latest                | Pure MAD-Graph               |     41.70% |      11.57 |      17.24
+llama3.2_latest                | Pure MAD-Graph               |     41.70% |       6.41 |      17.24
 llama3.2_latest                | AgentFull (Semantic)         |     28.00% |      38.71 |      39.68
 llama3.2_latest                | AgentFull+PriDe (Semantic)   |     35.30% |      17.10 |      17.58
 -----------------------------------------------------------------------------------------------
 llama3_8b-instruct-q6_k        | Baseline                     |     40.00% |       7.42 |       7.04
 llama3_8b-instruct-q6_k        | Baseline+PriDe               |     36.50% |       7.84 |       8.25
-llama3_8b-instruct-q6_k        | Pure MAD-Graph               |     53.00% |       8.46 |      13.51
+llama3_8b-instruct-q6_k        | Pure MAD-Graph               |     53.00% |       2.55 |      13.51
 llama3_8b-instruct-q6_k        | AgentFull (Semantic)         |     21.00% |      21.22 |      21.99
 llama3_8b-instruct-q6_k        | AgentFull+PriDe (Semantic)   |     32.90% |      10.71 |      12.24
 -----------------------------------------------------------------------------------------------
 llama3_8b-instruct-q8_0        | Baseline                     |     42.00% |       7.95 |       7.89
 llama3_8b-instruct-q8_0        | Baseline+PriDe               |     41.20% |       8.36 |       8.58
-llama3_8b-instruct-q8_0        | Pure MAD-Graph               |     43.00% |       6.96 |      12.29
+llama3_8b-instruct-q8_0        | Pure MAD-Graph               |     43.00% |       2.35 |      12.29
 llama3_8b-instruct-q8_0        | AgentFull (Semantic)         |     26.00% |      19.60 |      21.98
 llama3_8b-instruct-q8_0        | AgentFull+PriDe (Semantic)   |     30.60% |      14.45 |      17.93
 -----------------------------------------------------------------------------------------------
 mistral-nemo_latest            | Baseline                     |     45.30% |       3.41 |       4.84
 mistral-nemo_latest            | Baseline+PriDe               |     42.40% |       2.42 |       2.70
-mistral-nemo_latest            | Pure MAD-Graph               |     67.00% |       5.96 |      11.17
+mistral-nemo_latest            | Pure MAD-Graph               |     67.00% |       2.12 |      11.17
 mistral-nemo_latest            | AgentFull (Semantic)         |     40.00% |       9.29 |      11.26
 mistral-nemo_latest            | AgentFull+PriDe (Semantic)   |     41.20% |       5.91 |       6.36
 -----------------------------------------------------------------------------------------------
 mistral_latest                 | Baseline                     |     49.50% |      14.09 |      16.35
 mistral_latest                 | Baseline+PriDe               |     45.90% |      14.77 |      17.58
-mistral_latest                 | Pure MAD-Graph               |     53.00% |       6.12 |       8.77
+mistral_latest                 | Pure MAD-Graph               |     53.00% |       2.24 |       8.77
 mistral_latest                 | AgentFull (Semantic)         |     42.00% |      13.88 |      15.02
 mistral_latest                 | AgentFull+PriDe (Semantic)   |     42.40% |       6.10 |       6.36
 -----------------------------------------------------------------------------------------------
 phi-3-mini-4k-instruct         | Baseline                     |     49.50% |      11.65 |      15.69
 phi-3-mini-4k-instruct         | Baseline+PriDe               |     48.20% |      11.16 |      14.63
+phi-3-mini-4k-instruct         | Pure MAD-Graph               |     33.00% |      16.58 |      13.64
 phi-3-mini-4k-instruct         | AgentFull (Semantic)         |     38.00% |      12.78 |      16.19
 phi-3-mini-4k-instruct         | AgentFull+PriDe (Semantic)   |     43.50% |       8.25 |      10.75
 -----------------------------------------------------------------------------------------------
 phi-3.5-mini-instruct          | Baseline                     |     48.20% |       9.94 |      13.18
 phi-3.5-mini-instruct          | Baseline+PriDe               |     38.80% |       4.18 |       5.70
+phi-3.5-mini-instruct          | Pure MAD-Graph               |     36.00% |      18.18 |      19.22
 phi-3.5-mini-instruct          | AgentFull (Semantic)         |     38.00% |      12.47 |      18.17
 phi-3.5-mini-instruct          | AgentFull+PriDe (Semantic)   |     43.50% |      10.33 |      13.98
 -----------------------------------------------------------------------------------------------
 phi-4-mini-instruct            | Baseline                     |     48.00% |       9.12 |      13.67
 phi-4-mini-instruct            | Baseline+PriDe               |     43.50% |       9.77 |      14.56
+phi-4-mini-instruct            | Pure MAD-Graph               |     43.00% |       9.57 |       6.35
 phi-4-mini-instruct            | AgentFull (Semantic)         |     49.00% |       9.73 |      13.53
 phi-4-mini-instruct            | AgentFull+PriDe (Semantic)   |     45.90% |      10.35 |      14.10
 -----------------------------------------------------------------------------------------------
 qwen2.5-1.5b-instruct          | Baseline                     |     42.00% |      23.67 |      25.69
 qwen2.5-1.5b-instruct          | Baseline+PriDe               |     41.20% |      24.96 |      26.81
+qwen2.5-1.5b-instruct          | Pure MAD-Graph               |     29.00% |      14.23 |       6.51
 qwen2.5-1.5b-instruct          | AgentFull (Semantic)         |     42.00% |      22.82 |      24.37
 qwen2.5-1.5b-instruct          | AgentFull+PriDe (Semantic)   |     38.80% |      24.66 |      25.77
 -----------------------------------------------------------------------------------------------
 qwen2.5-3b-instruct            | Baseline                     |     54.00% |       7.33 |       9.76
 qwen2.5-3b-instruct            | Baseline+PriDe               |     52.90% |       7.98 |      11.82
+qwen2.5-3b-instruct            | Pure MAD-Graph               |     48.00% |       5.43 |      13.69
 qwen2.5-3b-instruct            | AgentFull (Semantic)         |     52.00% |      10.13 |      10.74
 qwen2.5-3b-instruct            | AgentFull+PriDe (Semantic)   |     51.80% |       9.51 |      10.67
 -----------------------------------------------------------------------------------------------
 qwen2.5-7b-instruct            | Baseline                     |     67.00% |       3.82 |       5.05
 qwen2.5-7b-instruct            | Baseline+PriDe               |     63.50% |       4.28 |       6.46
+qwen2.5-7b-instruct            | Pure MAD-Graph               |     65.70% |       2.77 |       6.43
 qwen2.5-7b-instruct            | AgentFull (Semantic)         |     58.00% |       4.20 |       5.52
 qwen2.5-7b-instruct            | AgentFull+PriDe (Semantic)   |     58.80% |       7.00 |       9.36
 -----------------------------------------------------------------------------------------------
@@ -181,79 +185,85 @@ Model                          | Method                       | Acc%       | Bia
 -----------------------------------------------------------------------------------------------
 gemma3_12b                     | Baseline                     |     87.10% |       0.84 |       1.47
 gemma3_12b                     | Baseline+PriDe               |     88.30% |       0.75 |       1.31
-gemma3_12b                     | Pure MAD-Graph               |     87.60% |       3.23 |       7.41
+gemma3_12b                     | Pure MAD-Graph               |     87.60% |       4.04 |       7.41
 gemma3_12b                     | AgentFull (Semantic)         |     88.10% |       2.37 |       3.47
 gemma3_12b                     | AgentFull+PriDe (Semantic)   |     86.50% |       1.94 |       2.91
 -----------------------------------------------------------------------------------------------
 gemma3_1b                      | Baseline                     |     49.30% |      15.98 |      20.69
 gemma3_1b                      | Baseline+PriDe               |     52.60% |      16.09 |      20.78
-gemma3_1b                      | Pure MAD-Graph               |     46.30% |      18.03 |      21.45
+gemma3_1b                      | Pure MAD-Graph               |     46.30% |      18.42 |      21.45
 gemma3_1b                      | AgentFull (Semantic)         |     39.80% |      30.10 |      31.65
 gemma3_1b                      | AgentFull+PriDe (Semantic)   |     48.50% |      12.54 |      11.14
 -----------------------------------------------------------------------------------------------
 gemma3_4b                      | Baseline                     |     72.10% |       3.79 |       8.83
 gemma3_4b                      | Baseline+PriDe               |     71.90% |       4.03 |       9.29
-gemma3_4b                      | Pure MAD-Graph               |     73.60% |       2.12 |       1.91
+gemma3_4b                      | Pure MAD-Graph               |     73.60% |       1.86 |       1.91
 gemma3_4b                      | AgentFull (Semantic)         |     67.70% |       6.54 |      11.69
 gemma3_4b                      | AgentFull+PriDe (Semantic)   |     69.60% |       6.46 |      12.39
 -----------------------------------------------------------------------------------------------
 llama3.2_latest                | Baseline                     |     69.50% |       2.88 |       4.86
 llama3.2_latest                | Baseline+PriDe               |     69.60% |       2.30 |       4.36
-llama3.2_latest                | Pure MAD-Graph               |     73.10% |       4.84 |       6.65
+llama3.2_latest                | Pure MAD-Graph               |     73.10% |       4.69 |       6.65
 llama3.2_latest                | AgentFull (Semantic)         |     57.70% |      12.18 |      15.88
 llama3.2_latest                | AgentFull+PriDe (Semantic)   |     65.50% |       1.90 |       3.64
 -----------------------------------------------------------------------------------------------
 llama3_8b-instruct-q6_k        | Baseline                     |     80.60% |       2.41 |       3.84
 llama3_8b-instruct-q6_k        | Baseline+PriDe               |     81.30% |       1.91 |       3.39
-llama3_8b-instruct-q6_k        | Pure MAD-Graph               |     76.60% |       2.59 |       6.41
+llama3_8b-instruct-q6_k        | Pure MAD-Graph               |     76.60% |       3.46 |       6.41
 llama3_8b-instruct-q6_k        | AgentFull (Semantic)         |     25.90% |      34.68 |      38.16
 llama3_8b-instruct-q6_k        | AgentFull+PriDe (Semantic)   |     60.20% |      13.40 |      26.61
 -----------------------------------------------------------------------------------------------
 llama3_8b-instruct-q8_0        | Baseline                     |     80.60% |       2.20 |       3.66
 llama3_8b-instruct-q8_0        | Baseline+PriDe               |     82.50% |       1.68 |       3.28
-llama3_8b-instruct-q8_0        | Pure MAD-Graph               |     78.60% |       3.17 |       8.25
+llama3_8b-instruct-q8_0        | Pure MAD-Graph               |     78.60% |       4.24 |       8.25
 llama3_8b-instruct-q8_0        | AgentFull (Semantic)         |     27.40% |      29.92 |      36.07
 llama3_8b-instruct-q8_0        | AgentFull+PriDe (Semantic)   |     58.50% |      11.70 |      24.43
 -----------------------------------------------------------------------------------------------
 mistral-nemo_latest            | Baseline                     |     78.10% |       3.56 |       4.11
 mistral-nemo_latest            | Baseline+PriDe               |     76.60% |       3.51 |       4.06
-mistral-nemo_latest            | Pure MAD-Graph               |     77.10% |       1.08 |       3.59
+mistral-nemo_latest            | Pure MAD-Graph               |     77.10% |       2.17 |       3.59
 mistral-nemo_latest            | AgentFull (Semantic)         |     65.70% |       7.79 |       8.94
 mistral-nemo_latest            | AgentFull+PriDe (Semantic)   |     73.70% |       3.01 |       2.21
 -----------------------------------------------------------------------------------------------
 mistral_latest                 | Baseline                     |     76.10% |       6.52 |       7.53
 mistral_latest                 | Baseline+PriDe               |     76.60% |       6.43 |       7.75
-mistral_latest                 | Pure MAD-Graph               |     78.60% |       1.08 |       1.77
+mistral_latest                 | Pure MAD-Graph               |     78.60% |       2.08 |       1.77
 mistral_latest                 | AgentFull (Semantic)         |     72.60% |       6.66 |       9.09
 mistral_latest                 | AgentFull+PriDe (Semantic)   |     71.30% |       4.13 |       5.81
 -----------------------------------------------------------------------------------------------
 phi-3-mini-4k-instruct         | Baseline                     |     77.10% |       7.80 |      13.54
 phi-3-mini-4k-instruct         | Baseline+PriDe               |     78.40% |       7.58 |      13.75
+phi-3-mini-4k-instruct         | Pure MAD-Graph               |     34.80% |       7.97 |       7.27
 phi-3-mini-4k-instruct         | AgentFull (Semantic)         |     76.60% |       2.42 |       7.67
 phi-3-mini-4k-instruct         | AgentFull+PriDe (Semantic)   |     79.50% |       5.14 |      11.22
 -----------------------------------------------------------------------------------------------
 phi-3.5-mini-instruct          | Baseline                     |     80.50% |       5.26 |      10.82
 phi-3.5-mini-instruct          | Baseline+PriDe               |     81.90% |       4.97 |      10.51
+phi-3.5-mini-instruct          | Pure MAD-Graph               |     62.20% |       4.72 |       7.59
 phi-3.5-mini-instruct          | AgentFull (Semantic)         |     66.20% |      16.74 |      27.13
 phi-3.5-mini-instruct          | AgentFull+PriDe (Semantic)   |     78.90% |       2.57 |       6.57
 -----------------------------------------------------------------------------------------------
 phi-4-mini-instruct            | Baseline                     |     82.60% |       2.57 |       5.73
 phi-4-mini-instruct            | Baseline+PriDe               |     83.00% |       2.65 |       6.01
+phi-4-mini-instruct            | Pure MAD-Graph               |     70.10% |       2.28 |       4.89
 phi-4-mini-instruct            | AgentFull (Semantic)         |     82.60% |       2.37 |       5.30
 phi-4-mini-instruct            | AgentFull+PriDe (Semantic)   |     83.00% |       2.13 |       5.04
 -----------------------------------------------------------------------------------------------
 qwen2.5-1.5b-instruct          | Baseline                     |     72.60% |       9.38 |      14.41
 qwen2.5-1.5b-instruct          | Baseline+PriDe               |     73.10% |       9.25 |      13.90
+qwen2.5-1.5b-instruct          | Pure MAD-Graph               |     52.20% |       9.39 |      21.36
 qwen2.5-1.5b-instruct          | AgentFull (Semantic)         |     66.70% |      11.73 |      14.61
 qwen2.5-1.5b-instruct          | AgentFull+PriDe (Semantic)   |     66.70% |      11.32 |      13.98
 -----------------------------------------------------------------------------------------------
 qwen2.5-3b-instruct            | Baseline                     |     73.10% |       4.36 |       6.62
 qwen2.5-3b-instruct            | Baseline+PriDe               |     75.40% |       4.04 |       6.28
+qwen2.5-3b-instruct            | Pure MAD-Graph               |     71.10% |       3.89 |       5.23
 qwen2.5-3b-instruct            | AgentFull (Semantic)         |     78.10% |       4.39 |       8.58
 qwen2.5-3b-instruct            | AgentFull+PriDe (Semantic)   |     77.80% |       1.96 |       4.27
 -----------------------------------------------------------------------------------------------
 qwen2.5-7b-instruct            | Baseline                     |     88.60% |       1.53 |       2.24
 qwen2.5-7b-instruct            | Baseline+PriDe               |     91.80% |       1.37 |       1.94
+qwen2.5-7b-instruct            | Pure MAD-Graph               |     84.60% |       2.88 |       4.99
 qwen2.5-7b-instruct            | AgentFull (Semantic)         |     81.60% |       2.63 |       3.36
 qwen2.5-7b-instruct            | AgentFull+PriDe (Semantic)   |     84.20% |       2.37 |       3.34
 -----------------------------------------------------------------------------------------------
@@ -264,6 +274,6 @@ Method                         | Global Avg Acc%      | Global Avg Bias      | G
 -----------------------------------------------------------------------------------------------
 Baseline                       |               62.82% |                 7.73 |                10.05
 Baseline+PriDe                 |               62.48% |                 7.48 |                 9.81
-Pure MAD-Graph                 |               63.44% |                 8.30 |                12.02
+Pure MAD-Graph                 |               60.36% |                 6.94 |                10.07
 AgentFull (Semantic)           |               53.16% |                14.04 |                17.39
 AgentFull+PriDe (Semantic)     |               58.73% |                 8.37 |                11.39
