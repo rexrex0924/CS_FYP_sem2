@@ -158,7 +158,10 @@ class TransformersLLM:
         self.tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
 
         quant_config = _build_quant_config(quantization)
-        load_kwargs: dict = {"device_map": "auto" if device == "auto" else None}
+        
+        # Explicitly map directly to the target device. This fails loudly with OOM 
+        # if the GPU is full, rather than silently offloading to CPU and freezing.
+        load_kwargs: dict = {"device_map": self.device}
 
         if quant_config is not None:
             load_kwargs["quantization_config"] = quant_config
@@ -168,9 +171,7 @@ class TransformersLLM:
             load_kwargs["torch_dtype"] = torch.float16 if self.device == "cuda" else torch.float32
 
         self.model = AutoModelForCausalLM.from_pretrained(model_name_or_path, **load_kwargs)
-
-        if quant_config is None and device != "auto":
-            self.model.to(self.device)
+            
         self.model.eval()
         self.temperature = temperature
 
@@ -184,8 +185,7 @@ class TransformersLLM:
             torch.manual_seed(seed)
 
         inputs = self.tokenizer(prompt, return_tensors="pt", truncation=True, max_length=2048)
-        if self.device != "auto":
-            inputs = {k: v.to(self.device) for k, v in inputs.items()}
+        inputs = {k: v.to(self.model.device) for k, v in inputs.items()}
 
         with torch.no_grad():
             outputs = self.model.generate(
@@ -222,7 +222,12 @@ def run_mad_graph(mcq: MCQ, llm: TransformersLLM, seed: int) -> Tuple[str, Dict]
             agent_prompt=agent_prompt
         )
         try:
+            # print(f"  [Q {mcq.uid}] Generating response for Agent {agent_id}...")
+            start_time = time.time()
             response = llm.generate(prompt, temperature=0.7, seed=seed + agent_id)
+            elapsed = time.time() - start_time
+            print(f"  [Q {mcq.uid}] Agent {agent_id} finished in {elapsed:.1f}s.")
+            
             ans, reasoning = extract_answer_and_reasoning(response)
             initial_responses[agent_id] = {"ans": ans, "reasoning": reasoning}
         except Exception as e:
@@ -305,7 +310,7 @@ def run_evaluation(model_name_or_path: str, csv_path: str, seed: int,
 
     mcqs = load_mcq_csv(csv_path, max_questions=max_questions)
 
-    csv_dir = Path("../mad_graph/results")
+    csv_dir = Path(__file__).resolve().parent.parent / "mad_graph" / "results"
     csv_dir.mkdir(parents=True, exist_ok=True)
 
     dataset_name = Path(csv_path).stem
@@ -323,9 +328,9 @@ def run_evaluation(model_name_or_path: str, csv_path: str, seed: int,
         try:
             with open(csv_output_file, 'r', newline='', encoding='utf-8') as f:
                 for row in csv.DictReader(f):
-                    if row.get('question_id'):
+                    if row.get('question_id') and row.get('agent_1_ans'):
                         processed_ids.add(row['question_id'])
-            print(f"Resuming: {len(processed_ids)} questions already completed.")
+            print(f"Resuming: {len(processed_ids)} valid questions already completed.")
         except Exception:
             processed_ids = set()
 
